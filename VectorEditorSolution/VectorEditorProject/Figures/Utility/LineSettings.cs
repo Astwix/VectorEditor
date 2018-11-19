@@ -10,6 +10,22 @@ namespace VectorEditorProject.Figures.Utility
 {
     class LineSettings
     {
+        /// <summary>
+        /// Конструктор настроек линии по умолчанию
+        /// </summary>
+        public LineSettings()
+        {
+            Color = Color.Black;
+            Width = 1;
+            Style = DashStyle.Solid;
+        }
+
+        /// <summary>
+        /// Конструктор настроек линии
+        /// </summary>
+        /// <param name="color">Цвет</param>
+        /// <param name="width">Тощина</param>
+        /// <param name="style">Стиль</param>
         public LineSettings(Color color, float width, DashStyle style)
         {
             Color = color;

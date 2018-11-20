@@ -16,13 +16,15 @@ namespace VectorEditorProject.Drawing
         private BaseDrawer _circleDrawer;
         private BaseDrawer _ellipseDrawer;
 
-        Dictionary<Type, BaseDrawer> drawers = new Dictionary<Type, BaseDrawer>();
+        Dictionary<Type, BaseDrawer> drawers = null;
 
         /// <summary>
         /// Конструктор фабрики фигур
         /// </summary>
         public DrawerFactory()
         {
+            drawers = new Dictionary<Type, BaseDrawer>();
+
             _lineDrawer = new LineDrawer();
             _polyLineDrawer = new PolyLineDrawer();
             _polygonDrawer = new PolygonDrawer();
@@ -39,11 +41,11 @@ namespace VectorEditorProject.Drawing
         /// <summary>
         /// Рисование фигур
         /// </summary>
-        /// <param name="baseFigure"></param>
-        /// <param name="graphics"></param>
+        /// <param name="baseFigure">Фигура</param>
+        /// <param name="graphics">Объект graphics</param>
         public void DrawFigure(BaseFigure baseFigure, Graphics graphics)
         {
-            drawers[typeof(BaseFigure)].DrawFigure(baseFigure, graphics);
+            drawers[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
         }
     }
 }

@@ -7,10 +7,10 @@ using VectorEditorProject.Figures.Utility;
 
 namespace VectorEditorProject.Figures
 {
-    abstract class FilledBaseFigure : BaseFigure
+    public abstract class FilledBaseFigure : BaseFigure
     {
         protected FillSettings _fillSettings;
 
-        internal FillSettings FillSettings { get => _fillSettings; set => _fillSettings = value; }
+        public FillSettings FillSettings { get => _fillSettings; set => _fillSettings = value; }
     }
 }

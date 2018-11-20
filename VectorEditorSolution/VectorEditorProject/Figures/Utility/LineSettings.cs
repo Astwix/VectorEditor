@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace VectorEditorProject.Figures.Utility
 {
-    class LineSettings
+    public class LineSettings
     {
         /// <summary>
         /// Конструктор настроек линии по умолчанию

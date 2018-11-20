@@ -46,6 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drawing\BaseDrawer.cs" />
+    <Compile Include="Drawing\CircleDrawer.cs" />
+    <Compile Include="Drawing\DrawerFactory.cs" />
+    <Compile Include="Drawing\EllipseDrawer.cs" />
+    <Compile Include="Drawing\LineDrawer.cs" />
+    <Compile Include="Drawing\PolygonDrawer.cs" />
+    <Compile Include="Drawing\PolyLineDrawer.cs" />
     <Compile Include="Figures\BaseFigure.cs" />
     <Compile Include="Figures\Circle.cs" />
     <Compile Include="Figures\Ellipse.cs" />

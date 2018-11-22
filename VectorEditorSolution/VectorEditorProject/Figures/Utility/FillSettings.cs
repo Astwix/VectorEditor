@@ -9,6 +9,8 @@ namespace VectorEditorProject.Figures.Utility
 {
     public class FillSettings
     {
+        public Color Color { get; set; }
+
         /// <summary>
         /// Конструктор настройки заливки по умолчанию
         /// </summary>
@@ -25,7 +27,5 @@ namespace VectorEditorProject.Figures.Utility
         {
             Color = color;
         }
-
-        public Color Color { get; set; }
     }
 }

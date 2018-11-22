@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VectorEditorProject.Figures.Utility
 {
-    class PointsSettings
+    public class PointsSettings
     {
         private int _limitPoint = 0;
         private List<Point> _points = new List<Point>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VectorEditorProject.Figures.Utility
 {
-    class FillSettings
+    public class FillSettings
     {
         /// <summary>
         /// Конструктор настройки заливки по умолчанию
@@ -20,7 +20,7 @@ namespace VectorEditorProject.Figures.Utility
         /// <summary>
         /// Конструктор настройки заливки
         /// </summary>
-        /// <param name="color"></param>
+        /// <param name="color">Цвет</param>
         public FillSettings(Color color)
         {
             Color = color;

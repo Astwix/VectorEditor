@@ -7,7 +7,7 @@ using VectorEditorProject.Figures.Utility;
 
 namespace VectorEditorProject.Figures
 {
-    abstract class BaseFigure
+    public abstract class BaseFigure
     {
         protected LineSettings _lineSettings;
         protected PointsSettings _pointsSettings;

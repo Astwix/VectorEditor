@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VectorEditorProject.Figures
 {
-    class FigureFactory
+    public class FigureFactory
     {
         /// <summary>
         /// Перечисление фигур (без заливки)

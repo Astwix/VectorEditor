@@ -19,15 +19,30 @@ namespace VectorEditorProject.Drawing
         {
             if (figure.PointsSettings.GetPoints().Count == 2)
             {
-                Pen pen = new Pen(figure.LineSettings.Color, figure.LineSettings.Width);
-                pen.DashStyle = figure.LineSettings.Style;
-                var points = figure.PointsSettings.GetPoints();
+                // Приведение типа к заливным фигурам
+                FilledBaseFigure filledBaseFigure = figure as FilledBaseFigure;
+                if (filledBaseFigure == null)
+                {
+                    return;
+                }
+
+                var points = filledBaseFigure.PointsSettings.GetPoints();
                 int deltaX = Math.Abs(points.First().X - points.Last().X);
                 int deltaY = Math.Abs(points.First().Y - points.Last().Y);
                 int distance = Math.Max(deltaX, deltaY);
+
+                Brush brush = new SolidBrush(filledBaseFigure.FillSettings.Color);
+                graphics.FillEllipse(brush, points.First().X,
+                    points.First().Y, distance, distance);
+
+                Pen pen = new Pen(filledBaseFigure.LineSettings.
+                    Color, filledBaseFigure.LineSettings.Width);
+                pen.DashStyle = filledBaseFigure.LineSettings.Style;
+                
                 graphics.DrawEllipse(pen, points.First().X,
                     points.First().Y, distance, distance);
 
+                brush.Dispose();
                 pen.Dispose();
             }
         }

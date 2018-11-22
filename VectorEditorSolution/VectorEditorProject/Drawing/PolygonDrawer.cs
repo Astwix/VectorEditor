@@ -19,10 +19,20 @@ namespace VectorEditorProject.Drawing
         {
             if (figure.PointsSettings.GetPoints().Count >= 3)
             {
-                Pen pen = new Pen(figure.LineSettings.Color, figure.LineSettings.Width);
-                pen.DashStyle = figure.LineSettings.Style;
-                graphics.DrawPolygon(pen, figure.PointsSettings.GetPoints().ToArray());
+                FilledBaseFigure filledBaseFigure = figure as  FilledBaseFigure;
+                if (filledBaseFigure == null)
+                {
+                    return;
+                }
 
+                Brush brush = new SolidBrush(filledBaseFigure.FillSettings.Color);
+                graphics.FillPolygon(brush, filledBaseFigure.PointsSettings.GetPoints().ToArray());
+
+                Pen pen = new Pen(filledBaseFigure.LineSettings.Color, filledBaseFigure.LineSettings.Width);
+                pen.DashStyle = filledBaseFigure.LineSettings.Style;
+                graphics.DrawPolygon(pen, filledBaseFigure.PointsSettings.GetPoints().ToArray());
+
+                brush.Dispose();
                 pen.Dispose();
             }
         }

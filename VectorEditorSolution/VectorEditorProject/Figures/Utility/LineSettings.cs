@@ -10,6 +10,10 @@ namespace VectorEditorProject.Figures.Utility
 {
     public class LineSettings
     {
+        public Color Color { get; set; }
+        public float Width { get; set; }
+        public DashStyle Style { get; set; }
+
         /// <summary>
         /// Конструктор настроек линии по умолчанию
         /// </summary>
@@ -32,9 +36,5 @@ namespace VectorEditorProject.Figures.Utility
             Width = width;
             Style = style;
         }
-
-        public Color Color { get; set; }
-        public float Width { get; set; }
-        public DashStyle Style { get; set; }
     }
 }

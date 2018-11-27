@@ -69,7 +69,7 @@ namespace VectorEditorProject.Figures.Utility
         /// <summary>
         /// Возвращает список точек, доступный только для чтения
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Список точек</returns>
         public IReadOnlyList<Point> GetPoints()
         {
             return _points;

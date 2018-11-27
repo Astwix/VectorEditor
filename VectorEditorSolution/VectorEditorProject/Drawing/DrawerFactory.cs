@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VectorEditorProject.Core;
 using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Drawing
@@ -46,6 +47,20 @@ namespace VectorEditorProject.Drawing
         public void DrawFigure(BaseFigure baseFigure, Graphics graphics)
         {
             drawers[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
+        }
+
+        /// <summary>
+        /// Рисование холста
+        /// </summary>
+        /// <param name="document">Документ</param>
+        /// <param name="graphics">Графика</param>
+        public void DrawCanvas(Document document, Graphics graphics)
+        {
+            Brush brush = new SolidBrush(document.Color);
+
+            graphics.FillRectangle(brush, new Rectangle(new Point(0, 0), document.Size));
+
+            brush.Dispose();
         }
     }
 }

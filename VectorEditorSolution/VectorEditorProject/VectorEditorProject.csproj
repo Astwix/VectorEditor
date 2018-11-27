@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Commands\AddFigureCommand.cs" />
+    <Compile Include="Core\Commands\BaseCommand.cs" />
+    <Compile Include="Core\ControlUnit.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Drawing\BaseDrawer.cs" />
     <Compile Include="Drawing\CircleDrawer.cs" />

@@ -39,5 +39,15 @@ namespace VectorEditorProject
         private void MainForm_Load(object sender, EventArgs e)
         {
         }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controlUnit.Undo();
+        }
+
+        private void doToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controlUnit.Do();
+        }
     }
 }

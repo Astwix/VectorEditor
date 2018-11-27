@@ -12,6 +12,7 @@ using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Drawing;
 using VectorEditorProject.Figures;
 using VectorEditorProject.Figures.Utility;
+using VectorEditorProject.Forms;
 
 namespace VectorEditorProject
 {
@@ -48,6 +49,20 @@ namespace VectorEditorProject
         private void doToolStripMenuItem_Click(object sender, EventArgs e)
         {
             controlUnit.Do();
+        }
+
+        private void fileOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Пока без undo/redo
+            DocumentForm documentForm = new DocumentForm(controlUnit.GetDocument());
+            if (documentForm.ShowDialog() != DialogResult.Cancel && documentForm.document != null)
+            {
+                var doc = controlUnit.GetDocument();
+                doc.Name = documentForm.document.Name;
+                doc.Size = documentForm.document.Size;
+                doc.Color = documentForm.document.Color;
+                canvas.Invalidate();
+            }
         }
     }
 }

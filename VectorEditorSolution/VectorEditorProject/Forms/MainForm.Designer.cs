@@ -34,6 +34,7 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +62,8 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileOptionsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
             this.fileToolStripMenuItem.Text = "Файл";
@@ -78,7 +81,7 @@
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.undoToolStripMenuItem.Text = "Отменить";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -86,9 +89,16 @@
             // 
             this.doToolStripMenuItem.Name = "doToolStripMenuItem";
             this.doToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.doToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.doToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.doToolStripMenuItem.Text = "Вернуть";
             this.doToolStripMenuItem.Click += new System.EventHandler(this.doToolStripMenuItem_Click);
+            // 
+            // fileOptionsToolStripMenuItem
+            // 
+            this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
+            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.fileOptionsToolStripMenuItem.Text = "Параметры";
+            this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -117,6 +127,7 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileOptionsToolStripMenuItem;
     }
 }
 

@@ -7,25 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VectorEditorProject.Core;
+using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Drawing;
 using VectorEditorProject.Figures;
+using VectorEditorProject.Figures.Utility;
 
 namespace VectorEditorProject
 {
     public partial class MainForm : Form
     {
-        // временно здесь
-        List<BaseFigure> figures = new List<BaseFigure>();
         DrawerFactory drawerFactory = new DrawerFactory();
+        private ControlUnit controlUnit;
 
         public MainForm()
         {
             InitializeComponent();
+            controlUnit = new ControlUnit(canvas);
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
-            foreach (var figure in figures)
+            drawerFactory.DrawCanvas(controlUnit.GetDocument(), e.Graphics);
+
+            foreach (var figure in controlUnit.GetDocument().GetFigures())
             {
                 drawerFactory.DrawFigure(figure, e.Graphics);
             }

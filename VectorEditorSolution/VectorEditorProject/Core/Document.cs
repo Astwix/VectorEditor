@@ -75,7 +75,7 @@ namespace VectorEditorProject.Core
         /// Возвращает список фигур, доступный только для чтения
         /// </summary>
         /// <returns>Список фигур</returns>
-        private IReadOnlyList<BaseFigure> GetFigures()
+        public IReadOnlyList<BaseFigure> GetFigures()
         {
             return Figures;
         }

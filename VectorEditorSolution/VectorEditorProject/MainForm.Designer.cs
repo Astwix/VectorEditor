@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 555);
+            this.ClientSize = new System.Drawing.Size(926, 599);
             this.Controls.Add(this.canvas);
             this.Name = "MainForm";
             this.Text = "VectorEditor";

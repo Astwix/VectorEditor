@@ -74,5 +74,24 @@ namespace VectorEditorProject.Figures.Utility
         {
             return _points;
         }
+
+        /// <summary>
+        /// Перемещение точки
+        /// </summary>
+        /// <param name="n">Индекс точки в массиве точек</param>
+        /// <param name="p">Точка</param>
+        public void ReplacePoint(int n, Point p)
+        {
+            _points[n] = p;
+        }
+
+        /// <summary>
+        /// Удаление точки
+        /// </summary>
+        /// <param name="point">Точка</param>
+        public void DeletePoint(Point point)
+        {
+            _points.Remove(point);
+        }
     }
 }

@@ -79,5 +79,23 @@ namespace VectorEditorProject.Core
         {
             return Figures;
         }
+
+        /// <summary>
+        /// Получить фигуру по GUID
+        /// </summary>
+        /// <param name="guid">GUID фигуры</param>
+        /// <returns>Фигура</returns>
+        public BaseFigure GetFigure(Guid guid)
+        {
+            foreach (var figure in Figures)
+            {
+                if (figure.guid.Equals(guid))
+                {
+                    return figure;
+                }
+            }
+
+            return null;
+        }
     }
 }

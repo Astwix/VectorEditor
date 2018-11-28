@@ -32,6 +32,7 @@
             this.topToolBar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,14 +42,14 @@
             this.ellipseButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.selectionButton = new System.Windows.Forms.Button();
-            this.fileClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.figureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // canvas
             // 
-            this.canvas.Location = new System.Drawing.Point(117, 31);
+            this.canvas.Location = new System.Drawing.Point(117, 78);
             this.canvas.Name = "canvas";
             this.canvas.Size = new System.Drawing.Size(754, 513);
             this.canvas.TabIndex = 0;
@@ -66,7 +67,7 @@
             this.editToolStripMenuItem});
             this.topToolBar.Location = new System.Drawing.Point(0, 0);
             this.topToolBar.Name = "topToolBar";
-            this.topToolBar.Size = new System.Drawing.Size(926, 28);
+            this.topToolBar.Size = new System.Drawing.Size(889, 28);
             this.topToolBar.TabIndex = 1;
             this.topToolBar.Text = "topToolBar";
             // 
@@ -82,9 +83,16 @@
             // fileOptionsToolStripMenuItem
             // 
             this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
-            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.fileOptionsToolStripMenuItem.Text = "Параметры";
             this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
+            // 
+            // fileClearToolStripMenuItem
+            // 
+            this.fileClearToolStripMenuItem.Name = "fileClearToolStripMenuItem";
+            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.fileClearToolStripMenuItem.Text = "Очистить";
+            this.fileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -113,9 +121,9 @@
             // 
             // lineButton
             // 
-            this.lineButton.Location = new System.Drawing.Point(12, 31);
+            this.lineButton.Location = new System.Drawing.Point(12, 78);
             this.lineButton.Name = "lineButton";
-            this.lineButton.Size = new System.Drawing.Size(99, 23);
+            this.lineButton.Size = new System.Drawing.Size(99, 25);
             this.lineButton.TabIndex = 2;
             this.lineButton.Text = "Линия";
             this.lineButton.UseVisualStyleBackColor = true;
@@ -123,9 +131,9 @@
             // 
             // polylineButton
             // 
-            this.polylineButton.Location = new System.Drawing.Point(12, 60);
+            this.polylineButton.Location = new System.Drawing.Point(12, 109);
             this.polylineButton.Name = "polylineButton";
-            this.polylineButton.Size = new System.Drawing.Size(99, 23);
+            this.polylineButton.Size = new System.Drawing.Size(99, 25);
             this.polylineButton.TabIndex = 3;
             this.polylineButton.Text = "Полилиния";
             this.polylineButton.UseVisualStyleBackColor = true;
@@ -133,9 +141,9 @@
             // 
             // circleButton
             // 
-            this.circleButton.Location = new System.Drawing.Point(12, 89);
+            this.circleButton.Location = new System.Drawing.Point(12, 140);
             this.circleButton.Name = "circleButton";
-            this.circleButton.Size = new System.Drawing.Size(99, 23);
+            this.circleButton.Size = new System.Drawing.Size(99, 25);
             this.circleButton.TabIndex = 4;
             this.circleButton.Text = "Круг";
             this.circleButton.UseVisualStyleBackColor = true;
@@ -143,9 +151,9 @@
             // 
             // ellipseButton
             // 
-            this.ellipseButton.Location = new System.Drawing.Point(12, 118);
+            this.ellipseButton.Location = new System.Drawing.Point(12, 171);
             this.ellipseButton.Name = "ellipseButton";
-            this.ellipseButton.Size = new System.Drawing.Size(99, 23);
+            this.ellipseButton.Size = new System.Drawing.Size(99, 25);
             this.ellipseButton.TabIndex = 5;
             this.ellipseButton.Text = "Эллипс";
             this.ellipseButton.UseVisualStyleBackColor = true;
@@ -153,9 +161,9 @@
             // 
             // polygonButton
             // 
-            this.polygonButton.Location = new System.Drawing.Point(12, 147);
+            this.polygonButton.Location = new System.Drawing.Point(12, 202);
             this.polygonButton.Name = "polygonButton";
-            this.polygonButton.Size = new System.Drawing.Size(99, 23);
+            this.polygonButton.Size = new System.Drawing.Size(99, 25);
             this.polygonButton.TabIndex = 6;
             this.polygonButton.Text = "Полигон";
             this.polygonButton.UseVisualStyleBackColor = true;
@@ -163,26 +171,27 @@
             // 
             // selectionButton
             // 
-            this.selectionButton.Location = new System.Drawing.Point(12, 176);
+            this.selectionButton.Location = new System.Drawing.Point(12, 233);
             this.selectionButton.Name = "selectionButton";
-            this.selectionButton.Size = new System.Drawing.Size(99, 23);
+            this.selectionButton.Size = new System.Drawing.Size(99, 25);
             this.selectionButton.TabIndex = 7;
             this.selectionButton.Text = "Выделение";
             this.selectionButton.UseVisualStyleBackColor = true;
             this.selectionButton.Click += new System.EventHandler(this.selectionButton_Click);
             // 
-            // fileClearToolStripMenuItem
+            // figureSettingsControl
             // 
-            this.fileClearToolStripMenuItem.Name = "fileClearToolStripMenuItem";
-            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.fileClearToolStripMenuItem.Text = "Очистить";
-            this.fileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
+            this.figureSettingsControl.Location = new System.Drawing.Point(12, 33);
+            this.figureSettingsControl.Name = "figureSettingsControl";
+            this.figureSettingsControl.Size = new System.Drawing.Size(865, 39);
+            this.figureSettingsControl.TabIndex = 8;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(926, 599);
+            this.ClientSize = new System.Drawing.Size(889, 599);
+            this.Controls.Add(this.figureSettingsControl);
             this.Controls.Add(this.selectionButton);
             this.Controls.Add(this.polygonButton);
             this.Controls.Add(this.ellipseButton);
@@ -219,6 +228,7 @@
         private System.Windows.Forms.Button polygonButton;
         private System.Windows.Forms.Button selectionButton;
         private System.Windows.Forms.ToolStripMenuItem fileClearToolStripMenuItem;
+        private Forms.FigureSettingsControl figureSettingsControl;
     }
 }
 

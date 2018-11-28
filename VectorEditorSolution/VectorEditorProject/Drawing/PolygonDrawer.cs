@@ -17,7 +17,7 @@ namespace VectorEditorProject.Drawing
         /// <param name="graphics">Объект graphics, на котором рисуем</param>
         public override void DrawFigure(BaseFigure figure, Graphics graphics)
         {
-            if (figure.PointsSettings.GetPoints().Count >= 3)
+            if (figure.PointsSettings.GetPoints().Count >= 2)
             {
                 FilledBaseFigure filledBaseFigure = figure as  FilledBaseFigure;
                 if (filledBaseFigure == null)

@@ -31,22 +31,31 @@
             this.canvas = new System.Windows.Forms.PictureBox();
             this.topToolBar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lineButton = new System.Windows.Forms.Button();
+            this.polylineButton = new System.Windows.Forms.Button();
+            this.circleButton = new System.Windows.Forms.Button();
+            this.ellipseButton = new System.Windows.Forms.Button();
+            this.polygonButton = new System.Windows.Forms.Button();
+            this.selectionButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // canvas
             // 
-            this.canvas.Location = new System.Drawing.Point(83, 49);
+            this.canvas.Location = new System.Drawing.Point(117, 31);
             this.canvas.Name = "canvas";
             this.canvas.Size = new System.Drawing.Size(754, 513);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // topToolBar
             // 
@@ -67,6 +76,13 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
             this.fileToolStripMenuItem.Text = "Файл";
+            // 
+            // fileOptionsToolStripMenuItem
+            // 
+            this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
+            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.fileOptionsToolStripMenuItem.Text = "Параметры";
+            this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -93,18 +109,77 @@
             this.doToolStripMenuItem.Text = "Вернуть";
             this.doToolStripMenuItem.Click += new System.EventHandler(this.doToolStripMenuItem_Click);
             // 
-            // fileOptionsToolStripMenuItem
+            // lineButton
             // 
-            this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
-            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.fileOptionsToolStripMenuItem.Text = "Параметры";
-            this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
+            this.lineButton.Location = new System.Drawing.Point(12, 31);
+            this.lineButton.Name = "lineButton";
+            this.lineButton.Size = new System.Drawing.Size(99, 23);
+            this.lineButton.TabIndex = 2;
+            this.lineButton.Text = "Линия";
+            this.lineButton.UseVisualStyleBackColor = true;
+            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
+            // 
+            // polylineButton
+            // 
+            this.polylineButton.Location = new System.Drawing.Point(12, 60);
+            this.polylineButton.Name = "polylineButton";
+            this.polylineButton.Size = new System.Drawing.Size(99, 23);
+            this.polylineButton.TabIndex = 3;
+            this.polylineButton.Text = "Полилиния";
+            this.polylineButton.UseVisualStyleBackColor = true;
+            this.polylineButton.Click += new System.EventHandler(this.polylineButton_Click);
+            // 
+            // circleButton
+            // 
+            this.circleButton.Location = new System.Drawing.Point(12, 89);
+            this.circleButton.Name = "circleButton";
+            this.circleButton.Size = new System.Drawing.Size(99, 23);
+            this.circleButton.TabIndex = 4;
+            this.circleButton.Text = "Круг";
+            this.circleButton.UseVisualStyleBackColor = true;
+            this.circleButton.Click += new System.EventHandler(this.circleButton_Click);
+            // 
+            // ellipseButton
+            // 
+            this.ellipseButton.Location = new System.Drawing.Point(12, 118);
+            this.ellipseButton.Name = "ellipseButton";
+            this.ellipseButton.Size = new System.Drawing.Size(99, 23);
+            this.ellipseButton.TabIndex = 5;
+            this.ellipseButton.Text = "Эллипс";
+            this.ellipseButton.UseVisualStyleBackColor = true;
+            this.ellipseButton.Click += new System.EventHandler(this.ellipseButton_Click);
+            // 
+            // polygonButton
+            // 
+            this.polygonButton.Location = new System.Drawing.Point(12, 147);
+            this.polygonButton.Name = "polygonButton";
+            this.polygonButton.Size = new System.Drawing.Size(99, 23);
+            this.polygonButton.TabIndex = 6;
+            this.polygonButton.Text = "Полигон";
+            this.polygonButton.UseVisualStyleBackColor = true;
+            this.polygonButton.Click += new System.EventHandler(this.polygonButton_Click);
+            // 
+            // selectionButton
+            // 
+            this.selectionButton.Location = new System.Drawing.Point(12, 176);
+            this.selectionButton.Name = "selectionButton";
+            this.selectionButton.Size = new System.Drawing.Size(99, 23);
+            this.selectionButton.TabIndex = 7;
+            this.selectionButton.Text = "Выделение";
+            this.selectionButton.UseVisualStyleBackColor = true;
+            this.selectionButton.Click += new System.EventHandler(this.selectionButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 599);
+            this.Controls.Add(this.selectionButton);
+            this.Controls.Add(this.polygonButton);
+            this.Controls.Add(this.ellipseButton);
+            this.Controls.Add(this.circleButton);
+            this.Controls.Add(this.polylineButton);
+            this.Controls.Add(this.lineButton);
             this.Controls.Add(this.canvas);
             this.Controls.Add(this.topToolBar);
             this.MainMenuStrip = this.topToolBar;
@@ -128,6 +203,12 @@
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileOptionsToolStripMenuItem;
+        private System.Windows.Forms.Button lineButton;
+        private System.Windows.Forms.Button polylineButton;
+        private System.Windows.Forms.Button circleButton;
+        private System.Windows.Forms.Button ellipseButton;
+        private System.Windows.Forms.Button polygonButton;
+        private System.Windows.Forms.Button selectionButton;
     }
 }
 

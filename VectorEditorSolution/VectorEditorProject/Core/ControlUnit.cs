@@ -29,13 +29,14 @@ namespace VectorEditorProject.Core
             _canvas = canvas;
 
             _viewUpdateDictionary.Add(typeof(AddFigureCommand), _canvas);
+            _viewUpdateDictionary.Add(typeof(AddPointCommand), _canvas);
         }
 
         /// <summary>
         /// Обновление view по соответствующей команде (команда -> контрол)
         /// Переделать, т.к. надо обновлять не только контролы
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="command">Команда</param>
         private void UpdateView(BaseCommand command)
         {
             _viewUpdateDictionary[command.GetType()].Invalidate();
@@ -120,6 +121,14 @@ namespace VectorEditorProject.Core
         public Document GetDocument()
         {
             return _currentDocument;
+        }
+
+        /// <summary>
+        /// Принудительная перерисовка холста
+        /// </summary>
+        public void ForceRedrawCanvas()
+        {
+            _canvas.Invalidate();
         }
     }
 }

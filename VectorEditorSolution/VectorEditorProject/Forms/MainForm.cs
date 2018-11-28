@@ -115,5 +115,12 @@ namespace VectorEditorProject
         {
             _editContext.SetActiveState(EditContext.States.SelectionState);
         }
+
+        private void fileClearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var command = new ClearDocumentCommand(_controlUnit.GetDocument());
+            _controlUnit.StoreCommand(command);
+            _controlUnit.Do();
+        }
     }
 }

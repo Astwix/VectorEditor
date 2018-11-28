@@ -30,6 +30,7 @@ namespace VectorEditorProject.Core
 
             _viewUpdateDictionary.Add(typeof(AddFigureCommand), _canvas);
             _viewUpdateDictionary.Add(typeof(AddPointCommand), _canvas);
+            _viewUpdateDictionary.Add(typeof(ClearDocumentCommand), _canvas);
         }
 
         /// <summary>

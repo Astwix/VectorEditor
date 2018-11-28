@@ -41,6 +41,7 @@
             this.ellipseButton = new System.Windows.Forms.Button();
             this.polygonButton = new System.Windows.Forms.Button();
             this.selectionButton = new System.Windows.Forms.Button();
+            this.fileClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +73,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileOptionsToolStripMenuItem});
+            this.fileOptionsToolStripMenuItem,
+            this.fileClearToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
             this.fileToolStripMenuItem.Text = "Файл";
@@ -80,7 +82,7 @@
             // fileOptionsToolStripMenuItem
             // 
             this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
-            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.fileOptionsToolStripMenuItem.Text = "Параметры";
             this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
             // 
@@ -169,6 +171,13 @@
             this.selectionButton.UseVisualStyleBackColor = true;
             this.selectionButton.Click += new System.EventHandler(this.selectionButton_Click);
             // 
+            // fileClearToolStripMenuItem
+            // 
+            this.fileClearToolStripMenuItem.Name = "fileClearToolStripMenuItem";
+            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.fileClearToolStripMenuItem.Text = "Очистить";
+            this.fileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -209,6 +218,7 @@
         private System.Windows.Forms.Button ellipseButton;
         private System.Windows.Forms.Button polygonButton;
         private System.Windows.Forms.Button selectionButton;
+        private System.Windows.Forms.ToolStripMenuItem fileClearToolStripMenuItem;
     }
 }
 

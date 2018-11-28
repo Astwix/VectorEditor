@@ -49,6 +49,7 @@
     <Compile Include="Core\Commands\AddFigureCommand.cs" />
     <Compile Include="Core\Commands\AddPointCommand.cs" />
     <Compile Include="Core\Commands\BaseCommand.cs" />
+    <Compile Include="Core\Commands\ClearDocumentCommand.cs" />
     <Compile Include="Core\ControlUnit.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\EditContext.cs" />

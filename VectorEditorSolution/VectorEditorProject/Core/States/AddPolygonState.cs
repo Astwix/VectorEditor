@@ -14,7 +14,7 @@ namespace VectorEditorProject.Core.States
     public class AddPolygonState : BaseState
     {
         private DrawerFactory _drawerFactory = new DrawerFactory();
-        private BaseFigure _figure;
+        private FilledBaseFigure _figure;
         private EditContext _editContext;
         private ControlUnit _controlUnit;
 
@@ -42,6 +42,8 @@ namespace VectorEditorProject.Core.States
             _figure = figureFactory.CreateFilledFigure(FigureFactory.FilledFigures.Polygon);
             _figure.PointsSettings.AddPoint(new Point(e.X, e.Y));
             _figure.PointsSettings.AddPoint(new Point(e.X, e.Y));
+            _figure.FillSettings = _controlUnit.GetFillSettings();
+            _figure.LineSettings = _controlUnit.GetLineSettings();
         }
 
 

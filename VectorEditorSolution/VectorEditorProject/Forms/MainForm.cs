@@ -26,7 +26,7 @@ namespace VectorEditorProject
         {
             InitializeComponent();
 
-            _controlUnit = new ControlUnit(canvas);
+            _controlUnit = new ControlUnit(canvas, figureSettingsControl);
             _drawerFactory = new DrawerFactory();
             _editContext = new EditContext(_controlUnit);
         }

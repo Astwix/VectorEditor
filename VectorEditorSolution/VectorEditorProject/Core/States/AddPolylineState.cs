@@ -42,6 +42,7 @@ namespace VectorEditorProject.Core.States
             _figure = figureFactory.CreateFigure(FigureFactory.Figures.PolyLine);
             _figure.PointsSettings.AddPoint(new Point(e.X, e.Y));
             _figure.PointsSettings.AddPoint(new Point(e.X, e.Y));
+            _figure.LineSettings = _controlUnit.GetLineSettings();
         }
 
 

@@ -13,7 +13,7 @@ namespace VectorEditorProject.Core.States
 {
     public class AddEllipseState : BaseState
     {
-        private BaseFigure _figure;
+        private FilledBaseFigure _figure;
         private ControlUnit _controlUnit;
         private DrawerFactory _drawerFactory = new DrawerFactory();
         private bool _isMousePressed;
@@ -39,6 +39,8 @@ namespace VectorEditorProject.Core.States
             _figure = figureFactory.CreateFilledFigure(FigureFactory.FilledFigures.Ellipse);
             _figure.PointsSettings.AddPoint(new Point(e.X, e.Y));
             _figure.PointsSettings.AddPoint(new Point(e.X, e.Y));
+            _figure.FillSettings = _controlUnit.GetFillSettings();
+            _figure.LineSettings = _controlUnit.GetLineSettings();
         }
 
         public override void MouseMove(object sender, MouseEventArgs e)

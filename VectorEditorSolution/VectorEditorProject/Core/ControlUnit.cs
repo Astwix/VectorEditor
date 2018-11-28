@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
+using VectorEditorProject.Figures.Utility;
+using VectorEditorProject.Forms;
 
 namespace VectorEditorProject.Core
 {
@@ -13,7 +16,9 @@ namespace VectorEditorProject.Core
     {
         private List<BaseCommand> _commands;
         private int _currentCommand;
+
         private readonly PictureBox _canvas;
+        private FigureSettingsControl _figureSettingsControl;
 
         private Document _currentDocument = new Document("Untitled", Color.White, new Size(500, 500));
 
@@ -22,11 +27,13 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Конструктор класса управляющего control
         /// </summary>
-        public ControlUnit(PictureBox canvas)
+        public ControlUnit(PictureBox canvas, FigureSettingsControl figureSettingsControl)
         {
             _commands = new List<BaseCommand>();
             _currentCommand = 0;
+
             _canvas = canvas;
+            _figureSettingsControl = figureSettingsControl;
 
             _viewUpdateDictionary.Add(typeof(AddFigureCommand), _canvas);
             _viewUpdateDictionary.Add(typeof(AddPointCommand), _canvas);
@@ -130,6 +137,16 @@ namespace VectorEditorProject.Core
         public void ForceRedrawCanvas()
         {
             _canvas.Invalidate();
+        }
+
+        public LineSettings GetLineSettings()
+        {
+            return _figureSettingsControl.GetLineSettings();
+        }
+
+        public FillSettings GetFillSettings()
+        {
+            return _figureSettingsControl.GetFillSettings();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace VectorEditorProject.Core.States
             FigureFactory figureFactory = new FigureFactory();
             BaseFigure figure = figureFactory.CreateFigure(FigureFactory.Figures.Line);
             figure.LineSettings = _controlUnit.GetLineSettings();
-            figure.PointsSettings.AddPoint(new Point(e.X, e.Y));
+            figure.PointsSettings.AddPoint(new PointF(e.X, e.Y));
 
             AddFigureCommand command = new AddFigureCommand(_controlUnit, figure);
             _controlUnit.StoreCommand(command);

@@ -24,8 +24,8 @@ namespace VectorEditorProject.Drawing
                 }
 
                 var points = filledBaseFigure.PointsSettings.GetPoints();
-                int deltaX = Math.Abs(points.First().X - points.Last().X);
-                int deltaY = Math.Abs(points.First().Y - points.Last().Y);
+                float deltaX = Math.Abs(points.First().X - points.Last().X);
+                float deltaY = Math.Abs(points.First().Y - points.Last().Y);
 
                 Brush brush = new SolidBrush(filledBaseFigure.FillSettings.Color);
                 graphics.FillEllipse(brush, points.First().X,

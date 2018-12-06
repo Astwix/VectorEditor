@@ -7,7 +7,7 @@ namespace VectorEditorProject.Core.Commands
     class AddPointCommand : BaseCommand
     {
         private Guid _guid = Guid.Empty;
-        private Point _point;
+        private PointF _point;
         private ControlUnit _controlUnit;
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="fugure">Фигура</param>
         /// <param name="point">Точка</param>
         /// <param name="controlUnit">controlUnit</param>
-        public AddPointCommand(BaseFigure fugure, Point point, ControlUnit controlUnit)
+        public AddPointCommand(BaseFigure fugure, PointF point, ControlUnit controlUnit)
         {
             _guid = fugure.guid;
             _point = point;

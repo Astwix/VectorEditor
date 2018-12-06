@@ -55,7 +55,7 @@ namespace VectorEditorProject.Drawing
         {
             Brush brush = new SolidBrush(document.Color);
 
-            graphics.FillRectangle(brush, new Rectangle(new Point(0, 0), document.Size));
+            graphics.FillRectangle(brush, new RectangleF(new PointF(0, 0), document.Size));
 
             brush.Dispose();
         }

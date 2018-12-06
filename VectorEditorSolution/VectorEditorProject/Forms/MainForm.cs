@@ -17,9 +17,10 @@ namespace VectorEditorProject
         {
             InitializeComponent();
 
-            _controlUnit = new ControlUnit(canvas, figureSettingsControl);
+            _controlUnit = new ControlUnit(canvas, figureSettingsControl, ToolsUserControl);
             _drawerFactory = new DrawerFactory();
             _editContext = new EditContext(_controlUnit);
+            ToolsUserControl.EditContext = _editContext;
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -76,37 +77,7 @@ namespace VectorEditorProject
         {
             _editContext.MouseMove(sender, e);
         }
-
-        private void lineButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddFigureState);
-        }
-
-        private void polylineButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddFigureState);
-        }
-
-        private void circleButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddFigureState);
-        }
-
-        private void ellipseButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddFigureState);
-        }
-
-        private void polygonButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddFigureState);
-        }
-
-        private void selectionButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.SelectionState);
-        }
-
+        
         private void fileClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var command = new ClearDocumentCommand(_controlUnit.GetDocument());

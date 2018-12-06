@@ -36,20 +36,15 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lineButton = new System.Windows.Forms.Button();
-            this.polylineButton = new System.Windows.Forms.Button();
-            this.circleButton = new System.Windows.Forms.Button();
-            this.ellipseButton = new System.Windows.Forms.Button();
-            this.polygonButton = new System.Windows.Forms.Button();
-            this.selectionButton = new System.Windows.Forms.Button();
-            this.figureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.MainLeftSplitContainer = new System.Windows.Forms.SplitContainer();
             this.WrapPictureBox = new System.Windows.Forms.Panel();
+            this.figureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
+            this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).BeginInit();
+            this.MainLeftSplitContainer.Panel1.SuspendLayout();
+            this.MainLeftSplitContainer.SuspendLayout();
             this.WrapPictureBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +53,7 @@
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(0, 0);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(1003, 532);
+            this.canvas.Size = new System.Drawing.Size(1030, 532);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
@@ -90,14 +85,14 @@
             // fileOptionsToolStripMenuItem
             // 
             this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
-            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.fileOptionsToolStripMenuItem.Text = "Параметры";
             this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
             // 
             // fileClearToolStripMenuItem
             // 
             this.fileClearToolStripMenuItem.Name = "fileClearToolStripMenuItem";
-            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.fileClearToolStripMenuItem.Text = "Очистить";
             this.fileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
             // 
@@ -126,65 +121,28 @@
             this.doToolStripMenuItem.Text = "Вернуть";
             this.doToolStripMenuItem.Click += new System.EventHandler(this.doToolStripMenuItem_Click);
             // 
-            // lineButton
+            // MainLeftSplitContainer
             // 
-            this.lineButton.Location = new System.Drawing.Point(3, 3);
-            this.lineButton.Name = "lineButton";
-            this.lineButton.Size = new System.Drawing.Size(99, 25);
-            this.lineButton.TabIndex = 2;
-            this.lineButton.Text = "Линия";
-            this.lineButton.UseVisualStyleBackColor = true;
-            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
+            this.MainLeftSplitContainer.Dock = System.Windows.Forms.DockStyle.Left;
+            this.MainLeftSplitContainer.Location = new System.Drawing.Point(0, 67);
+            this.MainLeftSplitContainer.Name = "MainLeftSplitContainer";
+            this.MainLeftSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // polylineButton
+            // MainLeftSplitContainer.Panel1
             // 
-            this.polylineButton.Location = new System.Drawing.Point(3, 34);
-            this.polylineButton.Name = "polylineButton";
-            this.polylineButton.Size = new System.Drawing.Size(99, 25);
-            this.polylineButton.TabIndex = 3;
-            this.polylineButton.Text = "Полилиния";
-            this.polylineButton.UseVisualStyleBackColor = true;
-            this.polylineButton.Click += new System.EventHandler(this.polylineButton_Click);
+            this.MainLeftSplitContainer.Panel1.Controls.Add(this.ToolsUserControl);
+            this.MainLeftSplitContainer.Size = new System.Drawing.Size(123, 532);
+            this.MainLeftSplitContainer.SplitterDistance = 266;
+            this.MainLeftSplitContainer.TabIndex = 9;
             // 
-            // circleButton
+            // WrapPictureBox
             // 
-            this.circleButton.Location = new System.Drawing.Point(3, 65);
-            this.circleButton.Name = "circleButton";
-            this.circleButton.Size = new System.Drawing.Size(99, 25);
-            this.circleButton.TabIndex = 4;
-            this.circleButton.Text = "Круг";
-            this.circleButton.UseVisualStyleBackColor = true;
-            this.circleButton.Click += new System.EventHandler(this.circleButton_Click);
-            // 
-            // ellipseButton
-            // 
-            this.ellipseButton.Location = new System.Drawing.Point(3, 96);
-            this.ellipseButton.Name = "ellipseButton";
-            this.ellipseButton.Size = new System.Drawing.Size(99, 25);
-            this.ellipseButton.TabIndex = 5;
-            this.ellipseButton.Text = "Эллипс";
-            this.ellipseButton.UseVisualStyleBackColor = true;
-            this.ellipseButton.Click += new System.EventHandler(this.ellipseButton_Click);
-            // 
-            // polygonButton
-            // 
-            this.polygonButton.Location = new System.Drawing.Point(3, 127);
-            this.polygonButton.Name = "polygonButton";
-            this.polygonButton.Size = new System.Drawing.Size(99, 25);
-            this.polygonButton.TabIndex = 6;
-            this.polygonButton.Text = "Полигон";
-            this.polygonButton.UseVisualStyleBackColor = true;
-            this.polygonButton.Click += new System.EventHandler(this.polygonButton_Click);
-            // 
-            // selectionButton
-            // 
-            this.selectionButton.Location = new System.Drawing.Point(3, 158);
-            this.selectionButton.Name = "selectionButton";
-            this.selectionButton.Size = new System.Drawing.Size(99, 25);
-            this.selectionButton.TabIndex = 7;
-            this.selectionButton.Text = "Выделение";
-            this.selectionButton.UseVisualStyleBackColor = true;
-            this.selectionButton.Click += new System.EventHandler(this.selectionButton_Click);
+            this.WrapPictureBox.Controls.Add(this.canvas);
+            this.WrapPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WrapPictureBox.Location = new System.Drawing.Point(123, 67);
+            this.WrapPictureBox.Name = "WrapPictureBox";
+            this.WrapPictureBox.Size = new System.Drawing.Size(1030, 532);
+            this.WrapPictureBox.TabIndex = 10;
             // 
             // figureSettingsControl
             // 
@@ -194,33 +152,13 @@
             this.figureSettingsControl.Size = new System.Drawing.Size(1153, 39);
             this.figureSettingsControl.TabIndex = 8;
             // 
-            // splitContainer1
+            // ToolsUserControl
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 67);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.lineButton);
-            this.splitContainer1.Panel1.Controls.Add(this.polylineButton);
-            this.splitContainer1.Panel1.Controls.Add(this.selectionButton);
-            this.splitContainer1.Panel1.Controls.Add(this.circleButton);
-            this.splitContainer1.Panel1.Controls.Add(this.polygonButton);
-            this.splitContainer1.Panel1.Controls.Add(this.ellipseButton);
-            this.splitContainer1.Size = new System.Drawing.Size(150, 532);
-            this.splitContainer1.SplitterDistance = 266;
-            this.splitContainer1.TabIndex = 9;
-            // 
-            // WrapPictureBox
-            // 
-            this.WrapPictureBox.Controls.Add(this.canvas);
-            this.WrapPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WrapPictureBox.Location = new System.Drawing.Point(150, 67);
-            this.WrapPictureBox.Name = "WrapPictureBox";
-            this.WrapPictureBox.Size = new System.Drawing.Size(1003, 532);
-            this.WrapPictureBox.TabIndex = 10;
+            this.ToolsUserControl.EditContext = null;
+            this.ToolsUserControl.Location = new System.Drawing.Point(12, 6);
+            this.ToolsUserControl.Name = "ToolsUserControl";
+            this.ToolsUserControl.Size = new System.Drawing.Size(106, 189);
+            this.ToolsUserControl.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -228,7 +166,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 599);
             this.Controls.Add(this.WrapPictureBox);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.MainLeftSplitContainer);
             this.Controls.Add(this.figureSettingsControl);
             this.Controls.Add(this.topToolBar);
             this.MainMenuStrip = this.topToolBar;
@@ -238,9 +176,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.topToolBar.ResumeLayout(false);
             this.topToolBar.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.MainLeftSplitContainer.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).EndInit();
+            this.MainLeftSplitContainer.ResumeLayout(false);
             this.WrapPictureBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -256,16 +194,11 @@
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileOptionsToolStripMenuItem;
-        private System.Windows.Forms.Button lineButton;
-        private System.Windows.Forms.Button polylineButton;
-        private System.Windows.Forms.Button circleButton;
-        private System.Windows.Forms.Button ellipseButton;
-        private System.Windows.Forms.Button polygonButton;
-        private System.Windows.Forms.Button selectionButton;
         private System.Windows.Forms.ToolStripMenuItem fileClearToolStripMenuItem;
         private Forms.FigureSettingsControl figureSettingsControl;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer MainLeftSplitContainer;
         private System.Windows.Forms.Panel WrapPictureBox;
+        private Forms.ToolsControl ToolsUserControl;
     }
 }
 

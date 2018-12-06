@@ -3,19 +3,12 @@
     public class FigureFactory
     {
         /// <summary>
-        /// Перечисление фигур (без заливки)
+        /// Перечисление фигур
         /// </summary>
         public enum Figures
         {
             Line,
-            PolyLine
-        }
-
-        /// <summary>
-        /// Перечисление фигур с заливкой
-        /// </summary>
-        public enum FilledFigures
-        {
+            PolyLine,
             Polygon,
             Circle,
             Ellipse
@@ -38,6 +31,18 @@
                     return new PolyLine();
                     break;
 
+                case Figures.Polygon:
+                    return new Polygon();
+                    break;
+
+                case Figures.Circle:
+                    return new Circle();
+                    break;
+
+                case Figures.Ellipse:
+                    return new Ellipse();
+                    break;
+
                 default:
                     return null;
             }
@@ -48,19 +53,19 @@
         /// </summary>
         /// <param name="figureType">Тип фигуры из перечисления</param>
         /// <returns>Возвращает новый объект фигуры как базовый тип (FilledBase)</returns>
-        public FilledBaseFigure CreateFilledFigure(FilledFigures figureType)
+        public FilledBaseFigure CreateFilledFigure(Figures figureType)
         {
             switch (figureType)
             {
-                case FilledFigures.Polygon:
+                case Figures.Polygon:
                     return new Polygon();
                     break;
 
-                case FilledFigures.Circle:
+                case Figures.Circle:
                     return new Circle();
                     break;
 
-                case FilledFigures.Ellipse:
+                case Figures.Ellipse:
                     return new Ellipse();
                     break;
 

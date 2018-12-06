@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Drawing;
-using VectorEditorProject.Figures;
-using VectorEditorProject.Figures.Utility;
 using VectorEditorProject.Forms;
 
 namespace VectorEditorProject

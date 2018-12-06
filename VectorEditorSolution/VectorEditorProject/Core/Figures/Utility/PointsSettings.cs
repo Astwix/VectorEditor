@@ -89,5 +89,10 @@ namespace VectorEditorProject.Figures.Utility
         {
             _points.Remove(point);
         }
+
+        public void RemoveLast()
+        {
+            _points.RemoveAt(_points.Count - 1);
+        }
     }
 }

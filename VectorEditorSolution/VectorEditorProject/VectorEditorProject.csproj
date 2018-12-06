@@ -53,12 +53,8 @@
     <Compile Include="Core\ControlUnit.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\EditContext.cs" />
-    <Compile Include="Core\States\AddCircleState.cs" />
-    <Compile Include="Core\States\AddEllipseState.cs" />
-    <Compile Include="Core\States\AddLineState.cs" />
+    <Compile Include="Core\States\AddFigureState.cs" />
     <Compile Include="Core\States\AddPointState.cs" />
-    <Compile Include="Core\States\AddPolygonState.cs" />
-    <Compile Include="Core\States\AddPolylineState.cs" />
     <Compile Include="Core\States\BaseState.cs" />
     <Compile Include="Core\States\SelectionState.cs" />
     <Compile Include="Core\Drawing\BaseDrawer.cs" />

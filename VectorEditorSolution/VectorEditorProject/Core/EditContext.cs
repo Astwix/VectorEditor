@@ -24,14 +24,8 @@ namespace VectorEditorProject.Core
         /// </summary>
         public enum States
         {
-            AddLineState,
-            AddPolylineState,
-            AddPlygonState,
-            AddCircleState,
-            AddEllipseState,
-
+            AddFigureState,
             SelectionState,
-
             AddPointState
         }
 
@@ -41,27 +35,10 @@ namespace VectorEditorProject.Core
         /// <param name="state"></param>
         public void SetActiveState(States state)
         {
-            // todo (уменьшить) упростить количество состояний
             switch (state)
             {
-                case States.AddLineState:
-                    _activeState = new AddLineState(_controlUnit);
-                    break;
-
-                case States.AddCircleState:
-                    _activeState = new AddCircleState(_controlUnit);
-                    break;
-
-                case States.AddEllipseState:
-                    _activeState = new AddEllipseState(_controlUnit);
-                    break;
-
-                case States.AddPolylineState:
-                    _activeState = new AddPolylineState(_controlUnit, this);
-                    break;
-
-                case States.AddPlygonState:
-                    _activeState = new AddPolygonState(_controlUnit, this);
+                case States.AddFigureState:
+                    _activeState = new AddFigureState(_controlUnit, this);
                     break;
 
                 case States.AddPointState:

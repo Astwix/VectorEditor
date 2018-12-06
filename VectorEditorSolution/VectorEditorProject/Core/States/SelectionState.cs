@@ -46,7 +46,7 @@ namespace VectorEditorProject.Core.States
             endX = e.X;
             endY = e.Y;
 
-            _controlUnit.ForceRedrawCanvas();
+            _controlUnit.UpdateCanvas();
         }
 
         public override void MouseUp(object sender, MouseEventArgs e)

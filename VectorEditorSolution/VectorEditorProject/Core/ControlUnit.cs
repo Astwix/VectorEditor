@@ -130,7 +130,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Принудительная перерисовка холста
         /// </summary>
-        public void ForceRedrawCanvas()
+        public void UpdateCanvas()
         {
             _canvas.Invalidate();
         }

@@ -79,27 +79,27 @@ namespace VectorEditorProject
 
         private void lineButton_Click(object sender, EventArgs e)
         {
-            _editContext.SetActiveState(EditContext.States.AddLineState);
+            _editContext.SetActiveState(EditContext.States.AddFigureState);
         }
 
         private void polylineButton_Click(object sender, EventArgs e)
         {
-            _editContext.SetActiveState(EditContext.States.AddPolylineState);
+            _editContext.SetActiveState(EditContext.States.AddFigureState);
         }
 
         private void circleButton_Click(object sender, EventArgs e)
         {
-            _editContext.SetActiveState(EditContext.States.AddCircleState);
+            _editContext.SetActiveState(EditContext.States.AddFigureState);
         }
 
         private void ellipseButton_Click(object sender, EventArgs e)
         {
-            _editContext.SetActiveState(EditContext.States.AddEllipseState);
+            _editContext.SetActiveState(EditContext.States.AddFigureState);
         }
 
         private void polygonButton_Click(object sender, EventArgs e)
         {
-            _editContext.SetActiveState(EditContext.States.AddPlygonState);
+            _editContext.SetActiveState(EditContext.States.AddFigureState);
         }
 
         private void selectionButton_Click(object sender, EventArgs e)

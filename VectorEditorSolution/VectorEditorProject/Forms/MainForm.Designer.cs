@@ -43,15 +43,22 @@
             this.polygonButton = new System.Windows.Forms.Button();
             this.selectionButton = new System.Windows.Forms.Button();
             this.figureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.WrapPictureBox = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.WrapPictureBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // canvas
             // 
-            this.canvas.Location = new System.Drawing.Point(117, 78);
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(0, 0);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(754, 513);
+            this.canvas.Size = new System.Drawing.Size(1003, 532);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
@@ -67,7 +74,7 @@
             this.editToolStripMenuItem});
             this.topToolBar.Location = new System.Drawing.Point(0, 0);
             this.topToolBar.Name = "topToolBar";
-            this.topToolBar.Size = new System.Drawing.Size(889, 28);
+            this.topToolBar.Size = new System.Drawing.Size(1153, 28);
             this.topToolBar.TabIndex = 1;
             this.topToolBar.Text = "topToolBar";
             // 
@@ -83,14 +90,14 @@
             // fileOptionsToolStripMenuItem
             // 
             this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
-            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.fileOptionsToolStripMenuItem.Text = "Параметры";
             this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
             // 
             // fileClearToolStripMenuItem
             // 
             this.fileClearToolStripMenuItem.Name = "fileClearToolStripMenuItem";
-            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.fileClearToolStripMenuItem.Text = "Очистить";
             this.fileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
             // 
@@ -121,7 +128,7 @@
             // 
             // lineButton
             // 
-            this.lineButton.Location = new System.Drawing.Point(12, 78);
+            this.lineButton.Location = new System.Drawing.Point(3, 3);
             this.lineButton.Name = "lineButton";
             this.lineButton.Size = new System.Drawing.Size(99, 25);
             this.lineButton.TabIndex = 2;
@@ -131,7 +138,7 @@
             // 
             // polylineButton
             // 
-            this.polylineButton.Location = new System.Drawing.Point(12, 109);
+            this.polylineButton.Location = new System.Drawing.Point(3, 34);
             this.polylineButton.Name = "polylineButton";
             this.polylineButton.Size = new System.Drawing.Size(99, 25);
             this.polylineButton.TabIndex = 3;
@@ -141,7 +148,7 @@
             // 
             // circleButton
             // 
-            this.circleButton.Location = new System.Drawing.Point(12, 140);
+            this.circleButton.Location = new System.Drawing.Point(3, 65);
             this.circleButton.Name = "circleButton";
             this.circleButton.Size = new System.Drawing.Size(99, 25);
             this.circleButton.TabIndex = 4;
@@ -151,7 +158,7 @@
             // 
             // ellipseButton
             // 
-            this.ellipseButton.Location = new System.Drawing.Point(12, 171);
+            this.ellipseButton.Location = new System.Drawing.Point(3, 96);
             this.ellipseButton.Name = "ellipseButton";
             this.ellipseButton.Size = new System.Drawing.Size(99, 25);
             this.ellipseButton.TabIndex = 5;
@@ -161,7 +168,7 @@
             // 
             // polygonButton
             // 
-            this.polygonButton.Location = new System.Drawing.Point(12, 202);
+            this.polygonButton.Location = new System.Drawing.Point(3, 127);
             this.polygonButton.Name = "polygonButton";
             this.polygonButton.Size = new System.Drawing.Size(99, 25);
             this.polygonButton.TabIndex = 6;
@@ -171,7 +178,7 @@
             // 
             // selectionButton
             // 
-            this.selectionButton.Location = new System.Drawing.Point(12, 233);
+            this.selectionButton.Location = new System.Drawing.Point(3, 158);
             this.selectionButton.Name = "selectionButton";
             this.selectionButton.Size = new System.Drawing.Size(99, 25);
             this.selectionButton.TabIndex = 7;
@@ -181,24 +188,48 @@
             // 
             // figureSettingsControl
             // 
-            this.figureSettingsControl.Location = new System.Drawing.Point(12, 33);
+            this.figureSettingsControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.figureSettingsControl.Location = new System.Drawing.Point(0, 28);
             this.figureSettingsControl.Name = "figureSettingsControl";
-            this.figureSettingsControl.Size = new System.Drawing.Size(865, 39);
+            this.figureSettingsControl.Size = new System.Drawing.Size(1153, 39);
             this.figureSettingsControl.TabIndex = 8;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 67);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.lineButton);
+            this.splitContainer1.Panel1.Controls.Add(this.polylineButton);
+            this.splitContainer1.Panel1.Controls.Add(this.selectionButton);
+            this.splitContainer1.Panel1.Controls.Add(this.circleButton);
+            this.splitContainer1.Panel1.Controls.Add(this.polygonButton);
+            this.splitContainer1.Panel1.Controls.Add(this.ellipseButton);
+            this.splitContainer1.Size = new System.Drawing.Size(150, 532);
+            this.splitContainer1.SplitterDistance = 266;
+            this.splitContainer1.TabIndex = 9;
+            // 
+            // WrapPictureBox
+            // 
+            this.WrapPictureBox.Controls.Add(this.canvas);
+            this.WrapPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WrapPictureBox.Location = new System.Drawing.Point(150, 67);
+            this.WrapPictureBox.Name = "WrapPictureBox";
+            this.WrapPictureBox.Size = new System.Drawing.Size(1003, 532);
+            this.WrapPictureBox.TabIndex = 10;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 599);
+            this.ClientSize = new System.Drawing.Size(1153, 599);
+            this.Controls.Add(this.WrapPictureBox);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.figureSettingsControl);
-            this.Controls.Add(this.selectionButton);
-            this.Controls.Add(this.polygonButton);
-            this.Controls.Add(this.ellipseButton);
-            this.Controls.Add(this.circleButton);
-            this.Controls.Add(this.polylineButton);
-            this.Controls.Add(this.lineButton);
-            this.Controls.Add(this.canvas);
             this.Controls.Add(this.topToolBar);
             this.MainMenuStrip = this.topToolBar;
             this.Name = "MainForm";
@@ -207,6 +238,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.topToolBar.ResumeLayout(false);
             this.topToolBar.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.WrapPictureBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,6 +264,8 @@
         private System.Windows.Forms.Button selectionButton;
         private System.Windows.Forms.ToolStripMenuItem fileClearToolStripMenuItem;
         private Forms.FigureSettingsControl figureSettingsControl;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel WrapPictureBox;
     }
 }
 

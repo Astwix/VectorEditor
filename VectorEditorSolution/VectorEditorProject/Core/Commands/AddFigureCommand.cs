@@ -4,17 +4,17 @@ namespace VectorEditorProject.Core.Commands
 {
     class AddFigureCommand : BaseCommand
     {
-        private Document _document = null;
-        private BaseFigure _figure = null;
+        private ControlUnit _controlUnit;
+        private BaseFigure _figure;
 
         /// <summary>
         /// Конструктор создания команды
         /// </summary>
-        /// <param name="document">Документ</param>
+        /// <param name="controlUnit">Control Unit</param>
         /// <param name="figure">Фигура</param>
-        public AddFigureCommand(Document document, BaseFigure figure)
+        public AddFigureCommand(ControlUnit controlUnit, BaseFigure figure)
         {
-            _document = document;
+            _controlUnit = controlUnit;
             _figure = figure;
         }
 
@@ -23,7 +23,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            _document.AddFigure(_figure);
+            _controlUnit.GetDocument().AddFigure(_figure);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Undo()
         {
-            _document.DeleteFigure(_figure);
+            _controlUnit.GetDocument().DeleteFigure(_figure);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
+using VectorEditorProject.Figures;
 using VectorEditorProject.Figures.Utility;
 using VectorEditorProject.Forms;
 
@@ -15,6 +16,7 @@ namespace VectorEditorProject.Core
 
         private readonly PictureBox _canvas;
         private FigureSettingsControl _figureSettingsControl;
+        private ToolsControl _toolsControl;
 
         private Document _currentDocument = new Document("Untitled", Color.White, new Size(500, 500));
 
@@ -23,13 +25,14 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Конструктор класса управляющего control
         /// </summary>
-        public ControlUnit(PictureBox canvas, FigureSettingsControl figureSettingsControl)
+        public ControlUnit(PictureBox canvas, FigureSettingsControl figureSettingsControl, ToolsControl toolsControl)
         {
             _commands = new List<BaseCommand>();
             _currentCommand = 0;
 
             _canvas = canvas;
             _figureSettingsControl = figureSettingsControl;
+            _toolsControl = toolsControl;
 
             _viewUpdateDictionary.Add(typeof(AddFigureCommand), _canvas);
             _viewUpdateDictionary.Add(typeof(AddPointCommand), _canvas);
@@ -135,14 +138,31 @@ namespace VectorEditorProject.Core
             _canvas.Invalidate();
         }
 
-        public LineSettings GetLineSettings()
+        /// <summary>
+        /// Получить настройки линии
+        /// </summary>
+        /// <returns></returns>
+        public LineSettings GetActiveLineSettings()
         {
             return _figureSettingsControl.GetLineSettings();
         }
 
-        public FillSettings GetFillSettings()
+        /// <summary>
+        /// Получить настройки заливки
+        /// </summary>
+        /// <returns></returns>
+        public FillSettings GetActiveFillSettings()
         {
             return _figureSettingsControl.GetFillSettings();
+        }
+
+        /// <summary>
+        /// Получить тип фигуры
+        /// </summary>
+        /// <returns></returns>
+        public FigureFactory.Figures GetActiveFigureType()
+        {
+            return _toolsControl.GetActiveFigureType();
         }
     }
 }

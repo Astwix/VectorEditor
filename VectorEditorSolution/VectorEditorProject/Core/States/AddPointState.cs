@@ -69,7 +69,7 @@ namespace VectorEditorProject.Core.States
 
             if (_isMousePressed)
             {
-                Point point = new Point(e.X, e.Y);
+                PointF point = new PointF(e.X, e.Y);
                 int pointsCount = activeFigure.PointsSettings.GetPoints().Count;
                 activeFigure.PointsSettings.ReplacePoint(pointsCount - 1, point);
             }
@@ -89,7 +89,7 @@ namespace VectorEditorProject.Core.States
 
             activeFigure.PointsSettings.RemoveLast();
 
-            var command = new AddPointCommand(activeFigure, new Point(e.X, e.Y), _controlUnit);
+            var command = new AddPointCommand(activeFigure, new PointF(e.X, e.Y), _controlUnit);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
 

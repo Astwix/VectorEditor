@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
+using VectorEditorProject.Core.Figures.Utility;
 using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Drawing
@@ -23,23 +25,50 @@ namespace VectorEditorProject.Drawing
                     return;
                 }
 
-                var points = filledBaseFigure.PointsSettings.GetPoints();
-                float deltaX = Math.Abs(points.First().X - points.Last().X);
-                float deltaY = Math.Abs(points.First().Y - points.Last().Y);
+                var leftTopPoint = FigureEditor.LeftTopPointF(figure);
+                var rightBottomPoint = FigureEditor.RightBottomPointF(figure);
+
+                float deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
+                float deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
                 float distance = Math.Max(deltaX, deltaY);
 
                 Brush brush = new SolidBrush(filledBaseFigure.FillSettings.Color);
-                graphics.FillEllipse(brush, points.First().X,
-                    points.First().Y, distance, distance);
+                graphics.FillEllipse(brush, leftTopPoint.X,
+                    leftTopPoint.Y, distance, distance);
 
                 Pen pen = new Pen(filledBaseFigure.LineSettings.
                     Color, filledBaseFigure.LineSettings.Width);
                 pen.DashStyle = filledBaseFigure.LineSettings.Style;
                 
-                graphics.DrawEllipse(pen, points.First().X,
-                    points.First().Y, distance, distance);
+                graphics.DrawEllipse(pen, leftTopPoint.X,
+                    leftTopPoint.Y, distance, distance);
 
                 brush.Dispose();
+                pen.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Рисование границы
+        /// </summary>
+        /// <param name="figure">Фигура</param>
+        /// <param name="graphics"></param>
+        public override void DrawBorder(BaseFigure figure, Graphics graphics)
+        {
+            if (figure.PointsSettings.GetPoints().Count == 2)
+            {
+                var leftTopPoint = FigureEditor.LeftTopPointF(figure);
+                var rightBottomPoint = FigureEditor.RightBottomPointF(figure);
+
+                float deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
+                float deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
+                float distance = Math.Max(deltaX, deltaY);
+
+                Pen pen = new Pen(Color.Black);
+                pen.DashStyle = DashStyle.Dash;
+                graphics.DrawRectangle(pen, leftTopPoint.X, leftTopPoint.Y,
+                    distance, distance);
+
                 pen.Dispose();
             }
         }

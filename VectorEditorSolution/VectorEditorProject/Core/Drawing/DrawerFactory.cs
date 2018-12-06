@@ -46,6 +46,11 @@ namespace VectorEditorProject.Drawing
             drawers[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
         }
 
+        public void DrawBorder(BaseFigure baseFigure, Graphics graphics)
+        {
+            drawers[baseFigure.GetType()].DrawBorder(baseFigure, graphics);
+        }
+
         /// <summary>
         /// Рисование холста
         /// </summary>

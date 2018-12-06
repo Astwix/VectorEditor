@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
+using VectorEditorProject.Core.Figures.Utility;
 using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Drawing
@@ -29,6 +31,27 @@ namespace VectorEditorProject.Drawing
                 graphics.DrawPolygon(pen, filledBaseFigure.PointsSettings.GetPoints().ToArray());
 
                 brush.Dispose();
+                pen.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Рисование границы
+        /// </summary>
+        /// <param name="figure">Фигура</param>
+        /// <param name="graphics"></param>
+        public override void DrawBorder(BaseFigure figure, Graphics graphics)
+        {
+            if (figure.PointsSettings.GetPoints().Count >= 2)
+            {
+                var leftTopPoint = FigureEditor.LeftTopPointF(figure);
+                var rightBottomPoint = FigureEditor.RightBottomPointF(figure);
+
+                Pen pen = new Pen(Color.Black);
+                pen.DashStyle = DashStyle.Dash;
+                graphics.DrawRectangle(pen, leftTopPoint.X, leftTopPoint.Y,
+                    rightBottomPoint.X - leftTopPoint.X, rightBottomPoint.Y - leftTopPoint.Y);
+
                 pen.Dispose();
             }
         }

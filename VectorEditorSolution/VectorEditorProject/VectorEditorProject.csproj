@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F1C5C57D-C773-42C2-8E18-52F0A1E67A9B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>VectorEditorProject</RootNamespace>
+    <AssemblyName>VectorEditorProject</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Commands\AddFigureCommand.cs" />
+    <Compile Include="Core\Commands\AddPointCommand.cs" />
+    <Compile Include="Core\Commands\BaseCommand.cs" />
+    <Compile Include="Core\Commands\ClearDocumentCommand.cs" />
+    <Compile Include="Core\ControlUnit.cs" />
+    <Compile Include="Core\Document.cs" />
+    <Compile Include="Core\EditContext.cs" />
+    <Compile Include="Core\States\AddCircleState.cs" />
+    <Compile Include="Core\States\AddEllipseState.cs" />
+    <Compile Include="Core\States\AddLineState.cs" />
+    <Compile Include="Core\States\AddPointState.cs" />
+    <Compile Include="Core\States\AddPolygonState.cs" />
+    <Compile Include="Core\States\AddPolylineState.cs" />
+    <Compile Include="Core\States\BaseState.cs" />
+    <Compile Include="Core\States\SelectionState.cs" />
+    <Compile Include="Drawing\BaseDrawer.cs" />
+    <Compile Include="Drawing\CircleDrawer.cs" />
+    <Compile Include="Drawing\DrawerFactory.cs" />
+    <Compile Include="Drawing\EllipseDrawer.cs" />
+    <Compile Include="Drawing\LineDrawer.cs" />
+    <Compile Include="Drawing\PolygonDrawer.cs" />
+    <Compile Include="Drawing\PolyLineDrawer.cs" />
+    <Compile Include="Figures\BaseFigure.cs" />
+    <Compile Include="Figures\Circle.cs" />
+    <Compile Include="Figures\Ellipse.cs" />
+    <Compile Include="Figures\FigureFactory.cs" />
+    <Compile Include="Figures\FilledBaseFigure.cs" />
+    <Compile Include="Figures\Line.cs" />
+    <Compile Include="Figures\Polygon.cs" />
+    <Compile Include="Figures\PolyLine.cs" />
+    <Compile Include="Figures\Utility\FillSettings.cs" />
+    <Compile Include="Figures\Utility\LineSettings.cs" />
+    <Compile Include="Figures\Utility\PointsSettings.cs" />
+    <Compile Include="Forms\DocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DocumentForm.Designer.cs">
+      <DependentUpon>DocumentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FigureSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FigureSettingsControl.Designer.cs">
+      <DependentUpon>FigureSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\DocumentForm.resx">
+      <DependentUpon>DocumentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FigureSettingsControl.resx">
+      <DependentUpon>FigureSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

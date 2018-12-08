@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Core.Figures.Utility
@@ -82,6 +80,40 @@ namespace VectorEditorProject.Core.Figures.Utility
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Попала ли фигура в выделение
+        /// </summary>
+        /// <param name="figure">Фигура</param>
+        /// <param name="rectangle">Прямоугольник выделения</param>
+        /// <returns></returns>
+        public static bool IsFigureInRectangle(BaseFigure figure, RectangleF rectangle)
+        {
+            foreach (var point in figure.PointsSettings.GetPoints())
+            {
+                if (point.X <= rectangle.X) // левая граница выделения
+                {
+                    return false;
+                }
+
+                if (point.X >= rectangle.X + rectangle.Width) // правая граница выделения
+                {
+                    return false;
+                }
+
+                if (point.Y <= rectangle.Y) // верхняя граница выделения
+                {
+                    return false;
+                }
+
+                if (point.Y >= rectangle.Y + rectangle.Height) // нижняя граница выделения
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

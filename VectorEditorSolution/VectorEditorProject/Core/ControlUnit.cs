@@ -20,7 +20,7 @@ namespace VectorEditorProject.Core
 
         private Document _currentDocument = new Document("Untitled", Color.White, new Size(500, 500));
 
-        private Dictionary<Type, Control> _viewUpdateDictionary = new Dictionary<Type, Control>();
+        private Dictionary<Type, List<Action>> _viewUpdateDictionary = new Dictionary<Type, List<Action>>();
 
         /// <summary>
         /// Конструктор класса управляющего control
@@ -34,19 +34,23 @@ namespace VectorEditorProject.Core
             _figureSettingsControl = figureSettingsControl;
             _toolsControl = toolsControl;
 
-            _viewUpdateDictionary.Add(typeof(AddFigureCommand), _canvas);
-            _viewUpdateDictionary.Add(typeof(AddPointCommand), _canvas);
-            _viewUpdateDictionary.Add(typeof(ClearDocumentCommand), _canvas);
+            _viewUpdateDictionary.Add(typeof(AddFigureCommand), new List<Action>() {UpdateCanvas});
+            _viewUpdateDictionary.Add(typeof(AddPointCommand), new List<Action>() { UpdateCanvas });
+            _viewUpdateDictionary.Add(typeof(ClearDocumentCommand), new List<Action>() { UpdateCanvas });
+            _viewUpdateDictionary.Add(typeof(SelectFiguresCommand), new List<Action>() { UpdateCanvas });
         }
 
         /// <summary>
-        /// Обновление view по соответствующей команде (команда -> контрол)
-        /// Переделать, т.к. надо обновлять не только контролы
+        /// Обновление view по соответствующей команде
         /// </summary>
         /// <param name="command">Команда</param>
         private void UpdateView(BaseCommand command)
         {
-            _viewUpdateDictionary[command.GetType()].Invalidate();
+            var actionList = _viewUpdateDictionary[command.GetType()];
+            foreach (var action in actionList)
+            {
+                action();
+            }
         }
 
         /// <summary>

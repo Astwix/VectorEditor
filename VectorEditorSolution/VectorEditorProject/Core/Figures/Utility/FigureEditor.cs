@@ -115,5 +115,35 @@ namespace VectorEditorProject.Core.Figures.Utility
 
             return true;
         }
+
+        /// <summary>
+        /// Метод для соразмерного (пропорционального) изменения фигуры
+        /// </summary>
+        /// <param name="figures">Фигуры</param>
+        /// <param name="newSize">Новая область</param>
+        public static void EditFiguresSize(IReadOnlyList<BaseFigure> figures, RectangleF newSize)
+        {
+            var leftTopPoint = LeftTopPointF(figures);
+            var rightBottomPoint = RightBottomPointF(figures);
+
+            var rectangleWidth = rightBottomPoint.X - leftTopPoint.X;
+            var rectangleHeight = rightBottomPoint.Y - leftTopPoint.Y;
+
+            foreach (var figure in figures)
+            {
+                var points = figure.PointsSettings.GetPoints().ToArray();
+                for (int i = 0; i < points.Length; i++)
+                {
+                    PointF newPoint = new PointF();
+
+                    newPoint.X = newSize.X + newSize.Width * 
+                                 ((points[i].X - leftTopPoint.X) / rectangleWidth);
+                    newPoint.Y = newSize.Y + newSize.Height 
+                                 * ((points[i].Y - leftTopPoint.Y) / rectangleHeight);
+
+                    figure.PointsSettings.ReplacePoint(i, newPoint);
+                }
+            }
+        }
     }
 }

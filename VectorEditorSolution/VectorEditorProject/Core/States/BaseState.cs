@@ -20,5 +20,9 @@ namespace VectorEditorProject.Core.States
         public virtual void MouseMove(object sender, MouseEventArgs e)
         {
         }
+
+        public virtual void Update()
+        {
+        }
     }
 }

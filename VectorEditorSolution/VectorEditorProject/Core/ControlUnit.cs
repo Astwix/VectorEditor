@@ -13,6 +13,7 @@ namespace VectorEditorProject.Core
     {
         private List<BaseCommand> _commands;
         private int _currentCommand;
+        public EditContext EditContext { get; set; }
 
         private readonly PictureBox _canvas;
         private FigureSettingsControl _figureSettingsControl;
@@ -38,6 +39,15 @@ namespace VectorEditorProject.Core
             _viewUpdateDictionary.Add(typeof(AddPointCommand), new List<Action>() { UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(ClearDocumentCommand), new List<Action>() { UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(SelectFiguresCommand), new List<Action>() { UpdateCanvas });
+            _viewUpdateDictionary.Add(typeof(FiguresChangingCommand), new List<Action>() { UpdateCanvas, UpdateState });
+        }
+
+        /// <summary>
+        /// Обновить состояние
+        /// </summary>
+        private void UpdateState()
+        {
+            EditContext.UpdateState();
         }
 
         /// <summary>

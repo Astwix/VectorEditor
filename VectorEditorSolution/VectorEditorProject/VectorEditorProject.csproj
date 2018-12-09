@@ -50,6 +50,7 @@
     <Compile Include="Core\Commands\AddPointCommand.cs" />
     <Compile Include="Core\Commands\BaseCommand.cs" />
     <Compile Include="Core\Commands\ClearDocumentCommand.cs" />
+    <Compile Include="Core\Commands\FiguresChangingCommand.cs" />
     <Compile Include="Core\Commands\SelectFiguresCommand.cs" />
     <Compile Include="Core\ControlUnit.cs" />
     <Compile Include="Core\Document.cs" />

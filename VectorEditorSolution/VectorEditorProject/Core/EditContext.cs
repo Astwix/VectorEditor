@@ -89,6 +89,11 @@ namespace VectorEditorProject.Core
             _activeState?.MouseUp(sender, e);
         }
 
+        public void UpdateState()
+        {
+            _activeState?.Update();
+        }
+
         /// <summary>
         /// Установить активную фигуру
         /// </summary>

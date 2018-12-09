@@ -20,6 +20,7 @@ namespace VectorEditorProject
             _controlUnit = new ControlUnit(canvas, figureSettingsControl, ToolsUserControl);
             _drawerFactory = new DrawerFactory();
             _editContext = new EditContext(_controlUnit);
+            _controlUnit.EditContext = _editContext;
             ToolsUserControl.EditContext = _editContext;
         }
 

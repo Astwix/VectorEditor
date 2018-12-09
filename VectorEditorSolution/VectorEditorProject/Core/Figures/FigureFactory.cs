@@ -1,4 +1,7 @@
-﻿namespace VectorEditorProject.Figures
+﻿using System;
+using System.Drawing;
+
+namespace VectorEditorProject.Figures
 {
     public class FigureFactory
     {
@@ -72,6 +75,32 @@
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// Копирование фигуры
+        /// </summary>
+        /// <param name="figure">Фигура</param>
+        /// <returns>Возвращает копию фигуры</returns>
+        public BaseFigure CopyFigure(BaseFigure figure)
+        {
+            var copy = (BaseFigure) Activator.CreateInstance(figure.GetType());
+            copy.guid = figure.guid;
+            foreach (var point in figure.PointsSettings.GetPoints())
+            {
+                copy.PointsSettings.AddPoint(new PointF(point.X, point.Y));
+            }
+
+            copy.LineSettings.Color = figure.LineSettings.Color;
+            copy.LineSettings.Style = figure.LineSettings.Style;
+            copy.LineSettings.Width = figure.LineSettings.Width;
+
+            if (figure is FilledBaseFigure filledFigure && copy is FilledBaseFigure filledCopy)
+            {
+                filledCopy.FillSettings.Color = filledFigure.FillSettings.Color;
+            }
+
+            return copy;
         }
     }
 }

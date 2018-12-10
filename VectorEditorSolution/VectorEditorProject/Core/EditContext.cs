@@ -67,6 +67,8 @@ namespace VectorEditorProject.Core
                     _activeState = null;
                     break;
             }
+
+            _controlUnit.UpdateCanvas();
         }
 
         public void Draw(Graphics graphics)

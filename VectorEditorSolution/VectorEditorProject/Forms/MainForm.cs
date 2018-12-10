@@ -85,5 +85,14 @@ namespace VectorEditorProject
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
         }
+
+        private void MainForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                _editContext.SetActiveState(EditContext.States.SelectionState);
+                return;
+            }
+        }
     }
 }

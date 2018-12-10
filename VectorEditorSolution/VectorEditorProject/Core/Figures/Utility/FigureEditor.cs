@@ -145,5 +145,19 @@ namespace VectorEditorProject.Core.Figures.Utility
                 }
             }
         }
+
+        /// <summary>
+        /// Расчет расстояния между точками
+        /// </summary>
+        /// <param name="point1">Первая точка</param>
+        /// <param name="point2">Вторая точка</param>
+        /// <returns>Расстояние между точками</returns>
+        public static float DistanceBetweenPoints(PointF point1, PointF point2)
+        {
+            float deltaX = Math.Abs(point1.X - point2.X);
+            float deltaY = Math.Abs(point1.Y - point2.Y);
+
+            return (float)Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+        }
     }
 }

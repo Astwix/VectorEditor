@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.Figures.Utility;
@@ -56,8 +57,8 @@ namespace VectorEditorProject.Core.States
 
             _beginX = e.X;
             _beginY = e.Y;
-            _endX = e.X;
-            _endY = e.Y;
+            _leftTopX = Math.Min(_beginX, _endX);
+            _leftTopY = Math.Min(_beginY, _endY);
         }
 
         public override void MouseMove(object sender, MouseEventArgs e)
@@ -79,11 +80,48 @@ namespace VectorEditorProject.Core.States
 
             if ((_rightBottomX - _leftTopX < 3) && (_rightBottomY - _leftTopY < 3))
             {
-                //SingleSelection();
+                SingleSelection();
             }
             else
             {
                 AreaSelection();
+            }
+        }
+
+        /// <summary>
+        /// Единичное выделение
+        /// </summary>
+        private void SingleSelection()
+        {
+            Dictionary<BaseFigure, float> distanceToFigures = new Dictionary<BaseFigure, float>();
+
+            var figures = _controlUnit.GetDocument().GetFigures();
+            if (figures.Count > 0)
+            {
+                // по фигурам
+                foreach (var figure in figures)
+                {
+                    float distance = FigureEditor.DistanceBetweenPoints(figure.PointsSettings.GetPoints()[0],
+                        new PointF(_endX, _endY));
+
+                    // по точкам
+                    foreach (var point in figure.PointsSettings.GetPoints())
+                    {
+                        distance = Math.Min(distance,
+                            FigureEditor.DistanceBetweenPoints(point, new PointF(_endX, _endY)));
+                    }
+
+                    distanceToFigures.Add(figure, distance);
+                }
+
+                // ближайшая (к клику пользователя) фигура из словаря
+                var nearFigure = distanceToFigures.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
+
+                var command = new SelectFiguresCommand(_editContext, nearFigure);
+                _controlUnit.StoreCommand(command);
+                _controlUnit.Do();
+
+                _editContext.SetActiveState(EditContext.States.FigureEditingState);
             }
         }
 

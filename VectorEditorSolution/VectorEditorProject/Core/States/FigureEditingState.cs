@@ -23,6 +23,9 @@ namespace VectorEditorProject.Core.States
         private bool _isLeftTopMarkerHovered;
         private bool _isRightBottomMarkerHovered;
 
+        private float _fixedWidth;
+        private float _fixedHeight;
+
         private const float _markerSize = 10;
         private Color _markerHoverColor = Color.DeepPink;
         private List<BaseFigure> _backUp = new List<BaseFigure>();
@@ -95,6 +98,9 @@ namespace VectorEditorProject.Core.States
         public override void MouseDown(object sender, MouseEventArgs e)
         {
             _isMousePressed = true;
+            // запоминаем габариты выделения 
+            _fixedWidth = _rightBottomMarker.X - _leftTopMarker.X;
+            _fixedHeight = _rightBottomMarker.Y - _leftTopMarker.Y;
 
             // создание резервной копии фигуры (для отката)
             foreach (var selectedFigure in _editContext.GetSelectedFigures())
@@ -136,6 +142,22 @@ namespace VectorEditorProject.Core.States
                                               e.X <= _rightBottomMarker.X + _markerSize / 2 &&
                                               e.Y >= _rightBottomMarker.Y - _markerSize / 2 &&
                                               e.Y <= _rightBottomMarker.Y + _markerSize / 2;
+            }
+
+            // перемещение выделенных фигур
+            if (_isMousePressed &&
+                !_isLeftTopMarkerHovered &&
+                !_isRightBottomMarkerHovered &&
+                // внутри выделения
+                e.X > _leftTopMarker.X &&
+                e.X < _leftTopMarker.X + _fixedWidth &&
+                e.Y > _leftTopMarker.Y &&
+                e.Y < _leftTopMarker.Y + _fixedHeight)
+            {
+                _leftTopMarker.X = e.X - _fixedWidth / 2;
+                _leftTopMarker.Y = e.Y - _fixedHeight / 2;
+                _rightBottomMarker.X = e.X + _fixedWidth / 2;
+                _rightBottomMarker.Y = e.Y + _fixedHeight / 2;
             }
 
             // изменение размеров выделенных фигур

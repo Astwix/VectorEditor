@@ -38,8 +38,8 @@
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainLeftSplitContainer = new System.Windows.Forms.SplitContainer();
             this.WrapPictureBox = new System.Windows.Forms.Panel();
-            this.figureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
             this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
+            this.figureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).BeginInit();
@@ -144,14 +144,6 @@
             this.WrapPictureBox.Size = new System.Drawing.Size(1030, 532);
             this.WrapPictureBox.TabIndex = 10;
             // 
-            // figureSettingsControl
-            // 
-            this.figureSettingsControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.figureSettingsControl.Location = new System.Drawing.Point(0, 28);
-            this.figureSettingsControl.Name = "figureSettingsControl";
-            this.figureSettingsControl.Size = new System.Drawing.Size(1153, 39);
-            this.figureSettingsControl.TabIndex = 8;
-            // 
             // ToolsUserControl
             // 
             this.ToolsUserControl.EditContext = null;
@@ -159,6 +151,14 @@
             this.ToolsUserControl.Name = "ToolsUserControl";
             this.ToolsUserControl.Size = new System.Drawing.Size(106, 189);
             this.ToolsUserControl.TabIndex = 0;
+            // 
+            // figureSettingsControl
+            // 
+            this.figureSettingsControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.figureSettingsControl.Location = new System.Drawing.Point(0, 28);
+            this.figureSettingsControl.Name = "figureSettingsControl";
+            this.figureSettingsControl.Size = new System.Drawing.Size(1153, 39);
+            this.figureSettingsControl.TabIndex = 8;
             // 
             // MainForm
             // 
@@ -169,10 +169,12 @@
             this.Controls.Add(this.MainLeftSplitContainer);
             this.Controls.Add(this.figureSettingsControl);
             this.Controls.Add(this.topToolBar);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.topToolBar;
             this.Name = "MainForm";
             this.Text = "VectorEditor";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.topToolBar.ResumeLayout(false);
             this.topToolBar.PerformLayout();

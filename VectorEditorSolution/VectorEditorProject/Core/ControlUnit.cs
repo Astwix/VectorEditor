@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
+using VectorEditorProject.Core.Figures.Utility;
 using VectorEditorProject.Figures;
 using VectorEditorProject.Figures.Utility;
 using VectorEditorProject.Forms;
@@ -18,6 +19,8 @@ namespace VectorEditorProject.Core
         private readonly PictureBox _canvas;
         private FigureSettingsControl _figureSettingsControl;
         private ToolsControl _toolsControl;
+
+        private List<BaseFigure> _clipboard = new List<BaseFigure>();
 
         private Document _currentDocument = new Document("Untitled", Color.White, new Size(500, 500));
 
@@ -40,6 +43,73 @@ namespace VectorEditorProject.Core
             _viewUpdateDictionary.Add(typeof(ClearDocumentCommand), new List<Action>() { UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(SelectFiguresCommand), new List<Action>() { UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(FiguresChangingCommand), new List<Action>() { UpdateCanvas, UpdateState });
+            _viewUpdateDictionary.Add(typeof(RemoveFigureCommand), new List<Action>() {UpdateCanvas});
+        }
+
+        /// <summary>
+        /// Удаление
+        /// </summary>
+        public void Delete()
+        {
+            var figures = EditContext.GetSelectedFigures();
+            if (figures.Count > 0)
+            {
+                var command = new RemoveFigureCommand(this, figures);
+                StoreCommand(command);
+                Do();
+            }
+        }
+
+        /// <summary>
+        /// Копирование
+        /// </summary>
+        public void Copy()
+        {
+            _clipboard.Clear();
+            var figureFactory = new FigureFactory();
+            foreach (var selectedFigure in EditContext.GetSelectedFigures())
+            {
+                _clipboard.Add(figureFactory.CopyFigure(selectedFigure));
+            }
+        }
+
+        /// <summary>
+        /// Вставка
+        /// </summary>
+        public void Paste()
+        {
+            var figureFactory = new FigureFactory();
+            var copiedClipboard = new List<BaseFigure>();
+
+            foreach (var figure in _clipboard)
+            {
+                var copy = figureFactory.CopyFigure(figure);
+                copy.guid = Guid.NewGuid();
+
+                var leftTopPoint = FigureEditor.LeftTopPointF(copy);
+                var rightBottomPoint = FigureEditor.RightBottomPointF(copy);
+                var rectangle = new RectangleF(0,0, 
+                    rightBottomPoint.X - leftTopPoint.X,
+                    rightBottomPoint.Y - leftTopPoint.Y);
+
+                FigureEditor.EditFiguresSize(copy, rectangle);
+
+                copiedClipboard.Add(copy);
+            }
+
+            var selectCommand1 = new SelectFiguresCommand(EditContext, new List<BaseFigure>());
+            StoreCommand(selectCommand1);
+            Do();
+
+            var command = new AddFigureCommand(this, copiedClipboard);
+            StoreCommand(command);
+            Do();
+
+            var selectCommand2 = new SelectFiguresCommand(EditContext, copiedClipboard);
+            StoreCommand(selectCommand2);
+            Do();
+
+            EditContext.SetActiveState(EditContext.States.FigureEditingState);
         }
 
         /// <summary>

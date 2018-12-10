@@ -175,6 +175,12 @@ namespace VectorEditorProject.Core.States
 
         public override void MouseUp(object sender, MouseEventArgs e)
         {
+            if (_editContext.GetSelectedFigures().Count == 0)
+            {
+                _editContext.SetActiveState(EditContext.States.SelectionState);
+                return;
+            }
+
             _isMousePressed = false;
 
             // сохранение изменений пользователя

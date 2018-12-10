@@ -94,5 +94,26 @@ namespace VectorEditorProject
                 return;
             }
         }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Copy();
+        }
+
+        private void ExtrudeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Copy();
+            _controlUnit.Delete();
+        }
+
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Paste();
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Delete();
+        }
     }
 }

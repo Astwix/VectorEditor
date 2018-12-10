@@ -3,23 +3,18 @@ using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
-    public class AddFigureCommand : BaseCommand
+    public class RemoveFigureCommand : BaseCommand
     {
         private ControlUnit _controlUnit;
         private IReadOnlyList<BaseFigure> _figures;
 
-        /// <summary>
-        /// Конструктор создания команды
-        /// </summary>
-        /// <param name="controlUnit">Control Unit</param>
-        /// <param name="figure">Фигура</param>
-        public AddFigureCommand(ControlUnit controlUnit, BaseFigure figure)
+        public RemoveFigureCommand(ControlUnit controlUnit, BaseFigure figure)
         {
             _controlUnit = controlUnit;
-            _figures = new List<BaseFigure>() {figure};
+            _figures = new List<BaseFigure>() { figure };
         }
 
-        public AddFigureCommand(ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
+        public RemoveFigureCommand(ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
         {
             _controlUnit = controlUnit;
             _figures = figures;
@@ -28,7 +23,7 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Делай
         /// </summary>
-        public override void Do()
+        public override void Undo()
         {
             foreach (var figure in _figures)
             {
@@ -39,7 +34,7 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Отмена
         /// </summary>
-        public override void Undo()
+        public override void Do()
         {
             foreach (var figure in _figures)
             {

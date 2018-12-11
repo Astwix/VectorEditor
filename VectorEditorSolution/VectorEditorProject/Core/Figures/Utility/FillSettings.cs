@@ -1,9 +1,13 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace VectorEditorProject.Figures.Utility
 {
+    [TypeConverter(typeof(ExpandableObjectConverter))]
+    [DisplayName("Настройки заливки")]
     public class FillSettings
     {
+        [DisplayName("Цвет")]
         public Color Color { get; set; }
 
         /// <summary>

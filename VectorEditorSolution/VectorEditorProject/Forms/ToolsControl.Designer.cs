@@ -40,7 +40,7 @@
             // 
             this.LineButton.Location = new System.Drawing.Point(3, 3);
             this.LineButton.Name = "LineButton";
-            this.LineButton.Size = new System.Drawing.Size(99, 25);
+            this.LineButton.Size = new System.Drawing.Size(110, 25);
             this.LineButton.TabIndex = 8;
             this.LineButton.Text = "Линия";
             this.LineButton.UseVisualStyleBackColor = true;
@@ -50,7 +50,7 @@
             // 
             this.PolylineButton.Location = new System.Drawing.Point(3, 34);
             this.PolylineButton.Name = "PolylineButton";
-            this.PolylineButton.Size = new System.Drawing.Size(99, 25);
+            this.PolylineButton.Size = new System.Drawing.Size(110, 25);
             this.PolylineButton.TabIndex = 9;
             this.PolylineButton.Text = "Полилиния";
             this.PolylineButton.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@
             // 
             // SelectionButton
             // 
-            this.SelectionButton.Location = new System.Drawing.Point(3, 158);
+            this.SelectionButton.Location = new System.Drawing.Point(127, 65);
             this.SelectionButton.Name = "SelectionButton";
-            this.SelectionButton.Size = new System.Drawing.Size(99, 25);
+            this.SelectionButton.Size = new System.Drawing.Size(110, 25);
             this.SelectionButton.TabIndex = 13;
             this.SelectionButton.Text = "Выделение";
             this.SelectionButton.UseVisualStyleBackColor = true;
@@ -68,9 +68,9 @@
             // 
             // CircleButton
             // 
-            this.CircleButton.Location = new System.Drawing.Point(3, 65);
+            this.CircleButton.Location = new System.Drawing.Point(127, 3);
             this.CircleButton.Name = "CircleButton";
-            this.CircleButton.Size = new System.Drawing.Size(99, 25);
+            this.CircleButton.Size = new System.Drawing.Size(110, 25);
             this.CircleButton.TabIndex = 10;
             this.CircleButton.Text = "Круг";
             this.CircleButton.UseVisualStyleBackColor = true;
@@ -78,9 +78,9 @@
             // 
             // PolygonButton
             // 
-            this.PolygonButton.Location = new System.Drawing.Point(3, 127);
+            this.PolygonButton.Location = new System.Drawing.Point(3, 65);
             this.PolygonButton.Name = "PolygonButton";
-            this.PolygonButton.Size = new System.Drawing.Size(99, 25);
+            this.PolygonButton.Size = new System.Drawing.Size(110, 25);
             this.PolygonButton.TabIndex = 12;
             this.PolygonButton.Text = "Полигон";
             this.PolygonButton.UseVisualStyleBackColor = true;
@@ -88,9 +88,9 @@
             // 
             // EllipseButton
             // 
-            this.EllipseButton.Location = new System.Drawing.Point(3, 96);
+            this.EllipseButton.Location = new System.Drawing.Point(127, 34);
             this.EllipseButton.Name = "EllipseButton";
-            this.EllipseButton.Size = new System.Drawing.Size(99, 25);
+            this.EllipseButton.Size = new System.Drawing.Size(110, 25);
             this.EllipseButton.TabIndex = 11;
             this.EllipseButton.Text = "Эллипс";
             this.EllipseButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             this.Controls.Add(this.PolygonButton);
             this.Controls.Add(this.EllipseButton);
             this.Name = "ToolsControl";
-            this.Size = new System.Drawing.Size(106, 189);
+            this.Size = new System.Drawing.Size(240, 100);
             this.ResumeLayout(false);
 
         }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Drawing;
-using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Core.States
 {
@@ -17,7 +12,7 @@ namespace VectorEditorProject.Core.States
         private EditContext _editContext;
         private ControlUnit _controlUnit;
 
-        private bool _isMousePressed;
+        private bool _isMousePressed = true;
 
         /// <summary>
         /// Состояние добавления точек
@@ -29,16 +24,19 @@ namespace VectorEditorProject.Core.States
             _controlUnit = controlUnit;
             _editContext = editContext;
 
-            if (_editContext.GetActiveFigure() == null)
+            var activeFigure = _editContext.GetActiveFigure();
+            if (activeFigure == null)
             {
                 editContext.SetActiveState(EditContext.States.SelectionState);
             }
+
+            var lastPoint = activeFigure.PointsSettings.GetPoints().Last();
+            activeFigure.PointsSettings.AddPoint(lastPoint);
         }
 
         public override void Draw(Graphics graphics)
         {
             var activeFigure = _editContext.GetActiveFigure();
-
             if (_isMousePressed && activeFigure != null)
             {
                 _drawerFactory.DrawFigure(activeFigure, graphics);
@@ -50,52 +48,54 @@ namespace VectorEditorProject.Core.States
             _isMousePressed = true;
 
             var activeFigure = _editContext.GetActiveFigure();
-            if (activeFigure != null)
-            {
-                activeFigure.PointsSettings.AddPoint(new Point(e.X, e.Y));
-            }
-            else
+            if (activeFigure == null)
             {
                 _editContext.SetActiveState(EditContext.States.SelectionState);
+                return;
             }
-        }
 
+            var lastPoint = activeFigure.PointsSettings.GetPoints().Last();
+            activeFigure.PointsSettings.AddPoint(lastPoint);
+        }
 
         public override void MouseMove(object sender, MouseEventArgs e)
         {
             var activeFigure = _editContext.GetActiveFigure();
+            if (activeFigure == null)
+            {
+                _editContext.SetActiveState(EditContext.States.SelectionState);
+                return;
+            }
+
             if (_isMousePressed)
             {
-                if (activeFigure != null)
-                {
-                    Point point = new Point(e.X, e.Y);
-                    int pointsCount = activeFigure.PointsSettings.GetPoints().Count;
-                    activeFigure.PointsSettings.ReplacePoint(pointsCount - 1, point);
-
-                    _controlUnit.ForceRedrawCanvas();
-                }
-                else
-                {
-                    _editContext.SetActiveState(EditContext.States.SelectionState);
-                }
+                PointF point = new PointF(e.X, e.Y);
+                int pointsCount = activeFigure.PointsSettings.GetPoints().Count;
+                activeFigure.PointsSettings.ReplacePoint(pointsCount - 1, point);
             }
+
+            _controlUnit.UpdateCanvas();
         }
 
         public override void MouseUp(object sender, MouseEventArgs e)
         {
             _isMousePressed = false;
-            var activeFigure = _editContext.GetActiveFigure();
 
-            if (activeFigure != null)
-            {
-                activeFigure.PointsSettings.DeletePoint(new Point(e.X, e.Y));
-                var command = new AddPointCommand(activeFigure, new Point(e.X, e.Y), _controlUnit);
-                _controlUnit.StoreCommand(command);
-                _controlUnit.Do();
-            }
-            else
+            var activeFigure = _editContext.GetActiveFigure();
+            if (activeFigure == null)
             {
                 _editContext.SetActiveState(EditContext.States.SelectionState);
+            }
+
+            activeFigure.PointsSettings.RemoveLast();
+
+            var command = new AddPointCommand(activeFigure, new PointF(e.X, e.Y), _controlUnit);
+            _controlUnit.StoreCommand(command);
+            _controlUnit.Do();
+
+            if (!activeFigure.PointsSettings.CanAddPoint())
+            {
+                _editContext.SetActiveState(EditContext.States.AddFigureState);
             }
         }
     }

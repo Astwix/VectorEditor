@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.States;
 using VectorEditorProject.Figures;
 
@@ -15,6 +13,7 @@ namespace VectorEditorProject.Core
         private ControlUnit _controlUnit;
         private BaseState _activeState;
         private Guid _activeFigureGuid = Guid.Empty;
+        private List<Guid> _selectedFigures = new List<Guid>();
 
         public EditContext(ControlUnit controlUnit)
         {
@@ -28,44 +27,28 @@ namespace VectorEditorProject.Core
         /// </summary>
         public enum States
         {
-            AddLineState,
-            AddPolylineState,
-            AddPlygonState,
-            AddCircleState,
-            AddEllipseState,
-
+            AddFigureState,
             SelectionState,
-
-            AddPointState
+            AddPointState,
+            FigureEditingState
         }
 
         /// <summary>
         /// Установить активное состояние
         /// </summary>
-        /// <param name="state"></param>
+        /// <param name="state">Состояние</param>
         public void SetActiveState(States state)
         {
-            // todo (уменьшить) упростить количество состояний
             switch (state)
             {
-                case States.AddLineState:
-                    _activeState = new AddLineState(_controlUnit);
-                    break;
-
-                case States.AddCircleState:
-                    _activeState = new AddCircleState(_controlUnit);
-                    break;
-
-                case States.AddEllipseState:
-                    _activeState = new AddEllipseState(_controlUnit);
-                    break;
-
-                case States.AddPolylineState:
-                    _activeState = new AddPolylineState(_controlUnit, this);
-                    break;
-
-                case States.AddPlygonState:
-                    _activeState = new AddPolygonState(_controlUnit, this);
+                case States.AddFigureState:
+                    if (GetSelectedFigures().Count > 0) // если есть выделение - сбросить
+                    {
+                        var command = new SelectFiguresCommand(this, new List<BaseFigure>());
+                        _controlUnit.StoreCommand(command);
+                        _controlUnit.Do();
+                    }
+                    _activeState = new AddFigureState(_controlUnit, this);
                     break;
 
                 case States.AddPointState:
@@ -73,13 +56,19 @@ namespace VectorEditorProject.Core
                     break;
 
                 case States.SelectionState:
-                    _activeState = new SelectionState(_controlUnit);
+                    _activeState = new SelectionState(_controlUnit, this);
+                    break;
+                    
+                case States.FigureEditingState:
+                    _activeState = new FigureEditingState(_controlUnit, this);
                     break;
 
                 default:
                     _activeState = null;
                     break;
             }
+
+            _controlUnit.UpdateCanvas();
         }
 
         public void Draw(Graphics graphics)
@@ -102,6 +91,11 @@ namespace VectorEditorProject.Core
             _activeState?.MouseUp(sender, e);
         }
 
+        public void UpdateState()
+        {
+            _activeState?.Update();
+        }
+
         /// <summary>
         /// Установить активную фигуру
         /// </summary>
@@ -118,6 +112,58 @@ namespace VectorEditorProject.Core
         public BaseFigure GetActiveFigure()
         {
             return _controlUnit.GetDocument().GetFigure(_activeFigureGuid);
+        }
+
+        /// <summary>
+        /// Выделение фигур (с перебором по фигурам)
+        /// </summary>
+        /// <param name="figuresList">Список фигур</param>
+        public void SetSelectedFigures(List<BaseFigure> figuresList)
+        {
+            _selectedFigures.Clear();
+
+            foreach (var baseFigure in figuresList)
+            {
+                _selectedFigures.Add(baseFigure.guid);
+            }
+        }
+
+        /// <summary>
+        /// Выделение фигур (с перебором по guid)
+        /// </summary>
+        /// <param name="figuresList">Список фигур</param>
+        public void SetSelectedFigures(List<Guid> figuresList)
+        {
+            _selectedFigures.Clear();
+
+            foreach (var guid in figuresList)
+            {
+                _selectedFigures.Add(guid);
+            }
+        }
+
+        /// <summary>
+        /// Список выделенных фигур, доступный только для чтения
+        /// </summary>
+        /// <returns></returns>
+        public IReadOnlyList<BaseFigure> GetSelectedFigures()
+        {
+            List<BaseFigure> selectedFigures = new List<BaseFigure>();
+
+            foreach (var guid in _selectedFigures)
+            {
+                var figure = _controlUnit.GetDocument().GetFigure(guid);
+
+                // если не нашлась фигура - пропускаем
+                if (figure == null)
+                {
+                    continue;
+                }
+
+                selectedFigures.Add(figure);
+            }
+
+            return selectedFigures;
         }
     }
 }

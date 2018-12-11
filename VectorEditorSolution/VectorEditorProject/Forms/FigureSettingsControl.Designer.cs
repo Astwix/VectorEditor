@@ -28,102 +28,102 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lineColorButton = new System.Windows.Forms.Button();
-            this.fillColorButton = new System.Windows.Forms.Button();
-            this.lineColorLabel = new System.Windows.Forms.Label();
-            this.lineWidthLabel = new System.Windows.Forms.Label();
-            this.lineTypeLabel = new System.Windows.Forms.Label();
-            this.fillColorLabel = new System.Windows.Forms.Label();
-            this.lineWidthTextBox = new System.Windows.Forms.TextBox();
-            this.lineTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.LineColorButton = new System.Windows.Forms.Button();
+            this.FillColorButton = new System.Windows.Forms.Button();
+            this.LineColorLabel = new System.Windows.Forms.Label();
+            this.LineWidthLabel = new System.Windows.Forms.Label();
+            this.LineTypeLabel = new System.Windows.Forms.Label();
+            this.FillColorLabel = new System.Windows.Forms.Label();
+            this.LineWidthTextBox = new System.Windows.Forms.TextBox();
+            this.LineTypeComboBox = new System.Windows.Forms.ComboBox();
             this.lineColorDialog = new System.Windows.Forms.ColorDialog();
             this.fillColorDialog = new System.Windows.Forms.ColorDialog();
             this.SuspendLayout();
             // 
-            // lineColorButton
+            // LineColorButton
             // 
-            this.lineColorButton.Location = new System.Drawing.Point(94, 3);
-            this.lineColorButton.Name = "lineColorButton";
-            this.lineColorButton.Size = new System.Drawing.Size(75, 23);
-            this.lineColorButton.TabIndex = 0;
-            this.lineColorButton.UseVisualStyleBackColor = true;
-            this.lineColorButton.Click += new System.EventHandler(this.lineColorButton_Click);
+            this.LineColorButton.Location = new System.Drawing.Point(143, 3);
+            this.LineColorButton.Name = "LineColorButton";
+            this.LineColorButton.Size = new System.Drawing.Size(88, 23);
+            this.LineColorButton.TabIndex = 0;
+            this.LineColorButton.UseVisualStyleBackColor = true;
+            this.LineColorButton.Click += new System.EventHandler(this.lineColorButton_Click);
             // 
-            // fillColorButton
+            // FillColorButton
             // 
-            this.fillColorButton.Location = new System.Drawing.Point(777, 3);
-            this.fillColorButton.Name = "fillColorButton";
-            this.fillColorButton.Size = new System.Drawing.Size(75, 23);
-            this.fillColorButton.TabIndex = 1;
-            this.fillColorButton.UseVisualStyleBackColor = true;
-            this.fillColorButton.Click += new System.EventHandler(this.fillColorButton_Click);
+            this.FillColorButton.Location = new System.Drawing.Point(143, 32);
+            this.FillColorButton.Name = "FillColorButton";
+            this.FillColorButton.Size = new System.Drawing.Size(88, 23);
+            this.FillColorButton.TabIndex = 1;
+            this.FillColorButton.UseVisualStyleBackColor = true;
+            this.FillColorButton.Click += new System.EventHandler(this.fillColorButton_Click);
             // 
-            // lineColorLabel
+            // LineColorLabel
             // 
-            this.lineColorLabel.AutoSize = true;
-            this.lineColorLabel.Location = new System.Drawing.Point(3, 6);
-            this.lineColorLabel.Name = "lineColorLabel";
-            this.lineColorLabel.Size = new System.Drawing.Size(85, 17);
-            this.lineColorLabel.TabIndex = 2;
-            this.lineColorLabel.Text = "Цвет линии";
+            this.LineColorLabel.AutoSize = true;
+            this.LineColorLabel.Location = new System.Drawing.Point(3, 6);
+            this.LineColorLabel.Name = "LineColorLabel";
+            this.LineColorLabel.Size = new System.Drawing.Size(85, 17);
+            this.LineColorLabel.TabIndex = 2;
+            this.LineColorLabel.Text = "Цвет линии";
             // 
-            // lineWidthLabel
+            // LineWidthLabel
             // 
-            this.lineWidthLabel.AutoSize = true;
-            this.lineWidthLabel.Location = new System.Drawing.Point(195, 6);
-            this.lineWidthLabel.Name = "lineWidthLabel";
-            this.lineWidthLabel.Size = new System.Drawing.Size(112, 17);
-            this.lineWidthLabel.TabIndex = 3;
-            this.lineWidthLabel.Text = "Толщина линии";
+            this.LineWidthLabel.AutoSize = true;
+            this.LineWidthLabel.Location = new System.Drawing.Point(3, 64);
+            this.LineWidthLabel.Name = "LineWidthLabel";
+            this.LineWidthLabel.Size = new System.Drawing.Size(112, 17);
+            this.LineWidthLabel.TabIndex = 3;
+            this.LineWidthLabel.Text = "Толщина линии";
             // 
-            // lineTypeLabel
+            // LineTypeLabel
             // 
-            this.lineTypeLabel.AutoSize = true;
-            this.lineTypeLabel.Location = new System.Drawing.Point(439, 6);
-            this.lineTypeLabel.Name = "lineTypeLabel";
-            this.lineTypeLabel.Size = new System.Drawing.Size(77, 17);
-            this.lineTypeLabel.TabIndex = 4;
-            this.lineTypeLabel.Text = "Тип линии";
+            this.LineTypeLabel.AutoSize = true;
+            this.LineTypeLabel.Location = new System.Drawing.Point(3, 92);
+            this.LineTypeLabel.Name = "LineTypeLabel";
+            this.LineTypeLabel.Size = new System.Drawing.Size(77, 17);
+            this.LineTypeLabel.TabIndex = 4;
+            this.LineTypeLabel.Text = "Тип линии";
             // 
-            // fillColorLabel
+            // FillColorLabel
             // 
-            this.fillColorLabel.AutoSize = true;
-            this.fillColorLabel.Location = new System.Drawing.Point(673, 6);
-            this.fillColorLabel.Name = "fillColorLabel";
-            this.fillColorLabel.Size = new System.Drawing.Size(98, 17);
-            this.fillColorLabel.TabIndex = 5;
-            this.fillColorLabel.Text = "Цвет заливки";
+            this.FillColorLabel.AutoSize = true;
+            this.FillColorLabel.Location = new System.Drawing.Point(3, 35);
+            this.FillColorLabel.Name = "FillColorLabel";
+            this.FillColorLabel.Size = new System.Drawing.Size(98, 17);
+            this.FillColorLabel.TabIndex = 5;
+            this.FillColorLabel.Text = "Цвет заливки";
             // 
-            // lineWidthTextBox
+            // LineWidthTextBox
             // 
-            this.lineWidthTextBox.Location = new System.Drawing.Point(313, 3);
-            this.lineWidthTextBox.Name = "lineWidthTextBox";
-            this.lineWidthTextBox.Size = new System.Drawing.Size(100, 22);
-            this.lineWidthTextBox.TabIndex = 6;
-            this.lineWidthTextBox.Text = "1";
+            this.LineWidthTextBox.Location = new System.Drawing.Point(143, 61);
+            this.LineWidthTextBox.Name = "LineWidthTextBox";
+            this.LineWidthTextBox.Size = new System.Drawing.Size(88, 22);
+            this.LineWidthTextBox.TabIndex = 6;
+            this.LineWidthTextBox.Text = "1";
             // 
-            // lineTypeComboBox
+            // LineTypeComboBox
             // 
-            this.lineTypeComboBox.FormattingEnabled = true;
-            this.lineTypeComboBox.Location = new System.Drawing.Point(522, 3);
-            this.lineTypeComboBox.Name = "lineTypeComboBox";
-            this.lineTypeComboBox.Size = new System.Drawing.Size(121, 24);
-            this.lineTypeComboBox.TabIndex = 7;
+            this.LineTypeComboBox.FormattingEnabled = true;
+            this.LineTypeComboBox.Location = new System.Drawing.Point(143, 89);
+            this.LineTypeComboBox.Name = "LineTypeComboBox";
+            this.LineTypeComboBox.Size = new System.Drawing.Size(88, 24);
+            this.LineTypeComboBox.TabIndex = 7;
             // 
             // FigureSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lineTypeComboBox);
-            this.Controls.Add(this.lineWidthTextBox);
-            this.Controls.Add(this.fillColorLabel);
-            this.Controls.Add(this.lineTypeLabel);
-            this.Controls.Add(this.lineWidthLabel);
-            this.Controls.Add(this.lineColorLabel);
-            this.Controls.Add(this.fillColorButton);
-            this.Controls.Add(this.lineColorButton);
+            this.Controls.Add(this.LineTypeComboBox);
+            this.Controls.Add(this.LineWidthTextBox);
+            this.Controls.Add(this.FillColorLabel);
+            this.Controls.Add(this.LineTypeLabel);
+            this.Controls.Add(this.LineWidthLabel);
+            this.Controls.Add(this.LineColorLabel);
+            this.Controls.Add(this.FillColorButton);
+            this.Controls.Add(this.LineColorButton);
             this.Name = "FigureSettingsControl";
-            this.Size = new System.Drawing.Size(865, 39);
+            this.Size = new System.Drawing.Size(240, 125);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,14 +131,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button lineColorButton;
-        private System.Windows.Forms.Button fillColorButton;
-        private System.Windows.Forms.Label lineColorLabel;
-        private System.Windows.Forms.Label lineWidthLabel;
-        private System.Windows.Forms.Label lineTypeLabel;
-        private System.Windows.Forms.Label fillColorLabel;
-        private System.Windows.Forms.TextBox lineWidthTextBox;
-        private System.Windows.Forms.ComboBox lineTypeComboBox;
+        private System.Windows.Forms.Button LineColorButton;
+        private System.Windows.Forms.Button FillColorButton;
+        private System.Windows.Forms.Label LineColorLabel;
+        private System.Windows.Forms.Label LineWidthLabel;
+        private System.Windows.Forms.Label LineTypeLabel;
+        private System.Windows.Forms.Label FillColorLabel;
+        private System.Windows.Forms.TextBox LineWidthTextBox;
+        private System.Windows.Forms.ComboBox LineTypeComboBox;
         private System.Windows.Forms.ColorDialog lineColorDialog;
         private System.Windows.Forms.ColorDialog fillColorDialog;
     }

@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Drawing;
-using VectorEditorProject.Figures;
-using VectorEditorProject.Figures.Utility;
 using VectorEditorProject.Forms;
 
 namespace VectorEditorProject
@@ -26,9 +17,11 @@ namespace VectorEditorProject
         {
             InitializeComponent();
 
-            _controlUnit = new ControlUnit(canvas, figureSettingsControl);
+            _controlUnit = new ControlUnit(Canvas, FigureSettingsControl, ToolsUserControl, PropertyGrid);
             _drawerFactory = new DrawerFactory();
             _editContext = new EditContext(_controlUnit);
+            _controlUnit.EditContext = _editContext;
+            ToolsUserControl.EditContext = _editContext;
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -67,7 +60,7 @@ namespace VectorEditorProject
                 doc.Name = documentForm.document.Name;
                 doc.Size = documentForm.document.Size;
                 doc.Color = documentForm.document.Color;
-                canvas.Invalidate();
+                Canvas.Invalidate();
             }
         }
 
@@ -85,42 +78,42 @@ namespace VectorEditorProject
         {
             _editContext.MouseMove(sender, e);
         }
-
-        private void lineButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddLineState);
-        }
-
-        private void polylineButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddPolylineState);
-        }
-
-        private void circleButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddCircleState);
-        }
-
-        private void ellipseButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddEllipseState);
-        }
-
-        private void polygonButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.AddPlygonState);
-        }
-
-        private void selectionButton_Click(object sender, EventArgs e)
-        {
-            _editContext.SetActiveState(EditContext.States.SelectionState);
-        }
-
+        
         private void fileClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var command = new ClearDocumentCommand(_controlUnit.GetDocument());
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
+        }
+
+        private void MainForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                _editContext.SetActiveState(EditContext.States.SelectionState);
+                return;
+            }
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Copy();
+        }
+
+        private void ExtrudeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Copy();
+            _controlUnit.Delete();
+        }
+
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Paste();
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controlUnit.Delete();
         }
     }
 }

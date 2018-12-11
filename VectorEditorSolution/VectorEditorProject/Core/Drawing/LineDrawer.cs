@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using VectorEditorProject.Core.Figures.Utility;
 using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Drawing
@@ -23,6 +22,28 @@ namespace VectorEditorProject.Drawing
                 pen.Width = figure.LineSettings.Width;
                 pen.DashStyle = figure.LineSettings.Style;
                 graphics.DrawLine(pen, figure.PointsSettings.GetPoints().First(), figure.PointsSettings.GetPoints().Last());
+
+                pen.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Рисование границы
+        /// </summary>
+        /// <param name="figure">Фигура</param>
+        /// <param name="graphics"></param>
+        public override void DrawBorder(BaseFigure figure, Graphics graphics)
+        {
+            var points = figure.PointsSettings.GetPoints();
+            if (points.Count() == 2)
+            {
+                var leftTopPoint = FigureEditor.LeftTopPointF(figure);
+                var rightBottomPoint = FigureEditor.RightBottomPointF(figure);
+
+                Pen pen = new Pen(Color.Black);
+                pen.DashStyle = DashStyle.Dash;
+                graphics.DrawRectangle(pen, leftTopPoint.X, leftTopPoint.Y, 
+                    rightBottomPoint.X - leftTopPoint.X, rightBottomPoint.Y - leftTopPoint.Y);
 
                 pen.Dispose();
             }

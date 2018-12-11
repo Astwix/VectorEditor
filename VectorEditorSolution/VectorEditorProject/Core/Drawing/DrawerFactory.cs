@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VectorEditorProject.Core;
 using VectorEditorProject.Figures;
 
@@ -49,6 +46,11 @@ namespace VectorEditorProject.Drawing
             drawers[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
         }
 
+        public void DrawBorder(BaseFigure baseFigure, Graphics graphics)
+        {
+            drawers[baseFigure.GetType()].DrawBorder(baseFigure, graphics);
+        }
+
         /// <summary>
         /// Рисование холста
         /// </summary>
@@ -58,7 +60,7 @@ namespace VectorEditorProject.Drawing
         {
             Brush brush = new SolidBrush(document.Color);
 
-            graphics.FillRectangle(brush, new Rectangle(new Point(0, 0), document.Size));
+            graphics.FillRectangle(brush, new RectangleF(new PointF(0, 0), document.Size));
 
             brush.Dispose();
         }

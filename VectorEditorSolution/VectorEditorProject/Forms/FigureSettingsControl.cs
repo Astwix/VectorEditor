@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VectorEditorProject.Figures.Utility;
 
@@ -22,22 +16,22 @@ namespace VectorEditorProject.Forms
 
             lineColorDialog.Color = Color.Black;
             fillColorDialog.Color = Color.White;
-            lineColorButton.BackColor = lineColorDialog.Color;
-            fillColorButton.BackColor = fillColorDialog.Color;
+            LineColorButton.BackColor = lineColorDialog.Color;
+            FillColorButton.BackColor = fillColorDialog.Color;
 
-            lineTypeComboBox.Items.Add(DashStyle.Solid);
-            lineTypeComboBox.Items.Add(DashStyle.Dash);
-            lineTypeComboBox.Items.Add(DashStyle.DashDot);
-            lineTypeComboBox.Items.Add(DashStyle.DashDotDot);
-            lineTypeComboBox.Items.Add(DashStyle.Dot);
-            lineTypeComboBox.SelectedIndex = 0;
+            LineTypeComboBox.Items.Add(DashStyle.Solid);
+            LineTypeComboBox.Items.Add(DashStyle.Dash);
+            LineTypeComboBox.Items.Add(DashStyle.DashDot);
+            LineTypeComboBox.Items.Add(DashStyle.DashDotDot);
+            LineTypeComboBox.Items.Add(DashStyle.Dot);
+            LineTypeComboBox.SelectedIndex = 0;
         }
 
         private void lineColorButton_Click(object sender, EventArgs e)
         {
             if (lineColorDialog.ShowDialog() != DialogResult.Cancel)
             {
-                lineColorButton.BackColor = lineColorDialog.Color;
+                LineColorButton.BackColor = lineColorDialog.Color;
             }
         }
 
@@ -45,23 +39,23 @@ namespace VectorEditorProject.Forms
         {
             if (fillColorDialog.ShowDialog() != DialogResult.Cancel)
             {
-                fillColorButton.BackColor = fillColorDialog.Color;
+                FillColorButton.BackColor = fillColorDialog.Color;
             }
         }
 
         public LineSettings GetLineSettings()
         {
             int width = 1;
-            if (int.TryParse(lineWidthTextBox.Text, out width))
+            if (int.TryParse(LineWidthTextBox.Text, out width))
             {
                 _lastValidLineWidth = width;
             }
             else
             {
                 width = _lastValidLineWidth;
-                lineWidthTextBox.Text = _lastValidLineWidth.ToString();
+                LineWidthTextBox.Text = _lastValidLineWidth.ToString();
             }
-            return new LineSettings(lineColorDialog.Color, width, (DashStyle)lineTypeComboBox.SelectedItem);
+            return new LineSettings(lineColorDialog.Color, width, (DashStyle)LineTypeComboBox.SelectedItem);
         }
 
         public FillSettings GetFillSettings()

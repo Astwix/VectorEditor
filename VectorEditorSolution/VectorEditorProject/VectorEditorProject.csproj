@@ -50,35 +50,36 @@
     <Compile Include="Core\Commands\AddPointCommand.cs" />
     <Compile Include="Core\Commands\BaseCommand.cs" />
     <Compile Include="Core\Commands\ClearDocumentCommand.cs" />
+    <Compile Include="Core\Commands\FiguresChangingCommand.cs" />
+    <Compile Include="Core\Commands\RemoveFigureCommand.cs" />
+    <Compile Include="Core\Commands\SelectFiguresCommand.cs" />
     <Compile Include="Core\ControlUnit.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\EditContext.cs" />
-    <Compile Include="Core\States\AddCircleState.cs" />
-    <Compile Include="Core\States\AddEllipseState.cs" />
-    <Compile Include="Core\States\AddLineState.cs" />
+    <Compile Include="Core\Figures\Utility\FigureEditor.cs" />
+    <Compile Include="Core\States\AddFigureState.cs" />
     <Compile Include="Core\States\AddPointState.cs" />
-    <Compile Include="Core\States\AddPolygonState.cs" />
-    <Compile Include="Core\States\AddPolylineState.cs" />
     <Compile Include="Core\States\BaseState.cs" />
+    <Compile Include="Core\States\FigureEditingState.cs" />
     <Compile Include="Core\States\SelectionState.cs" />
-    <Compile Include="Drawing\BaseDrawer.cs" />
-    <Compile Include="Drawing\CircleDrawer.cs" />
-    <Compile Include="Drawing\DrawerFactory.cs" />
-    <Compile Include="Drawing\EllipseDrawer.cs" />
-    <Compile Include="Drawing\LineDrawer.cs" />
-    <Compile Include="Drawing\PolygonDrawer.cs" />
-    <Compile Include="Drawing\PolyLineDrawer.cs" />
-    <Compile Include="Figures\BaseFigure.cs" />
-    <Compile Include="Figures\Circle.cs" />
-    <Compile Include="Figures\Ellipse.cs" />
-    <Compile Include="Figures\FigureFactory.cs" />
-    <Compile Include="Figures\FilledBaseFigure.cs" />
-    <Compile Include="Figures\Line.cs" />
-    <Compile Include="Figures\Polygon.cs" />
-    <Compile Include="Figures\PolyLine.cs" />
-    <Compile Include="Figures\Utility\FillSettings.cs" />
-    <Compile Include="Figures\Utility\LineSettings.cs" />
-    <Compile Include="Figures\Utility\PointsSettings.cs" />
+    <Compile Include="Core\Drawing\BaseDrawer.cs" />
+    <Compile Include="Core\Drawing\CircleDrawer.cs" />
+    <Compile Include="Core\Drawing\DrawerFactory.cs" />
+    <Compile Include="Core\Drawing\EllipseDrawer.cs" />
+    <Compile Include="Core\Drawing\LineDrawer.cs" />
+    <Compile Include="Core\Drawing\PolygonDrawer.cs" />
+    <Compile Include="Core\Drawing\PolyLineDrawer.cs" />
+    <Compile Include="Core\Figures\BaseFigure.cs" />
+    <Compile Include="Core\Figures\Circle.cs" />
+    <Compile Include="Core\Figures\Ellipse.cs" />
+    <Compile Include="Core\Figures\FigureFactory.cs" />
+    <Compile Include="Core\Figures\FilledBaseFigure.cs" />
+    <Compile Include="Core\Figures\Line.cs" />
+    <Compile Include="Core\Figures\Polygon.cs" />
+    <Compile Include="Core\Figures\PolyLine.cs" />
+    <Compile Include="Core\Figures\Utility\FillSettings.cs" />
+    <Compile Include="Core\Figures\Utility\LineSettings.cs" />
+    <Compile Include="Core\Figures\Utility\PointsSettings.cs" />
     <Compile Include="Forms\DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +98,12 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ToolsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolsControl.Designer.cs">
+      <DependentUpon>ToolsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\DocumentForm.resx">
@@ -107,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ToolsControl.resx">
+      <DependentUpon>ToolsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

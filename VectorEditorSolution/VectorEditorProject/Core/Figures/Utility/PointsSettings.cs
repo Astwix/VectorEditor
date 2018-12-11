@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace VectorEditorProject.Figures.Utility
 {
+    [Browsable(false)]
     public class PointsSettings
     {
         private int _limitPoint = 0;

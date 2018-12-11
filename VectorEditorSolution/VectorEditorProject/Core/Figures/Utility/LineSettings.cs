@@ -1,12 +1,18 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace VectorEditorProject.Figures.Utility
 {
+    [TypeConverter(typeof(ExpandableObjectConverter))]
+    [DisplayName("Настройки линии")]
     public class LineSettings
     {
+        [DisplayName("Цвет")]
         public Color Color { get; set; }
+        [DisplayName("Толщина")]
         public float Width { get; set; }
+        [DisplayName("Тип")]
         public DashStyle Style { get; set; }
 
         /// <summary>

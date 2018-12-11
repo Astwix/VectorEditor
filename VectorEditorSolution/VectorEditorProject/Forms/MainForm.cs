@@ -17,7 +17,7 @@ namespace VectorEditorProject
         {
             InitializeComponent();
 
-            _controlUnit = new ControlUnit(canvas, figureSettingsControl, ToolsUserControl);
+            _controlUnit = new ControlUnit(Canvas, FigureSettingsControl, ToolsUserControl, PropertyGrid);
             _drawerFactory = new DrawerFactory();
             _editContext = new EditContext(_controlUnit);
             _controlUnit.EditContext = _editContext;
@@ -60,7 +60,7 @@ namespace VectorEditorProject
                 doc.Name = documentForm.document.Name;
                 doc.Size = documentForm.document.Size;
                 doc.Color = documentForm.document.Color;
-                canvas.Invalidate();
+                Canvas.Invalidate();
             }
         }
 

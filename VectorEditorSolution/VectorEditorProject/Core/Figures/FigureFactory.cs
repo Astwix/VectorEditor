@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace VectorEditorProject.Figures
+namespace VectorEditorProject.Core.Figures
 {
     public class FigureFactory
     {

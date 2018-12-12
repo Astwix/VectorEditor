@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 
-namespace VectorEditorProject.Figures.Utility
+namespace VectorEditorProject.Core.Figures.Utility
 {
     [TypeConverter(typeof(ExpandableObjectConverter))]
     [DisplayName("Настройки заливки")]

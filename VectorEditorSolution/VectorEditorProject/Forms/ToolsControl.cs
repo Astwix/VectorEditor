@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using VectorEditorProject.Core;
-using VectorEditorProject.Figures;
+using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Forms
 {

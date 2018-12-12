@@ -4,9 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
+using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.Figures.Utility;
-using VectorEditorProject.Figures;
-using VectorEditorProject.Figures.Utility;
 using VectorEditorProject.Forms;
 
 namespace VectorEditorProject.Core

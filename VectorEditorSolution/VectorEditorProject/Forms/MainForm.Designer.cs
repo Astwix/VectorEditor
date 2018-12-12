@@ -1,4 +1,4 @@
-﻿namespace VectorEditorProject
+﻿namespace VectorEditorProject.Forms
 {
     partial class MainForm
     {

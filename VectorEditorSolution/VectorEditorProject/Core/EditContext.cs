@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
+using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.States;
-using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Core
 {

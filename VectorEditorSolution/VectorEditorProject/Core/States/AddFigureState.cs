@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Figures;
+using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.States
 {

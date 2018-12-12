@@ -1,6 +1,6 @@
-﻿using VectorEditorProject.Figures.Utility;
+﻿using VectorEditorProject.Core.Figures.Utility;
 
-namespace VectorEditorProject.Figures
+namespace VectorEditorProject.Core.Figures
 {
     class Polygon : FilledBaseFigure
     {

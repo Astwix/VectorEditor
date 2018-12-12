@@ -2,10 +2,9 @@
 using System.Windows.Forms;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Drawing;
-using VectorEditorProject.Forms;
+using VectorEditorProject.Core.Drawing;
 
-namespace VectorEditorProject
+namespace VectorEditorProject.Forms
 {
     public partial class MainForm : Form
     {

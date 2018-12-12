@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
-using VectorEditorProject.Figures;
+using VectorEditorProject.Core.Figures;
 
-namespace VectorEditorProject.Drawing
+namespace VectorEditorProject.Core.Drawing
 {
     public abstract class BaseDrawer
     {

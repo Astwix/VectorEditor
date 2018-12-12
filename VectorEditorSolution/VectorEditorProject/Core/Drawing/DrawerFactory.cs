@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using VectorEditorProject.Core;
-using VectorEditorProject.Figures;
+using VectorEditorProject.Core.Figures;
 
-namespace VectorEditorProject.Drawing
+namespace VectorEditorProject.Core.Drawing
 {
     public class DrawerFactory
     {

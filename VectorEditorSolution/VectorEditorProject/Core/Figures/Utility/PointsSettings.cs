@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 
-namespace VectorEditorProject.Figures.Utility
+namespace VectorEditorProject.Core.Figures.Utility
 {
     [Browsable(false)]
     public class PointsSettings

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
+using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.Figures.Utility;
-using VectorEditorProject.Figures;
 
-namespace VectorEditorProject.Drawing
+namespace VectorEditorProject.Core.Drawing
 {
     public class CircleDrawer : BaseDrawer
     {

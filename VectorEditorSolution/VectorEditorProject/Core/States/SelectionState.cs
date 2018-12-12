@@ -5,8 +5,8 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
+using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.Figures.Utility;
-using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Core.States
 {

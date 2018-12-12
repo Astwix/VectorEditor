@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VectorEditorProject.Figures;
+using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {

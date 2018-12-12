@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {

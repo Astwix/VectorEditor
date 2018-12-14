@@ -56,13 +56,15 @@ namespace VectorEditorProject.Core.States
                 return;
             }
 
+            Pen pen = new Pen(Color.Black);
+            pen.DashStyle = DashStyle.Dash;
+
+            var selectionRectangle = figures[0].GetBorderRectangle();
             foreach (var figure in figures)
             {
-                _drawerFactory.DrawBorder(figure, graphics);
+                selectionRectangle = Rectangle.Union(selectionRectangle, figure.GetBorderRectangle());
             }
-
-            Pen pen = new Pen(Color.Black);
-            pen.DashStyle = DashStyle.Solid;
+            graphics.DrawRectangle(pen, selectionRectangle);
 
             //обводка маркеров
             graphics.DrawEllipse(pen, _leftTopMarker.X - _markerSize / 2, 

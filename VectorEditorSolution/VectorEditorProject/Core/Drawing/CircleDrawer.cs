@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.Figures.Utility;
 
@@ -43,31 +42,6 @@ namespace VectorEditorProject.Core.Drawing
                     leftTopPoint.Y, distance, distance);
 
                 brush.Dispose();
-                pen.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// Рисование границы
-        /// </summary>
-        /// <param name="figure">Фигура</param>
-        /// <param name="graphics"></param>
-        public override void DrawBorder(BaseFigure figure, Graphics graphics)
-        {
-            if (figure.PointsSettings.GetPoints().Count == 2)
-            {
-                var leftTopPoint = FigureEditor.LeftTopPointF(figure);
-                var rightBottomPoint = FigureEditor.RightBottomPointF(figure);
-
-                float deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
-                float deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
-                float distance = Math.Max(deltaX, deltaY);
-
-                Pen pen = new Pen(Color.Black);
-                pen.DashStyle = DashStyle.Dash;
-                graphics.DrawRectangle(pen, leftTopPoint.X, leftTopPoint.Y,
-                    distance, distance);
-
                 pen.Dispose();
             }
         }

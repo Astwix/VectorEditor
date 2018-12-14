@@ -1,4 +1,6 @@
-﻿using VectorEditorProject.Core.Figures.Utility;
+﻿using System;
+using System.Drawing;
+using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
@@ -12,6 +14,23 @@ namespace VectorEditorProject.Core.Figures
             _lineSettings = new LineSettings();
             _pointsSettings = new PointsSettings(2);
             _fillSettings = new FillSettings();
+        }
+
+        public override Rectangle GetBorderRectangle()
+        {
+            if (PointsSettings.GetPoints().Count < 2)
+            {
+                new Rectangle();
+            }
+
+            Point leftTopPoint = Point.Round(FigureEditor.LeftTopPointF(this));
+            Point rightBottomPoint = Point.Round(FigureEditor.RightBottomPointF(this));
+
+            int deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
+            int deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
+            int distance = Math.Max(deltaX, deltaY);
+
+            return new Rectangle(leftTopPoint.X, leftTopPoint.Y, distance, distance);
         }
     }
 }

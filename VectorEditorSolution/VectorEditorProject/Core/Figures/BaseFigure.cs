@@ -14,6 +14,10 @@ namespace VectorEditorProject.Core.Figures
         public LineSettings LineSettings { get => _lineSettings; set => _lineSettings = value; }
         public PointsSettings PointsSettings { get => _pointsSettings; }
 
+        /// <summary>
+        /// Получить границы фигуры
+        /// </summary>
+        /// <returns></returns>
         public virtual Rectangle GetBorderRectangle()
         {
             if (PointsSettings.GetPoints().Count < 2)

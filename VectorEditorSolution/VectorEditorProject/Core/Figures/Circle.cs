@@ -16,6 +16,10 @@ namespace VectorEditorProject.Core.Figures
             _fillSettings = new FillSettings();
         }
 
+        /// <summary>
+        /// Получить границы фигуры
+        /// </summary>
+        /// <returns></returns>
         public override Rectangle GetBorderRectangle()
         {
             if (PointsSettings.GetPoints().Count < 2)

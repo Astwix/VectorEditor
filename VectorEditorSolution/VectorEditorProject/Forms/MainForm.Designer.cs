@@ -30,23 +30,23 @@
         {
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.topToolBar = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UndoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExtrudeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainLeftSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.FigureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
             this.MainLeftBottomSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
             this.PropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.WrapPictureBox = new System.Windows.Forms.Panel();
-            this.FigureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
-            this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.topToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).BeginInit();
@@ -77,66 +77,66 @@
             // 
             this.topToolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.topToolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.FileToolStripMenuItem,
+            this.EditToolStripMenuItem});
             this.topToolBar.Location = new System.Drawing.Point(0, 0);
             this.topToolBar.Name = "topToolBar";
             this.topToolBar.Size = new System.Drawing.Size(982, 28);
             this.topToolBar.TabIndex = 1;
             this.topToolBar.Text = "topToolBar";
             // 
-            // fileToolStripMenuItem
+            // FileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileOptionsToolStripMenuItem,
-            this.fileClearToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
-            this.fileToolStripMenuItem.Text = "Файл";
+            this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileOptionsToolStripMenuItem,
+            this.FileClearToolStripMenuItem});
+            this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
+            this.FileToolStripMenuItem.Text = "Файл";
             // 
-            // fileOptionsToolStripMenuItem
+            // FileOptionsToolStripMenuItem
             // 
-            this.fileOptionsToolStripMenuItem.Name = "fileOptionsToolStripMenuItem";
-            this.fileOptionsToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
-            this.fileOptionsToolStripMenuItem.Text = "Параметры";
-            this.fileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
+            this.FileOptionsToolStripMenuItem.Name = "FileOptionsToolStripMenuItem";
+            this.FileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.FileOptionsToolStripMenuItem.Text = "Параметры";
+            this.FileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
             // 
-            // fileClearToolStripMenuItem
+            // FileClearToolStripMenuItem
             // 
-            this.fileClearToolStripMenuItem.Name = "fileClearToolStripMenuItem";
-            this.fileClearToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
-            this.fileClearToolStripMenuItem.Text = "Очистить";
-            this.fileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
+            this.FileClearToolStripMenuItem.Name = "FileClearToolStripMenuItem";
+            this.FileClearToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.FileClearToolStripMenuItem.Text = "Очистить";
+            this.FileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
             // 
-            // editToolStripMenuItem
+            // EditToolStripMenuItem
             // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoToolStripMenuItem,
-            this.doToolStripMenuItem,
+            this.EditToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.UndoToolStripMenuItem,
+            this.DoToolStripMenuItem,
             this.toolStripSeparator1,
             this.CopyToolStripMenuItem,
             this.ExtrudeToolStripMenuItem,
             this.PasteToolStripMenuItem,
             this.DeleteToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
-            this.editToolStripMenuItem.Text = "Правка";
+            this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
+            this.EditToolStripMenuItem.Text = "Правка";
             // 
-            // undoToolStripMenuItem
+            // UndoToolStripMenuItem
             // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
-            this.undoToolStripMenuItem.Text = "Отменить";
-            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            this.UndoToolStripMenuItem.Name = "UndoToolStripMenuItem";
+            this.UndoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.UndoToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
+            this.UndoToolStripMenuItem.Text = "Отменить";
+            this.UndoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
-            // doToolStripMenuItem
+            // DoToolStripMenuItem
             // 
-            this.doToolStripMenuItem.Name = "doToolStripMenuItem";
-            this.doToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.doToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
-            this.doToolStripMenuItem.Text = "Вернуть";
-            this.doToolStripMenuItem.Click += new System.EventHandler(this.doToolStripMenuItem_Click);
+            this.DoToolStripMenuItem.Name = "DoToolStripMenuItem";
+            this.DoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.DoToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
+            this.DoToolStripMenuItem.Text = "Вернуть";
+            this.DoToolStripMenuItem.Click += new System.EventHandler(this.doToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -193,6 +193,13 @@
             this.MainLeftSplitContainer.SplitterDistance = 117;
             this.MainLeftSplitContainer.TabIndex = 9;
             // 
+            // FigureSettingsControl
+            // 
+            this.FigureSettingsControl.Location = new System.Drawing.Point(3, 3);
+            this.FigureSettingsControl.Name = "FigureSettingsControl";
+            this.FigureSettingsControl.Size = new System.Drawing.Size(240, 120);
+            this.FigureSettingsControl.TabIndex = 8;
+            // 
             // MainLeftBottomSplitContainer
             // 
             this.MainLeftBottomSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -210,6 +217,14 @@
             this.MainLeftBottomSplitContainer.Size = new System.Drawing.Size(253, 404);
             this.MainLeftBottomSplitContainer.SplitterDistance = 100;
             this.MainLeftBottomSplitContainer.TabIndex = 1;
+            // 
+            // ToolsUserControl
+            // 
+            this.ToolsUserControl.EditContext = null;
+            this.ToolsUserControl.Location = new System.Drawing.Point(3, 3);
+            this.ToolsUserControl.Name = "ToolsUserControl";
+            this.ToolsUserControl.Size = new System.Drawing.Size(240, 90);
+            this.ToolsUserControl.TabIndex = 0;
             // 
             // PropertyGrid
             // 
@@ -231,21 +246,6 @@
             this.WrapPictureBox.Name = "WrapPictureBox";
             this.WrapPictureBox.Size = new System.Drawing.Size(729, 525);
             this.WrapPictureBox.TabIndex = 10;
-            // 
-            // FigureSettingsControl
-            // 
-            this.FigureSettingsControl.Location = new System.Drawing.Point(3, 3);
-            this.FigureSettingsControl.Name = "FigureSettingsControl";
-            this.FigureSettingsControl.Size = new System.Drawing.Size(240, 120);
-            this.FigureSettingsControl.TabIndex = 8;
-            // 
-            // ToolsUserControl
-            // 
-            this.ToolsUserControl.EditContext = null;
-            this.ToolsUserControl.Location = new System.Drawing.Point(3, 3);
-            this.ToolsUserControl.Name = "ToolsUserControl";
-            this.ToolsUserControl.Size = new System.Drawing.Size(240, 90);
-            this.ToolsUserControl.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -283,12 +283,12 @@
 
         private System.Windows.Forms.PictureBox Canvas;
         private System.Windows.Forms.MenuStrip topToolBar;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem doToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fileOptionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fileClearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UndoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileOptionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileClearToolStripMenuItem;
         private Forms.FigureSettingsControl FigureSettingsControl;
         private System.Windows.Forms.SplitContainer MainLeftSplitContainer;
         private System.Windows.Forms.Panel WrapPictureBox;

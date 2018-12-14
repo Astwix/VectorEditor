@@ -80,7 +80,7 @@ namespace VectorEditorProject.Forms
         
         private void fileClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var command = new ClearDocumentCommand(_controlUnit.GetDocument());
+            var command = new ClearDocumentCommand(_controlUnit);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
         }

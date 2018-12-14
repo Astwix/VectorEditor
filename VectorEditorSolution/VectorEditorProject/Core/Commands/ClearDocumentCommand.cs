@@ -5,13 +5,13 @@ namespace VectorEditorProject.Core.Commands
 {
     public class ClearDocumentCommand : BaseCommand
     {
-        private Document _document;
+        private ControlUnit _controlUnit;
         private List<BaseFigure> _backUpFigures = new List<BaseFigure>();
-
-        public ClearDocumentCommand(Document document)
+        
+        public ClearDocumentCommand(ControlUnit controlUnit)
         {
-            _document = document;
-            foreach (var figure in document.GetFigures())
+            _controlUnit = controlUnit;
+            foreach (var figure in controlUnit.GetDocument().GetFigures())
             {
                 _backUpFigures.Add(figure);
             }
@@ -22,7 +22,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            _document.ClearCanvas();
+            _controlUnit.GetDocument().ClearCanvas();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _backUpFigures)
             {
-                _document.AddFigure(figure);
+                _controlUnit.GetDocument().AddFigure(figure);
             }
         }
     }

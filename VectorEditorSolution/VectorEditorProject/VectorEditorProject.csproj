@@ -49,6 +49,7 @@
     <Compile Include="Core\Commands\AddFigureCommand.cs" />
     <Compile Include="Core\Commands\AddPointCommand.cs" />
     <Compile Include="Core\Commands\BaseCommand.cs" />
+    <Compile Include="Core\Commands\ChangingDocumentOptionsCommand.cs" />
     <Compile Include="Core\Commands\ClearDocumentCommand.cs" />
     <Compile Include="Core\Commands\FiguresChangingCommand.cs" />
     <Compile Include="Core\Commands\RemoveFigureCommand.cs" />

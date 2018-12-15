@@ -44,7 +44,7 @@ namespace VectorEditorProject.Core
                 case States.AddFigureState:
                     if (GetSelectedFigures().Count > 0) // если есть выделение - сбросить
                     {
-                        var command = new SelectFiguresCommand(this, new List<BaseFigure>());
+                        var command = CommandFactory.CreateSelectFiguresCommand(this, new List<BaseFigure>());
                         _controlUnit.StoreCommand(command);
                         _controlUnit.Do();
                     }

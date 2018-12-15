@@ -215,7 +215,7 @@ namespace VectorEditorProject.Core.States
             }
 
             // создание команды изменения фигур
-            var command = new FiguresChangingCommand(_controlUnit, newValues);
+            var command = CommandFactory.CreateFiguresChangingCommand(_controlUnit, newValues);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
         }

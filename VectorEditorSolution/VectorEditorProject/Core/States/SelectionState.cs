@@ -117,7 +117,7 @@ namespace VectorEditorProject.Core.States
                 // ближайшая (к клику пользователя) фигура из словаря
                 var nearFigure = distanceToFigures.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
 
-                var command = new SelectFiguresCommand(_editContext, nearFigure);
+                var command = CommandFactory.CreateSelectFiguresCommand(_editContext, nearFigure);
                 _controlUnit.StoreCommand(command);
                 _controlUnit.Do();
 
@@ -144,7 +144,7 @@ namespace VectorEditorProject.Core.States
 
             if (selectedFigures.Count > 0)
             {
-                var command = new SelectFiguresCommand(_editContext, selectedFigures);
+                var command = CommandFactory.CreateSelectFiguresCommand(_editContext, selectedFigures);
                 _controlUnit.StoreCommand(command);
                 _controlUnit.Do();
 

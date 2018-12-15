@@ -13,12 +13,12 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Команда добавления точки
         /// </summary>
-        /// <param name="fugure">Фигура</param>
+        /// <param name="figure">Фигура</param>
         /// <param name="point">Точка</param>
         /// <param name="controlUnit">controlUnit</param>
-        public AddPointCommand(BaseFigure fugure, PointF point, ControlUnit controlUnit)
+        public AddPointCommand(BaseFigure figure, PointF point, ControlUnit controlUnit)
         {
-            _guid = fugure.guid;
+            _guid = figure.guid;
             _point = point;
             _controlUnit = controlUnit;
         }

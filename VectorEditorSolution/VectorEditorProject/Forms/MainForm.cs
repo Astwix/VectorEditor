@@ -51,15 +51,13 @@ namespace VectorEditorProject.Forms
 
         private void fileOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Пока без undo/redo
             DocumentForm documentForm = new DocumentForm(_controlUnit.GetDocument());
             if (documentForm.ShowDialog() != DialogResult.Cancel && documentForm.document != null)
             {
-                var doc = _controlUnit.GetDocument();
-                doc.Name = documentForm.document.Name;
-                doc.Size = documentForm.document.Size;
-                doc.Color = documentForm.document.Color;
-                Canvas.Invalidate();
+                var command = CommandFactory.CreateChangingDocumentOptionsCommand
+                    (_controlUnit, documentForm.document);
+                _controlUnit.StoreCommand(command);
+                _controlUnit.Do();
             }
         }
 
@@ -80,7 +78,7 @@ namespace VectorEditorProject.Forms
         
         private void fileClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var command = new ClearDocumentCommand(_controlUnit);
+            var command = CommandFactory.CreateClearDocumentCommand(_controlUnit);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
         }

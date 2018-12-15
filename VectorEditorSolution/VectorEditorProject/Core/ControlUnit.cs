@@ -60,6 +60,8 @@ namespace VectorEditorProject.Core
                 { UpdateCanvas, UpdateState, UpdatePropertyGrid });
             _viewUpdateDictionary.Add(typeof(RemoveFigureCommand), new List<Action>()
                 { UpdateCanvas, UpdatePropertyGrid});
+            _viewUpdateDictionary.Add(typeof(ChangingDocumentOptionsCommand), new List<Action>()
+                { UpdateCanvas });
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace VectorEditorProject.Core
             var figures = EditContext.GetSelectedFigures();
             if (figures.Count > 0)
             {
-                var command = new RemoveFigureCommand(this, figures);
+                var command = CommandFactory.CreateRemoveFigureCommand(this, figures);
                 StoreCommand(command);
                 Do();
             }
@@ -113,15 +115,15 @@ namespace VectorEditorProject.Core
                 copiedClipboard.Add(copy);
             }
 
-            var selectCommand1 = new SelectFiguresCommand(EditContext, new List<BaseFigure>());
+            var selectCommand1 = CommandFactory.CreateSelectFiguresCommand(EditContext, new List<BaseFigure>());
             StoreCommand(selectCommand1);
             Do();
 
-            var command = new AddFigureCommand(this, copiedClipboard);
+            var command = CommandFactory.CreateAddFigureCommand(this, copiedClipboard);
             StoreCommand(command);
             Do();
 
-            var selectCommand2 = new SelectFiguresCommand(EditContext, copiedClipboard);
+            var selectCommand2 = CommandFactory.CreateSelectFiguresCommand(EditContext, copiedClipboard);
             StoreCommand(selectCommand2);
             Do();
 
@@ -327,7 +329,7 @@ namespace VectorEditorProject.Core
                 selectedFilledFigure.FillSettings.Color = backUpFilledValues.FillSettings.Color;
             }
 
-            var command = new FiguresChangingCommand(this, newValues);
+            var command = CommandFactory.CreateFiguresChangingCommand(this, newValues);
             StoreCommand(command);
             Do();
 

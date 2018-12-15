@@ -89,7 +89,7 @@ namespace VectorEditorProject.Core.States
 
             activeFigure.PointsSettings.RemoveLast();
 
-            var command = new AddPointCommand(activeFigure, new PointF(e.X, e.Y), _controlUnit);
+            var command = CommandFactory.CreateAddPointCommand(activeFigure, new PointF(e.X, e.Y), _controlUnit);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
 

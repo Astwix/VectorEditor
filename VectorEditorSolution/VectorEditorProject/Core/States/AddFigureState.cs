@@ -33,7 +33,7 @@ namespace VectorEditorProject.Core.States
             figure.LineSettings = _controlUnit.GetActiveLineSettings();
             figure.PointsSettings.AddPoint(new PointF(e.X, e.Y));
 
-            AddFigureCommand command = new AddFigureCommand(_controlUnit, figure);
+            var command = CommandFactory.CreateAddFigureCommand(_controlUnit, figure);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
@@ -23,7 +25,7 @@ namespace VectorEditorProject.Forms
             ToolsUserControl.EditContext = _editContext;
         }
 
-        private void canvas_Paint(object sender, PaintEventArgs e)
+        private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             _drawerFactory.DrawCanvas(_controlUnit.GetDocument(), e.Graphics);
 
@@ -39,17 +41,17 @@ namespace VectorEditorProject.Forms
         {
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Undo();
         }
 
-        private void doToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Do();
         }
 
-        private void fileOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FileOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DocumentForm documentForm = new DocumentForm(_controlUnit.GetDocument());
             if (documentForm.ShowDialog() != DialogResult.Cancel && documentForm.document != null)
@@ -61,22 +63,22 @@ namespace VectorEditorProject.Forms
             }
         }
 
-        private void canvas_MouseDown(object sender, MouseEventArgs e)
+        private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             _editContext.MouseDown(sender, e);
         }
 
-        private void canvas_MouseUp(object sender, MouseEventArgs e)
+        private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             _editContext.MouseUp(sender, e);
         }
 
-        private void canvas_MouseMove(object sender, MouseEventArgs e)
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
             _editContext.MouseMove(sender, e);
         }
         
-        private void fileClearToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FileClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var command = CommandFactory.CreateClearDocumentCommand(_controlUnit);
             _controlUnit.StoreCommand(command);
@@ -111,6 +113,39 @@ namespace VectorEditorProject.Forms
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Delete();
+        }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PNG|*.png|JPEG|*.jpeg";
+            saveFileDialog.FileName = _controlUnit.GetDocument().Name;
+
+            if (saveFileDialog.ShowDialog() != DialogResult.Cancel && 
+                saveFileDialog.FileName != "")
+            {
+                var size = _controlUnit.GetDocument().Size;
+                Bitmap bitmap = new Bitmap(size.Width, size.Height);
+                Canvas.DrawToBitmap(bitmap, new Rectangle(0, 0, size.Width, size.Height));
+
+                ImageFormat selectedFormat;
+                switch (saveFileDialog.FilterIndex)
+                {
+                    case 1:
+                        selectedFormat = ImageFormat.Png;
+                        break;
+
+                    case 2:
+                        selectedFormat = ImageFormat.Jpeg;
+                        break;
+
+                    default:
+                        selectedFormat = ImageFormat.Png;
+                        break;
+                }
+
+                bitmap.Save(saveFileDialog.FileName, selectedFormat);
+            }
         }
     }
 }

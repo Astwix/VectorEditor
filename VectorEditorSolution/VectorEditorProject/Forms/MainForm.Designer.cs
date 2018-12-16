@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.Canvas = new System.Windows.Forms.PictureBox();
-            this.topToolBar = new System.Windows.Forms.MenuStrip();
+            this.TopToolBar = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UndoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,7 @@
             this.PropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.WrapPictureBox = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
-            this.topToolBar.SuspendLayout();
+            this.TopToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).BeginInit();
             this.MainLeftSplitContainer.Panel1.SuspendLayout();
             this.MainLeftSplitContainer.Panel2.SuspendLayout();
@@ -68,28 +69,29 @@
             this.Canvas.Size = new System.Drawing.Size(729, 525);
             this.Canvas.TabIndex = 0;
             this.Canvas.TabStop = false;
-            this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
-            this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
+            this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
+            this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
+            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
-            // topToolBar
+            // TopToolBar
             // 
-            this.topToolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.topToolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TopToolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.TopToolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileToolStripMenuItem,
             this.EditToolStripMenuItem});
-            this.topToolBar.Location = new System.Drawing.Point(0, 0);
-            this.topToolBar.Name = "topToolBar";
-            this.topToolBar.Size = new System.Drawing.Size(982, 28);
-            this.topToolBar.TabIndex = 1;
-            this.topToolBar.Text = "topToolBar";
+            this.TopToolBar.Location = new System.Drawing.Point(0, 0);
+            this.TopToolBar.Name = "TopToolBar";
+            this.TopToolBar.Size = new System.Drawing.Size(982, 28);
+            this.TopToolBar.TabIndex = 1;
+            this.TopToolBar.Text = "topToolBar";
             // 
             // FileToolStripMenuItem
             // 
             this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileOptionsToolStripMenuItem,
-            this.FileClearToolStripMenuItem});
+            this.FileClearToolStripMenuItem,
+            this.SaveAsToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
             this.FileToolStripMenuItem.Text = "Файл";
@@ -99,14 +101,21 @@
             this.FileOptionsToolStripMenuItem.Name = "FileOptionsToolStripMenuItem";
             this.FileOptionsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.FileOptionsToolStripMenuItem.Text = "Параметры";
-            this.FileOptionsToolStripMenuItem.Click += new System.EventHandler(this.fileOptionsToolStripMenuItem_Click);
+            this.FileOptionsToolStripMenuItem.Click += new System.EventHandler(this.FileOptionsToolStripMenuItem_Click);
             // 
             // FileClearToolStripMenuItem
             // 
             this.FileClearToolStripMenuItem.Name = "FileClearToolStripMenuItem";
             this.FileClearToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.FileClearToolStripMenuItem.Text = "Очистить";
-            this.FileClearToolStripMenuItem.Click += new System.EventHandler(this.fileClearToolStripMenuItem_Click);
+            this.FileClearToolStripMenuItem.Click += new System.EventHandler(this.FileClearToolStripMenuItem_Click);
+            // 
+            // SaveAsToolStripMenuItem
+            // 
+            this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
+            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.SaveAsToolStripMenuItem.Text = "Сохранить как...";
+            this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
@@ -128,7 +137,7 @@
             this.UndoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.UndoToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.UndoToolStripMenuItem.Text = "Отменить";
-            this.UndoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            this.UndoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
             // 
             // DoToolStripMenuItem
             // 
@@ -136,7 +145,7 @@
             this.DoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.DoToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.DoToolStripMenuItem.Text = "Вернуть";
-            this.DoToolStripMenuItem.Click += new System.EventHandler(this.doToolStripMenuItem_Click);
+            this.DoToolStripMenuItem.Click += new System.EventHandler(this.DoToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -254,17 +263,17 @@
             this.ClientSize = new System.Drawing.Size(982, 553);
             this.Controls.Add(this.WrapPictureBox);
             this.Controls.Add(this.MainLeftSplitContainer);
-            this.Controls.Add(this.topToolBar);
+            this.Controls.Add(this.TopToolBar);
             this.KeyPreview = true;
-            this.MainMenuStrip = this.topToolBar;
+            this.MainMenuStrip = this.TopToolBar;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "MainForm";
             this.Text = "VectorEditor";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
-            this.topToolBar.ResumeLayout(false);
-            this.topToolBar.PerformLayout();
+            this.TopToolBar.ResumeLayout(false);
+            this.TopToolBar.PerformLayout();
             this.MainLeftSplitContainer.Panel1.ResumeLayout(false);
             this.MainLeftSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).EndInit();
@@ -282,7 +291,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox Canvas;
-        private System.Windows.Forms.MenuStrip topToolBar;
+        private System.Windows.Forms.MenuStrip TopToolBar;
         private System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UndoToolStripMenuItem;
@@ -300,6 +309,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.PropertyGrid PropertyGrid;
         private System.Windows.Forms.SplitContainer MainLeftBottomSplitContainer;
+        private System.Windows.Forms.ToolStripMenuItem SaveAsToolStripMenuItem;
     }
 }
 

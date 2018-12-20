@@ -1,8 +1,10 @@
-﻿using VectorEditorProject.Core.Figures.Utility;
+﻿using System;
+using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
-    class Ellipse : FilledBaseFigure
+    [Serializable]
+    public class Ellipse : FilledBaseFigure
     {
         /// <summary>
         /// Конструктор "Эллипс"

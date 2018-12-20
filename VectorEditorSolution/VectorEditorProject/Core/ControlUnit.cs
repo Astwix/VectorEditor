@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.Figures;
@@ -334,6 +336,87 @@ namespace VectorEditorProject.Core
             Do();
 
             _propertyBackUp = newValues;
+        }
+
+        /// <summary>
+        /// Десериализация
+        /// </summary>
+        /// <param name="stream"></param>
+        public void Deserialize(Stream stream)
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            _currentDocument.ClearCanvas();
+            _commands.Clear();
+            _currentCommand = 0;
+
+            // восстановление
+            _commands = (List<BaseCommand>)binaryFormatter.Deserialize(stream);
+            MakeCommandsOKAgain();
+            foreach (var command in _commands)
+            {
+                Do();
+            }
+        }
+
+        /// <summary>
+        /// Сериализация
+        /// </summary>
+        /// <param name="stream">Поток</param>
+        public void Serialize(Stream stream)
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            binaryFormatter.Serialize(stream, _commands);
+        }
+
+        /// <summary>
+        /// Починить команды при восстановлении файла
+        /// </summary>
+        private void MakeCommandsOKAgain()
+        {
+            foreach (var command in _commands)
+            {
+                if (command is AddFigureCommand addFigureCommand)
+                {
+                    addFigureCommand.ControlUnit = this;
+                    continue;
+                }
+
+                if (command is AddPointCommand addPointCommand)
+                {
+                    addPointCommand.ControlUnit = this;
+                    continue;
+                }
+
+                if (command is ChangingDocumentOptionsCommand changingDocumentOptionsCommand)
+                {
+                    changingDocumentOptionsCommand.ControlUnit = this;
+                    continue;
+                }
+
+                if (command is ClearDocumentCommand clearDocumentCommand)
+                {
+                    clearDocumentCommand.ControlUnit = this;
+                    continue;
+                }
+
+                if (command is FiguresChangingCommand figuresChangingCommand)
+                {
+                    figuresChangingCommand.ControlUnit = this;
+                    continue;
+                }
+
+                if (command is RemoveFigureCommand removeFigureCommand)
+                {
+                    removeFigureCommand.ControlUnit = this;
+                    continue;
+                }
+
+                if (command is SelectFiguresCommand selectFiguresCommand)
+                {
+                    selectFiguresCommand.EditContext = EditContext;
+                    continue;
+                }
+            }
         }
     }
 }

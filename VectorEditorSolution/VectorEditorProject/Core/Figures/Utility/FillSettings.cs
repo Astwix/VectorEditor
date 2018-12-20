@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {
+    [Serializable]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     [DisplayName("Настройки заливки")]
     public class FillSettings

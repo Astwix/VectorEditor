@@ -1,8 +1,10 @@
-﻿using VectorEditorProject.Core.Figures.Utility;
+﻿using System;
+using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
-    class PolyLine : BaseFigure
+    [Serializable]
+    public class PolyLine : BaseFigure
     {
         /// <summary>
         /// Конструктор "Полилиния"

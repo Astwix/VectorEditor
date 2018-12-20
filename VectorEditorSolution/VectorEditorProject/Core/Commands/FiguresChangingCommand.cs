@@ -1,23 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    [Serializable]
     public class FiguresChangingCommand : BaseCommand
     {
-        private ControlUnit _controlUnit;
+        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
         private List<BaseFigure> _oldValues = new List<BaseFigure>();
         private List<BaseFigure> _newValues = new List<BaseFigure>();
 
         public FiguresChangingCommand(ControlUnit controlUnit, List<BaseFigure> newValues)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
             
             var figureFactory = new FigureFactory();
             foreach (var figure in newValues)
             {
-                var original = _controlUnit.GetDocument().GetFigure(figure.guid);
+                var original = ControlUnit.GetDocument().GetFigure(figure.guid);
                 _oldValues.Add(figureFactory.CopyFigure(original));
                 _newValues.Add(figureFactory.CopyFigure(figure));
             }
@@ -25,10 +27,10 @@ namespace VectorEditorProject.Core.Commands
 
         public FiguresChangingCommand(ControlUnit controlUnit, BaseFigure newValues)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
 
             var figureFactory = new FigureFactory();
-            var original = _controlUnit.GetDocument().GetFigure(newValues.guid);
+            var original = ControlUnit.GetDocument().GetFigure(newValues.guid);
             _oldValues.Add(figureFactory.CopyFigure(original));
             _newValues.Add(figureFactory.CopyFigure(newValues));
         }
@@ -52,7 +54,7 @@ namespace VectorEditorProject.Core.Commands
             foreach (var figure in values)
             {
                 // применение параметров линии
-                var original = _controlUnit.GetDocument().GetFigure(figure.guid);
+                var original = ControlUnit.GetDocument().GetFigure(figure.guid);
                 original.LineSettings.Color = figure.LineSettings.Color;
                 original.LineSettings.Style = figure.LineSettings.Style;
                 original.LineSettings.Width = figure.LineSettings.Width;

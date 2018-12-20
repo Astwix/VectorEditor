@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {
+    [Serializable]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     [DisplayName("Настройки линии")]
     public class LineSettings

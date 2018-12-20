@@ -147,5 +147,49 @@ namespace VectorEditorProject.Forms
                 bitmap.Save(saveFileDialog.FileName, selectedFormat);
             }
         }
+
+        private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "ElectroCute|*.pika";
+
+            if (openFileDialog.ShowDialog() != DialogResult.Cancel)
+            {
+                using (var stream = openFileDialog.OpenFile())
+                {
+                    _controlUnit.Deserialize(stream);
+                }
+            }
+        }
+
+        private void SaveFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = _controlUnit.GetDocument().Name;
+            saveFileDialog.Filter = "ElectoCute|*.pika";
+
+            if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
+            {
+                using (var stream = saveFileDialog.OpenFile())
+                {
+                    _controlUnit.Serialize(stream);
+                }
+            }
+        }
+
+        private void NewFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DocumentForm documentForm = new DocumentForm(_controlUnit.GetDocument());
+            if (documentForm.ShowDialog() != DialogResult.Cancel && documentForm.document != null)
+            {
+                _controlUnit.Reset();
+                _controlUnit.GetDocument().ClearCanvas();
+
+                var command = CommandFactory.CreateChangingDocumentOptionsCommand
+                    (_controlUnit, documentForm.document);
+                command.Do();
+                _controlUnit.UpdateCanvas();
+            }
+        }
     }
 }

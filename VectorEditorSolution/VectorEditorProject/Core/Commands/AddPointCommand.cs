@@ -4,11 +4,12 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
-    class AddPointCommand : BaseCommand
+    [Serializable]
+    public class AddPointCommand : BaseCommand
     {
         private Guid _guid = Guid.Empty;
         private PointF _point;
-        private ControlUnit _controlUnit;
+        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Команда добавления точки
@@ -20,7 +21,7 @@ namespace VectorEditorProject.Core.Commands
         {
             _guid = figure.guid;
             _point = point;
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            _controlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.AddPoint(_point);
+            ControlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.AddPoint(_point);
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Undo()
         {
-            _controlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.DeletePoint(_point);
+            ControlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.DeletePoint(_point);
         }
     }
 }

@@ -76,8 +76,12 @@ namespace VectorEditorProject.Core.States
 
         public override void MouseUp(object sender, MouseEventArgs e)
         {
-            _isMousePressed = false;
+            if (!_isMousePressed)
+            {
+                return;
+            }
 
+            _isMousePressed = false;
             if ((_rightBottomX - _leftTopX < 3) && (_rightBottomY - _leftTopY < 3))
             {
                 SingleSelection();

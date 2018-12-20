@@ -4,6 +4,7 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
+    [Serializable]
     public abstract class BaseFigure
     {
         public Guid guid = Guid.NewGuid();

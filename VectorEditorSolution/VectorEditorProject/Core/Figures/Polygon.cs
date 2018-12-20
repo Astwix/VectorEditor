@@ -1,8 +1,10 @@
-﻿using VectorEditorProject.Core.Figures.Utility;
+﻿using System;
+using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
-    class Polygon : FilledBaseFigure
+    [Serializable]
+    public class Polygon : FilledBaseFigure
     {
         /// <summary>
         /// Конструктор "Многоугольник"

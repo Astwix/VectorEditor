@@ -1,7 +1,9 @@
-﻿using VectorEditorProject.Core.Figures.Utility;
+﻿using System;
+using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
+    [Serializable]
     public abstract class FilledBaseFigure : BaseFigure
     {
         protected FillSettings _fillSettings;

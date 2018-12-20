@@ -3,9 +3,10 @@ using System.Drawing;
 
 namespace VectorEditorProject.Core.Commands
 {
+    [Serializable]
     public class ChangingDocumentOptionsCommand : BaseCommand
     {
-        private ControlUnit _controlUnit;
+        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
 
         private Size _newSize;
         private Size _backUpSize;
@@ -17,13 +18,13 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Изменение свойств документа
         /// </summary>
-        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="controlUnit">Control ControlUnit</param>
         /// <param name="newOptions">Новые параметры</param>
         public ChangingDocumentOptionsCommand(ControlUnit controlUnit, Document newOptions)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
 
-            var target = _controlUnit.GetDocument();
+            var target = ControlUnit.GetDocument();
 
             _backUpSize = target.Size;
             _backUpColor = target.Color;
@@ -39,7 +40,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            var target = _controlUnit.GetDocument();
+            var target = ControlUnit.GetDocument();
 
             target.Size = _newSize;
             target.Color = _newColor;
@@ -51,7 +52,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Undo()
         {
-            var target = _controlUnit.GetDocument();
+            var target = ControlUnit.GetDocument();
 
             target.Size = _backUpSize;
             target.Color = _backUpColor;

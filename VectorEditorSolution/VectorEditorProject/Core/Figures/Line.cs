@@ -1,8 +1,10 @@
-﻿using VectorEditorProject.Core.Figures.Utility;
+﻿using System;
+using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
-    class Line : BaseFigure
+    [Serializable]
+    public class Line : BaseFigure
     {
         /// <summary>
         /// Конструктор "Линия"

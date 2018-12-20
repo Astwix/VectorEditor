@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {
+    [Serializable]
     [Browsable(false)]
     public class PointsSettings
     {

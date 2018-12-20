@@ -1,27 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    [Serializable]
     public class AddFigureCommand : BaseCommand
     {
-        private ControlUnit _controlUnit;
+        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
         private IReadOnlyList<BaseFigure> _figures;
 
         /// <summary>
         /// Конструктор создания команды
         /// </summary>
-        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="controlControlUnit">Control ControlUnit</param>
         /// <param name="figure">Фигура</param>
-        public AddFigureCommand(ControlUnit controlUnit, BaseFigure figure)
+        public AddFigureCommand(ControlUnit controlControlUnit, BaseFigure figure)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlControlUnit;
             _figures = new List<BaseFigure>() {figure};
         }
 
-        public AddFigureCommand(ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
+        public AddFigureCommand(ControlUnit controlControlUnit, IReadOnlyList<BaseFigure> figures)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlControlUnit;
             _figures = figures;
         }
 
@@ -32,7 +34,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().AddFigure(figure);
+                ControlUnit.GetDocument().AddFigure(figure);
             }
         }
 
@@ -43,7 +45,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().DeleteFigure(figure);
+                ControlUnit.GetDocument().DeleteFigure(figure);
             }
         }
     }

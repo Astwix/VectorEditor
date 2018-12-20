@@ -1,22 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    [Serializable]
     public class RemoveFigureCommand : BaseCommand
     {
-        private ControlUnit _controlUnit;
+        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
         private IReadOnlyList<BaseFigure> _figures;
 
         public RemoveFigureCommand(ControlUnit controlUnit, BaseFigure figure)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
             _figures = new List<BaseFigure>() { figure };
         }
 
         public RemoveFigureCommand(ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
             _figures = figures;
         }
 
@@ -27,7 +29,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().AddFigure(figure);
+                ControlUnit.GetDocument().AddFigure(figure);
             }
         }
 
@@ -38,7 +40,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().DeleteFigure(figure);
+                ControlUnit.GetDocument().DeleteFigure(figure);
             }
         }
     }

@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    [Serializable]
     public class ClearDocumentCommand : BaseCommand
     {
-        private ControlUnit _controlUnit;
+        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
         private List<BaseFigure> _backUpFigures = new List<BaseFigure>();
         
         public ClearDocumentCommand(ControlUnit controlUnit)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
             foreach (var figure in controlUnit.GetDocument().GetFigures())
             {
                 _backUpFigures.Add(figure);
@@ -22,7 +24,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            _controlUnit.GetDocument().ClearCanvas();
+            ControlUnit.GetDocument().ClearCanvas();
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _backUpFigures)
             {
-                _controlUnit.GetDocument().AddFigure(figure);
+                ControlUnit.GetDocument().AddFigure(figure);
             }
         }
     }

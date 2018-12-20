@@ -4,6 +4,7 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
+    [Serializable]
     class Circle : FilledBaseFigure
     {
         /// <summary>

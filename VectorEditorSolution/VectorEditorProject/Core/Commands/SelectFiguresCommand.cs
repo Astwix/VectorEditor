@@ -4,9 +4,10 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    [Serializable]
     public class SelectFiguresCommand : BaseCommand
     {
-        private EditContext _editContext;
+        [field: NonSerialized] public EditContext EditContext { get; set; }
         private List<Guid> _doList = new List<Guid>();
         private List<Guid> _undoList = new List<Guid>();
 
@@ -17,7 +18,7 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="selectedFigures"></param>
         public SelectFiguresCommand(EditContext editContext, List<BaseFigure> selectedFigures)
         {
-            _editContext = editContext;
+            EditContext = editContext;
 
             foreach (var selectedFigure in selectedFigures)
             {
@@ -37,7 +38,7 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="selectedFigure"></param>
         public SelectFiguresCommand(EditContext editContext, BaseFigure selectedFigure)
         {
-            _editContext = editContext;
+            EditContext = editContext;
 
             _doList.Add(selectedFigure.guid);
             
@@ -49,14 +50,14 @@ namespace VectorEditorProject.Core.Commands
 
         public override void Do()
         {
-            _editContext.SetSelectedFigures(_doList);
-            _editContext.SetActiveState(EditContext.States.FigureEditingState);
+            EditContext.SetSelectedFigures(_doList);
+            EditContext.SetActiveState(EditContext.States.FigureEditingState);
         }
 
         public override void Undo()
         {
-            _editContext.SetSelectedFigures(_undoList);
-            _editContext.SetActiveState(EditContext.States.FigureEditingState);
+            EditContext.SetSelectedFigures(_undoList);
+            EditContext.SetActiveState(EditContext.States.FigureEditingState);
         }
     }
 }

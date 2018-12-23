@@ -18,6 +18,8 @@ namespace VectorEditorProject.Core
         private int _currentCommand;
         public EditContext EditContext { get; set; }
 
+        private int _lastSavedHash = -1;
+
         private readonly PictureBox _canvas;
         private FigureSettingsControl _figureSettingsControl;
         private ToolsControl _toolsControl;
@@ -356,6 +358,8 @@ namespace VectorEditorProject.Core
             {
                 Do();
             }
+
+            _lastSavedHash = CalcCurrentHash();
         }
 
         /// <summary>
@@ -366,6 +370,38 @@ namespace VectorEditorProject.Core
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(stream, _commands);
+
+            _lastSavedHash = CalcCurrentHash();
+        }
+
+        /// <summary>
+        /// Расчет текущего хэша
+        /// </summary>
+        /// <returns></returns>
+        private int CalcCurrentHash()
+        {
+            int hash = -1;
+            foreach (var command in _commands)
+            {
+                hash = hash + command.GetHashCode();
+            }
+
+            return hash;
+        }
+
+        /// <summary>
+        /// Есть ли несохраненные изменения
+        /// </summary>
+        /// <returns></returns>
+        public bool IsFileHaveUnsavedChanges()
+        {
+            bool isIt = false;
+            if (_lastSavedHash != CalcCurrentHash())
+            {
+                isIt = true;
+            }
+
+            return isIt;
         }
 
         /// <summary>

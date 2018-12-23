@@ -58,5 +58,19 @@ namespace VectorEditorProject.Core.Commands
             target.Color = _backUpColor;
             target.Name = _backUpName;
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            return _backUpSize.GetHashCode() + 
+                   _backUpColor.GetHashCode() + 
+                   _backUpName.GetHashCode() + 
+                   _newSize.GetHashCode() + 
+                   _newColor.GetHashCode() + 
+                   _newName.GetHashCode();
+        }
     }
 }

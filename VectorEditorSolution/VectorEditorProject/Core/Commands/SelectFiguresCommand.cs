@@ -59,5 +59,24 @@ namespace VectorEditorProject.Core.Commands
             EditContext.SetSelectedFigures(_undoList);
             EditContext.SetActiveState(EditContext.States.FigureEditingState);
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var doGuid in _doList)
+            {
+                hash = hash + doGuid.GetHashCode();
+            }
+            foreach (var undoGuid in _undoList)
+            {
+                hash = hash + undoGuid.GetHashCode();
+            }
+
+            return hash;
+        }
     }
 }

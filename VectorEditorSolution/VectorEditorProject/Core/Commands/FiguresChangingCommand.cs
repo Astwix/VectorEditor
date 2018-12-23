@@ -74,5 +74,24 @@ namespace VectorEditorProject.Core.Commands
                 }
             }
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var newValue in _newValues)
+            {
+                hash = hash + newValue.GetHashCode();
+            }
+            foreach (var oldValue in _oldValues)
+            {
+                hash = hash + oldValue.GetHashCode();
+            }
+
+            return hash;
+        }
     }
 }

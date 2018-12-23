@@ -37,5 +37,20 @@ namespace VectorEditorProject.Core.Commands
                 ControlUnit.GetDocument().AddFigure(figure);
             }
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var backUpFigure in _backUpFigures)
+            {
+                hash = hash + backUpFigure.GetHashCode();
+            }
+
+            return hash;
+        }
     }
 }

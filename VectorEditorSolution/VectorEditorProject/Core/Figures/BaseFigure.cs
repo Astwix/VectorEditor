@@ -32,5 +32,14 @@ namespace VectorEditorProject.Core.Figures
             return new Rectangle(leftTopPoint.X, leftTopPoint.Y, 
                 rightBottomPoint.X - leftTopPoint.X, rightBottomPoint.Y - leftTopPoint.Y);
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            return _lineSettings.GetHashCode() + _pointsSettings.GetHashCode();
+        }
     }
 }

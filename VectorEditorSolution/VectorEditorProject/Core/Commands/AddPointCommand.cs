@@ -39,5 +39,14 @@ namespace VectorEditorProject.Core.Commands
         {
             ControlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.DeletePoint(_point);
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            return _guid.GetHashCode() + _point.GetHashCode();
+        }
     }
 }

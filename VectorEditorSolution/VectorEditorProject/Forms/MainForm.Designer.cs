@@ -31,9 +31,12 @@
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.TopToolBar = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UndoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,14 +46,11 @@
             this.PasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainLeftSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.FigureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
             this.MainLeftBottomSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
             this.PropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.WrapPictureBox = new System.Windows.Forms.Panel();
-            this.OpenFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.FigureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
-            this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
-            this.NewFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.TopToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).BeginInit();
@@ -102,6 +102,35 @@
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
             this.FileToolStripMenuItem.Text = "Файл";
             // 
+            // NewFileToolStripMenuItem
+            // 
+            this.NewFileToolStripMenuItem.Name = "NewFileToolStripMenuItem";
+            this.NewFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.NewFileToolStripMenuItem.Text = "Новый";
+            this.NewFileToolStripMenuItem.Click += new System.EventHandler(this.NewFileToolStripMenuItem_Click);
+            // 
+            // OpenFileToolStripMenuItem
+            // 
+            this.OpenFileToolStripMenuItem.Name = "OpenFileToolStripMenuItem";
+            this.OpenFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.OpenFileToolStripMenuItem.Text = "Открыть";
+            this.OpenFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
+            // 
+            // SaveFileToolStripMenuItem
+            // 
+            this.SaveFileToolStripMenuItem.Name = "SaveFileToolStripMenuItem";
+            this.SaveFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.SaveFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.SaveFileToolStripMenuItem.Text = "Сохранить";
+            this.SaveFileToolStripMenuItem.Click += new System.EventHandler(this.SaveFileToolStripMenuItem_Click);
+            // 
+            // SaveAsToolStripMenuItem
+            // 
+            this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
+            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.SaveAsToolStripMenuItem.Text = "Сохранить как...";
+            this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
+            // 
             // FileOptionsToolStripMenuItem
             // 
             this.FileOptionsToolStripMenuItem.Name = "FileOptionsToolStripMenuItem";
@@ -115,13 +144,6 @@
             this.FileClearToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.FileClearToolStripMenuItem.Text = "Очистить";
             this.FileClearToolStripMenuItem.Click += new System.EventHandler(this.FileClearToolStripMenuItem_Click);
-            // 
-            // SaveAsToolStripMenuItem
-            // 
-            this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.SaveAsToolStripMenuItem.Text = "Сохранить как...";
-            this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
@@ -208,6 +230,13 @@
             this.MainLeftSplitContainer.SplitterDistance = 117;
             this.MainLeftSplitContainer.TabIndex = 9;
             // 
+            // FigureSettingsControl
+            // 
+            this.FigureSettingsControl.Location = new System.Drawing.Point(3, 3);
+            this.FigureSettingsControl.Name = "FigureSettingsControl";
+            this.FigureSettingsControl.Size = new System.Drawing.Size(240, 120);
+            this.FigureSettingsControl.TabIndex = 8;
+            // 
             // MainLeftBottomSplitContainer
             // 
             this.MainLeftBottomSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -225,6 +254,14 @@
             this.MainLeftBottomSplitContainer.Size = new System.Drawing.Size(253, 404);
             this.MainLeftBottomSplitContainer.SplitterDistance = 100;
             this.MainLeftBottomSplitContainer.TabIndex = 1;
+            // 
+            // ToolsUserControl
+            // 
+            this.ToolsUserControl.EditContext = null;
+            this.ToolsUserControl.Location = new System.Drawing.Point(3, 3);
+            this.ToolsUserControl.Name = "ToolsUserControl";
+            this.ToolsUserControl.Size = new System.Drawing.Size(240, 90);
+            this.ToolsUserControl.TabIndex = 0;
             // 
             // PropertyGrid
             // 
@@ -247,42 +284,6 @@
             this.WrapPictureBox.Size = new System.Drawing.Size(729, 525);
             this.WrapPictureBox.TabIndex = 10;
             // 
-            // OpenFileToolStripMenuItem
-            // 
-            this.OpenFileToolStripMenuItem.Name = "OpenFileToolStripMenuItem";
-            this.OpenFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.OpenFileToolStripMenuItem.Text = "Открыть";
-            this.OpenFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
-            // 
-            // SaveFileToolStripMenuItem
-            // 
-            this.SaveFileToolStripMenuItem.Name = "SaveFileToolStripMenuItem";
-            this.SaveFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.SaveFileToolStripMenuItem.Text = "Сохранить";
-            this.SaveFileToolStripMenuItem.Click += new System.EventHandler(this.SaveFileToolStripMenuItem_Click);
-            // 
-            // FigureSettingsControl
-            // 
-            this.FigureSettingsControl.Location = new System.Drawing.Point(3, 3);
-            this.FigureSettingsControl.Name = "FigureSettingsControl";
-            this.FigureSettingsControl.Size = new System.Drawing.Size(240, 120);
-            this.FigureSettingsControl.TabIndex = 8;
-            // 
-            // ToolsUserControl
-            // 
-            this.ToolsUserControl.EditContext = null;
-            this.ToolsUserControl.Location = new System.Drawing.Point(3, 3);
-            this.ToolsUserControl.Name = "ToolsUserControl";
-            this.ToolsUserControl.Size = new System.Drawing.Size(240, 90);
-            this.ToolsUserControl.TabIndex = 0;
-            // 
-            // NewFileToolStripMenuItem
-            // 
-            this.NewFileToolStripMenuItem.Name = "NewFileToolStripMenuItem";
-            this.NewFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.NewFileToolStripMenuItem.Text = "Новый";
-            this.NewFileToolStripMenuItem.Click += new System.EventHandler(this.NewFileToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -296,6 +297,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "MainForm";
             this.Text = "VectorEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();

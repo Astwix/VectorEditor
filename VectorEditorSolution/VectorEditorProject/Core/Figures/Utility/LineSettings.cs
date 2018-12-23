@@ -39,5 +39,14 @@ namespace VectorEditorProject.Core.Figures.Utility
             Width = width;
             Style = style;
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return Color.GetHashCode() + Width.GetHashCode() + Style.GetHashCode();
+        }
     }
 }

@@ -28,5 +28,14 @@ namespace VectorEditorProject.Core.Figures.Utility
         {
             Color = color;
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            return Color.GetHashCode();
+        }
     }
 }

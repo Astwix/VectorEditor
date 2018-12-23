@@ -150,6 +150,8 @@ namespace VectorEditorProject.Forms
 
         private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CanClose();
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "ElectroCute|*.pika";
 
@@ -177,8 +179,37 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Можно ли закрыть файл
+        /// </summary>
+        /// <returns></returns>
+        private bool CanClose()
+        {
+            if (_controlUnit.IsFileHaveUnsavedChanges())
+            {
+                var dialogResult = MessageBox.Show(
+                    "Есть несохраненные изменения. Сохранить перед закрытием?",
+                    "Внимание", MessageBoxButtons.YesNoCancel);
+
+                switch (dialogResult)
+                {
+                    case DialogResult.Yes:
+                        SaveFileToolStripMenuItem_Click(this, new EventArgs());
+                        return true;
+                        break;
+
+                    case DialogResult.Cancel:
+                        return false;
+                }
+            }
+
+            return false;
+        }
+
         private void NewFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CanClose();
+
             DocumentForm documentForm = new DocumentForm(_controlUnit.GetDocument());
             if (documentForm.ShowDialog() != DialogResult.Cancel && documentForm.document != null)
             {
@@ -189,6 +220,27 @@ namespace VectorEditorProject.Forms
                     (_controlUnit, documentForm.document);
                 command.Do();
                 _controlUnit.UpdateCanvas();
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_controlUnit.IsFileHaveUnsavedChanges())
+            {
+                var dialogResult = MessageBox.Show(
+                    "Есть несохраненные изменения. Сохранить перед закрытием?",
+                    "Внимание", MessageBoxButtons.YesNoCancel);
+
+                switch (dialogResult)
+                {
+                    case DialogResult.Yes:
+                        SaveFileToolStripMenuItem_Click(this, e);
+                        break;
+
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
             }
         }
     }

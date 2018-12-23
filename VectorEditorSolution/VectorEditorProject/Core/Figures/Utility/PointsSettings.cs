@@ -98,5 +98,20 @@ namespace VectorEditorProject.Core.Figures.Utility
         {
             _points.RemoveAt(_points.Count - 1);
         }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var point in _points)
+            {
+                hash = hash + point.GetHashCode();
+            }
+
+            return hash;
+        }
     }
 }

@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Core\Commands\AddFigureCommand.cs" />
     <Compile Include="Core\Commands\AddPointCommand.cs" />
-    <Compile Include="Core\Commands\BaseCommand.cs" />
+    <Compile Include="Core\Commands\CommandBase.cs" />
     <Compile Include="Core\Commands\ChangingDocumentOptionsCommand.cs" />
     <Compile Include="Core\Commands\ClearDocumentCommand.cs" />
     <Compile Include="Core\Commands\CommandFactory.cs" />
@@ -61,21 +61,21 @@
     <Compile Include="Core\Figures\Utility\FigureEditor.cs" />
     <Compile Include="Core\States\AddFigureState.cs" />
     <Compile Include="Core\States\AddPointState.cs" />
-    <Compile Include="Core\States\BaseState.cs" />
+    <Compile Include="Core\States\StateBase.cs" />
     <Compile Include="Core\States\FigureEditingState.cs" />
     <Compile Include="Core\States\SelectionState.cs" />
-    <Compile Include="Core\Drawing\BaseDrawer.cs" />
+    <Compile Include="Core\Drawing\DrawerBase.cs" />
     <Compile Include="Core\Drawing\CircleDrawer.cs" />
     <Compile Include="Core\Drawing\DrawerFactory.cs" />
     <Compile Include="Core\Drawing\EllipseDrawer.cs" />
     <Compile Include="Core\Drawing\LineDrawer.cs" />
     <Compile Include="Core\Drawing\PolygonDrawer.cs" />
     <Compile Include="Core\Drawing\PolyLineDrawer.cs" />
-    <Compile Include="Core\Figures\BaseFigure.cs" />
+    <Compile Include="Core\Figures\FigureBase.cs" />
     <Compile Include="Core\Figures\Circle.cs" />
     <Compile Include="Core\Figures\Ellipse.cs" />
     <Compile Include="Core\Figures\FigureFactory.cs" />
-    <Compile Include="Core\Figures\FilledBaseFigure.cs" />
+    <Compile Include="Core\Figures\FilledFigureBase.cs" />
     <Compile Include="Core\Figures\Line.cs" />
     <Compile Include="Core\Figures\Polygon.cs" />
     <Compile Include="Core\Figures\PolyLine.cs" />

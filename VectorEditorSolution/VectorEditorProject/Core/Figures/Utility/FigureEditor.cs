@@ -12,7 +12,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figure">Фигура</param>
         /// <returns></returns>
-        public static PointF LeftTopPointF(BaseFigure figure)
+        public static PointF LeftTopPointF(FigureBase figure)
         {
             var result = figure.PointsSettings.GetPoints()[0];
             foreach (var point in figure.PointsSettings.GetPoints())
@@ -29,7 +29,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figures">Список фигур</param>
         /// <returns></returns>
-        public static PointF LeftTopPointF(IReadOnlyList<BaseFigure> figures)
+        public static PointF LeftTopPointF(IReadOnlyList<FigureBase> figures)
         {
             var result = figures[0].PointsSettings.GetPoints().First();
             foreach (var figure in figures)
@@ -49,7 +49,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figure">Фигура</param>
         /// <returns></returns>
-        public static PointF RightBottomPointF(BaseFigure figure)
+        public static PointF RightBottomPointF(FigureBase figure)
         {
             var result = figure.PointsSettings.GetPoints()[0];
             foreach (var point in figure.PointsSettings.GetPoints())
@@ -66,7 +66,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figures">Список фигур</param>
         /// <returns></returns>
-        public static PointF RightBottomPointF(IReadOnlyList<BaseFigure> figures)
+        public static PointF RightBottomPointF(IReadOnlyList<FigureBase> figures)
         {
             var result = figures[0].PointsSettings.GetPoints().First();
             foreach (var figure in figures)
@@ -87,7 +87,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// <param name="figure">Фигура</param>
         /// <param name="rectangle">Прямоугольник выделения</param>
         /// <returns></returns>
-        public static bool IsFigureInRectangle(BaseFigure figure, RectangleF rectangle)
+        public static bool IsFigureInRectangle(FigureBase figure, RectangleF rectangle)
         {
             foreach (var point in figure.PointsSettings.GetPoints())
             {
@@ -120,7 +120,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figures">Фигуры</param>
         /// <param name="newSize">Новая область</param>
-        public static void EditFiguresSize(IReadOnlyList<BaseFigure> figures, RectangleF newSize)
+        public static void EditFiguresSize(IReadOnlyList<FigureBase> figures, RectangleF newSize)
         {
             var leftTopPoint = LeftTopPointF(figures);
             var rightBottomPoint = RightBottomPointF(figures);
@@ -150,7 +150,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figure">Фигура</param>
         /// <param name="newSize">Новая область</param>
-        public static void EditFiguresSize(BaseFigure figure, RectangleF newSize)
+        public static void EditFiguresSize(FigureBase figure, RectangleF newSize)
         {
             var leftTopPoint = LeftTopPointF(figure);
             var rightBottomPoint = RightBottomPointF(figure);

@@ -5,23 +5,23 @@ using VectorEditorProject.Core.Figures;
 namespace VectorEditorProject.Core.Commands
 {
     [Serializable]
-    public class AddFigureCommand : BaseCommand
+    public class AddFigureCommand : CommandBase
     {
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
-        private IReadOnlyList<BaseFigure> _figures;
+        private IReadOnlyList<FigureBase> _figures;
 
         /// <summary>
         /// Конструктор создания команды
         /// </summary>
         /// <param name="controlControlUnit">Control ControlUnit</param>
         /// <param name="figure">Фигура</param>
-        public AddFigureCommand(ControlUnit controlControlUnit, BaseFigure figure)
+        public AddFigureCommand(ControlUnit controlControlUnit, FigureBase figure)
         {
             ControlUnit = controlControlUnit;
-            _figures = new List<BaseFigure>() {figure};
+            _figures = new List<FigureBase>() {figure};
         }
 
-        public AddFigureCommand(ControlUnit controlControlUnit, IReadOnlyList<BaseFigure> figures)
+        public AddFigureCommand(ControlUnit controlControlUnit, IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlControlUnit;
             _figures = figures;

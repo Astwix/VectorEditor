@@ -11,7 +11,7 @@ namespace VectorEditorProject.Core
     public class EditContext
     {
         private ControlUnit _controlUnit;
-        private BaseState _activeState;
+        private StateBase _activeState;
         private Guid _activeFigureGuid = Guid.Empty;
         private List<Guid> _selectedFigures = new List<Guid>();
 
@@ -44,7 +44,7 @@ namespace VectorEditorProject.Core
                 case States.AddFigureState:
                     if (GetSelectedFigures().Count > 0) // если есть выделение - сбросить
                     {
-                        var command = CommandFactory.CreateSelectFiguresCommand(this, new List<BaseFigure>());
+                        var command = CommandFactory.CreateSelectFiguresCommand(this, new List<FigureBase>());
                         _controlUnit.StoreCommand(command);
                         _controlUnit.Do();
                     }
@@ -100,7 +100,7 @@ namespace VectorEditorProject.Core
         /// Установить активную фигуру
         /// </summary>
         /// <param name="figure">Фигура</param>
-        public void SetActiveFigure(BaseFigure figure)
+        public void SetActiveFigure(FigureBase figure)
         {
             _activeFigureGuid = figure.guid;
         }
@@ -109,7 +109,7 @@ namespace VectorEditorProject.Core
         /// Получить активную фигуру
         /// </summary>
         /// <returns></returns>
-        public BaseFigure GetActiveFigure()
+        public FigureBase GetActiveFigure()
         {
             return _controlUnit.GetDocument().GetFigure(_activeFigureGuid);
         }
@@ -118,7 +118,7 @@ namespace VectorEditorProject.Core
         /// Выделение фигур (с перебором по фигурам)
         /// </summary>
         /// <param name="figuresList">Список фигур</param>
-        public void SetSelectedFigures(List<BaseFigure> figuresList)
+        public void SetSelectedFigures(List<FigureBase> figuresList)
         {
             _selectedFigures.Clear();
 
@@ -146,9 +146,9 @@ namespace VectorEditorProject.Core
         /// Список выделенных фигур, доступный только для чтения
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<BaseFigure> GetSelectedFigures()
+        public IReadOnlyList<FigureBase> GetSelectedFigures()
         {
-            List<BaseFigure> selectedFigures = new List<BaseFigure>();
+            List<FigureBase> selectedFigures = new List<FigureBase>();
 
             foreach (var guid in _selectedFigures)
             {

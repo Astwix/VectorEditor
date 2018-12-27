@@ -4,7 +4,7 @@ using VectorEditorProject.Core.Figures.Utility;
 namespace VectorEditorProject.Core.Figures
 {
     [Serializable]
-    public class Line : BaseFigure
+    public class Line : FigureBase
     {
         /// <summary>
         /// Конструктор "Линия"

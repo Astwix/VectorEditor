@@ -5,19 +5,19 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Drawing
 {
-    public class CircleDrawer : BaseDrawer
+    public class CircleDrawer : DrawerBase
     {
         /// <summary>
         /// Рисование круга
         /// </summary>
         /// <param name="figure">Фигура, которую рисуем (круг)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>
-        public override void DrawFigure(BaseFigure figure, Graphics graphics)
+        public override void DrawFigure(FigureBase figure, Graphics graphics)
         {
             if (figure.PointsSettings.GetPoints().Count == 2)
             {
                 // Приведение типа к заливным фигурам
-                FilledBaseFigure filledBaseFigure = figure as FilledBaseFigure;
+                FilledFigureBase filledBaseFigure = figure as FilledFigureBase;
                 if (filledBaseFigure == null)
                 {
                     return;

@@ -6,7 +6,7 @@ using VectorEditorProject.Core.Drawing;
 
 namespace VectorEditorProject.Core.States
 {
-    public class AddPointState : BaseState
+    public class AddPointState : StateBase
     {
         private DrawerFactory _drawerFactory = new DrawerFactory();
         private EditContext _editContext;

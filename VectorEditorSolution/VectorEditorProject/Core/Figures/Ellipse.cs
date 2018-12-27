@@ -4,7 +4,7 @@ using VectorEditorProject.Core.Figures.Utility;
 namespace VectorEditorProject.Core.Figures
 {
     [Serializable]
-    public class Ellipse : FilledBaseFigure
+    public class Ellipse : FilledFigureBase
     {
         /// <summary>
         /// Конструктор "Эллипс"

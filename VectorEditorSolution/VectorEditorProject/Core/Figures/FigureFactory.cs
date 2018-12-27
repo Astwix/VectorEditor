@@ -22,7 +22,7 @@ namespace VectorEditorProject.Core.Figures
         /// </summary>
         /// <param name="figureType">Тип фигуры из перечисления</param>
         /// <returns>Возвращает новый объект фигуры как базовый тип (Base)</returns>
-        public BaseFigure CreateFigure(Figures figureType)
+        public FigureBase CreateFigure(Figures figureType)
         {
             switch (figureType)
             {
@@ -56,7 +56,7 @@ namespace VectorEditorProject.Core.Figures
         /// </summary>
         /// <param name="figureType">Тип фигуры из перечисления</param>
         /// <returns>Возвращает новый объект фигуры как базовый тип (FilledBase)</returns>
-        public FilledBaseFigure CreateFilledFigure(Figures figureType)
+        public FilledFigureBase CreateFilledFigure(Figures figureType)
         {
             switch (figureType)
             {
@@ -82,9 +82,9 @@ namespace VectorEditorProject.Core.Figures
         /// </summary>
         /// <param name="figure">Фигура</param>
         /// <returns>Возвращает копию фигуры</returns>
-        public BaseFigure CopyFigure(BaseFigure figure)
+        public FigureBase CopyFigure(FigureBase figure)
         {
-            var copy = (BaseFigure) Activator.CreateInstance(figure.GetType());
+            var copy = (FigureBase) Activator.CreateInstance(figure.GetType());
             copy.guid = figure.guid;
             foreach (var point in figure.PointsSettings.GetPoints())
             {
@@ -95,7 +95,7 @@ namespace VectorEditorProject.Core.Figures
             copy.LineSettings.Style = figure.LineSettings.Style;
             copy.LineSettings.Width = figure.LineSettings.Width;
 
-            if (figure is FilledBaseFigure filledFigure && copy is FilledBaseFigure filledCopy)
+            if (figure is FilledFigureBase filledFigure && copy is FilledFigureBase filledCopy)
             {
                 filledCopy.FillSettings.Color = filledFigure.FillSettings.Color;
             }

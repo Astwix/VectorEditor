@@ -5,7 +5,7 @@ using VectorEditorProject.Core.Figures;
 namespace VectorEditorProject.Core.Commands
 {
     [Serializable]
-    public class AddPointCommand : BaseCommand
+    public class AddPointCommand : CommandBase
     {
         private Guid _guid = Guid.Empty;
         private PointF _point;
@@ -17,7 +17,7 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="figure">Фигура</param>
         /// <param name="point">Точка</param>
         /// <param name="controlUnit">controlUnit</param>
-        public AddPointCommand(BaseFigure figure, PointF point, ControlUnit controlUnit)
+        public AddPointCommand(FigureBase figure, PointF point, ControlUnit controlUnit)
         {
             _guid = figure.guid;
             _point = point;

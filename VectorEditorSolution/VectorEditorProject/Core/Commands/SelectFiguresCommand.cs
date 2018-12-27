@@ -5,7 +5,7 @@ using VectorEditorProject.Core.Figures;
 namespace VectorEditorProject.Core.Commands
 {
     [Serializable]
-    public class SelectFiguresCommand : BaseCommand
+    public class SelectFiguresCommand : CommandBase
     {
         [field: NonSerialized] public EditContext EditContext { get; set; }
         private List<Guid> _doList = new List<Guid>();
@@ -16,7 +16,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="editContext"></param>
         /// <param name="selectedFigures"></param>
-        public SelectFiguresCommand(EditContext editContext, List<BaseFigure> selectedFigures)
+        public SelectFiguresCommand(EditContext editContext, List<FigureBase> selectedFigures)
         {
             EditContext = editContext;
 
@@ -36,7 +36,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="editContext"></param>
         /// <param name="selectedFigure"></param>
-        public SelectFiguresCommand(EditContext editContext, BaseFigure selectedFigure)
+        public SelectFiguresCommand(EditContext editContext, FigureBase selectedFigure)
         {
             EditContext = editContext;
 

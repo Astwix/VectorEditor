@@ -6,13 +6,13 @@ using VectorEditorProject.Core.Figures;
 namespace VectorEditorProject.Core.Commands
 {
     [Serializable]
-    public class FiguresChangingCommand : BaseCommand
+    public class FiguresChangingCommand : CommandBase
     {
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
-        private List<BaseFigure> _oldValues = new List<BaseFigure>();
-        private List<BaseFigure> _newValues = new List<BaseFigure>();
+        private List<FigureBase> _oldValues = new List<FigureBase>();
+        private List<FigureBase> _newValues = new List<FigureBase>();
 
-        public FiguresChangingCommand(ControlUnit controlUnit, List<BaseFigure> newValues)
+        public FiguresChangingCommand(ControlUnit controlUnit, List<FigureBase> newValues)
         {
             ControlUnit = controlUnit;
             
@@ -25,7 +25,7 @@ namespace VectorEditorProject.Core.Commands
             }
         }
 
-        public FiguresChangingCommand(ControlUnit controlUnit, BaseFigure newValues)
+        public FiguresChangingCommand(ControlUnit controlUnit, FigureBase newValues)
         {
             ControlUnit = controlUnit;
 
@@ -49,7 +49,7 @@ namespace VectorEditorProject.Core.Commands
         /// Применить изменения к параметрам фигур
         /// </summary>
         /// <param name="values">Изменения</param>
-        private void AcceptValues(List<BaseFigure> values)
+        private void AcceptValues(List<FigureBase> values)
         {
             foreach (var figure in values)
             {
@@ -60,8 +60,8 @@ namespace VectorEditorProject.Core.Commands
                 original.LineSettings.Width = figure.LineSettings.Width;
 
                 // применение заливки
-                if (original is FilledBaseFigure originalFilled && 
-                    figure is FilledBaseFigure filledFigure)
+                if (original is FilledFigureBase originalFilled && 
+                    figure is FilledFigureBase filledFigure)
                 {
                     originalFilled.FillSettings.Color = filledFigure.FillSettings.Color;
                 }

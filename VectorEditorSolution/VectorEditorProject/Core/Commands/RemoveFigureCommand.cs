@@ -5,18 +5,18 @@ using VectorEditorProject.Core.Figures;
 namespace VectorEditorProject.Core.Commands
 {
     [Serializable]
-    public class RemoveFigureCommand : BaseCommand
+    public class RemoveFigureCommand : CommandBase
     {
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
-        private IReadOnlyList<BaseFigure> _figures;
+        private IReadOnlyList<FigureBase> _figures;
 
-        public RemoveFigureCommand(ControlUnit controlUnit, BaseFigure figure)
+        public RemoveFigureCommand(ControlUnit controlUnit, FigureBase figure)
         {
             ControlUnit = controlUnit;
-            _figures = new List<BaseFigure>() { figure };
+            _figures = new List<FigureBase>() { figure };
         }
 
-        public RemoveFigureCommand(ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
+        public RemoveFigureCommand(ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlUnit;
             _figures = figures;

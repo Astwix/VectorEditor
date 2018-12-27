@@ -4,7 +4,7 @@ using VectorEditorProject.Core.Figures.Utility;
 namespace VectorEditorProject.Core.Figures
 {
     [Serializable]
-    public class Polygon : FilledBaseFigure
+    public class Polygon : FilledFigureBase
     {
         /// <summary>
         /// Конструктор "Многоугольник"

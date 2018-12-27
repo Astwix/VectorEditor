@@ -10,7 +10,7 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.States
 {
-    public class SelectionState : BaseState
+    public class SelectionState : StateBase
     {
         private EditContext _editContext;
         private ControlUnit _controlUnit;
@@ -97,7 +97,7 @@ namespace VectorEditorProject.Core.States
         /// </summary>
         private void SingleSelection()
         {
-            Dictionary<BaseFigure, float> distanceToFigures = new Dictionary<BaseFigure, float>();
+            Dictionary<FigureBase, float> distanceToFigures = new Dictionary<FigureBase, float>();
 
             var figures = _controlUnit.GetDocument().GetFigures();
             if (figures.Count > 0)
@@ -134,7 +134,7 @@ namespace VectorEditorProject.Core.States
         /// </summary>
         private void AreaSelection()
         {
-            List<BaseFigure> selectedFigures = new List<BaseFigure>();
+            List<FigureBase> selectedFigures = new List<FigureBase>();
             RectangleF selectionRectangle = new RectangleF(_leftTopX, _leftTopY, 
                 _rightBottomX - _leftTopX, _rightBottomY - _leftTopY);
             

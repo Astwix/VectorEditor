@@ -4,14 +4,14 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
 {
-    public class LineDrawer : BaseDrawer
+    public class LineDrawer : DrawerBase
     {
         /// <summary>
         /// Рисование линии
         /// </summary>
         /// <param name="figure">Объект, который рисуем (линия)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>
-        public override void DrawFigure(BaseFigure figure, Graphics graphics)
+        public override void DrawFigure(FigureBase figure, Graphics graphics)
         {
             if (figure.PointsSettings.GetPoints().Count() == 2)
             {

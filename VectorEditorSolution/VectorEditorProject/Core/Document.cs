@@ -10,7 +10,7 @@ namespace VectorEditorProject.Core
         public string Name { get; set; }
         public Color Color { get; set; }
         public Size Size { get; set; }
-        private List<BaseFigure> Figures { get; set; }
+        private List<FigureBase> Figures { get; set; }
 
         /// <summary>
         /// Конструктор документа
@@ -23,14 +23,14 @@ namespace VectorEditorProject.Core
             Name = name;
             Color = color;
             Size = size;
-            Figures = new List<BaseFigure>();
+            Figures = new List<FigureBase>();
         }
 
         /// <summary>
         /// Добавление фигуры
         /// </summary>
         /// <param name="figure">Фигура</param>
-        public void AddFigure(BaseFigure figure)
+        public void AddFigure(FigureBase figure)
         {
             Figures.Add(figure);
         }
@@ -39,7 +39,7 @@ namespace VectorEditorProject.Core
         /// Удаление фигуры
         /// </summary>
         /// <param name="figure">Фигура</param>
-        public void DeleteFigure(BaseFigure figure)
+        public void DeleteFigure(FigureBase figure)
         {
             Figures.Remove(figure);
         }
@@ -50,7 +50,7 @@ namespace VectorEditorProject.Core
         /// <param name="guid">guid фигуры</param>
         public void DeleteFigure(Guid guid)
         {
-            foreach (BaseFigure figure in Figures)
+            foreach (FigureBase figure in Figures)
             {
                 if (figure.guid == guid)
                 {
@@ -72,7 +72,7 @@ namespace VectorEditorProject.Core
         /// Возвращает список фигур, доступный только для чтения
         /// </summary>
         /// <returns>Список фигур</returns>
-        public IReadOnlyList<BaseFigure> GetFigures()
+        public IReadOnlyList<FigureBase> GetFigures()
         {
             return Figures;
         }
@@ -82,7 +82,7 @@ namespace VectorEditorProject.Core
         /// </summary>
         /// <param name="guid">GUID фигуры</param>
         /// <returns>Фигура</returns>
-        public BaseFigure GetFigure(Guid guid)
+        public FigureBase GetFigure(Guid guid)
         {
             foreach (var figure in Figures)
             {

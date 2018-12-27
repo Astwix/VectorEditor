@@ -10,7 +10,7 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.States
 {
-    public class FigureEditingState : BaseState
+    public class FigureEditingState : StateBase
     {
         private EditContext _editContext;
         private ControlUnit _controlUnit;
@@ -35,7 +35,7 @@ namespace VectorEditorProject.Core.States
         private const float _markerSize = 10;
         private Color _markerHoverColor = Color.DeepPink;
         private Color _markerRefPointHoverColor = Color.Aquamarine;
-        private List<BaseFigure> _backUp = new List<BaseFigure>();
+        private List<FigureBase> _backUp = new List<FigureBase>();
 
         public FigureEditingState(ControlUnit controlUnit, EditContext editContext)
         {
@@ -321,7 +321,7 @@ namespace VectorEditorProject.Core.States
             _isFigureMoving = false;
 
             // сохранение изменений пользователя
-            List<BaseFigure> newValues = new List<BaseFigure>();
+            List<FigureBase> newValues = new List<FigureBase>();
             foreach (var selectedFigure in _editContext.GetSelectedFigures())
             {
                 newValues.Add(new FigureFactory().CopyFigure(selectedFigure));
@@ -336,8 +336,8 @@ namespace VectorEditorProject.Core.States
                 original.LineSettings.Style = figure.LineSettings.Style;
                 original.LineSettings.Width = figure.LineSettings.Width;
 
-                if (original is FilledBaseFigure originalFilled &&
-                    figure is FilledBaseFigure filledFigure)
+                if (original is FilledFigureBase originalFilled &&
+                    figure is FilledFigureBase filledFigure)
                 {
                     originalFilled.FillSettings.Color = filledFigure.FillSettings.Color;
                 }

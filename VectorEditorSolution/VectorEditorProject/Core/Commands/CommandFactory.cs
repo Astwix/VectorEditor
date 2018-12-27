@@ -6,67 +6,67 @@ namespace VectorEditorProject.Core.Commands
 {
     public static class CommandFactory
     {
-        public static BaseCommand CreateAddFigureCommand
-            (ControlUnit controlUnit, BaseFigure figure)
+        public static CommandBase CreateAddFigureCommand
+            (ControlUnit controlUnit, FigureBase figure)
         {
             return new AddFigureCommand(controlUnit, figure);
         }
 
-        public static BaseCommand CreateAddFigureCommand
-            (ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
+        public static CommandBase CreateAddFigureCommand
+            (ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
         {
             return new AddFigureCommand(controlUnit, figures);
         }
 
-        public static BaseCommand CreateAddPointCommand
-            (BaseFigure figure, PointF point, ControlUnit controlUnit)
+        public static CommandBase CreateAddPointCommand
+            (FigureBase figure, PointF point, ControlUnit controlUnit)
         {
             return new AddPointCommand(figure, point, controlUnit);
         }
 
-        public static BaseCommand CreateChangingDocumentOptionsCommand
+        public static CommandBase CreateChangingDocumentOptionsCommand
             (ControlUnit controlUnit, Document newOptions)
         {
             return new ChangingDocumentOptionsCommand(controlUnit, newOptions);
         }
 
-        public static BaseCommand CreateClearDocumentCommand
+        public static CommandBase CreateClearDocumentCommand
             (ControlUnit controlUnit)
         {
             return new ClearDocumentCommand(controlUnit);
         }
 
-        public static BaseCommand CreateFiguresChangingCommand
-            (ControlUnit controlUnit, List<BaseFigure> newValues)
+        public static CommandBase CreateFiguresChangingCommand
+            (ControlUnit controlUnit, List<FigureBase> newValues)
         {
             return new FiguresChangingCommand(controlUnit, newValues);
         }
 
-        public static BaseCommand CreateFiguresChangingCommand
-            (ControlUnit controlUnit, BaseFigure newValues)
+        public static CommandBase CreateFiguresChangingCommand
+            (ControlUnit controlUnit, FigureBase newValues)
         {
             return new FiguresChangingCommand(controlUnit, newValues);
         }
 
-        public static BaseCommand CreateRemoveFigureCommand(ControlUnit controlUnit, BaseFigure figure)
+        public static CommandBase CreateRemoveFigureCommand(ControlUnit controlUnit, FigureBase figure)
         {
             return new RemoveFigureCommand(controlUnit, figure);
         }
 
-        public static BaseCommand CreateRemoveFigureCommand
-            (ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
+        public static CommandBase CreateRemoveFigureCommand
+            (ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
         {
             return new RemoveFigureCommand(controlUnit, figures);
         }
 
-        public static BaseCommand CreateSelectFiguresCommand
-            (EditContext editContext, List<BaseFigure> selectedFigures)
+        public static CommandBase CreateSelectFiguresCommand
+            (EditContext editContext, List<FigureBase> selectedFigures)
         {
             return new SelectFiguresCommand(editContext, selectedFigures);
         }
 
-        public static BaseCommand CreateSelectFiguresCommand
-            (EditContext editContext, BaseFigure selectedFigure)
+        public static CommandBase CreateSelectFiguresCommand
+            (EditContext editContext, FigureBase selectedFigure)
         {
             return new SelectFiguresCommand(editContext, selectedFigure);
         }

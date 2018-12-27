@@ -5,19 +5,19 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Drawing
 {
-    public class EllipseDrawer : BaseDrawer
+    public class EllipseDrawer : DrawerBase
     {
         /// <summary>
         /// Рисование эллипса
         /// </summary>
         /// <param name="figure">Объект, который рисуем (эллипс)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>
-        public override void DrawFigure(BaseFigure figure, Graphics graphics)
+        public override void DrawFigure(FigureBase figure, Graphics graphics)
         {
             if (figure.PointsSettings.GetPoints().Count == 2)
             {
                 // Приведение типа к заливным фигурам
-                FilledBaseFigure filledBaseFigure = figure as FilledBaseFigure;
+                FilledFigureBase filledBaseFigure = figure as FilledFigureBase;
                 if (filledBaseFigure == null)
                 {
                     return;

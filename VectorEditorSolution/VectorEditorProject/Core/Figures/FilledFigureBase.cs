@@ -4,7 +4,7 @@ using VectorEditorProject.Core.Figures.Utility;
 namespace VectorEditorProject.Core.Figures
 {
     [Serializable]
-    public abstract class FilledBaseFigure : BaseFigure
+    public abstract class FilledFigureBase : FigureBase
     {
         protected FillSettings _fillSettings;
 

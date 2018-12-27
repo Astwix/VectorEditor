@@ -4,18 +4,18 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
 {
-    public class PolygonDrawer : BaseDrawer
+    public class PolygonDrawer : DrawerBase
     {
         /// <summary>
         /// Рисование многоугольника
         /// </summary>
         /// <param name="figure">Объект, который рисуем (многоугольник)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>
-        public override void DrawFigure(BaseFigure figure, Graphics graphics)
+        public override void DrawFigure(FigureBase figure, Graphics graphics)
         {
             if (figure.PointsSettings.GetPoints().Count >= 2)
             {
-                FilledBaseFigure filledBaseFigure = figure as  FilledBaseFigure;
+                FilledFigureBase filledBaseFigure = figure as  FilledFigureBase;
                 if (filledBaseFigure == null)
                 {
                     return;

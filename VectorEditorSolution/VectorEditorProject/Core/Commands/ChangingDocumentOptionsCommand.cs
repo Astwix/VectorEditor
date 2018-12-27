@@ -4,7 +4,7 @@ using System.Drawing;
 namespace VectorEditorProject.Core.Commands
 {
     [Serializable]
-    public class ChangingDocumentOptionsCommand : BaseCommand
+    public class ChangingDocumentOptionsCommand : CommandBase
     {
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
 

@@ -14,7 +14,7 @@ namespace VectorEditorProject.Core
 {
     public class ControlUnit
     {
-        private List<BaseCommand> _commands;
+        private List<CommandBase> _commands;
         private int _currentCommand;
         public EditContext EditContext { get; set; }
 
@@ -25,9 +25,9 @@ namespace VectorEditorProject.Core
         private ToolsControl _toolsControl;
         private PropertyGrid _propertyGrid;
 
-        private BaseFigure _propertyBackUp;
+        private FigureBase _propertyBackUp;
 
-        private List<BaseFigure> _clipboard = new List<BaseFigure>();
+        private List<FigureBase> _clipboard = new List<FigureBase>();
 
         private Document _currentDocument = new Document("Untitled", Color.White, new Size(400, 400));
 
@@ -39,7 +39,7 @@ namespace VectorEditorProject.Core
         public ControlUnit(PictureBox canvas, FigureSettingsControl figureSettingsControl, 
             ToolsControl toolsControl, PropertyGrid propertyGrid)
         {
-            _commands = new List<BaseCommand>();
+            _commands = new List<CommandBase>();
             _currentCommand = 0;
 
             _canvas = canvas;
@@ -101,7 +101,7 @@ namespace VectorEditorProject.Core
         public void Paste()
         {
             var figureFactory = new FigureFactory();
-            var copiedClipboard = new List<BaseFigure>();
+            var copiedClipboard = new List<FigureBase>();
 
             foreach (var figure in _clipboard)
             {
@@ -119,7 +119,7 @@ namespace VectorEditorProject.Core
                 copiedClipboard.Add(copy);
             }
 
-            var selectCommand1 = CommandFactory.CreateSelectFiguresCommand(EditContext, new List<BaseFigure>());
+            var selectCommand1 = CommandFactory.CreateSelectFiguresCommand(EditContext, new List<FigureBase>());
             StoreCommand(selectCommand1);
             Do();
 
@@ -146,7 +146,7 @@ namespace VectorEditorProject.Core
         /// Обновление view по соответствующей команде
         /// </summary>
         /// <param name="command">Команда</param>
-        private void UpdateView(BaseCommand command)
+        private void UpdateView(CommandBase command)
         {
             var actionList = _viewUpdateDictionary[command.GetType()];
             foreach (var action in actionList)
@@ -164,7 +164,7 @@ namespace VectorEditorProject.Core
             {
                 var figure = EditContext.GetSelectedFigures()[0];
 
-                if (figure is FilledBaseFigure filledFigure)
+                if (figure is FilledFigureBase filledFigure)
                 {
                     _propertyGrid.SelectedObject = filledFigure;
                 }
@@ -185,7 +185,7 @@ namespace VectorEditorProject.Core
         /// Добавление команд
         /// </summary>
         /// <param name="command">Команда</param>
-        public void StoreCommand(BaseCommand command)
+        public void StoreCommand(CommandBase command)
         {
             _commands = _commands.GetRange(0, _currentCommand); // обрезание списка
 
@@ -197,7 +197,7 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Do()
         {
-            BaseCommand cmd = null;
+            CommandBase cmd = null;
             try
             {
                 cmd = _commands[_currentCommand];
@@ -223,7 +223,7 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Undo()
         {
-            BaseCommand cmd = null;
+            CommandBase cmd = null;
             try
             {
                 cmd = _commands[_currentCommand - 1];
@@ -249,7 +249,7 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Reset()
         {
-            _commands = new List<BaseCommand>();
+            _commands = new List<CommandBase>();
             _currentCommand = 0;
         }
 
@@ -299,15 +299,15 @@ namespace VectorEditorProject.Core
 
         private void PropertyGrid_SelectedObjectsChanged(object sender, EventArgs e)
         {
-            if ((BaseFigure)_propertyGrid.SelectedObject != null)
+            if ((FigureBase)_propertyGrid.SelectedObject != null)
             {
-                _propertyBackUp = new FigureFactory().CopyFigure((BaseFigure)_propertyGrid.SelectedObject);
+                _propertyBackUp = new FigureFactory().CopyFigure((FigureBase)_propertyGrid.SelectedObject);
             }
         }
 
         private void PropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            var selectedFigure = (BaseFigure) _propertyGrid.SelectedObject;
+            var selectedFigure = (FigureBase) _propertyGrid.SelectedObject;
 
             if (selectedFigure == null)
             {
@@ -327,8 +327,8 @@ namespace VectorEditorProject.Core
                 selectedFigure.PointsSettings.ReplacePoint(i, points[i]);
             }
 
-            if (selectedFigure is FilledBaseFigure selectedFilledFigure &&
-                _propertyBackUp is FilledBaseFigure backUpFilledValues)
+            if (selectedFigure is FilledFigureBase selectedFilledFigure &&
+                _propertyBackUp is FilledFigureBase backUpFilledValues)
             {
                 selectedFilledFigure.FillSettings.Color = backUpFilledValues.FillSettings.Color;
             }
@@ -352,7 +352,7 @@ namespace VectorEditorProject.Core
             _currentCommand = 0;
 
             // восстановление
-            _commands = (List<BaseCommand>)binaryFormatter.Deserialize(stream);
+            _commands = (List<CommandBase>)binaryFormatter.Deserialize(stream);
             MakeCommandsOKAgain();
             foreach (var command in _commands)
             {

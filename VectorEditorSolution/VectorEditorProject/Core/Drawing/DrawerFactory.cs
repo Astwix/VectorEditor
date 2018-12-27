@@ -7,20 +7,20 @@ namespace VectorEditorProject.Core.Drawing
 {
     public class DrawerFactory
     {
-        private BaseDrawer _lineDrawer;
-        private BaseDrawer _polyLineDrawer;
-        private BaseDrawer _polygonDrawer;
-        private BaseDrawer _circleDrawer;
-        private BaseDrawer _ellipseDrawer;
+        private DrawerBase _lineDrawer;
+        private DrawerBase _polyLineDrawer;
+        private DrawerBase _polygonDrawer;
+        private DrawerBase _circleDrawer;
+        private DrawerBase _ellipseDrawer;
 
-        Dictionary<Type, BaseDrawer> drawers = null;
+        Dictionary<Type, DrawerBase> drawers = null;
 
         /// <summary>
         /// Конструктор фабрики фигур
         /// </summary>
         public DrawerFactory()
         {
-            drawers = new Dictionary<Type, BaseDrawer>();
+            drawers = new Dictionary<Type, DrawerBase>();
 
             _lineDrawer = new LineDrawer();
             _polyLineDrawer = new PolyLineDrawer();
@@ -40,12 +40,12 @@ namespace VectorEditorProject.Core.Drawing
         /// </summary>
         /// <param name="baseFigure">Фигура</param>
         /// <param name="graphics">Объект graphics</param>
-        public void DrawFigure(BaseFigure baseFigure, Graphics graphics)
+        public void DrawFigure(FigureBase baseFigure, Graphics graphics)
         {
             drawers[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
         }
 
-        public void DrawBorder(BaseFigure baseFigure, Graphics graphics)
+        public void DrawBorder(FigureBase baseFigure, Graphics graphics)
         {
             drawers[baseFigure.GetType()].DrawBorder(baseFigure, graphics);
         }

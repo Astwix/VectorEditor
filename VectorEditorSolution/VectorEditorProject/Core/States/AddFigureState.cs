@@ -6,7 +6,7 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.States
 {
-    public class AddFigureState : BaseState
+    public class AddFigureState : StateBase
     {
         private EditContext _editContext;
         private ControlUnit _controlUnit;
@@ -25,8 +25,8 @@ namespace VectorEditorProject.Core.States
         public override void MouseDown(object sender, MouseEventArgs e)
         {
             FigureFactory figureFactory = new FigureFactory();
-            BaseFigure figure = figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
-            if (figure is FilledBaseFigure filledFigure)
+            FigureBase figure = figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
+            if (figure is FilledFigureBase filledFigure)
             {
                 filledFigure.FillSettings = _controlUnit.GetActiveFillSettings();
             }

@@ -4,14 +4,14 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
 {
-    public class PolyLineDrawer : BaseDrawer
+    public class PolyLineDrawer : DrawerBase
     {
         /// <summary>
         /// Рисование полилинии
         /// </summary>
         /// <param name="figure">Объект, который рисуем (полилиния)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>
-        public override void DrawFigure(BaseFigure figure, Graphics graphics)
+        public override void DrawFigure(FigureBase figure, Graphics graphics)
         {
             if (figure.PointsSettings.GetPoints().Count() >= 2)
             {

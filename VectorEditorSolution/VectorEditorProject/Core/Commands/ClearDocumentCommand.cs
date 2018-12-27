@@ -5,10 +5,10 @@ using VectorEditorProject.Core.Figures;
 namespace VectorEditorProject.Core.Commands
 {
     [Serializable]
-    public class ClearDocumentCommand : BaseCommand
+    public class ClearDocumentCommand : CommandBase
     {
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
-        private List<BaseFigure> _backUpFigures = new List<BaseFigure>();
+        private List<FigureBase> _backUpFigures = new List<FigureBase>();
         
         public ClearDocumentCommand(ControlUnit controlUnit)
         {

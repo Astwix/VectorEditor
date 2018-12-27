@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace VectorEditorProject.Core.States
 {
-    public abstract class BaseState
+    public abstract class StateBase
     {
         public virtual void Draw(Graphics graphics)
         {

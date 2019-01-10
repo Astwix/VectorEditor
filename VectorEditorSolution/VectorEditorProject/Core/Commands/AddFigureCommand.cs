@@ -11,7 +11,7 @@ namespace VectorEditorProject.Core.Commands
     public class AddFigureCommand : CommandBase
     {
         /// <summary>
-        /// 
+        /// Control Unit
         /// </summary>
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
 
@@ -47,9 +47,10 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
+            FigureFactory figureFactory = new FigureFactory();
             foreach (var figure in _figures)
             {
-                ControlUnit.GetDocument().AddFigure(figure);
+                ControlUnit.GetDocument().AddFigure(figureFactory.CopyFigure(figure));
             }
         }
 

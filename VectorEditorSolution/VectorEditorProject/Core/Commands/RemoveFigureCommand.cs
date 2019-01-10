@@ -4,18 +4,38 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Команда удаления фигур
+    /// </summary>
     [Serializable]
     public class RemoveFigureCommand : CommandBase
     {
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+
+        /// <summary>
+        /// Список фигур (доступный только для чтения)
+        /// </summary>
         private IReadOnlyList<FigureBase> _figures;
 
+        /// <summary>
+        /// Конструктор команды удаления фигуры
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="figure">Фигура</param>
         public RemoveFigureCommand(ControlUnit controlUnit, FigureBase figure)
         {
             ControlUnit = controlUnit;
             _figures = new List<FigureBase>() { figure };
         }
 
+        /// <summary>
+        /// Конструктор команды удаления фигур
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="figures">Фигуры</param>
         public RemoveFigureCommand(ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlUnit;

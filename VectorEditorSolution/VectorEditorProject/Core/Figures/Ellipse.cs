@@ -3,6 +3,9 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
+    /// <summary>
+    /// Эллипс
+    /// </summary>
     [Serializable]
     public class Ellipse : FilledFigureBase
     {

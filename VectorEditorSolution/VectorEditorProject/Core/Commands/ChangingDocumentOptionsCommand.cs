@@ -3,16 +3,45 @@ using System.Drawing;
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Команда изменения параметров документа
+    /// </summary>
     [Serializable]
     public class ChangingDocumentOptionsCommand : CommandBase
     {
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
 
+        /// <summary>
+        /// Новый размер канвы
+        /// </summary>
         private Size _newSize;
+
+        /// <summary>
+        /// Резервный размер канвы
+        /// </summary>
         private Size _backUpSize;
+
+        /// <summary>
+        /// Новый цвет
+        /// </summary>
         private Color _newColor;
+
+        /// <summary>
+        /// Резервный цвет
+        /// </summary>
         private Color _backUpColor;
+
+        /// <summary>
+        /// Новое название
+        /// </summary>
         private String _newName;
+
+        /// <summary>
+        /// Резервное название
+        /// </summary>
         private String _backUpName;
 
         /// <summary>

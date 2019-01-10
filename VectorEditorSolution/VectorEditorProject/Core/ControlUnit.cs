@@ -12,29 +12,77 @@ using VectorEditorProject.Forms;
 
 namespace VectorEditorProject.Core
 {
+    /// <summary>
+    /// Control Unit
+    /// </summary>
     public class ControlUnit
     {
+        /// <summary>
+        /// Список команд
+        /// </summary>
         private List<CommandBase> _commands;
-        private int _currentCommand;
-        public EditContext EditContext { get; set; }
 
+        /// <summary>
+        /// Текущая команда
+        /// </summary>
+        private int _currentCommand;
+
+        /// <summary>
+        /// Edit Context
+        /// </summary>
+        public EditContext EditContext
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Последний сохраненный хэш
+        /// </summary>
         private int _lastSavedHash = -1;
 
+        /// <summary>
+        /// Канва
+        /// </summary>
         private readonly PictureBox _canvas;
+
+        /// <summary>
+        /// Control настроек фигуры
+        /// </summary>
         private FigureSettingsControl _figureSettingsControl;
+
+        /// <summary>
+        /// Control инструментов
+        /// </summary>
         private ToolsControl _toolsControl;
+
+        /// <summary>
+        /// Редактор свойств
+        /// </summary>
         private PropertyGrid _propertyGrid;
 
+        /// <summary>
+        /// Резервные свойства
+        /// </summary>
         private FigureBase _propertyBackUp;
 
+        /// <summary>
+        /// Буфер обмена
+        /// </summary>
         private List<FigureBase> _clipboard = new List<FigureBase>();
 
+        /// <summary>
+        /// Текущий документ
+        /// </summary>
         private Document _currentDocument = new Document("Untitled", Color.White, new Size(400, 400));
 
+        /// <summary>
+        /// Словарь для обновления view по действию
+        /// </summary>
         private Dictionary<Type, List<Action>> _viewUpdateDictionary = new Dictionary<Type, List<Action>>();
 
         /// <summary>
-        /// Конструктор класса управляющего control
+        /// Конструктор класса Control Unit
         /// </summary>
         public ControlUnit(PictureBox canvas, FigureSettingsControl figureSettingsControl, 
             ToolsControl toolsControl, PropertyGrid propertyGrid)
@@ -256,7 +304,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить документ
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Текущий документ</returns>
         public Document GetDocument()
         {
             return _currentDocument;
@@ -273,7 +321,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить настройки линии
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Настройки линии</returns>
         public LineSettings GetActiveLineSettings()
         {
             return _figureSettingsControl.GetLineSettings();
@@ -282,7 +330,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить настройки заливки
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Настройки заливки</returns>
         public FillSettings GetActiveFillSettings()
         {
             return _figureSettingsControl.GetFillSettings();
@@ -291,12 +339,17 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить тип фигуры
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Тип фигуры</returns>
         public FigureFactory.Figures GetActiveFigureType()
         {
             return _toolsControl.GetActiveFigureType();
         }
 
+        /// <summary>
+        /// Изменение выделенного объекта
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PropertyGrid_SelectedObjectsChanged(object sender, EventArgs e)
         {
             if ((FigureBase)_propertyGrid.SelectedObject != null)
@@ -305,6 +358,11 @@ namespace VectorEditorProject.Core
             }
         }
 
+        /// <summary>
+        /// Изменение свойств
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
         private void PropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             var selectedFigure = (FigureBase) _propertyGrid.SelectedObject;
@@ -343,7 +401,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Десериализация
         /// </summary>
-        /// <param name="stream"></param>
+        /// <param name="stream">Поток</param>
         public void Deserialize(Stream stream)
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -377,7 +435,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Расчет текущего хэша
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Хэш</returns>
         private int CalcCurrentHash()
         {
             int hash = -1;

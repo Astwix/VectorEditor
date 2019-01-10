@@ -8,13 +8,35 @@ using VectorEditorProject.Core.States;
 
 namespace VectorEditorProject.Core
 {
+    /// <summary>
+    /// Edit Context
+    /// </summary>
     public class EditContext
     {
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         private ControlUnit _controlUnit;
+
+        /// <summary>
+        /// Активное состояние
+        /// </summary>
         private StateBase _activeState;
+
+        /// <summary>
+        /// Guid активной фигуры
+        /// </summary>
         private Guid _activeFigureGuid = Guid.Empty;
+
+        /// <summary>
+        /// Список выделенных фигур
+        /// </summary>
         private List<Guid> _selectedFigures = new List<Guid>();
 
+        /// <summary>
+        /// Конструктор Edit Context
+        /// </summary>
+        /// <param name="controlUnit"></param>
         public EditContext(ControlUnit controlUnit)
         {
             _controlUnit = controlUnit;
@@ -27,9 +49,21 @@ namespace VectorEditorProject.Core
         /// </summary>
         public enum States
         {
+            /// <summary>
+            /// Состояние добавления фигуры
+            /// </summary>
             AddFigureState,
+            /// <summary>
+            /// Состояние выделения
+            /// </summary>
             SelectionState,
+            /// <summary>
+            /// Состояние добавления точки
+            /// </summary>
             AddPointState,
+            /// <summary>
+            /// Состояние редактирования фигуры
+            /// </summary>
             FigureEditingState
         }
 
@@ -44,7 +78,8 @@ namespace VectorEditorProject.Core
                 case States.AddFigureState:
                     if (GetSelectedFigures().Count > 0) // если есть выделение - сбросить
                     {
-                        var command = CommandFactory.CreateSelectFiguresCommand(this, new List<FigureBase>());
+                        var command = CommandFactory.CreateSelectFiguresCommand
+                            (this, new List<FigureBase>());
                         _controlUnit.StoreCommand(command);
                         _controlUnit.Do();
                     }
@@ -71,26 +106,48 @@ namespace VectorEditorProject.Core
             _controlUnit.UpdateCanvas();
         }
 
+        /// <summary>
+        /// Рисование
+        /// </summary>
+        /// <param name="graphics"></param>
         public void Draw(Graphics graphics)
         {
             _activeState?.Draw(graphics); // суперсахар с "?": создается, только если объект существует
         }
 
+        /// <summary>
+        /// Нажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void MouseDown(object sender, MouseEventArgs e)
         {
             _activeState?.MouseDown(sender, e);
         }
 
+        /// <summary>
+        /// Перемещение мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void MouseMove(object sender, MouseEventArgs e)
         {
             _activeState?.MouseMove(sender, e);
         }
 
+        /// <summary>
+        /// Отжатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void MouseUp(object sender, MouseEventArgs e)
         {
             _activeState?.MouseUp(sender, e);
         }
 
+        /// <summary>
+        /// Обновление состояния
+        /// </summary>
         public void UpdateState()
         {
             _activeState?.Update();
@@ -108,7 +165,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить активную фигуру
         /// </summary>
-        /// <returns></returns>
+        /// <returns>guid фигуры</returns>
         public FigureBase GetActiveFigure()
         {
             return _controlUnit.GetDocument().GetFigure(_activeFigureGuid);
@@ -143,9 +200,9 @@ namespace VectorEditorProject.Core
         }
 
         /// <summary>
-        /// Список выделенных фигур, доступный только для чтения
+        /// Получить выделенные фигуры
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Список выделенных фигур (только для чтения)</returns>
         public IReadOnlyList<FigureBase> GetSelectedFigures()
         {
             List<FigureBase> selectedFigures = new List<FigureBase>();

@@ -6,19 +6,36 @@ using VectorEditorProject.Core.Drawing;
 
 namespace VectorEditorProject.Core.States
 {
+    /// <summary>
+    /// Состояние добавления точки
+    /// </summary>
     public class AddPointState : StateBase
     {
+        /// <summary>
+        /// Фабрика рисования
+        /// </summary>
         private DrawerFactory _drawerFactory = new DrawerFactory();
+
+        /// <summary>
+        /// Edit Context
+        /// </summary>
         private EditContext _editContext;
+
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         private ControlUnit _controlUnit;
 
+        /// <summary>
+        /// Нажата ли кнопка мыши
+        /// </summary>
         private bool _isMousePressed = true;
 
         /// <summary>
         /// Состояние добавления точек
         /// </summary>
-        /// <param name="controlUnit"></param>
-        /// <param name="editContext"></param>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="editContext">Edit Context</param>
         public AddPointState(ControlUnit controlUnit, EditContext editContext)
         {
             _controlUnit = controlUnit;
@@ -34,6 +51,10 @@ namespace VectorEditorProject.Core.States
             activeFigure.PointsSettings.AddPoint(lastPoint);
         }
 
+        /// <summary>
+        /// Рисование
+        /// </summary>
+        /// <param name="graphics">Graphics</param>
         public override void Draw(Graphics graphics)
         {
             var activeFigure = _editContext.GetActiveFigure();
@@ -43,6 +64,11 @@ namespace VectorEditorProject.Core.States
             }
         }
 
+        /// <summary>
+        /// Нажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseDown(object sender, MouseEventArgs e)
         {
             _isMousePressed = true;
@@ -58,6 +84,11 @@ namespace VectorEditorProject.Core.States
             activeFigure.PointsSettings.AddPoint(lastPoint);
         }
 
+        /// <summary>
+        /// Перемещение мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseMove(object sender, MouseEventArgs e)
         {
             var activeFigure = _editContext.GetActiveFigure();
@@ -77,6 +108,11 @@ namespace VectorEditorProject.Core.States
             _controlUnit.UpdateCanvas();
         }
 
+        /// <summary>
+        /// Отжатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseUp(object sender, MouseEventArgs e)
         {
             _isMousePressed = false;

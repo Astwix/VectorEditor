@@ -4,10 +4,13 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
 {
+    /// <summary>
+    /// Рисование многоугольника
+    /// </summary>
     public class PolygonDrawer : DrawerBase
     {
         /// <summary>
-        /// Рисование многоугольника
+        /// Рисование фигуры - многоугольник
         /// </summary>
         /// <param name="figure">Объект, который рисуем (многоугольник)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>

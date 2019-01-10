@@ -4,6 +4,9 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
 {
+    /// <summary>
+    /// Рисование линии
+    /// </summary>
     public class LineDrawer : DrawerBase
     {
         /// <summary>

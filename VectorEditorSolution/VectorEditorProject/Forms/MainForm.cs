@@ -8,12 +8,29 @@ using VectorEditorProject.Core.Drawing;
 
 namespace VectorEditorProject.Forms
 {
+    /// <summary>
+    /// Главная форма
+    /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Фабрика рисования
+        /// </summary>
         private DrawerFactory _drawerFactory;
+
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         private ControlUnit _controlUnit;
+
+        /// <summary>
+        /// Edit Context
+        /// </summary>
         private EditContext _editContext;
 
+        /// <summary>
+        /// Конмтруктор главной формы
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -25,6 +42,11 @@ namespace VectorEditorProject.Forms
             ToolsUserControl.EditContext = _editContext;
         }
 
+        /// <summary>
+        /// Рисование на канве
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             _drawerFactory.DrawCanvas(_controlUnit.GetDocument(), e.Graphics);
@@ -37,20 +59,40 @@ namespace VectorEditorProject.Forms
             _editContext.Draw(e.Graphics);
         }
 
+        /// <summary>
+        /// Загрузка главной формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
         }
 
+        /// <summary>
+        /// Клик по кнопке "Отменить"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Undo();
         }
 
+        /// <summary>
+        /// Клик по кнопке "Вернуть"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Do();
         }
 
+        /// <summary>
+        /// Клик по кнопке "Параметры"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FileOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DocumentForm documentForm = new DocumentForm(_controlUnit.GetDocument());
@@ -63,21 +105,41 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Нажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             _editContext.MouseDown(sender, e);
         }
 
+        /// <summary>
+        /// Отжатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             _editContext.MouseUp(sender, e);
         }
 
+        /// <summary>
+        /// Перемещение мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
             _editContext.MouseMove(sender, e);
         }
         
+        /// <summary>
+        /// Клик по кнопке "Очистить"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FileClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var command = CommandFactory.CreateClearDocumentCommand(_controlUnit);
@@ -85,6 +147,11 @@ namespace VectorEditorProject.Forms
             _controlUnit.Do();
         }
 
+        /// <summary>
+        /// Отпущена нажатая кнопка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -94,27 +161,52 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Клик по кнопке "Копировать"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Copy();
         }
 
+        /// <summary>
+        /// Клик по кнопке "Вырезать"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExtrudeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Copy();
             _controlUnit.Delete();
         }
 
+        /// <summary>
+        /// Клик по кнопке "Вставить"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Paste();
         }
 
+        /// <summary>
+        /// Клик по кнопке "Удалить"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controlUnit.Delete();
         }
 
+        /// <summary>
+        /// Клик по кнопке "Сохранить как..."
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -148,6 +240,11 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Клик по кнопке "Открыть"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CanClose();
@@ -164,6 +261,11 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Клик по кнопке "Сохранить"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -206,6 +308,11 @@ namespace VectorEditorProject.Forms
             return false;
         }
 
+        /// <summary>
+        /// Клик по кнопке "Новый"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CanClose();
@@ -223,6 +330,11 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Закрытие главной формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_controlUnit.IsFileHaveUnsavedChanges())

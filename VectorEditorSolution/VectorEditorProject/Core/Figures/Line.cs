@@ -3,6 +3,9 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
+    /// <summary>
+    /// Линия
+    /// </summary>
     [Serializable]
     public class Line : FigureBase
     {

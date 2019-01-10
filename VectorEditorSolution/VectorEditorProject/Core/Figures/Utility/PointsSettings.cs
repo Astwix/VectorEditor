@@ -5,11 +5,21 @@ using System.Drawing;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {
+    /// <summary>
+    /// Настройки точек
+    /// </summary>
     [Serializable]
     [Browsable(false)]
     public class PointsSettings
     {
+        /// <summary>
+        /// Лимит точек
+        /// </summary>
         private int _limitPoint = 0;
+
+        /// <summary>
+        /// Список точек
+        /// </summary>
         private List<PointF> _points = new List<PointF>();
 
         /// <summary>
@@ -94,6 +104,9 @@ namespace VectorEditorProject.Core.Figures.Utility
             _points.Remove(point);
         }
 
+        /// <summary>
+        /// Удаление последней точки
+        /// </summary>
         public void RemoveLast()
         {
             _points.RemoveAt(_points.Count - 1);

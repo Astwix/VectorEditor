@@ -5,10 +5,13 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Drawing
 {
+    /// <summary>
+    /// Рисование круга
+    /// </summary>
     public class CircleDrawer : DrawerBase
     {
         /// <summary>
-        /// Рисование круга
+        /// Рисование фигуры - круг
         /// </summary>
         /// <param name="figure">Фигура, которую рисуем (круг)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>

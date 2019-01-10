@@ -4,6 +4,9 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Команда добавления точки
+    /// </summary>
     [Serializable]
     public class AddPointCommand : CommandBase
     {

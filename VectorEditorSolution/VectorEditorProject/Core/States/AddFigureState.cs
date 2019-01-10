@@ -6,22 +6,37 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.States
 {
+    /// <summary>
+    /// Состояние добавления фигуры
+    /// </summary>
     public class AddFigureState : StateBase
     {
+        /// <summary>
+        /// Edit Context
+        /// </summary>
         private EditContext _editContext;
+
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         private ControlUnit _controlUnit;
 
         /// <summary>
         /// Конструктор состояния добавления фигуры
         /// </summary>
-        /// <param name="controlUnit"></param>
-        /// <param name="editContext"></param>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="editContext">Edit Context</param>
         public AddFigureState(ControlUnit controlUnit, EditContext editContext)
         {
             _controlUnit = controlUnit;
             _editContext = editContext;
         }
 
+        /// <summary>
+        /// Нажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseDown(object sender, MouseEventArgs e)
         {
             FigureFactory figureFactory = new FigureFactory();

@@ -5,13 +5,16 @@ using System.Linq;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {
+    /// <summary>
+    /// Редактор фигуры
+    /// </summary>
     public static class FigureEditor
     {
         /// <summary>
         /// Нахождение левой верхней точки фигуры
         /// </summary>
         /// <param name="figure">Фигура</param>
-        /// <returns></returns>
+        /// <returns>Первый элемент списка точек</returns>
         public static PointF LeftTopPointF(FigureBase figure)
         {
             var result = figure.PointsSettings.GetPoints()[0];
@@ -28,7 +31,7 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// Нахождение левой верхней точки всех фигур
         /// </summary>
         /// <param name="figures">Список фигур</param>
-        /// <returns></returns>
+        /// <returns>Первый элемент списка точек у списка фигур</returns>
         public static PointF LeftTopPointF(IReadOnlyList<FigureBase> figures)
         {
             var result = figures[0].PointsSettings.GetPoints().First();

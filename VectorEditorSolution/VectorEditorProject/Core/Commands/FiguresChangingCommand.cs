@@ -5,13 +5,32 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Команда изменения фигур
+    /// </summary>
     [Serializable]
     public class FiguresChangingCommand : CommandBase
     {
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+
+        /// <summary>
+        /// Старые значения
+        /// </summary>
         private List<FigureBase> _oldValues = new List<FigureBase>();
+
+        /// <summary>
+        /// Новые значения
+        /// </summary>
         private List<FigureBase> _newValues = new List<FigureBase>();
 
+        /// <summary>
+        /// Конструктор команды изменения фигур
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="newValues">Новые значения</param>
         public FiguresChangingCommand(ControlUnit controlUnit, List<FigureBase> newValues)
         {
             ControlUnit = controlUnit;
@@ -25,6 +44,11 @@ namespace VectorEditorProject.Core.Commands
             }
         }
 
+        /// <summary>
+        /// Конструктор команды изменения фигуры
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="newValues">Новые значения</param>
         public FiguresChangingCommand(ControlUnit controlUnit, FigureBase newValues)
         {
             ControlUnit = controlUnit;
@@ -35,11 +59,17 @@ namespace VectorEditorProject.Core.Commands
             _newValues.Add(figureFactory.CopyFigure(newValues));
         }
 
+        /// <summary>
+        /// Действие
+        /// </summary>
         public override void Do()
         {
             AcceptValues(_newValues);
         }
 
+        /// <summary>
+        /// Отмена
+        /// </summary>
         public override void Undo()
         {
             AcceptValues(_oldValues);

@@ -4,11 +4,17 @@ using System.Drawing;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {
+    /// <summary>
+    /// Настройки заливки
+    /// </summary>
     [Serializable]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     [DisplayName("Настройки заливки")]
     public class FillSettings
     {
+        /// <summary>
+        /// Цвет
+        /// </summary>
         [DisplayName("Цвет")]
         public Color Color { get; set; }
 

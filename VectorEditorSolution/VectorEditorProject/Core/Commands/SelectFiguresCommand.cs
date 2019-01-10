@@ -4,18 +4,32 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Команда выделения фигур
+    /// </summary>
     [Serializable]
     public class SelectFiguresCommand : CommandBase
     {
+        /// <summary>
+        /// Edit Context
+        /// </summary>
         [field: NonSerialized] public EditContext EditContext { get; set; }
+
+        /// <summary>
+        /// Список действий
+        /// </summary>
         private List<Guid> _doList = new List<Guid>();
+
+        /// <summary>
+        /// Список отмены
+        /// </summary>
         private List<Guid> _undoList = new List<Guid>();
 
         /// <summary>
         /// Конструктор команды веделения для нескольких фигур
         /// </summary>
-        /// <param name="editContext"></param>
-        /// <param name="selectedFigures"></param>
+        /// <param name="editContext">Edit Context</param>
+        /// <param name="selectedFigures">Выделенные фигуры</param>
         public SelectFiguresCommand(EditContext editContext, List<FigureBase> selectedFigures)
         {
             EditContext = editContext;
@@ -34,8 +48,8 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Конструктор команды веделения для одной фигуры
         /// </summary>
-        /// <param name="editContext"></param>
-        /// <param name="selectedFigure"></param>
+        /// <param name="editContext">Edit Context</param>
+        /// <param name="selectedFigure">Выделенная фигура</param>
         public SelectFiguresCommand(EditContext editContext, FigureBase selectedFigure)
         {
             EditContext = editContext;
@@ -48,12 +62,18 @@ namespace VectorEditorProject.Core.Commands
             }
         }
 
+        /// <summary>
+        /// Действие
+        /// </summary>
         public override void Do()
         {
             EditContext.SetSelectedFigures(_doList);
             EditContext.SetActiveState(EditContext.States.FigureEditingState);
         }
 
+        /// <summary>
+        /// Отмена
+        /// </summary>
         public override void Undo()
         {
             EditContext.SetSelectedFigures(_undoList);

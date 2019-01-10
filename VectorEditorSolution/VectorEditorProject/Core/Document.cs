@@ -75,7 +75,7 @@ namespace VectorEditorProject.Core
         /// <param name="figure">Фигура</param>
         public void DeleteFigure(FigureBase figure)
         {
-            Figures.Remove(figure);
+            DeleteFigure(figure.guid);
         }
 
         /// <summary>

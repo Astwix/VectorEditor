@@ -60,7 +60,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                ControlUnit.GetDocument().DeleteFigure(figure);
+                ControlUnit.GetDocument().DeleteFigure(figure.guid);
             }
         }
 

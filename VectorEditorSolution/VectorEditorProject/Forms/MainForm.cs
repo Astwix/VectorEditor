@@ -297,7 +297,7 @@ namespace VectorEditorProject.Forms
                 {
                     case DialogResult.Yes:
                         SaveFileToolStripMenuItem_Click(this, new EventArgs());
-                        return true;
+                        return !_controlUnit.IsFileHaveUnsavedChanges();
                         break;
 
                     case DialogResult.Cancel:
@@ -347,6 +347,10 @@ namespace VectorEditorProject.Forms
                 {
                     case DialogResult.Yes:
                         SaveFileToolStripMenuItem_Click(this, e);
+                        if (_controlUnit.IsFileHaveUnsavedChanges())
+                        {
+                            e.Cancel = true;
+                        }
                         break;
 
                     case DialogResult.Cancel:

@@ -3,6 +3,9 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
+    /// <summary>
+    /// Многоугольник
+    /// </summary>
     [Serializable]
     public class Polygon : FilledFigureBase
     {

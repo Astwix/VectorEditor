@@ -5,22 +5,47 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
 {
+    /// <summary>
+    /// Фабрика рисования
+    /// </summary>
     public class DrawerFactory
     {
+        /// <summary>
+        /// Рисование линии
+        /// </summary>
         private DrawerBase _lineDrawer;
+
+        /// <summary>
+        /// Рисование полилинии
+        /// </summary>
         private DrawerBase _polyLineDrawer;
+
+        /// <summary>
+        /// Рисование полигона
+        /// </summary>
         private DrawerBase _polygonDrawer;
+
+        /// <summary>
+        /// Рисование круга
+        /// </summary>
         private DrawerBase _circleDrawer;
+
+        /// <summary>
+        /// Рисование эллипса
+        /// </summary>
         private DrawerBase _ellipseDrawer;
 
-        Dictionary<Type, DrawerBase> drawers = null;
+        /// <summary>
+        /// Словарь тип фигуры -> конкретныое рисование
+        /// </summary>
+        Dictionary<Type, DrawerBase> typeToDrawerBaseMap = null;
 
         /// <summary>
         /// Конструктор фабрики фигур
         /// </summary>
         public DrawerFactory()
         {
-            drawers = new Dictionary<Type, DrawerBase>();
+            typeToDrawerBaseMap = new Dictionary<Type, DrawerBase>();
 
             _lineDrawer = new LineDrawer();
             _polyLineDrawer = new PolyLineDrawer();
@@ -28,26 +53,31 @@ namespace VectorEditorProject.Core.Drawing
             _circleDrawer = new CircleDrawer();
             _ellipseDrawer = new EllipseDrawer();
 
-            drawers.Add(typeof(Line), _lineDrawer);
-            drawers.Add(typeof(PolyLine), _polyLineDrawer);
-            drawers.Add(typeof(Polygon), _polygonDrawer);
-            drawers.Add(typeof(Circle), _circleDrawer);
-            drawers.Add(typeof(Ellipse), _ellipseDrawer);
+            typeToDrawerBaseMap.Add(typeof(Line), _lineDrawer);
+            typeToDrawerBaseMap.Add(typeof(PolyLine), _polyLineDrawer);
+            typeToDrawerBaseMap.Add(typeof(Polygon), _polygonDrawer);
+            typeToDrawerBaseMap.Add(typeof(Circle), _circleDrawer);
+            typeToDrawerBaseMap.Add(typeof(Ellipse), _ellipseDrawer);
         }
 
         /// <summary>
         /// Рисование фигур
         /// </summary>
         /// <param name="baseFigure">Фигура</param>
-        /// <param name="graphics">Объект graphics</param>
+        /// <param name="graphics">Графика</param>
         public void DrawFigure(FigureBase baseFigure, Graphics graphics)
         {
-            drawers[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
+            typeToDrawerBaseMap[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
         }
 
+        /// <summary>
+        /// Рисование границы
+        /// </summary>
+        /// <param name="baseFigure">Базовая фигура</param>
+        /// <param name="graphics">Графика</param>
         public void DrawBorder(FigureBase baseFigure, Graphics graphics)
         {
-            drawers[baseFigure.GetType()].DrawBorder(baseFigure, graphics);
+            typeToDrawerBaseMap[baseFigure.GetType()].DrawBorder(baseFigure, graphics);
         }
 
         /// <summary>

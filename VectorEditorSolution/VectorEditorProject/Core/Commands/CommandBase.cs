@@ -2,6 +2,9 @@
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Базовая команда
+    /// </summary>
     [Serializable]
     public abstract class CommandBase
     {

@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace VectorEditorProject.Core.Figures
 {
+    /// <summary>
+    /// Фабрика фигур
+    /// </summary>
     public class FigureFactory
     {
         /// <summary>
@@ -21,7 +24,7 @@ namespace VectorEditorProject.Core.Figures
         /// Создание фигуры
         /// </summary>
         /// <param name="figureType">Тип фигуры из перечисления</param>
-        /// <returns>Возвращает новый объект фигуры как базовый тип (Base)</returns>
+        /// <returns>Новый объект фигуры как базовый тип (Base)</returns>
         public FigureBase CreateFigure(Figures figureType)
         {
             switch (figureType)
@@ -81,7 +84,7 @@ namespace VectorEditorProject.Core.Figures
         /// Копирование фигуры
         /// </summary>
         /// <param name="figure">Фигура</param>
-        /// <returns>Возвращает копию фигуры</returns>
+        /// <returns>Копия фигуры</returns>
         public FigureBase CopyFigure(FigureBase figure)
         {
             var copy = (FigureBase) Activator.CreateInstance(figure.GetType());

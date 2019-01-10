@@ -10,26 +10,84 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.States
 {
+    /// <summary>
+    /// Состояние редактирования фигуры
+    /// </summary>
     public class FigureEditingState : StateBase
     {
+        /// <summary>
+        /// Edit Context
+        /// </summary>
         private EditContext _editContext;
+
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         private ControlUnit _controlUnit;
 
+        /// <summary>
+        /// Левый верхний маркер
+        /// </summary>
         private PointF _leftTopMarker;
+
+        /// <summary>
+        /// Правый нижний маркер
+        /// </summary>
         private PointF _rightBottomMarker;
+
+        /// <summary>
+        /// Прямоугольник выделения
+        /// </summary>
         private Rectangle _selectionRectangle;
 
+        /// <summary>
+        /// Нажата ли кнопка мыши
+        /// </summary>
         private bool _isMousePressed;
+
+        /// <summary>
+        /// Подсвечен ли левый верхний маркер
+        /// </summary>
         private bool _isLeftTopMarkerHovered;
+
+        /// <summary>
+        /// Подсвечен ли правый нижний маркер
+        /// </summary>
         private bool _isRightBottomMarkerHovered;
 
+        /// <summary>
+        /// Ширина фигуры
+        /// </summary>
         private float _fixedWidth;
+
+        /// <summary>
+        /// Высота фигуры
+        /// </summary>
         private float _fixedHeight;
+
+        /// <summary>
+        /// Расстояние по X до курсора
+        /// </summary>
         private float _deltaXtoCursor;
+
+        /// <summary>
+        /// Расстояние по Y до курсора
+        /// </summary>
         private float _deltaYtoCursor;
 
+        /// <summary>
+        /// Перемещается ли фигура
+        /// </summary>
         private bool _isFigureMoving;
+
+        /// <summary>
+        /// Список опорных точек
+        /// </summary>
         private Dictionary<int, bool> _pointsHovered = new Dictionary<int, bool>();
+
+        /// <summary>
+        /// Число активных точек
+        /// </summary>
         private int _activePoint = -1;
 
         private const float _markerSize = 10;
@@ -170,6 +228,11 @@ namespace VectorEditorProject.Core.States
             }
         }
 
+        /// <summary>
+        /// Нажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseDown(object sender, MouseEventArgs e)
         {
             _isMousePressed = true;
@@ -220,9 +283,18 @@ namespace VectorEditorProject.Core.States
             }
         }
 
+        /// <summary>
+        /// Перемещение мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseMove(object sender, MouseEventArgs e)
         {
             var figures = _editContext.GetSelectedFigures();
+            if (figures.Count == 0)
+            {
+                return;
+            }
             if (_isMousePressed)
             {
                 // действия с левым верхним маркером
@@ -273,7 +345,7 @@ namespace VectorEditorProject.Core.States
             else
             {
                 // подсветка маркеров опорных точек
-                if (_pointsHovered.Count != 0)
+                if (_pointsHovered.Count != 0 && figures.Count > 0)
                 {
                     var points = figures[0].PointsSettings.GetPoints().ToArray();
                     for (var i = 0; i < points.Length; i++)
@@ -315,6 +387,11 @@ namespace VectorEditorProject.Core.States
             _controlUnit.UpdateCanvas();
         }
 
+        /// <summary>
+        /// Отжатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseUp(object sender, MouseEventArgs e)
         {
             _isMousePressed = false;
@@ -332,6 +409,10 @@ namespace VectorEditorProject.Core.States
             foreach (var figure in _backUp)
             {
                 var original = _controlUnit.GetDocument().GetFigure(figure.guid);
+                if (original == null)
+                {
+                    return;
+                }
                 original.LineSettings.Color = figure.LineSettings.Color;
                 original.LineSettings.Style = figure.LineSettings.Style;
                 original.LineSettings.Width = figure.LineSettings.Width;
@@ -355,6 +436,9 @@ namespace VectorEditorProject.Core.States
             _controlUnit.Do();
         }
 
+        /// <summary>
+        /// Обновление
+        /// </summary>
         public override void Update()
         {
             Initialization();

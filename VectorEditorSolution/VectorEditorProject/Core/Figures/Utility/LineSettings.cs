@@ -5,15 +5,29 @@ using System.Drawing.Drawing2D;
 
 namespace VectorEditorProject.Core.Figures.Utility
 {
+    /// <summary>
+    /// Настройки линии
+    /// </summary>
     [Serializable]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     [DisplayName("Настройки линии")]
     public class LineSettings
     {
+        /// <summary>
+        /// Цвет линии
+        /// </summary>
         [DisplayName("Цвет")]
         public Color Color { get; set; }
+
+        /// <summary>
+        /// Толщина линии
+        /// </summary>
         [DisplayName("Толщина")]
         public float Width { get; set; }
+
+        /// <summary>
+        /// Тип линии
+        /// </summary>
         [DisplayName("Тип")]
         public DashStyle Style { get; set; }
 

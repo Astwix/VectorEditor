@@ -5,10 +5,13 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Drawing
 {
+    /// <summary>
+    /// Рисование эллипса
+    /// </summary>
     public class EllipseDrawer : DrawerBase
     {
         /// <summary>
-        /// Рисование эллипса
+        /// Рисование фигуры - эллипс
         /// </summary>
         /// <param name="figure">Объект, который рисуем (эллипс)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>

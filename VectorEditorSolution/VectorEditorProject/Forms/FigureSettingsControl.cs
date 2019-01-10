@@ -6,10 +6,19 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Forms
 {
+    /// <summary>
+    /// Пользовательский control с настройками фигуры
+    /// </summary>
     public partial class FigureSettingsControl : UserControl
     {
+        /// <summary>
+        /// Толщина линии
+        /// </summary>
         private int _lastValidLineWidth = 1;
 
+        /// <summary>
+        /// Конструктор control'а с настройками фигуры
+        /// </summary>
         public FigureSettingsControl()
         {
             InitializeComponent();
@@ -27,6 +36,11 @@ namespace VectorEditorProject.Forms
             LineTypeComboBox.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Клик по кнопке "цвет линии"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lineColorButton_Click(object sender, EventArgs e)
         {
             if (lineColorDialog.ShowDialog() != DialogResult.Cancel)
@@ -35,6 +49,11 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Клик по кнопке "цвет заливки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void fillColorButton_Click(object sender, EventArgs e)
         {
             if (fillColorDialog.ShowDialog() != DialogResult.Cancel)
@@ -43,6 +62,10 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Получить настройки линии
+        /// </summary>
+        /// <returns></returns>
         public LineSettings GetLineSettings()
         {
             int width = 1;
@@ -58,6 +81,10 @@ namespace VectorEditorProject.Forms
             return new LineSettings(lineColorDialog.Color, width, (DashStyle)LineTypeComboBox.SelectedItem);
         }
 
+        /// <summary>
+        /// Получить настройки заливки
+        /// </summary>
+        /// <returns></returns>
         public FillSettings GetFillSettings()
         {
             return new FillSettings(fillColorDialog.Color);

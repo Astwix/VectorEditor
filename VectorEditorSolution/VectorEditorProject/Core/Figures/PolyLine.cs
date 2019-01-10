@@ -3,6 +3,9 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Figures
 {
+    /// <summary>
+    /// Полилиния
+    /// </summary>
     [Serializable]
     public class PolyLine : FigureBase
     {

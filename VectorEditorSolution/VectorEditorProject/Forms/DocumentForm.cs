@@ -5,10 +5,19 @@ using VectorEditorProject.Core;
 
 namespace VectorEditorProject.Forms
 {
+    /// <summary>
+    /// Форма настроек документа
+    /// </summary>
     public partial class DocumentForm : Form
     {
+        /// <summary>
+        /// Документ
+        /// </summary>
         public Document document;
 
+        /// <summary>
+        /// Конструктор формы настроек документа
+        /// </summary>
         public DocumentForm()
         {
             InitializeComponent();
@@ -17,7 +26,7 @@ namespace VectorEditorProject.Forms
         /// <summary>
         /// Конструктор для изменения существующего документа
         /// </summary>
-        /// <param name="document"></param>
+        /// <param name="document">Документ</param>
         public DocumentForm(Document document)
         {
             this.document = document;
@@ -31,6 +40,11 @@ namespace VectorEditorProject.Forms
             colorButton.BackColor = colorDialog.Color;
         }
 
+        /// <summary>
+        /// Клик по кнопке "ОК"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OKButton_Click(object sender, EventArgs e)
         {
             try
@@ -49,6 +63,11 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Клик по кнопке "Смена цвета"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void colorButton_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() != DialogResult.Cancel)

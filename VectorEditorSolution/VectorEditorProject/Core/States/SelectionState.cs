@@ -10,21 +10,65 @@ using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.States
 {
+    /// <summary>
+    /// Состояние выделения
+    /// </summary>
     public class SelectionState : StateBase
     {
+        /// <summary>
+        /// Edit Context
+        /// </summary>
         private EditContext _editContext;
+
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         private ControlUnit _controlUnit;
+
+        /// <summary>
+        /// Нажата ли клавиша мыши
+        /// </summary>
         private bool _isMousePressed;
 
         //todo Заменить точки на прямоугольник
+        /// <summary>
+        /// Начальный Х
+        /// </summary>
         private int _beginX;
+
+        /// <summary>
+        /// Начальный У
+        /// </summary>
         private int _beginY;
+
+        /// <summary>
+        /// Конечный Х
+        /// </summary>
         private int _endX;
+
+        /// <summary>
+        /// Конечный У
+        /// </summary>
         private int _endY;
 
+        /// <summary>
+        /// Левый верхний Х
+        /// </summary>
         private int _leftTopX;
+
+        /// <summary>
+        /// Левый верхний У
+        /// </summary>
         private int _leftTopY;
+
+        /// <summary>
+        /// Правый нижний Х
+        /// </summary>
         private int _rightBottomX;
+
+        /// <summary>
+        /// Правый нижний У
+        /// </summary>
         private int _rightBottomY;
 
         /// <summary>
@@ -38,6 +82,10 @@ namespace VectorEditorProject.Core.States
             _editContext = editContext;
         }
 
+        /// <summary>
+        /// Рисование
+        /// </summary>
+        /// <param name="graphics">Graphics</param>
         public override void Draw(Graphics graphics)
         {
             if (_isMousePressed)
@@ -51,6 +99,11 @@ namespace VectorEditorProject.Core.States
             }
         }
 
+        /// <summary>
+        /// Нажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseDown(object sender, MouseEventArgs e)
         {
             _isMousePressed = true;
@@ -61,6 +114,11 @@ namespace VectorEditorProject.Core.States
             _leftTopY = Math.Min(_beginY, _endY);
         }
 
+        /// <summary>
+        /// Перемещение мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseMove(object sender, MouseEventArgs e)
         {
             _endX = e.X;
@@ -74,6 +132,11 @@ namespace VectorEditorProject.Core.States
             _controlUnit.UpdateCanvas();
         }
 
+        /// <summary>
+        /// Отжатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void MouseUp(object sender, MouseEventArgs e)
         {
             if (!_isMousePressed)

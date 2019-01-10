@@ -4,10 +4,13 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
 {
+    /// <summary>
+    /// Рисование полилинии
+    /// </summary>
     public class PolyLineDrawer : DrawerBase
     {
         /// <summary>
-        /// Рисование полилинии
+        /// Рисование фигуры - полилиния
         /// </summary>
         /// <param name="figure">Объект, который рисуем (полилиния)</param>
         /// <param name="graphics">Объект graphics, на котором рисуем</param>

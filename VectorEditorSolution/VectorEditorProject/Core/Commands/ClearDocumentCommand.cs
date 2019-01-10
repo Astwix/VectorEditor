@@ -4,12 +4,26 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Команда очистки документа
+    /// </summary>
     [Serializable]
     public class ClearDocumentCommand : CommandBase
     {
+        /// <summary>
+        /// Control Unit
+        /// </summary>
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+
+        /// <summary>
+        /// Список резервных фигур
+        /// </summary>
         private List<FigureBase> _backUpFigures = new List<FigureBase>();
-        
+
+        /// <summary>
+        /// Констуктор команды очистки документа
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
         public ClearDocumentCommand(ControlUnit controlUnit)
         {
             ControlUnit = controlUnit;

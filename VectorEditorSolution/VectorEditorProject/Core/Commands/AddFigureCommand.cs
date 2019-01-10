@@ -4,10 +4,20 @@ using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {
+    /// <summary>
+    /// Команда добавления фигуры
+    /// </summary>
     [Serializable]
     public class AddFigureCommand : CommandBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+
+        /// <summary>
+        /// Список фигур, доступный только для чтения
+        /// </summary>
         private IReadOnlyList<FigureBase> _figures;
 
         /// <summary>
@@ -21,6 +31,11 @@ namespace VectorEditorProject.Core.Commands
             _figures = new List<FigureBase>() {figure};
         }
 
+        /// <summary>
+        /// Конструктор создания команды
+        /// </summary>
+        /// <param name="controlControlUnit">Control ControlUnit</param>
+        /// <param name="figures">Фигуры</param>
         public AddFigureCommand(ControlUnit controlControlUnit, IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlControlUnit;
@@ -28,7 +43,7 @@ namespace VectorEditorProject.Core.Commands
         }
 
         /// <summary>
-        /// Делай
+        /// Действие
         /// </summary>
         public override void Do()
         {

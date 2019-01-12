@@ -17,6 +17,11 @@ namespace VectorEditorProject.Forms
         private int _lastValidLineWidth = 1;
 
         /// <summary>
+        /// Тип линии
+        /// </summary>
+        private object _lastValidLineType;
+
+        /// <summary>
         /// Конструктор control'а с настройками фигуры
         /// </summary>
         public FigureSettingsControl()
@@ -34,6 +39,8 @@ namespace VectorEditorProject.Forms
             LineTypeComboBox.Items.Add(DashStyle.DashDotDot);
             LineTypeComboBox.Items.Add(DashStyle.Dot);
             LineTypeComboBox.SelectedIndex = 0;
+
+            _lastValidLineType = LineTypeComboBox.SelectedItem;
         }
 
         /// <summary>
@@ -41,7 +48,7 @@ namespace VectorEditorProject.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lineColorButton_Click(object sender, EventArgs e)
+        private void LineColorButton_Click(object sender, EventArgs e)
         {
             if (lineColorDialog.ShowDialog() != DialogResult.Cancel)
             {
@@ -54,7 +61,7 @@ namespace VectorEditorProject.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void fillColorButton_Click(object sender, EventArgs e)
+        private void FillColorButton_Click(object sender, EventArgs e)
         {
             if (fillColorDialog.ShowDialog() != DialogResult.Cancel)
             {
@@ -68,16 +75,21 @@ namespace VectorEditorProject.Forms
         /// <returns></returns>
         public LineSettings GetLineSettings()
         {
-            int width = 1;
-            if (int.TryParse(LineWidthTextBox.Text, out width))
-            {
-                _lastValidLineWidth = width;
-            }
-            else
+            if (!int.TryParse(LineWidthTextBox.Text, out var width) || (width < 1))
             {
                 width = _lastValidLineWidth;
                 LineWidthTextBox.Text = _lastValidLineWidth.ToString();
             }
+
+            _lastValidLineWidth = width;
+
+            if (LineTypeComboBox.SelectedItem == null)
+            {
+                LineTypeComboBox.SelectedItem = _lastValidLineType;
+            }
+
+            _lastValidLineType = LineTypeComboBox.SelectedItem;
+
             return new LineSettings(lineColorDialog.Color, width, (DashStyle)LineTypeComboBox.SelectedItem);
         }
 

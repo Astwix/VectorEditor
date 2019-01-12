@@ -104,7 +104,7 @@
             this.colorButton.Size = new System.Drawing.Size(100, 23);
             this.colorButton.TabIndex = 7;
             this.colorButton.UseVisualStyleBackColor = true;
-            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            this.colorButton.Click += new System.EventHandler(this.ColorButton_Click);
             // 
             // OKButton
             // 
@@ -130,8 +130,10 @@
             this.Controls.Add(this.widthTextBox);
             this.Controls.Add(this.documentNameLabel);
             this.Controls.Add(this.documentNameTextBox);
+            this.MaximumSize = new System.Drawing.Size(314, 238);
+            this.MinimumSize = new System.Drawing.Size(314, 238);
             this.Name = "DocumentForm";
-            this.Text = "DocumentForm";
+            this.Text = "Document";
             this.ResumeLayout(false);
             this.PerformLayout();
 

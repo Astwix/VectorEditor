@@ -13,7 +13,7 @@ namespace VectorEditorProject.Forms
         /// <summary>
         /// Документ
         /// </summary>
-        public Document document;
+        //public Document document;
 
         /// <summary>
         /// Конструктор формы настроек документа
@@ -21,6 +21,12 @@ namespace VectorEditorProject.Forms
         public DocumentForm()
         {
             InitializeComponent();
+
+            documentNameTextBox.Text = "Untitled";
+            widthTextBox.Text = "400";
+            heightTextBox.Text = "400";
+            colorDialog.Color = Color.White;
+            colorButton.BackColor = colorDialog.Color;
         }
 
         /// <summary>
@@ -29,9 +35,7 @@ namespace VectorEditorProject.Forms
         /// <param name="document">Документ</param>
         public DocumentForm(Document document)
         {
-            this.document = document;
             InitializeComponent();
-            this.Text = "Параметры <" + document.Name + ">";
 
             documentNameTextBox.Text = document.Name;
             widthTextBox.Text = document.Size.Width.ToString();
@@ -47,19 +51,13 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void OKButton_Click(object sender, EventArgs e)
         {
-            try
+            if (int.TryParse(widthTextBox.Text, out var width) &&
+                int.TryParse(heightTextBox.Text, out var height) &&
+                width > 1 && 
+                height > 1)
             {
-                int width = int.Parse(widthTextBox.Text);
-                int height = int.Parse(heightTextBox.Text);
-
-                Size docSize = new Size(width, height);
-                document = new Document(documentNameTextBox.Text, colorDialog.Color, docSize);
-
                 DialogResult = DialogResult.OK;
                 Close();
-            }
-            catch (Exception exception)
-            {
             }
         }
 
@@ -68,12 +66,24 @@ namespace VectorEditorProject.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void colorButton_Click(object sender, EventArgs e)
+        private void ColorButton_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() != DialogResult.Cancel)
             {
                 colorButton.BackColor = colorDialog.Color;
             }
+        }
+
+        /// <summary>
+        /// Создание документа
+        /// </summary>
+        /// <returns>Параметры документа</returns>
+        public Document CreateDocument()
+        {
+            int.TryParse(widthTextBox.Text, out var width);
+            int.TryParse(heightTextBox.Text, out var height);
+
+            return new Document(documentNameTextBox.Text, colorDialog.Color, new Size(width, height));
         }
     }
 }

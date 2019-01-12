@@ -96,10 +96,11 @@ namespace VectorEditorProject.Forms
         private void FileOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DocumentForm documentForm = new DocumentForm(_controlUnit.GetDocument());
-            if (documentForm.ShowDialog() != DialogResult.Cancel && documentForm.document != null)
+            if (documentForm.ShowDialog() != DialogResult.Cancel && 
+                documentForm.CreateDocument() != null)
             {
                 var command = CommandFactory.CreateChangingDocumentOptionsCommand
-                    (_controlUnit, documentForm.document);
+                    (_controlUnit, documentForm.CreateDocument());
                 _controlUnit.StoreCommand(command);
                 _controlUnit.Do();
             }
@@ -318,13 +319,14 @@ namespace VectorEditorProject.Forms
             CanClose();
 
             DocumentForm documentForm = new DocumentForm(_controlUnit.GetDocument());
-            if (documentForm.ShowDialog() != DialogResult.Cancel && documentForm.document != null)
+            if (documentForm.ShowDialog() != DialogResult.Cancel && 
+                documentForm.CreateDocument() != null)
             {
                 _controlUnit.Reset();
                 _controlUnit.GetDocument().ClearCanvas();
 
                 var command = CommandFactory.CreateChangingDocumentOptionsCommand
-                    (_controlUnit, documentForm.document);
+                    (_controlUnit, documentForm.CreateDocument());
                 command.Do();
                 _controlUnit.UpdateCanvas();
             }

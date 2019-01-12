@@ -11,11 +11,6 @@ namespace VectorEditorProject.Forms
     public partial class DocumentForm : Form
     {
         /// <summary>
-        /// Документ
-        /// </summary>
-        //public Document document;
-
-        /// <summary>
         /// Конструктор формы настроек документа
         /// </summary>
         public DocumentForm()

@@ -4,7 +4,6 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Core.Drawing;
 using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.Figures.Utility;
 

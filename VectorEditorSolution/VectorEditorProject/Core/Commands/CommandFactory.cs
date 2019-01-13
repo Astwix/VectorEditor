@@ -116,29 +116,5 @@ namespace VectorEditorProject.Core.Commands
         {
             return new RemoveFigureCommand(controlUnit, figures);
         }
-
-        /// <summary>
-        /// Создание командывы деления фигур
-        /// </summary>
-        /// <param name="editContext">Edit Context</param>
-        /// <param name="selectedFigures">Выделяемые фигуры</param>
-        /// <returns></returns>
-        public static CommandBase CreateSelectFiguresCommand
-            (EditContext editContext, List<FigureBase> selectedFigures)
-        {
-            return new SelectFiguresCommand(editContext, selectedFigures);
-        }
-
-        /// <summary>
-        /// Создание командывы деления фигуры
-        /// </summary>
-        /// <param name="editContext">Edit Context</param>
-        /// <param name="selectedFigure">Выделяемая фигура</param>
-        /// <returns></returns>
-        public static CommandBase CreateSelectFiguresCommand
-            (EditContext editContext, FigureBase selectedFigure)
-        {
-            return new SelectFiguresCommand(editContext, selectedFigure);
-        }
     }
 }

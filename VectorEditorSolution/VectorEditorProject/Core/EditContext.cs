@@ -78,10 +78,7 @@ namespace VectorEditorProject.Core
                 case States.AddFigureState:
                     if (GetSelectedFigures().Count > 0) // если есть выделение - сбросить
                     {
-                        var command = CommandFactory.CreateSelectFiguresCommand
-                            (this, new List<FigureBase>());
-                        _controlUnit.StoreCommand(command);
-                        _controlUnit.Do();
+                        SetSelectedFigures(new List<FigureBase>());
                     }
                     _activeState = new AddFigureState(_controlUnit, this);
                     break;
@@ -183,6 +180,8 @@ namespace VectorEditorProject.Core
             {
                 _selectedFigures.Add(baseFigure.guid);
             }
+
+            _controlUnit.UpdatePropertyGrid();
         }
 
         /// <summary>
@@ -197,6 +196,8 @@ namespace VectorEditorProject.Core
             {
                 _selectedFigures.Add(guid);
             }
+
+            _controlUnit.UpdatePropertyGrid();
         }
 
         /// <summary>

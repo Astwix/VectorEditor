@@ -101,19 +101,17 @@ namespace VectorEditorProject.Core
                 new EventHandler(this.PropertyGrid_SelectedObjectsChanged);
 
             _viewUpdateDictionary.Add(typeof(AddFigureCommand), new List<Action>()
-                { UpdateCanvas});
+                { UpdateState, UpdateCanvas});
             _viewUpdateDictionary.Add(typeof(AddPointCommand), new List<Action>()
-                { UpdateCanvas });
+                { UpdateState, UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(ClearDocumentCommand), new List<Action>()
-                { UpdateCanvas });
-            _viewUpdateDictionary.Add(typeof(SelectFiguresCommand), new List<Action>()
-                { UpdateCanvas, UpdatePropertyGrid });
+                { UpdateState, UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(FiguresChangingCommand), new List<Action>()
-                { UpdateCanvas, UpdateState, UpdatePropertyGrid });
+                { UpdateState, UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(RemoveFigureCommand), new List<Action>()
-                { UpdateCanvas, UpdatePropertyGrid});
+                { UpdateState, UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(ChangingDocumentOptionsCommand), new List<Action>()
-                { UpdateCanvas });
+                { UpdateState, UpdateCanvas });
         }
 
         /// <summary>
@@ -167,17 +165,13 @@ namespace VectorEditorProject.Core
                 copiedClipboard.Add(copy);
             }
 
-            var selectCommand1 = CommandFactory.CreateSelectFiguresCommand(EditContext, new List<FigureBase>());
-            StoreCommand(selectCommand1);
-            Do();
+            EditContext.SetSelectedFigures(new List<FigureBase>());
 
             var command = CommandFactory.CreateAddFigureCommand(this, copiedClipboard);
             StoreCommand(command);
             Do();
 
-            var selectCommand2 = CommandFactory.CreateSelectFiguresCommand(EditContext, copiedClipboard);
-            StoreCommand(selectCommand2);
-            Do();
+            EditContext.SetSelectedFigures(copiedClipboard);
 
             EditContext.SetActiveState(EditContext.States.FigureEditingState);
         }
@@ -206,7 +200,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Обновление Property Grid
         /// </summary>
-        private void UpdatePropertyGrid()
+        public void UpdatePropertyGrid()
         {
             if (EditContext.GetSelectedFigures().Count == 1)
             {
@@ -502,12 +496,6 @@ namespace VectorEditorProject.Core
                 if (command is RemoveFigureCommand removeFigureCommand)
                 {
                     removeFigureCommand.ControlUnit = this;
-                    continue;
-                }
-
-                if (command is SelectFiguresCommand selectFiguresCommand)
-                {
-                    selectFiguresCommand.EditContext = EditContext;
                     continue;
                 }
             }

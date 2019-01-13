@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
@@ -29,7 +30,7 @@ namespace VectorEditorProject.Forms
         private EditContext _editContext;
 
         /// <summary>
-        /// Конмтруктор главной формы
+        /// Конструктор главной формы
         /// </summary>
         public MainForm()
         {
@@ -40,6 +41,29 @@ namespace VectorEditorProject.Forms
             _editContext = new EditContext(_controlUnit);
             _controlUnit.EditContext = _editContext;
             ToolsUserControl.EditContext = _editContext;
+        }
+
+        /// <summary>
+        /// Импорт библиотеки
+        /// </summary>
+        /// <param name="vKey"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
+
+        /// <summary>
+        /// Нажата ли мышь
+        /// </summary>
+        /// <returns> true if RMB || LMB </returns>
+        bool IsMousePressed()
+        {
+            // meh ok 
+            var lMB = GetAsyncKeyState(Keys.LButton);
+            var rMB = GetAsyncKeyState(Keys.RButton);
+            lMB = GetAsyncKeyState(Keys.LButton);
+            rMB = GetAsyncKeyState(Keys.RButton);
+
+            return lMB != 0 || rMB != 0;
         }
 
         /// <summary>
@@ -75,6 +99,11 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsMousePressed())
+            {
+                return;
+            }
+
             _controlUnit.Undo();
         }
 
@@ -85,6 +114,11 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void DoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsMousePressed())
+            {
+                return;
+            }
+
             _controlUnit.Do();
         }
 
@@ -169,6 +203,11 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsMousePressed())
+            {
+                return;
+            }
+
             _controlUnit.Copy();
         }
 
@@ -179,6 +218,11 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void ExtrudeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsMousePressed())
+            {
+                return;
+            }
+
             _controlUnit.Copy();
             _controlUnit.Delete();
         }
@@ -190,6 +234,11 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsMousePressed())
+            {
+                return;
+            }
+
             _controlUnit.Paste();
         }
 
@@ -200,6 +249,11 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsMousePressed())
+            {
+                return;
+            }
+
             _controlUnit.Delete();
         }
 

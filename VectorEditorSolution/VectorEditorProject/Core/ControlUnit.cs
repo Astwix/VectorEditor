@@ -109,7 +109,7 @@ namespace VectorEditorProject.Core
             _viewUpdateDictionary.Add(typeof(FiguresChangingCommand), new List<Action>()
                 { UpdateState, UpdateCanvas });
             _viewUpdateDictionary.Add(typeof(RemoveFigureCommand), new List<Action>()
-                { UpdateState, UpdateCanvas });
+                { UpdateState, UpdateCanvas, UpdatePropertyGrid });
             _viewUpdateDictionary.Add(typeof(ChangingDocumentOptionsCommand), new List<Action>()
                 { UpdateState, UpdateCanvas });
         }
@@ -366,7 +366,14 @@ namespace VectorEditorProject.Core
                 return;
             }
 
-            var newValues = new FigureFactory().CopyFigure(GetDocument().GetFigure(selectedFigure.guid));
+            var newValue = GetDocument().GetFigure(selectedFigure.guid);
+            if (newValue == null)
+            {
+                UpdatePropertyGrid();
+                return;
+            }
+
+            var newValues = new FigureFactory().CopyFigure(newValue);
 
             selectedFigure.LineSettings.Color = _propertyBackUp.LineSettings.Color;
             selectedFigure.LineSettings.Style = _propertyBackUp.LineSettings.Style;

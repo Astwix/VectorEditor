@@ -237,6 +237,7 @@ namespace VectorEditorProject.Core.States
             _isMousePressed = true;
 
             // создание резервной копии фигуры (для отката)
+            _backUp.Clear();
             foreach (var selectedFigure in _editContext.GetSelectedFigures())
             {
                 _backUp.Add(new FigureFactory().CopyFigure(selectedFigure));

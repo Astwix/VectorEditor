@@ -32,13 +32,15 @@ namespace VectorEditorProject.Core.Figures
             }
 
             Point leftTopPoint = Point.Round(FigureEditor.LeftTopPointF(this));
-            Point rightBottomPoint = Point.Round(FigureEditor.RightBottomPointF(this));
+            Point rightBottomPoint =
+                Point.Round(FigureEditor.RightBottomPointF(this));
 
             int deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
             int deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
             int distance = Math.Max(deltaX, deltaY);
 
-            return new Rectangle(leftTopPoint.X, leftTopPoint.Y, distance, distance);
+            return new Rectangle(leftTopPoint.X, leftTopPoint.Y,
+                distance, distance);
         }
     }
 }

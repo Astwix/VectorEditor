@@ -67,7 +67,8 @@ namespace VectorEditorProject.Core.Drawing
         /// <param name="graphics">Графика</param>
         public void DrawFigure(FigureBase baseFigure, Graphics graphics)
         {
-            typeToDrawerBaseMap[baseFigure.GetType()].DrawFigure(baseFigure, graphics);
+            typeToDrawerBaseMap[baseFigure.GetType()].DrawFigure(baseFigure,
+                    graphics);
         }
 
         /// <summary>
@@ -77,7 +78,8 @@ namespace VectorEditorProject.Core.Drawing
         /// <param name="graphics">Графика</param>
         public void DrawBorder(FigureBase baseFigure, Graphics graphics)
         {
-            typeToDrawerBaseMap[baseFigure.GetType()].DrawBorder(baseFigure, graphics);
+            typeToDrawerBaseMap[baseFigure.GetType()].DrawBorder(baseFigure,
+                    graphics);
         }
 
         /// <summary>
@@ -89,7 +91,8 @@ namespace VectorEditorProject.Core.Drawing
         {
             Brush brush = new SolidBrush(document.Color);
 
-            graphics.FillRectangle(brush, new RectangleF(new PointF(0, 0), document.Size));
+            graphics.FillRectangle(brush,
+                new RectangleF(new PointF(0, 0), document.Size));
 
             brush.Dispose();
         }

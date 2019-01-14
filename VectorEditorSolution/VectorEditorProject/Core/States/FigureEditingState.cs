@@ -82,19 +82,41 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Список опорных точек
         /// </summary>
-        private Dictionary<int, bool> _pointsHovered = new Dictionary<int, bool>();
+        private Dictionary<int, bool> _pointsHovered =
+            new Dictionary<int, bool>();
 
         /// <summary>
         /// Число активных точек
         /// </summary>
         private int _activePoint = -1;
 
+        /// <summary>
+        /// Размер маркера
+        /// </summary>
         private const float _markerSize = 10;
+
+        /// <summary>
+        /// Цвет маркера при наведении (выделение)
+        /// </summary>
         private Color _markerHoverColor = Color.DeepPink;
+
+        /// <summary>
+        /// Цвет маркера при наведении (опорная точка)
+        /// </summary>
         private Color _markerRefPointHoverColor = Color.Aquamarine;
+
+        /// <summary>
+        /// Резервный список фигур
+        /// </summary>
         private List<FigureBase> _backUp = new List<FigureBase>();
 
-        public FigureEditingState(ControlUnit controlUnit, EditContext editContext)
+        /// <summary>
+        /// Конструктор состояния редактирования фигуры
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="editContext">Edit Context</param>
+        public FigureEditingState(ControlUnit controlUnit, 
+            EditContext editContext)
         {
             _editContext = editContext;
             _controlUnit = controlUnit;
@@ -111,20 +133,25 @@ namespace VectorEditorProject.Core.States
             {
                 // инициализация маркеров
                 _leftTopMarker = FigureEditor.LeftTopPointF(selectedFigures);
-                _rightBottomMarker = FigureEditor.RightBottomPointF(selectedFigures);
+                _rightBottomMarker =
+                    FigureEditor.RightBottomPointF(selectedFigures);
 
                 // инициализация прямоугольника выделения
-                _selectionRectangle = selectedFigures[0].GetBorderRectangle();
+                _selectionRectangle = selectedFigures[0]
+                    .GetBorderRectangle();
                 foreach (var figure in selectedFigures)
                 {
-                    _selectionRectangle = Rectangle.Union(_selectionRectangle, figure.GetBorderRectangle());
+                    _selectionRectangle = Rectangle.Union(_selectionRectangle,
+                        figure.GetBorderRectangle());
                 }
 
                 // инициализация маркеров опорных точек (точек > 2)
-                if (selectedFigures.Count == 1 && selectedFigures[0].PointsSettings.GetPoints().Count > 2)  
+                if (selectedFigures.Count == 1 &&
+                    selectedFigures[0].PointsSettings.GetPoints().Count > 2)
                 {
                     _pointsHovered.Clear();
-                    for (int i = 0; i < selectedFigures[0].PointsSettings.GetPoints().Count; i++)
+                    for (int i = 0; i < selectedFigures[0]
+                            .PointsSettings.GetPoints().Count; i++)
                     {
                         _pointsHovered.Add(i, false);
                     }
@@ -154,7 +181,6 @@ namespace VectorEditorProject.Core.States
             pen.DashStyle = DashStyle.Dash;
 
             graphics.DrawRectangle(pen, _selectionRectangle);
-
             pen.DashStyle = DashStyle.Solid;
 
             // рисование маркеров опорных точек (точек > 2)
@@ -165,22 +191,31 @@ namespace VectorEditorProject.Core.States
 
                 for (var i = 0; i < points.Length; i++)
                 {
-                    graphics.DrawEllipse(pen, points[i].X - _markerSize / 2,
-                        points[i].Y - _markerSize / 2, _markerSize, _markerSize);
+                    graphics.DrawEllipse(pen, 
+                        points[i].X - _markerSize / 2, 
+                        points[i].Y -_markerSize / 2, 
+                        _markerSize, _markerSize);
                     if (_pointsHovered[i])
                     {
-                        graphics.FillEllipse(brush, points[i].X - _markerSize / 2,
-                            points[i].Y - _markerSize / 2, _markerSize, _markerSize);
+                        graphics.FillEllipse(brush,
+                            points[i].X - _markerSize / 2,
+                            points[i].Y - _markerSize / 2,
+                            _markerSize, _markerSize);
                     }
                 }
+
                 brush.Dispose();
             }
 
             //обводка маркеров
-            graphics.DrawEllipse(pen, _leftTopMarker.X - _markerSize / 2, 
-                _leftTopMarker.Y - _markerSize / 2, _markerSize, _markerSize);
-            graphics.DrawEllipse(pen, _rightBottomMarker.X - _markerSize / 2,
-                _rightBottomMarker.Y - _markerSize / 2, _markerSize, _markerSize);
+            graphics.DrawEllipse(pen,
+                _leftTopMarker.X - _markerSize / 2,
+                _leftTopMarker.Y - _markerSize / 2,
+                _markerSize, _markerSize);
+            graphics.DrawEllipse(pen,
+                _rightBottomMarker.X - _markerSize / 2,
+                _rightBottomMarker.Y - _markerSize / 2,
+                _markerSize, _markerSize);
 
             pen.Dispose();
 
@@ -189,8 +224,11 @@ namespace VectorEditorProject.Core.States
             {
                 Brush brush = new SolidBrush(_markerHoverColor);
 
-                graphics.FillEllipse(brush, _leftTopMarker.X - _markerSize / 2,
-                    _leftTopMarker.Y - _markerSize / 2, _markerSize, _markerSize);
+                graphics.FillEllipse(brush,
+                    _leftTopMarker.X - _markerSize / 2,
+                    _leftTopMarker.Y - _markerSize / 2,
+                    _markerSize,
+                    _markerSize);
 
                 brush.Dispose();
             }
@@ -200,8 +238,10 @@ namespace VectorEditorProject.Core.States
             {
                 Brush brush = new SolidBrush(_markerHoverColor);
 
-                graphics.FillEllipse(brush, _rightBottomMarker.X - _markerSize / 2,
-                    _rightBottomMarker.Y - _markerSize / 2, _markerSize, _markerSize);
+                graphics.FillEllipse(brush,
+                    _rightBottomMarker.X - _markerSize / 2,
+                    _rightBottomMarker.Y - _markerSize / 2,
+                    _markerSize, _markerSize);
 
                 brush.Dispose();
             }
@@ -222,8 +262,9 @@ namespace VectorEditorProject.Core.States
 
             foreach (var selectedFigure in selectedFigures)
             {
-                _selectionRectangle = 
-                    Rectangle.Union(_selectionRectangle, selectedFigure.GetBorderRectangle());
+                _selectionRectangle =
+                    Rectangle.Union(_selectionRectangle,
+                        selectedFigure.GetBorderRectangle());
             }
         }
 
@@ -295,11 +336,12 @@ namespace VectorEditorProject.Core.States
             {
                 return;
             }
+
             if (_isMousePressed)
             {
                 // действия с левым верхним маркером
                 if (_isLeftTopMarkerHovered &&
-                    e.X < _rightBottomMarker.X && 
+                    e.X < _rightBottomMarker.X &&
                     e.Y < _rightBottomMarker.Y)
                 {
                     _leftTopMarker = new PointF(e.X, e.Y);
@@ -322,9 +364,11 @@ namespace VectorEditorProject.Core.States
                 // действия с опорными точками
                 if (_activePoint != -1)
                 {
-                    figures[0].PointsSettings.ReplacePoint(_activePoint, new PointF(e.X, e.Y));
+                    figures[0].PointsSettings.ReplacePoint(_activePoint,
+                            new PointF(e.X, e.Y));
                     _leftTopMarker = FigureEditor.LeftTopPointF(figures);
-                    _rightBottomMarker = FigureEditor.RightBottomPointF(figures);
+                    _rightBottomMarker =
+                        FigureEditor.RightBottomPointF(figures);
                     EditFigure();
                     _controlUnit.UpdateCanvas();
                     return;
@@ -347,13 +391,15 @@ namespace VectorEditorProject.Core.States
                 // подсветка маркеров опорных точек
                 if (_pointsHovered.Count != 0 && figures.Count > 0)
                 {
-                    var points = figures[0].PointsSettings.GetPoints().ToArray();
+                    var points = figures[0].PointsSettings.GetPoints()
+                        .ToArray();
                     for (var i = 0; i < points.Length; i++)
                     {
-                        _pointsHovered[i] = e.X >= points[i].X - _markerSize / 2 &&
-                                            e.X <= points[i].X + _markerSize / 2 &&
-                                            e.Y >= points[i].Y - _markerSize / 2 &&
-                                            e.Y <= points[i].Y + _markerSize / 2;
+                        _pointsHovered[i] = 
+                            e.X >= points[i].X - _markerSize / 2 &&
+                            e.X <= points[i].X + _markerSize / 2 &&
+                            e.Y >= points[i].Y - _markerSize / 2 &&
+                            e.Y <= points[i].Y + _markerSize / 2;
                         if (_pointsHovered[i])
                         {
                             _controlUnit.UpdateCanvas();
@@ -363,10 +409,11 @@ namespace VectorEditorProject.Core.States
                 }
 
                 // перерасчет подсвечен или нет маркер (левый)
-                _isLeftTopMarkerHovered = e.X >= _leftTopMarker.X - _markerSize / 2 &&
-                                          e.X <= _leftTopMarker.X + _markerSize / 2 &&
-                                          e.Y >= _leftTopMarker.Y - _markerSize / 2 &&
-                                          e.Y <= _leftTopMarker.Y + _markerSize / 2;
+                _isLeftTopMarkerHovered =
+                    e.X >= _leftTopMarker.X - _markerSize / 2 &&
+                    e.X <= _leftTopMarker.X + _markerSize / 2 &&
+                    e.Y >= _leftTopMarker.Y - _markerSize / 2 &&
+                    e.Y <= _leftTopMarker.Y + _markerSize / 2;
                 if (_isLeftTopMarkerHovered)
                 {
                     _controlUnit.UpdateCanvas();
@@ -374,16 +421,18 @@ namespace VectorEditorProject.Core.States
                 }
 
                 // перерасчет подсвечен или нет маркер (правый)
-                _isRightBottomMarkerHovered = e.X >= _rightBottomMarker.X - _markerSize / 2 &&
-                                              e.X <= _rightBottomMarker.X + _markerSize / 2 &&
-                                              e.Y >= _rightBottomMarker.Y - _markerSize / 2 &&
-                                              e.Y <= _rightBottomMarker.Y + _markerSize / 2;
+                _isRightBottomMarkerHovered =
+                    e.X >= _rightBottomMarker.X - _markerSize / 2 &&
+                    e.X <= _rightBottomMarker.X + _markerSize / 2 &&
+                    e.Y >= _rightBottomMarker.Y - _markerSize / 2 &&
+                    e.Y <= _rightBottomMarker.Y + _markerSize / 2;
                 if (_isRightBottomMarkerHovered)
                 {
                     _controlUnit.UpdateCanvas();
                     return;
                 }
             }
+
             _controlUnit.UpdateCanvas();
         }
 
@@ -404,15 +453,16 @@ namespace VectorEditorProject.Core.States
                 newValues.Add(new FigureFactory().CopyFigure(selectedFigure));
             }
 
-            // т.к. пользователь меняет реальные фигуры
-            // делаем откат
+            // т.к. пользователь меняет реальные фигуры, делаем откат
             foreach (var figure in _backUp)
             {
-                var original = _controlUnit.GetDocument().GetFigure(figure.guid);
+                var original = _controlUnit.GetDocument()
+                    .GetFigure(figure.guid);
                 if (original == null)
                 {
                     return;
                 }
+
                 original.LineSettings.Color = figure.LineSettings.Color;
                 original.LineSettings.Style = figure.LineSettings.Style;
                 original.LineSettings.Width = figure.LineSettings.Width;
@@ -420,7 +470,8 @@ namespace VectorEditorProject.Core.States
                 if (original is FilledFigureBase originalFilled &&
                     figure is FilledFigureBase filledFigure)
                 {
-                    originalFilled.FillSettings.Color = filledFigure.FillSettings.Color;
+                    originalFilled.FillSettings.Color =
+                        filledFigure.FillSettings.Color;
                 }
 
                 var points = figure.PointsSettings.GetPoints().ToArray();
@@ -431,7 +482,8 @@ namespace VectorEditorProject.Core.States
             }
 
             // создание команды изменения фигур
-            var command = CommandFactory.CreateFiguresChangingCommand(_controlUnit, newValues);
+            var command = CommandFactory.CreateFiguresChangingCommand(
+                _controlUnit, newValues);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
         }

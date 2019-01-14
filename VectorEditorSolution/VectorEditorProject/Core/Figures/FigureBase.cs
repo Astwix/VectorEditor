@@ -54,10 +54,12 @@ namespace VectorEditorProject.Core.Figures
             }
 
             Point leftTopPoint = Point.Round(FigureEditor.LeftTopPointF(this));
-            Point rightBottomPoint = Point.Round(FigureEditor.RightBottomPointF(this));
-            
-            return new Rectangle(leftTopPoint.X, leftTopPoint.Y, 
-                rightBottomPoint.X - leftTopPoint.X, rightBottomPoint.Y - leftTopPoint.Y);
+            Point rightBottomPoint =
+                Point.Round(FigureEditor.RightBottomPointF(this));
+
+            return new Rectangle(leftTopPoint.X, leftTopPoint.Y,
+                rightBottomPoint.X - leftTopPoint.X,
+                rightBottomPoint.Y - leftTopPoint.Y);
         }
 
         /// <summary>

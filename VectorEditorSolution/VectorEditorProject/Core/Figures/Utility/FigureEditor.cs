@@ -32,7 +32,8 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figures">Список фигур</param>
         /// <returns>Первый элемент списка точек у списка фигур</returns>
-        public static PointF LeftTopPointF(IReadOnlyList<FigureBase> figures)
+        public static PointF LeftTopPointF(
+            IReadOnlyList<FigureBase> figures)
         {
             var result = figures[0].PointsSettings.GetPoints().First();
             foreach (var figure in figures)
@@ -52,7 +53,8 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figure">Фигура</param>
         /// <returns></returns>
-        public static PointF RightBottomPointF(FigureBase figure)
+        public static PointF RightBottomPointF(
+            FigureBase figure)
         {
             var result = figure.PointsSettings.GetPoints()[0];
             foreach (var point in figure.PointsSettings.GetPoints())
@@ -69,7 +71,8 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figures">Список фигур</param>
         /// <returns></returns>
-        public static PointF RightBottomPointF(IReadOnlyList<FigureBase> figures)
+        public static PointF RightBottomPointF(
+            IReadOnlyList<FigureBase> figures)
         {
             var result = figures[0].PointsSettings.GetPoints().First();
             foreach (var figure in figures)
@@ -90,7 +93,8 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// <param name="figure">Фигура</param>
         /// <param name="rectangle">Прямоугольник выделения</param>
         /// <returns></returns>
-        public static bool IsFigureInRectangle(FigureBase figure, RectangleF rectangle)
+        public static bool IsFigureInRectangle(FigureBase figure,
+            RectangleF rectangle)
         {
             foreach (var point in figure.PointsSettings.GetPoints())
             {
@@ -99,7 +103,8 @@ namespace VectorEditorProject.Core.Figures.Utility
                     return false;
                 }
 
-                if (point.X >= rectangle.X + rectangle.Width) // правая граница выделения
+                if (point.X >= rectangle.X + rectangle.Width
+                ) // правая граница выделения
                 {
                     return false;
                 }
@@ -109,7 +114,8 @@ namespace VectorEditorProject.Core.Figures.Utility
                     return false;
                 }
 
-                if (point.Y >= rectangle.Y + rectangle.Height) // нижняя граница выделения
+                if (point.Y >= rectangle.Y + rectangle.Height
+                ) // нижняя граница выделения
                 {
                     return false;
                 }
@@ -123,7 +129,8 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figures">Фигуры</param>
         /// <param name="newSize">Новая область</param>
-        public static void EditFiguresSize(IReadOnlyList<FigureBase> figures, RectangleF newSize)
+        public static void EditFiguresSize(IReadOnlyList<FigureBase> figures,
+            RectangleF newSize)
         {
             var leftTopPoint = LeftTopPointF(figures);
             var rightBottomPoint = RightBottomPointF(figures);
@@ -138,10 +145,12 @@ namespace VectorEditorProject.Core.Figures.Utility
                 {
                     PointF newPoint = new PointF();
 
-                    newPoint.X = newSize.X + newSize.Width * 
-                                 ((points[i].X - leftTopPoint.X) / rectangleWidth);
-                    newPoint.Y = newSize.Y + newSize.Height 
-                                 * ((points[i].Y - leftTopPoint.Y) / rectangleHeight);
+                    newPoint.X = newSize.X + newSize.Width *
+                                 ((points[i].X - leftTopPoint.X) /
+                                  rectangleWidth);
+                    newPoint.Y = newSize.Y + newSize.Height *
+                                 ((points[i].Y - leftTopPoint.Y) /
+                                  rectangleHeight);
 
                     figure.PointsSettings.ReplacePoint(i, newPoint);
                 }
@@ -153,7 +162,8 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// </summary>
         /// <param name="figure">Фигура</param>
         /// <param name="newSize">Новая область</param>
-        public static void EditFiguresSize(FigureBase figure, RectangleF newSize)
+        public static void EditFiguresSize(FigureBase figure,
+            RectangleF newSize)
         {
             var leftTopPoint = LeftTopPointF(figure);
             var rightBottomPoint = RightBottomPointF(figure);
@@ -167,9 +177,11 @@ namespace VectorEditorProject.Core.Figures.Utility
                 PointF newPoint = new PointF();
 
                 newPoint.X = newSize.X + newSize.Width *
-                             ((points[i].X - leftTopPoint.X) / rectangleWidth);
-                newPoint.Y = newSize.Y + newSize.Height
-                             * ((points[i].Y - leftTopPoint.Y) / rectangleHeight);
+                             ((points[i].X - leftTopPoint.X) /
+                              rectangleWidth);
+                newPoint.Y = newSize.Y + newSize.Height *
+                             ((points[i].Y - leftTopPoint.Y) /
+                              rectangleHeight);
 
                 figure.PointsSettings.ReplacePoint(i, newPoint);
             }
@@ -186,7 +198,8 @@ namespace VectorEditorProject.Core.Figures.Utility
             float deltaX = Math.Abs(point1.X - point2.X);
             float deltaY = Math.Abs(point1.Y - point2.Y);
 
-            return (float)Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+            return (float) Math.Sqrt(Math.Pow(deltaX, 2) +
+                                     Math.Pow(deltaY, 2));
         }
     }
 }

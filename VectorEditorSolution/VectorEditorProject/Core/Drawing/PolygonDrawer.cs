@@ -18,18 +18,22 @@ namespace VectorEditorProject.Core.Drawing
         {
             if (figure.PointsSettings.GetPoints().Count >= 2)
             {
-                FilledFigureBase filledBaseFigure = figure as  FilledFigureBase;
+                FilledFigureBase filledBaseFigure = figure as FilledFigureBase;
                 if (filledBaseFigure == null)
                 {
                     return;
                 }
 
-                Brush brush = new SolidBrush(filledBaseFigure.FillSettings.Color);
-                graphics.FillPolygon(brush, filledBaseFigure.PointsSettings.GetPoints().ToArray());
+                Brush brush =
+                    new SolidBrush(filledBaseFigure.FillSettings.Color);
+                graphics.FillPolygon(brush,
+                    filledBaseFigure.PointsSettings.GetPoints().ToArray());
 
-                Pen pen = new Pen(filledBaseFigure.LineSettings.Color, filledBaseFigure.LineSettings.Width);
+                Pen pen = new Pen(filledBaseFigure.LineSettings.Color,
+                    filledBaseFigure.LineSettings.Width);
                 pen.DashStyle = filledBaseFigure.LineSettings.Style;
-                graphics.DrawPolygon(pen, filledBaseFigure.PointsSettings.GetPoints().ToArray());
+                graphics.DrawPolygon(pen,
+                    filledBaseFigure.PointsSettings.GetPoints().ToArray());
 
                 brush.Dispose();
                 pen.Dispose();

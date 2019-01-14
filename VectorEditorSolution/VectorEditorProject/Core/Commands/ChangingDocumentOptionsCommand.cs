@@ -49,7 +49,8 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control ControlUnit</param>
         /// <param name="newOptions">Новые параметры</param>
-        public ChangingDocumentOptionsCommand(ControlUnit controlUnit, Document newOptions)
+        public ChangingDocumentOptionsCommand(ControlUnit controlUnit,
+            Document newOptions)
         {
             ControlUnit = controlUnit;
 

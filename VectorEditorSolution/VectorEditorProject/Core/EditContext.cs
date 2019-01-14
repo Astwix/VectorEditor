@@ -76,23 +76,29 @@ namespace VectorEditorProject.Core
             switch (state)
             {
                 case States.AddFigureState:
-                    if (GetSelectedFigures().Count > 0) // если есть выделение - сбросить
+                    // если есть выделение - сбросить
+                    if (GetSelectedFigures().Count > 0)
                     {
                         SetSelectedFigures(new List<FigureBase>());
                     }
-                    _activeState = new AddFigureState(_controlUnit, this);
+
+                    _activeState = new AddFigureState(_controlUnit,
+                        this);
                     break;
 
                 case States.AddPointState:
-                    _activeState = new AddPointState(_controlUnit, this);
+                    _activeState = new AddPointState(_controlUnit,
+                        this);
                     break;
 
                 case States.SelectionState:
-                    _activeState = new SelectionState(_controlUnit, this);
+                    _activeState = new SelectionState(_controlUnit,
+                        this);
                     break;
-                    
+
                 case States.FigureEditingState:
-                    _activeState = new FigureEditingState(_controlUnit, this);
+                    _activeState = new FigureEditingState(_controlUnit,
+                        this);
                     break;
 
                 default:
@@ -109,7 +115,8 @@ namespace VectorEditorProject.Core
         /// <param name="graphics"></param>
         public void Draw(Graphics graphics)
         {
-            _activeState?.Draw(graphics); // суперсахар с "?": создается, только если объект существует
+            // суперсахар с "?": создается, только если объект существует
+            _activeState?.Draw(graphics); 
         }
 
         /// <summary>

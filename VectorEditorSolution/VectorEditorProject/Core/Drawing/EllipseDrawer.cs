@@ -32,16 +32,17 @@ namespace VectorEditorProject.Core.Drawing
                 float deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
                 float deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
 
-                Brush brush = new SolidBrush(filledBaseFigure.FillSettings.Color);
-                graphics.FillEllipse(brush, leftTopPoint.X,
-                    leftTopPoint.Y, deltaX, deltaY);
+                Brush brush =
+                    new SolidBrush(filledBaseFigure.FillSettings.Color);
+                graphics.FillEllipse(brush, leftTopPoint.X, leftTopPoint.Y,
+                    deltaX, deltaY);
 
-                Pen pen = new Pen(filledBaseFigure.LineSettings.Color, 
+                Pen pen = new Pen(filledBaseFigure.LineSettings.Color,
                     filledBaseFigure.LineSettings.Width);
                 pen.DashStyle = filledBaseFigure.LineSettings.Style;
-                
-                graphics.DrawEllipse(pen, leftTopPoint.X, 
-                    leftTopPoint.Y, deltaX, deltaY);
+
+                graphics.DrawEllipse(pen, leftTopPoint.X, leftTopPoint.Y,
+                    deltaX, deltaY);
 
                 brush.Dispose();
                 pen.Dispose();

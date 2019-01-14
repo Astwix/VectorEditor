@@ -13,7 +13,8 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Control Unit
         /// </summary>
-        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+        [field: NonSerialized]
+        public ControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Список фигур (доступный только для чтения)
@@ -28,7 +29,10 @@ namespace VectorEditorProject.Core.Commands
         public RemoveFigureCommand(ControlUnit controlUnit, FigureBase figure)
         {
             ControlUnit = controlUnit;
-            _figures = new List<FigureBase>() { figure };
+            _figures = new List<FigureBase>()
+            {
+                figure
+            };
         }
 
         /// <summary>
@@ -36,7 +40,8 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="figures">Фигуры</param>
-        public RemoveFigureCommand(ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
+        public RemoveFigureCommand(ControlUnit controlUnit,
+            IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlUnit;
             _figures = figures;

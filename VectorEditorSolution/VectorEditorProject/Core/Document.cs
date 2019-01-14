@@ -13,38 +13,22 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Имя
         /// </summary>
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// Цвет
         /// </summary>
-        public Color Color
-        {
-            get;
-            set;
-        }
+        public Color Color { get; set; }
 
         /// <summary>
         /// Размер
         /// </summary>
-        public Size Size
-        {
-            get;
-            set;
-        }
+        public Size Size { get; set; }
 
         /// <summary>
         /// Фигуры
         /// </summary>
-        private List<FigureBase> Figures
-        {
-            get;
-            set;
-        }
+        private List<FigureBase> Figures { get; set; }
 
         /// <summary>
         /// Конструктор документа

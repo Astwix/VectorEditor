@@ -14,7 +14,8 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Control Unit
         /// </summary>
-        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+        [field: NonSerialized]
+        public ControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Старые значения
@@ -31,14 +32,16 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="newValues">Новые значения</param>
-        public FiguresChangingCommand(ControlUnit controlUnit, List<FigureBase> newValues)
+        public FiguresChangingCommand(ControlUnit controlUnit,
+            List<FigureBase> newValues)
         {
             ControlUnit = controlUnit;
-            
+
             var figureFactory = new FigureFactory();
             foreach (var figure in newValues)
             {
-                var original = ControlUnit.GetDocument().GetFigure(figure.guid);
+                var original = ControlUnit.GetDocument()
+                    .GetFigure(figure.guid);
                 _oldValues.Add(figureFactory.CopyFigure(original));
                 _newValues.Add(figureFactory.CopyFigure(figure));
             }
@@ -49,7 +52,8 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="newValues">Новые значения</param>
-        public FiguresChangingCommand(ControlUnit controlUnit, FigureBase newValues)
+        public FiguresChangingCommand(ControlUnit controlUnit,
+            FigureBase newValues)
         {
             ControlUnit = controlUnit;
 
@@ -84,23 +88,29 @@ namespace VectorEditorProject.Core.Commands
             foreach (var figure in values)
             {
                 // применение параметров линии
-                var original = ControlUnit.GetDocument().GetFigure(figure.guid);
+                var original = ControlUnit.GetDocument()
+                    .GetFigure(figure.guid);
                 original.LineSettings.Color = figure.LineSettings.Color;
                 original.LineSettings.Style = figure.LineSettings.Style;
                 original.LineSettings.Width = figure.LineSettings.Width;
 
                 // применение заливки
-                if (original is FilledFigureBase originalFilled && 
+                if (original is FilledFigureBase originalFilled &&
                     figure is FilledFigureBase filledFigure)
                 {
-                    originalFilled.FillSettings.Color = filledFigure.FillSettings.Color;
+                    originalFilled.FillSettings.Color =
+                        filledFigure.FillSettings.Color;
                 }
 
                 // применение изменений точек
-                var points = figure.PointsSettings.GetPoints().ToArray();
-                for (var i = 0; i < points.Length; i++)
+                var points = figure.PointsSettings.GetPoints()
+                    .ToArray();
+                for (var i = 0;
+                    i < points.Length;
+                    i++)
                 {
-                    original.PointsSettings.ReplacePoint(i, points[i]);
+                    original.PointsSettings.ReplacePoint(i,
+                        points[i]);
                 }
             }
         }
@@ -116,6 +126,7 @@ namespace VectorEditorProject.Core.Commands
             {
                 hash = hash + newValue.GetHashCode();
             }
+
             foreach (var oldValue in _oldValues)
             {
                 hash = hash + oldValue.GetHashCode();

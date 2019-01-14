@@ -74,8 +74,8 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Конструктор состояния выделения
         /// </summary>
-        /// <param name="controlUnit"></param>
-        /// <param name="editContext"></param>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="editContext">EditContext</param>
         public SelectionState(ControlUnit controlUnit, EditContext editContext)
         {
             _controlUnit = controlUnit;
@@ -86,14 +86,16 @@ namespace VectorEditorProject.Core.States
         /// Рисование
         /// </summary>
         /// <param name="graphics">Graphics</param>
-        public override void Draw(Graphics graphics)
+        public override void Draw(
+            Graphics graphics)
         {
             if (_isMousePressed)
             {
                 Pen pen = new Pen(Color.Black);
                 pen.DashStyle = DashStyle.Dot;
 
-                graphics.DrawRectangle(pen, _leftTopX, _leftTopY, _rightBottomX - _leftTopX, _rightBottomY - _leftTopY);
+                graphics.DrawRectangle(pen, _leftTopX, _leftTopY,
+                    _rightBottomX - _leftTopX, _rightBottomY - _leftTopY);
 
                 pen.Dispose();
             }
@@ -145,7 +147,8 @@ namespace VectorEditorProject.Core.States
             }
 
             _isMousePressed = false;
-            if ((_rightBottomX - _leftTopX < 3) && (_rightBottomY - _leftTopY < 3))
+            if ((_rightBottomX - _leftTopX < 3) &&
+                (_rightBottomY - _leftTopY < 3))
             {
                 SingleSelection();
             }
@@ -160,7 +163,8 @@ namespace VectorEditorProject.Core.States
         /// </summary>
         private void SingleSelection()
         {
-            Dictionary<FigureBase, float> distanceToFigures = new Dictionary<FigureBase, float>();
+            Dictionary<FigureBase, float> distanceToFigures =
+                new Dictionary<FigureBase, float>();
 
             var figures = _controlUnit.GetDocument().GetFigures();
             if (figures.Count > 0)
@@ -168,23 +172,30 @@ namespace VectorEditorProject.Core.States
                 // по фигурам
                 foreach (var figure in figures)
                 {
-                    float distance = FigureEditor.DistanceBetweenPoints(figure.PointsSettings.GetPoints()[0],
+                    float distance = FigureEditor.DistanceBetweenPoints(
+                        figure.PointsSettings.GetPoints()[0],
                         new PointF(_endX, _endY));
 
                     // по точкам
                     foreach (var point in figure.PointsSettings.GetPoints())
                     {
                         distance = Math.Min(distance,
-                            FigureEditor.DistanceBetweenPoints(point, new PointF(_endX, _endY)));
+                            FigureEditor.DistanceBetweenPoints(point,
+                                new PointF(_endX, _endY)));
                     }
 
                     distanceToFigures.Add(figure, distance);
                 }
 
                 // ближайшая (к клику пользователя) фигура из словаря
-                var nearFigure = distanceToFigures.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
-                _editContext.SetSelectedFigures(new List<FigureBase>(){nearFigure});
-                _editContext.SetActiveState(EditContext.States.FigureEditingState);
+                var nearFigure = distanceToFigures.Aggregate(
+                        (l, r) => l.Value < r.Value ? l : r).Key;
+                _editContext.SetSelectedFigures(new List<FigureBase>()
+                {
+                    nearFigure
+                });
+                _editContext.SetActiveState(EditContext.States
+                    .FigureEditingState);
             }
         }
 
@@ -194,12 +205,14 @@ namespace VectorEditorProject.Core.States
         private void AreaSelection()
         {
             List<FigureBase> selectedFigures = new List<FigureBase>();
-            RectangleF selectionRectangle = new RectangleF(_leftTopX, _leftTopY, 
-                _rightBottomX - _leftTopX, _rightBottomY - _leftTopY);
-            
+            RectangleF selectionRectangle = new RectangleF(_leftTopX,
+                _leftTopY, _rightBottomX - _leftTopX,
+                _rightBottomY - _leftTopY);
+
             foreach (var figure in _controlUnit.GetDocument().GetFigures())
             {
-                if (FigureEditor.IsFigureInRectangle(figure, selectionRectangle))
+                if (FigureEditor.IsFigureInRectangle(figure,
+                    selectionRectangle))
                 {
                     selectedFigures.Add(figure);
                 }
@@ -208,7 +221,8 @@ namespace VectorEditorProject.Core.States
             if (selectedFigures.Count > 0)
             {
                 _editContext.SetSelectedFigures(selectedFigures);
-                _editContext.SetActiveState(EditContext.States.FigureEditingState);
+                _editContext.SetActiveState(EditContext.States
+                    .FigureEditingState);
             }
         }
     }

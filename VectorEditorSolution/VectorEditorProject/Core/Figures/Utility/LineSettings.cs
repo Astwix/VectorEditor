@@ -60,7 +60,9 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Color.GetHashCode() + Width.GetHashCode() + Style.GetHashCode();
+            return Color.GetHashCode() + 
+                   Width.GetHashCode() + 
+                   Style.GetHashCode();
         }
     }
 }

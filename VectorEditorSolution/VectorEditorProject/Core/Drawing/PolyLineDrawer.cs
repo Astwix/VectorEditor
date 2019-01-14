@@ -18,9 +18,11 @@ namespace VectorEditorProject.Core.Drawing
         {
             if (figure.PointsSettings.GetPoints().Count() >= 2)
             {
-                Pen pen = new Pen(figure.LineSettings.Color, figure.LineSettings.Width);
+                Pen pen = new Pen(figure.LineSettings.Color,
+                    figure.LineSettings.Width);
                 pen.DashStyle = figure.LineSettings.Style;
-                graphics.DrawLines(pen, figure.PointsSettings.GetPoints().ToArray());
+                graphics.DrawLines(pen,
+                    figure.PointsSettings.GetPoints().ToArray());
 
                 pen.Dispose();
             }

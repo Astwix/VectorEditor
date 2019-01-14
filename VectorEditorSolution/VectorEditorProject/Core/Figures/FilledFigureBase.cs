@@ -29,9 +29,9 @@ namespace VectorEditorProject.Core.Figures
         /// <returns>Хэш</returns>
         public override int GetHashCode()
         {
-            return _lineSettings.GetHashCode() 
-                   + _pointsSettings.GetHashCode() 
-                   + _fillSettings.GetHashCode();
+            return _lineSettings.GetHashCode() +
+                   _pointsSettings.GetHashCode() +
+                   _fillSettings.GetHashCode();
         }
     }
 }

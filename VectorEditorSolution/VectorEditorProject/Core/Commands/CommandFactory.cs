@@ -15,8 +15,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="figure">Фигура</param>
         /// <returns></returns>
-        public static CommandBase CreateAddFigureCommand
-            (ControlUnit controlUnit, FigureBase figure)
+        public static CommandBase CreateAddFigureCommand(
+            ControlUnit controlUnit, FigureBase figure)
         {
             return new AddFigureCommand(controlUnit, figure);
         }
@@ -27,8 +27,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="figures">Список фигур (только для чтения)</param>
         /// <returns></returns>
-        public static CommandBase CreateAddFigureCommand
-            (ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
+        public static CommandBase CreateAddFigureCommand(
+            ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
         {
             return new AddFigureCommand(controlUnit, figures);
         }
@@ -40,8 +40,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="point">Точка</param>
         /// <param name="controlUnit">Control Unit</param>
         /// <returns></returns>
-        public static CommandBase CreateAddPointCommand
-            (FigureBase figure, PointF point, ControlUnit controlUnit)
+        public static CommandBase CreateAddPointCommand(FigureBase figure,
+            PointF point, ControlUnit controlUnit)
         {
             return new AddPointCommand(figure, point, controlUnit);
         }
@@ -52,10 +52,11 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="newOptions">Новые параметры</param>
         /// <returns></returns>
-        public static CommandBase CreateChangingDocumentOptionsCommand
-            (ControlUnit controlUnit, Document newOptions)
+        public static CommandBase CreateChangingDocumentOptionsCommand(
+            ControlUnit controlUnit, Document newOptions)
         {
-            return new ChangingDocumentOptionsCommand(controlUnit, newOptions);
+            return new ChangingDocumentOptionsCommand(controlUnit,
+                newOptions);
         }
 
         /// <summary>
@@ -63,8 +64,8 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit"></param>
         /// <returns></returns>
-        public static CommandBase CreateClearDocumentCommand
-            (ControlUnit controlUnit)
+        public static CommandBase CreateClearDocumentCommand(
+            ControlUnit controlUnit)
         {
             return new ClearDocumentCommand(controlUnit);
         }
@@ -75,8 +76,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="newValues">Новые значения</param>
         /// <returns></returns>
-        public static CommandBase CreateFiguresChangingCommand
-            (ControlUnit controlUnit, List<FigureBase> newValues)
+        public static CommandBase CreateFiguresChangingCommand(
+            ControlUnit controlUnit, List<FigureBase> newValues)
         {
             return new FiguresChangingCommand(controlUnit, newValues);
         }
@@ -87,8 +88,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="newValues">Новые значения</param>
         /// <returns></returns>
-        public static CommandBase CreateFiguresChangingCommand
-            (ControlUnit controlUnit, FigureBase newValues)
+        public static CommandBase CreateFiguresChangingCommand(
+            ControlUnit controlUnit, FigureBase newValues)
         {
             return new FiguresChangingCommand(controlUnit, newValues);
         }
@@ -99,8 +100,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="figure">Фигура</param>
         /// <returns></returns>
-        public static CommandBase CreateRemoveFigureCommand
-            (ControlUnit controlUnit, FigureBase figure)
+        public static CommandBase CreateRemoveFigureCommand(
+            ControlUnit controlUnit, FigureBase figure)
         {
             return new RemoveFigureCommand(controlUnit, figure);
         }
@@ -111,8 +112,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="figures">Список фигур</param>
         /// <returns></returns>
-        public static CommandBase CreateRemoveFigureCommand
-            (ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
+        public static CommandBase CreateRemoveFigureCommand(
+            ControlUnit controlUnit, IReadOnlyList<FigureBase> figures)
         {
             return new RemoveFigureCommand(controlUnit, figures);
         }

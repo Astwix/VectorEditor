@@ -40,19 +40,24 @@ namespace VectorEditorProject.Core.States
         public override void MouseDown(object sender, MouseEventArgs e)
         {
             FigureFactory figureFactory = new FigureFactory();
-            FigureBase figure = figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
+            FigureBase figure =
+                figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
             if (figure is FilledFigureBase filledFigure)
             {
-                filledFigure.FillSettings = _controlUnit.GetActiveFillSettings();
+                filledFigure.FillSettings =
+                    _controlUnit.GetActiveFillSettings();
             }
+
             figure.LineSettings = _controlUnit.GetActiveLineSettings();
             figure.PointsSettings.AddPoint(new PointF(e.X, e.Y));
 
-            var command = CommandFactory.CreateAddFigureCommand(_controlUnit, figure);
+            var command = CommandFactory.CreateAddFigureCommand(_controlUnit,
+                figure);
             _controlUnit.StoreCommand(command);
             _controlUnit.Do();
 
-            if (_controlUnit.GetDocument().GetFigures().Last().PointsSettings.CanAddPoint())
+            if (_controlUnit.GetDocument().GetFigures().Last()
+                .PointsSettings.CanAddPoint())
             {
                 _editContext.SetActiveFigure(figure);
                 _editContext.SetActiveState(EditContext.States.AddPointState);

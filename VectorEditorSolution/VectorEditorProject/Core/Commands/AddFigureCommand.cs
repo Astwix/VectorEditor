@@ -25,10 +25,14 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlControlUnit">Control ControlUnit</param>
         /// <param name="figure">Фигура</param>
-        public AddFigureCommand(ControlUnit controlControlUnit, FigureBase figure)
+        public AddFigureCommand(ControlUnit controlControlUnit, 
+            FigureBase figure)
         {
             ControlUnit = controlControlUnit;
-            _figures = new List<FigureBase>() {figure};
+            _figures = new List<FigureBase>()
+            {
+                figure
+            };
         }
 
         /// <summary>
@@ -36,7 +40,8 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlControlUnit">Control ControlUnit</param>
         /// <param name="figures">Фигуры</param>
-        public AddFigureCommand(ControlUnit controlControlUnit, IReadOnlyList<FigureBase> figures)
+        public AddFigureCommand(ControlUnit controlControlUnit,
+            IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlControlUnit;
             _figures = figures;
@@ -50,7 +55,8 @@ namespace VectorEditorProject.Core.Commands
             FigureFactory figureFactory = new FigureFactory();
             foreach (var figure in _figures)
             {
-                ControlUnit.GetDocument().AddFigure(figureFactory.CopyFigure(figure));
+                ControlUnit.GetDocument()
+                    .AddFigure(figureFactory.CopyFigure(figure));
             }
         }
 

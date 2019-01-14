@@ -20,7 +20,8 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="figure">Фигура</param>
         /// <param name="point">Точка</param>
         /// <param name="controlUnit">controlUnit</param>
-        public AddPointCommand(FigureBase figure, PointF point, ControlUnit controlUnit)
+        public AddPointCommand(FigureBase figure, PointF point,
+            ControlUnit controlUnit)
         {
             _guid = figure.guid;
             _point = point;
@@ -32,7 +33,9 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            ControlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.AddPoint(_point);
+            ControlUnit.GetDocument()
+                .GetFigure(_guid)
+                ?.PointsSettings.AddPoint(_point);
         }
 
         /// <summary>
@@ -40,7 +43,9 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Undo()
         {
-            ControlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.DeletePoint(_point);
+            ControlUnit.GetDocument()
+                .GetFigure(_guid)
+                ?.PointsSettings.DeletePoint(_point);
         }
 
         /// <summary>

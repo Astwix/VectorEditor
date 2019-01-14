@@ -117,5 +117,44 @@ namespace VectorEditorProject.Core.Commands
         {
             return new RemoveFigureCommand(controlUnit, figures);
         }
+
+        /// <summary>
+        /// Починить команды при восстановлении файла
+        /// Восстановление ссылки на Control Unit
+        /// </summary>
+        /// <param name="command">Команда</param>
+        /// <param name="controlUnit">Control Unit</param>
+        public static void MakeCommandOKAgain(CommandBase command, 
+            ControlUnit controlUnit)
+        {
+            switch (command)
+            {
+                case AddFigureCommand addFigureCommand:
+                    addFigureCommand.ControlUnit = controlUnit;
+                    break;
+
+                case AddPointCommand addPointCommand:
+                    addPointCommand.ControlUnit = controlUnit;
+                    break;
+
+                case ChangingDocumentOptionsCommand
+                    changingDocumentOptionsCommand:
+                    changingDocumentOptionsCommand.ControlUnit = controlUnit;
+                    break;
+
+                case ClearDocumentCommand clearDocumentCommand:
+                    clearDocumentCommand.ControlUnit = controlUnit;
+                    break;
+
+                case FiguresChangingCommand figuresChangingCommand:
+                    figuresChangingCommand.ControlUnit = controlUnit;
+                    break;
+
+                case RemoveFigureCommand removeFigureCommand:
+                    removeFigureCommand.ControlUnit = controlUnit;
+                    break;
+            }
+
+        }
     }
 }

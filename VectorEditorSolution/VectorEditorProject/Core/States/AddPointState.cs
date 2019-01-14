@@ -45,6 +45,7 @@ namespace VectorEditorProject.Core.States
             if (activeFigure == null)
             {
                 editContext.SetActiveState(EditContext.States.SelectionState);
+                return;
             }
 
             var lastPoint = activeFigure.PointsSettings.GetPoints().Last();

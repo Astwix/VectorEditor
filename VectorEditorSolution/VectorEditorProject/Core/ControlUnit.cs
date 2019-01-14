@@ -152,6 +152,11 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Paste()
         {
+            if (_clipboard.Count == 0)
+            {
+                return;
+            }
+
             var figureFactory = new FigureFactory();
             var copiedClipboard = new List<FigureBase>();
 
@@ -487,41 +492,7 @@ namespace VectorEditorProject.Core
         {
             foreach (var command in _commands)
             {
-                if (command is AddFigureCommand addFigureCommand)
-                {
-                    addFigureCommand.ControlUnit = this;
-                    continue;
-                }
-
-                if (command is AddPointCommand addPointCommand)
-                {
-                    addPointCommand.ControlUnit = this;
-                    continue;
-                }
-
-                if (command is ChangingDocumentOptionsCommand changingDocumentOptionsCommand)
-                {
-                    changingDocumentOptionsCommand.ControlUnit = this;
-                    continue;
-                }
-
-                if (command is ClearDocumentCommand clearDocumentCommand)
-                {
-                    clearDocumentCommand.ControlUnit = this;
-                    continue;
-                }
-
-                if (command is FiguresChangingCommand figuresChangingCommand)
-                {
-                    figuresChangingCommand.ControlUnit = this;
-                    continue;
-                }
-
-                if (command is RemoveFigureCommand removeFigureCommand)
-                {
-                    removeFigureCommand.ControlUnit = this;
-                    continue;
-                }
+                CommandFactory.MakeCommandOKAgain(command, this);
             }
         }
     }

@@ -14,17 +14,17 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Фабрика рисования
         /// </summary>
-        private DrawerFactory _drawerFactory = new DrawerFactory();
+        private readonly DrawerFactory _drawerFactory = new DrawerFactory();
 
         /// <summary>
         /// Edit Context
         /// </summary>
-        private EditContext _editContext;
+        private readonly EditContext _editContext;
 
         /// <summary>
         /// Control Unit
         /// </summary>
-        private ControlUnit _controlUnit;
+        private readonly ControlUnit _controlUnit;
 
         /// <summary>
         /// Нажата ли кнопка мыши
@@ -44,7 +44,7 @@ namespace VectorEditorProject.Core.States
             var activeFigure = _editContext.GetActiveFigure();
             if (activeFigure == null)
             {
-                editContext.SetActiveState(EditContext.States.SelectionState);
+                editContext.SetActiveState(States.SelectionState);
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace VectorEditorProject.Core.States
             var activeFigure = _editContext.GetActiveFigure();
             if (activeFigure == null)
             {
-                _editContext.SetActiveState(EditContext.States.SelectionState);
+                _editContext.SetActiveState(States.SelectionState);
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace VectorEditorProject.Core.States
             var activeFigure = _editContext.GetActiveFigure();
             if (activeFigure == null)
             {
-                _editContext.SetActiveState(EditContext.States.SelectionState);
+                _editContext.SetActiveState(States.SelectionState);
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace VectorEditorProject.Core.States
             var activeFigure = _editContext.GetActiveFigure();
             if (activeFigure == null)
             {
-                _editContext.SetActiveState(EditContext.States.SelectionState);
+                _editContext.SetActiveState(States.SelectionState);
             }
 
             activeFigure.PointsSettings.RemoveLast();
@@ -136,7 +136,7 @@ namespace VectorEditorProject.Core.States
 
             if (!activeFigure.PointsSettings.CanAddPoint())
             {
-                _editContext.SetActiveState(EditContext.States.AddFigureState);
+                _editContext.SetActiveState(States.AddFigureState);
             }
         }
     }

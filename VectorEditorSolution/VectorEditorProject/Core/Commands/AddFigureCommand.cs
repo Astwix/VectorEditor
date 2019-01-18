@@ -13,12 +13,13 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Control Unit
         /// </summary>
-        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+        [field: NonSerialized]
+        public ControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Список фигур, доступный только для чтения
         /// </summary>
-        private IReadOnlyList<FigureBase> _figures;
+        private readonly IReadOnlyList<FigureBase> _figures;
 
         /// <summary>
         /// Конструктор создания команды

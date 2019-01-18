@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.States;
 
@@ -16,7 +15,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Control Unit
         /// </summary>
-        private ControlUnit _controlUnit;
+        private readonly ControlUnit _controlUnit;
 
         /// <summary>
         /// Активное состояние
@@ -31,7 +30,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Список выделенных фигур
         /// </summary>
-        private List<Guid> _selectedFigures = new List<Guid>();
+        private readonly List<Guid> _selectedFigures = new List<Guid>();
 
         /// <summary>
         /// Конструктор Edit Context
@@ -41,41 +40,18 @@ namespace VectorEditorProject.Core
         {
             _controlUnit = controlUnit;
 
-            SetActiveState(States.SelectionState);
-        }
-
-        /// <summary>
-        /// Перечисление состояний
-        /// </summary>
-        public enum States
-        {
-            /// <summary>
-            /// Состояние добавления фигуры
-            /// </summary>
-            AddFigureState,
-            /// <summary>
-            /// Состояние выделения
-            /// </summary>
-            SelectionState,
-            /// <summary>
-            /// Состояние добавления точки
-            /// </summary>
-            AddPointState,
-            /// <summary>
-            /// Состояние редактирования фигуры
-            /// </summary>
-            FigureEditingState
+            SetActiveState(States.States.SelectionState);
         }
 
         /// <summary>
         /// Установить активное состояние
         /// </summary>
         /// <param name="state">Состояние</param>
-        public void SetActiveState(States state)
+        public void SetActiveState(States.States state)
         {
             switch (state)
             {
-                case States.AddFigureState:
+                case States.States.AddFigureState:
                     // если есть выделение - сбросить
                     if (GetSelectedFigures().Count > 0)
                     {
@@ -86,17 +62,17 @@ namespace VectorEditorProject.Core
                         this);
                     break;
 
-                case States.AddPointState:
+                case States.States.AddPointState:
                     _activeState = new AddPointState(_controlUnit,
                         this);
                     break;
 
-                case States.SelectionState:
+                case States.States.SelectionState:
                     _activeState = new SelectionState(_controlUnit,
                         this);
                     break;
 
-                case States.FigureEditingState:
+                case States.States.FigureEditingState:
                     _activeState = new FigureEditingState(_controlUnit,
                         this);
                     break;

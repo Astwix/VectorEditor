@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.Drawing;
+using VectorEditorProject.Core.States;
 
 namespace VectorEditorProject.Forms
 {
@@ -58,12 +59,12 @@ namespace VectorEditorProject.Forms
         bool IsMousePressed()
         {
             // meh ok 
-            var lMB = GetAsyncKeyState(Keys.LButton);
-            var rMB = GetAsyncKeyState(Keys.RButton);
-            lMB = GetAsyncKeyState(Keys.LButton);
-            rMB = GetAsyncKeyState(Keys.RButton);
+            var leftMouseButton = GetAsyncKeyState(Keys.LButton);
+            var rightMouseButton = GetAsyncKeyState(Keys.RButton);
+            leftMouseButton = GetAsyncKeyState(Keys.LButton);
+            rightMouseButton = GetAsyncKeyState(Keys.RButton);
 
-            return lMB != 0 || rMB != 0;
+            return leftMouseButton != 0 || rightMouseButton != 0;
         }
 
         /// <summary>
@@ -191,7 +192,7 @@ namespace VectorEditorProject.Forms
         {
             if (e.KeyCode == Keys.Escape)
             {
-                _editContext.SetActiveState(EditContext.States.SelectionState);
+                _editContext.SetActiveState(States.SelectionState);
                 return;
             }
         }
@@ -216,7 +217,7 @@ namespace VectorEditorProject.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ExtrudeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (IsMousePressed())
             {

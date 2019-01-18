@@ -15,12 +15,12 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// <summary>
         /// Лимит точек
         /// </summary>
-        private int _limitPoint = 0;
+        private readonly int _limitPoint = 0;
 
         /// <summary>
         /// Список точек
         /// </summary>
-        private List<PointF> _points = new List<PointF>();
+        private readonly List<PointF> _points = new List<PointF>();
 
         /// <summary>
         /// Конструктор для безлимитных фигур

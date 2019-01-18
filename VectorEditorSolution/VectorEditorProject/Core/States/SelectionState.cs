@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.Figures.Utility;
 
@@ -18,19 +17,18 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Edit Context
         /// </summary>
-        private EditContext _editContext;
+        private readonly EditContext _editContext;
 
         /// <summary>
         /// Control Unit
         /// </summary>
-        private ControlUnit _controlUnit;
+        private readonly ControlUnit _controlUnit;
 
         /// <summary>
         /// Нажата ли клавиша мыши
         /// </summary>
         private bool _isMousePressed;
 
-        //todo Заменить точки на прямоугольник
         /// <summary>
         /// Начальный Х
         /// </summary>
@@ -42,34 +40,9 @@ namespace VectorEditorProject.Core.States
         private int _beginY;
 
         /// <summary>
-        /// Конечный Х
+        /// Прямоугольник выделения
         /// </summary>
-        private int _endX;
-
-        /// <summary>
-        /// Конечный У
-        /// </summary>
-        private int _endY;
-
-        /// <summary>
-        /// Левый верхний Х
-        /// </summary>
-        private int _leftTopX;
-
-        /// <summary>
-        /// Левый верхний У
-        /// </summary>
-        private int _leftTopY;
-
-        /// <summary>
-        /// Правый нижний Х
-        /// </summary>
-        private int _rightBottomX;
-
-        /// <summary>
-        /// Правый нижний У
-        /// </summary>
-        private int _rightBottomY;
+        private Rectangle _selectionRectangle;
 
         /// <summary>
         /// Конструктор состояния выделения
@@ -86,16 +59,14 @@ namespace VectorEditorProject.Core.States
         /// Рисование
         /// </summary>
         /// <param name="graphics">Graphics</param>
-        public override void Draw(
-            Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
             if (_isMousePressed)
             {
                 Pen pen = new Pen(Color.Black);
                 pen.DashStyle = DashStyle.Dot;
 
-                graphics.DrawRectangle(pen, _leftTopX, _leftTopY,
-                    _rightBottomX - _leftTopX, _rightBottomY - _leftTopY);
+                graphics.DrawRectangle(pen, _selectionRectangle);
 
                 pen.Dispose();
             }
@@ -112,8 +83,9 @@ namespace VectorEditorProject.Core.States
 
             _beginX = e.X;
             _beginY = e.Y;
-            _leftTopX = Math.Min(_beginX, _endX);
-            _leftTopY = Math.Min(_beginY, _endY);
+            _selectionRectangle = new Rectangle();
+            _selectionRectangle.X = e.X;
+            _selectionRectangle.Y = e.Y;
         }
 
         /// <summary>
@@ -122,15 +94,14 @@ namespace VectorEditorProject.Core.States
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public override void MouseMove(object sender, MouseEventArgs e)
-        {
-            _endX = e.X;
-            _endY = e.Y;
-
-            _leftTopX = Math.Min(_beginX, _endX);
-            _leftTopY = Math.Min(_beginY, _endY);
-            _rightBottomX = Math.Max(_beginX, _endX);
-            _rightBottomY = Math.Max(_beginY, _endY);
-
+        {   
+            _selectionRectangle.X = Math.Min(_beginX, e.X);
+            _selectionRectangle.Y = Math.Min(_beginY, e.Y);
+            _selectionRectangle.Width = Math.Max(_beginX, e.X) - 
+                                        _selectionRectangle.X;
+            _selectionRectangle.Height = Math.Max(_beginY, e.Y) - 
+                                         _selectionRectangle.Y;
+            
             _controlUnit.UpdateCanvas();
         }
 
@@ -147,10 +118,10 @@ namespace VectorEditorProject.Core.States
             }
 
             _isMousePressed = false;
-            if ((_rightBottomX - _leftTopX < 3) &&
-                (_rightBottomY - _leftTopY < 3))
+            if (_selectionRectangle.Width < 3 &&
+                _selectionRectangle.Height < 3)
             {
-                SingleSelection();
+                SingleSelection(e.X, e.Y);
             }
             else
             {
@@ -161,7 +132,7 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Единичное выделение
         /// </summary>
-        private void SingleSelection()
+        private void SingleSelection(int x, int y)
         {
             Dictionary<FigureBase, float> distanceToFigures =
                 new Dictionary<FigureBase, float>();
@@ -174,14 +145,14 @@ namespace VectorEditorProject.Core.States
                 {
                     float distance = FigureEditor.DistanceBetweenPoints(
                         figure.PointsSettings.GetPoints()[0],
-                        new PointF(_endX, _endY));
+                        new PointF(x, y));
 
                     // по точкам
                     foreach (var point in figure.PointsSettings.GetPoints())
                     {
                         distance = Math.Min(distance,
                             FigureEditor.DistanceBetweenPoints(point,
-                                new PointF(_endX, _endY)));
+                                new PointF(x, y)));
                     }
 
                     distanceToFigures.Add(figure, distance);
@@ -194,8 +165,7 @@ namespace VectorEditorProject.Core.States
                 {
                     nearFigure
                 });
-                _editContext.SetActiveState(EditContext.States
-                    .FigureEditingState);
+                _editContext.SetActiveState(States.FigureEditingState);
             }
         }
 
@@ -205,14 +175,11 @@ namespace VectorEditorProject.Core.States
         private void AreaSelection()
         {
             List<FigureBase> selectedFigures = new List<FigureBase>();
-            RectangleF selectionRectangle = new RectangleF(_leftTopX,
-                _leftTopY, _rightBottomX - _leftTopX,
-                _rightBottomY - _leftTopY);
 
             foreach (var figure in _controlUnit.GetDocument().GetFigures())
             {
                 if (FigureEditor.IsFigureInRectangle(figure,
-                    selectionRectangle))
+                    _selectionRectangle))
                 {
                     selectedFigures.Add(figure);
                 }
@@ -221,8 +188,7 @@ namespace VectorEditorProject.Core.States
             if (selectedFigures.Count > 0)
             {
                 _editContext.SetSelectedFigures(selectedFigures);
-                _editContext.SetActiveState(EditContext.States
-                    .FigureEditingState);
+                _editContext.SetActiveState(States.FigureEditingState);
             }
         }
     }

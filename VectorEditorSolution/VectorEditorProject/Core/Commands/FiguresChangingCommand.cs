@@ -20,12 +20,12 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Старые значения
         /// </summary>
-        private List<FigureBase> _oldValues = new List<FigureBase>();
+        private readonly List<FigureBase> _oldValues = new List<FigureBase>();
 
         /// <summary>
         /// Новые значения
         /// </summary>
-        private List<FigureBase> _newValues = new List<FigureBase>();
+        private readonly List<FigureBase> _newValues = new List<FigureBase>();
 
         /// <summary>
         /// Конструктор команды изменения фигур

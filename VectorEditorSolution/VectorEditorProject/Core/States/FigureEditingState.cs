@@ -17,12 +17,12 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Edit Context
         /// </summary>
-        private EditContext _editContext;
+        private readonly EditContext _editContext;
 
         /// <summary>
         /// Control Unit
         /// </summary>
-        private ControlUnit _controlUnit;
+        private readonly ControlUnit _controlUnit;
 
         /// <summary>
         /// Левый верхний маркер
@@ -82,7 +82,7 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Список опорных точек
         /// </summary>
-        private Dictionary<int, bool> _pointsHovered =
+        private readonly Dictionary<int, bool> _pointsHovered =
             new Dictionary<int, bool>();
 
         /// <summary>
@@ -98,17 +98,17 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Цвет маркера при наведении (выделение)
         /// </summary>
-        private Color _markerHoverColor = Color.DeepPink;
+        private readonly Color _markerHoverColor = Color.DeepPink;
 
         /// <summary>
         /// Цвет маркера при наведении (опорная точка)
         /// </summary>
-        private Color _markerRefPointHoverColor = Color.Aquamarine;
+        private readonly Color _markerRefPointHoverColor = Color.Aquamarine;
 
         /// <summary>
         /// Резервный список фигур
         /// </summary>
-        private List<FigureBase> _backUp = new List<FigureBase>();
+        private readonly List<FigureBase> _backUp = new List<FigureBase>();
 
         /// <summary>
         /// Конструктор состояния редактирования фигуры
@@ -161,14 +161,14 @@ namespace VectorEditorProject.Core.States
             }
             else
             {
-                _editContext.SetActiveState(EditContext.States.SelectionState);
+                _editContext.SetActiveState(States.SelectionState);
             }
         }
 
         /// <summary>
         /// Рисование
         /// </summary>
-        /// <param name="graphics"></param>
+        /// <param name="graphics">Объект graphics</param>
         public override void Draw(Graphics graphics)
         {
             var figures = _editContext.GetSelectedFigures();
@@ -320,7 +320,7 @@ namespace VectorEditorProject.Core.States
             else if (!_isLeftTopMarkerHovered &&
                      !_isRightBottomMarkerHovered)
             {
-                _editContext.SetActiveState(EditContext.States.SelectionState);
+                _editContext.SetActiveState(States.SelectionState);
             }
         }
 

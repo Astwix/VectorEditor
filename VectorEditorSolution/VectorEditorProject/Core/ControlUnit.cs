@@ -49,17 +49,17 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Control настроек фигуры
         /// </summary>
-        private FigureSettingsControl _figureSettingsControl;
+        private readonly FigureSettingsControl _figureSettingsControl;
 
         /// <summary>
         /// Control инструментов
         /// </summary>
-        private ToolsControl _toolsControl;
+        private readonly ToolsControl _toolsControl;
 
         /// <summary>
         /// Редактор свойств
         /// </summary>
-        private PropertyGrid _propertyGrid;
+        private readonly PropertyGrid _propertyGrid;
 
         /// <summary>
         /// Резервные свойства
@@ -69,19 +69,18 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Буфер обмена
         /// </summary>
-        private List<FigureBase> _clipboard = new List<FigureBase>();
+        private readonly List<FigureBase> _clipboard = new List<FigureBase>();
 
         /// <summary>
         /// Текущий документ
         /// </summary>
-        private Document _currentDocument = new Document("Untitled",
+        private readonly Document _currentDocument = new Document("Untitled",
             Color.White, new Size(400, 400));
 
         /// <summary>
         /// Словарь для обновления view по действию
         /// </summary>
-        private Dictionary<Type, List<Action>> _viewUpdateDictionary =
-            new Dictionary<Type, List<Action>>();
+        private readonly Dictionary<Type, List<Action>> _viewUpdateDictionary;
 
         /// <summary>
         /// Конструктор класса Control Unit
@@ -104,19 +103,37 @@ namespace VectorEditorProject.Core
             _propertyGrid.SelectedObjectsChanged +=
                 new EventHandler(this.PropertyGrid_SelectedObjectsChanged);
 
-            _viewUpdateDictionary.Add(typeof(AddFigureCommand),
-                new List<Action>(){ UpdateState, UpdateCanvas });
-            _viewUpdateDictionary.Add(typeof(AddPointCommand),
-                new List<Action>(){ UpdateState, UpdateCanvas });
-            _viewUpdateDictionary.Add(typeof(ClearDocumentCommand),
-                new List<Action>(){ UpdateState, UpdateCanvas });
-            _viewUpdateDictionary.Add(typeof(FiguresChangingCommand),
-                new List<Action>(){ UpdateState, UpdateCanvas });
-            _viewUpdateDictionary.Add(typeof(RemoveFigureCommand),
-                new List<Action>(){ UpdateState, UpdateCanvas,
-                    UpdatePropertyGrid });
-            _viewUpdateDictionary.Add(typeof(ChangingDocumentOptionsCommand),
-                new List<Action>(){ UpdateState, UpdateCanvas });
+            _viewUpdateDictionary = new Dictionary<Type, List<Action>>
+            {
+                {
+                    typeof(AddFigureCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(AddPointCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(ClearDocumentCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(FiguresChangingCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(RemoveFigureCommand),
+                    new List<Action>()
+                    {
+                        UpdateState, UpdateCanvas, UpdatePropertyGrid
+                    }
+                },
+                {
+                    typeof(ChangingDocumentOptionsCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                }
+            };
+
         }
 
         /// <summary>
@@ -185,7 +202,7 @@ namespace VectorEditorProject.Core
 
             EditContext.SetSelectedFigures(copiedClipboard);
 
-            EditContext.SetActiveState(EditContext.States.FigureEditingState);
+            EditContext.SetActiveState(States.States.FigureEditingState);
         }
 
         /// <summary>
@@ -257,9 +274,10 @@ namespace VectorEditorProject.Core
             {
                 command = _commands[_currentCommand];
             }
-            catch (Exception e)
+            catch (ArgumentOutOfRangeException e)
             {
-
+                // В массиве нет больше команд, которые можно применить
+                System.Media.SystemSounds.Beep.Play();
             }
 
             if (command == null)
@@ -283,9 +301,10 @@ namespace VectorEditorProject.Core
             {
                 command = _commands[_currentCommand - 1];
             }
-            catch (Exception e)
+            catch (ArgumentOutOfRangeException e)
             {
-
+                // В массиве нет больше команд, которые можно отменить
+                System.Media.SystemSounds.Beep.Play();
             }
 
             if (command == null)
@@ -347,7 +366,7 @@ namespace VectorEditorProject.Core
         /// Получить тип фигуры
         /// </summary>
         /// <returns>Тип фигуры</returns>
-        public FigureFactory.Figures GetActiveFigureType()
+        public Figures.Utility.Figures GetActiveFigureType()
         {
             return _toolsControl.GetActiveFigureType();
         }

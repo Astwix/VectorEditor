@@ -19,7 +19,7 @@ namespace VectorEditorProject.Forms
         /// <summary>
         /// Тип линии
         /// </summary>
-        private object _lastValidLineType;
+        private int _lastValidLineType;
 
         /// <summary>
         /// Конструктор control'а с настройками фигуры
@@ -40,7 +40,7 @@ namespace VectorEditorProject.Forms
             LineTypeComboBox.Items.Add(DashStyle.Dot);
             LineTypeComboBox.SelectedIndex = 0;
 
-            _lastValidLineType = LineTypeComboBox.SelectedItem;
+            _lastValidLineType = LineTypeComboBox.SelectedIndex;
         }
 
         /// <summary>
@@ -85,10 +85,10 @@ namespace VectorEditorProject.Forms
 
             if (LineTypeComboBox.SelectedItem == null)
             {
-                LineTypeComboBox.SelectedItem = _lastValidLineType;
+                LineTypeComboBox.SelectedIndex = _lastValidLineType;
             }
 
-            _lastValidLineType = LineTypeComboBox.SelectedItem;
+            _lastValidLineType = LineTypeComboBox.SelectedIndex;
 
             return new LineSettings(lineColorDialog.Color, width, (DashStyle)LineTypeComboBox.SelectedItem);
         }

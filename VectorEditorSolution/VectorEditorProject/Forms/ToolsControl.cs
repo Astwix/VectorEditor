@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using VectorEditorProject.Core;
-using VectorEditorProject.Core.Figures;
+using VectorEditorProject.Core.Figures.Utility;
+using VectorEditorProject.Core.States;
 
 namespace VectorEditorProject.Forms
 {
@@ -19,10 +20,12 @@ namespace VectorEditorProject.Forms
         /// <summary>
         /// Тип активной фигуры
         /// </summary>
-        private FigureFactory.Figures _activeFigureType;
+        private Figures _activeFigureType;
 
-        private Dictionary<object, FigureFactory.Figures> _figures = 
-            new Dictionary<object, FigureFactory.Figures>();
+        /// <summary>
+        /// Привязка кнопка -> фигура
+        /// </summary>
+        private readonly Dictionary<Button, Figures> _figures;
 
         /// <summary>
         /// Конструктор Control'а инструментов
@@ -31,11 +34,15 @@ namespace VectorEditorProject.Forms
         {
             InitializeComponent();
 
-            _figures.Add(LineButton, FigureFactory.Figures.Line);
-            _figures.Add(PolylineButton, FigureFactory.Figures.PolyLine);
-            _figures.Add(CircleButton, FigureFactory.Figures.Circle);
-            _figures.Add(EllipseButton, FigureFactory.Figures.Ellipse);
-            _figures.Add(PolygonButton, FigureFactory.Figures.Polygon);
+            _figures = new Dictionary<Button, Figures>
+            {
+                {LineButton, Figures.Line},
+                {PolylineButton, Figures.PolyLine},
+                {CircleButton, Figures.Circle},
+                {EllipseButton, Figures.Ellipse},
+                {PolygonButton, Figures.Polygon}
+            };
+
         }
 
         /// <summary>
@@ -45,9 +52,9 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void CreateFigure(object sender, EventArgs e)
         {
-            _activeFigureType = _figures[sender];
+            _activeFigureType = _figures[(Button)sender];
 
-            EditContext.SetActiveState(EditContext.States.AddFigureState);
+            EditContext.SetActiveState(States.AddFigureState);
         }
 
         /// <summary>
@@ -57,14 +64,14 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void selectionButton_Click(object sender, EventArgs e)
         {
-            EditContext.SetActiveState(EditContext.States.SelectionState);
+            EditContext.SetActiveState(States.SelectionState);
         }
 
         /// <summary>
         /// Получить тип активной фигуры
         /// </summary>
         /// <returns></returns>
-        public FigureFactory.Figures GetActiveFigureType()
+        public Figures GetActiveFigureType()
         {
             return _activeFigureType;
         }

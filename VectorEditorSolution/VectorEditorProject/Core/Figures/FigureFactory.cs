@@ -9,43 +9,31 @@ namespace VectorEditorProject.Core.Figures
     public class FigureFactory
     {
         /// <summary>
-        /// Перечисление фигур
-        /// </summary>
-        public enum Figures
-        {
-            Line,
-            PolyLine,
-            Polygon,
-            Circle,
-            Ellipse
-        }
-
-        /// <summary>
         /// Создание фигуры
         /// </summary>
         /// <param name="figureType">Тип фигуры из перечисления</param>
         /// <returns>Новый объект фигуры как базовый тип (Base)</returns>
-        public FigureBase CreateFigure(Figures figureType)
+        public FigureBase CreateFigure(Utility.Figures figureType)
         {
             switch (figureType)
             {
-                case Figures.Line:
+                case Utility.Figures.Line:
                     return new Line();
                     break;
 
-                case Figures.PolyLine:
+                case Utility.Figures.PolyLine:
                     return new PolyLine();
                     break;
 
-                case Figures.Polygon:
+                case Utility.Figures.Polygon:
                     return new Polygon();
                     break;
 
-                case Figures.Circle:
+                case Utility.Figures.Circle:
                     return new Circle();
                     break;
 
-                case Figures.Ellipse:
+                case Utility.Figures.Ellipse:
                     return new Ellipse();
                     break;
 
@@ -59,19 +47,19 @@ namespace VectorEditorProject.Core.Figures
         /// </summary>
         /// <param name="figureType">Тип фигуры из перечисления</param>
         /// <returns>Возвращает новый объект фигуры как базовый тип (FilledBase)</returns>
-        public FilledFigureBase CreateFilledFigure(Figures figureType)
+        public FilledFigureBase CreateFilledFigure(Utility.Figures figureType)
         {
             switch (figureType)
             {
-                case Figures.Polygon:
+                case Utility.Figures.Polygon:
                     return new Polygon();
                     break;
 
-                case Figures.Circle:
+                case Utility.Figures.Circle:
                     return new Circle();
                     break;
 
-                case Figures.Ellipse:
+                case Utility.Figures.Ellipse:
                     return new Ellipse();
                     break;
 

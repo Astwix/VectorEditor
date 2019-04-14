@@ -10,9 +10,21 @@ namespace VectorEditorProject.Core.Commands
     [Serializable]
     public class AddPointCommand : CommandBase
     {
-        private Guid _guid = Guid.Empty;
-        private PointF _point;
-        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+        /// <summary>
+        /// GUID фигуры
+        /// </summary>
+        private readonly Guid _guid = Guid.Empty;
+
+        /// <summary>
+        /// Точка
+        /// </summary>
+        private readonly PointF _point;
+
+        /// <summary>
+        /// Control Unit
+        /// </summary>
+        [field: NonSerialized]
+        public ControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Команда добавления точки

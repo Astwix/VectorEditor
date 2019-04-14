@@ -11,53 +11,24 @@ namespace VectorEditorProject.Core.Drawing
     public class DrawerFactory
     {
         /// <summary>
-        /// Рисование линии
+        /// Словарь тип фигуры -> конкретное рисование
         /// </summary>
-        private DrawerBase _lineDrawer;
-
-        /// <summary>
-        /// Рисование полилинии
-        /// </summary>
-        private DrawerBase _polyLineDrawer;
-
-        /// <summary>
-        /// Рисование полигона
-        /// </summary>
-        private DrawerBase _polygonDrawer;
-
-        /// <summary>
-        /// Рисование круга
-        /// </summary>
-        private DrawerBase _circleDrawer;
-
-        /// <summary>
-        /// Рисование эллипса
-        /// </summary>
-        private DrawerBase _ellipseDrawer;
-
-        /// <summary>
-        /// Словарь тип фигуры -> конкретныое рисование
-        /// </summary>
-        Dictionary<Type, DrawerBase> typeToDrawerBaseMap = null;
+        private readonly Dictionary<Type, DrawerBase> _typeToDrawerBaseMap = null;
 
         /// <summary>
         /// Конструктор фабрики фигур
         /// </summary>
         public DrawerFactory()
         {
-            typeToDrawerBaseMap = new Dictionary<Type, DrawerBase>();
+            _typeToDrawerBaseMap = new Dictionary<Type, DrawerBase>
+            {
+                {typeof(Line), new LineDrawer()},
+                {typeof(PolyLine), new PolyLineDrawer()},
+                {typeof(Polygon), new PolygonDrawer()},
+                {typeof(Circle), new CircleDrawer()},
+                {typeof(Ellipse), new EllipseDrawer()}
+            };
 
-            _lineDrawer = new LineDrawer();
-            _polyLineDrawer = new PolyLineDrawer();
-            _polygonDrawer = new PolygonDrawer();
-            _circleDrawer = new CircleDrawer();
-            _ellipseDrawer = new EllipseDrawer();
-
-            typeToDrawerBaseMap.Add(typeof(Line), _lineDrawer);
-            typeToDrawerBaseMap.Add(typeof(PolyLine), _polyLineDrawer);
-            typeToDrawerBaseMap.Add(typeof(Polygon), _polygonDrawer);
-            typeToDrawerBaseMap.Add(typeof(Circle), _circleDrawer);
-            typeToDrawerBaseMap.Add(typeof(Ellipse), _ellipseDrawer);
         }
 
         /// <summary>
@@ -67,18 +38,18 @@ namespace VectorEditorProject.Core.Drawing
         /// <param name="graphics">Графика</param>
         public void DrawFigure(FigureBase baseFigure, Graphics graphics)
         {
-            typeToDrawerBaseMap[baseFigure.GetType()].DrawFigure(baseFigure,
+            _typeToDrawerBaseMap[baseFigure.GetType()].DrawFigure(baseFigure,
                     graphics);
         }
 
         /// <summary>
-        /// Рисование границы
+        /// Рисование границы фигуры
         /// </summary>
         /// <param name="baseFigure">Базовая фигура</param>
         /// <param name="graphics">Графика</param>
         public void DrawBorder(FigureBase baseFigure, Graphics graphics)
         {
-            typeToDrawerBaseMap[baseFigure.GetType()].DrawBorder(baseFigure,
+            _typeToDrawerBaseMap[baseFigure.GetType()].DrawBorder(baseFigure,
                     graphics);
         }
 

@@ -58,6 +58,7 @@
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\EditContext.cs" />
     <Compile Include="Core\Figures\Utility\FigureEditor.cs" />
+    <Compile Include="Core\Figures\Utility\FiguresEnum.cs" />
     <Compile Include="Core\States\AddFigureState.cs" />
     <Compile Include="Core\States\AddPointState.cs" />
     <Compile Include="Core\States\StateBase.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Core\Figures\Utility\FillSettings.cs" />
     <Compile Include="Core\Figures\Utility\LineSettings.cs" />
     <Compile Include="Core\Figures\Utility\PointsSettings.cs" />
+    <Compile Include="Core\States\StatesEnum.cs" />
     <Compile Include="Forms\DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>

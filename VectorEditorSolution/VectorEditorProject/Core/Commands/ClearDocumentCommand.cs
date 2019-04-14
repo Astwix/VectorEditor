@@ -13,12 +13,13 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Control Unit
         /// </summary>
-        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+        [field: NonSerialized]
+        public ControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Список резервных фигур
         /// </summary>
-        private List<FigureBase> _backUpFigures = new List<FigureBase>();
+        private readonly List<FigureBase> _backUpFigures = new List<FigureBase>();
 
         /// <summary>
         /// Констуктор команды очистки документа

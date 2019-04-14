@@ -12,37 +12,38 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Control Unit
         /// </summary>
-        [field: NonSerialized] public ControlUnit ControlUnit { get; set; }
+        [field: NonSerialized]
+        public ControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Новый размер канвы
         /// </summary>
-        private Size _newSize;
+        private readonly Size _newSize;
 
         /// <summary>
         /// Резервный размер канвы
         /// </summary>
-        private Size _backUpSize;
+        private readonly Size _backUpSize;
 
         /// <summary>
         /// Новый цвет
         /// </summary>
-        private Color _newColor;
+        private readonly Color _newColor;
 
         /// <summary>
         /// Резервный цвет
         /// </summary>
-        private Color _backUpColor;
+        private readonly Color _backUpColor;
 
         /// <summary>
         /// Новое название
         /// </summary>
-        private String _newName;
+        private readonly String _newName;
 
         /// <summary>
         /// Резервное название
         /// </summary>
-        private String _backUpName;
+        private readonly String _backUpName;
 
         /// <summary>
         /// Изменение свойств документа

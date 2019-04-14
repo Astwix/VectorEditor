@@ -14,12 +14,12 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Edit Context
         /// </summary>
-        private EditContext _editContext;
+        private readonly EditContext _editContext;
 
         /// <summary>
         /// Control Unit
         /// </summary>
-        private ControlUnit _controlUnit;
+        private readonly ControlUnit _controlUnit;
 
         /// <summary>
         /// Конструктор состояния добавления фигуры
@@ -60,11 +60,11 @@ namespace VectorEditorProject.Core.States
                 .PointsSettings.CanAddPoint())
             {
                 _editContext.SetActiveFigure(figure);
-                _editContext.SetActiveState(EditContext.States.AddPointState);
+                _editContext.SetActiveState(States.AddPointState);
             }
             else
             {
-                _editContext.SetActiveState(EditContext.States.SelectionState);
+                _editContext.SetActiveState(States.SelectionState);
             }
         }
     }

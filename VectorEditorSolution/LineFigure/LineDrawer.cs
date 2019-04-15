@@ -1,8 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using VectorEditorProject.Core.Figures;
+using System.Text;
+using System.Threading.Tasks;
+using SDK;
 
-namespace VectorEditorProject.Core.Drawing
+namespace LineFigure
 {
     /// <summary>
     /// Рисование линии

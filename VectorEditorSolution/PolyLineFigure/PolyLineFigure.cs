@@ -1,21 +1,30 @@
 ﻿using System;
-using VectorEditorProject.Core.Figures.Utility;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SDK;
 
-namespace VectorEditorProject.Core.Figures
+namespace PolyLineFigure
 {
     /// <summary>
     /// Полилиния
     /// </summary>
     [Serializable]
-    public class PolyLine : FigureBase
+    public class PolyLineFigure : FigureBase
     {
         /// <summary>
         /// Конструктор "Полилиния"
         /// </summary>
-        public PolyLine()
+        public PolyLineFigure()
         {
             _lineSettings = new LineSettings();
             _pointsSettings = new PointsSettings();
+        }
+
+        public override string GetFigureName()
+        {
+            return "PolyLine";
         }
     }
 }

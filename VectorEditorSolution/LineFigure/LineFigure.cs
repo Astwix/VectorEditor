@@ -1,21 +1,30 @@
 ﻿using System;
-using VectorEditorProject.Core.Figures.Utility;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SDK;
 
-namespace VectorEditorProject.Core.Figures
+namespace LineFigure
 {
     /// <summary>
     /// Линия
     /// </summary>
     [Serializable]
-    public class Line : FigureBase
+    public class LineFigure : FigureBase
     {
         /// <summary>
         /// Конструктор "Линия"
         /// </summary>
-        public Line()
+        public LineFigure()
         {
             _lineSettings = new LineSettings();
             _pointsSettings = new PointsSettings(2);
+        }
+
+        public override string GetFigureName()
+        {
+            return "Line";
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using VectorEditorProject.Core.Figures;
-using VectorEditorProject.Core.Figures.Utility;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SDK;
 
-namespace VectorEditorProject.Core.Drawing
+namespace EllipseFigure
 {
     /// <summary>
     /// Рисование эллипса
@@ -26,8 +29,8 @@ namespace VectorEditorProject.Core.Drawing
                     return;
                 }
 
-                var leftTopPoint = FigureEditor.LeftTopPointF(figure);
-                var rightBottomPoint = FigureEditor.RightBottomPointF(figure);
+                var leftTopPoint = figure.PointsSettings.LeftTopPointF();
+                var rightBottomPoint = figure.PointsSettings.RightBottomPointF();
 
                 float deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
                 float deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using VectorEditorProject.Core.Figures.Utility;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace VectorEditorProject.Core.Figures
+namespace SDK
 {
     /// <summary>
     /// Базовая фигура
@@ -50,12 +53,11 @@ namespace VectorEditorProject.Core.Figures
         {
             if (PointsSettings.GetPoints().Count < 2)
             {
-                new Rectangle();
+                return new Rectangle();
             }
 
-            Point leftTopPoint = Point.Round(FigureEditor.LeftTopPointF(this));
-            Point rightBottomPoint =
-                Point.Round(FigureEditor.RightBottomPointF(this));
+            Point leftTopPoint = Point.Round(_pointsSettings.LeftTopPointF());
+            Point rightBottomPoint = Point.Round(_pointsSettings.RightBottomPointF());
 
             return new Rectangle(leftTopPoint.X, leftTopPoint.Y,
                 rightBottomPoint.X - leftTopPoint.X,
@@ -70,5 +72,11 @@ namespace VectorEditorProject.Core.Figures
         {
             return _lineSettings.GetHashCode() + _pointsSettings.GetHashCode();
         }
+
+        /// <summary>
+        /// Получить название фигуры
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetFigureName();
     }
 }

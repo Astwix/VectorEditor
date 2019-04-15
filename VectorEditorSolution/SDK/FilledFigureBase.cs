@@ -1,7 +1,10 @@
 ﻿using System;
-using VectorEditorProject.Core.Figures.Utility;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace VectorEditorProject.Core.Figures
+namespace SDK
 {
     /// <summary>
     /// Базовая фигура с заливкой

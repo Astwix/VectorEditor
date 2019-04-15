@@ -46,11 +46,11 @@
             this.PasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainLeftSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.FigureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
             this.MainLeftBottomSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
             this.PropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.WrapPictureBox = new System.Windows.Forms.Panel();
+            this.FigureSettingsControl = new VectorEditorProject.Forms.FigureSettingsControl();
+            this.ToolsUserControl = new VectorEditorProject.Forms.ToolsControl();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.TopToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainLeftSplitContainer)).BeginInit();
@@ -230,13 +230,6 @@
             this.MainLeftSplitContainer.SplitterDistance = 117;
             this.MainLeftSplitContainer.TabIndex = 9;
             // 
-            // FigureSettingsControl
-            // 
-            this.FigureSettingsControl.Location = new System.Drawing.Point(3, 3);
-            this.FigureSettingsControl.Name = "FigureSettingsControl";
-            this.FigureSettingsControl.Size = new System.Drawing.Size(240, 120);
-            this.FigureSettingsControl.TabIndex = 8;
-            // 
             // MainLeftBottomSplitContainer
             // 
             this.MainLeftBottomSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -252,16 +245,8 @@
             // 
             this.MainLeftBottomSplitContainer.Panel2.Controls.Add(this.PropertyGrid);
             this.MainLeftBottomSplitContainer.Size = new System.Drawing.Size(253, 404);
-            this.MainLeftBottomSplitContainer.SplitterDistance = 100;
+            this.MainLeftBottomSplitContainer.SplitterDistance = 242;
             this.MainLeftBottomSplitContainer.TabIndex = 1;
-            // 
-            // ToolsUserControl
-            // 
-            this.ToolsUserControl.EditContext = null;
-            this.ToolsUserControl.Location = new System.Drawing.Point(3, 3);
-            this.ToolsUserControl.Name = "ToolsUserControl";
-            this.ToolsUserControl.Size = new System.Drawing.Size(240, 90);
-            this.ToolsUserControl.TabIndex = 0;
             // 
             // PropertyGrid
             // 
@@ -271,7 +256,7 @@
             this.PropertyGrid.Margin = new System.Windows.Forms.Padding(5);
             this.PropertyGrid.Name = "PropertyGrid";
             this.PropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.PropertyGrid.Size = new System.Drawing.Size(253, 300);
+            this.PropertyGrid.Size = new System.Drawing.Size(253, 158);
             this.PropertyGrid.TabIndex = 0;
             this.PropertyGrid.ToolbarVisible = false;
             // 
@@ -283,6 +268,21 @@
             this.WrapPictureBox.Name = "WrapPictureBox";
             this.WrapPictureBox.Size = new System.Drawing.Size(729, 525);
             this.WrapPictureBox.TabIndex = 10;
+            // 
+            // FigureSettingsControl
+            // 
+            this.FigureSettingsControl.Location = new System.Drawing.Point(3, 3);
+            this.FigureSettingsControl.Name = "FigureSettingsControl";
+            this.FigureSettingsControl.Size = new System.Drawing.Size(240, 120);
+            this.FigureSettingsControl.TabIndex = 8;
+            // 
+            // ToolsUserControl
+            // 
+            this.ToolsUserControl.EditContext = null;
+            this.ToolsUserControl.Location = new System.Drawing.Point(3, 3);
+            this.ToolsUserControl.Name = "ToolsUserControl";
+            this.ToolsUserControl.Size = new System.Drawing.Size(240, 235);
+            this.ToolsUserControl.TabIndex = 0;
             // 
             // MainForm
             // 

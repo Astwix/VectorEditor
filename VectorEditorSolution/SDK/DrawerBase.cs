@@ -1,8 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
-using VectorEditorProject.Core.Figures;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace VectorEditorProject.Core.Drawing
+namespace SDK
 {
     /// <summary>
     /// Базовое рисование

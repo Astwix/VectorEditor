@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using SDK;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.Figures;
-using VectorEditorProject.Core.Figures.Utility;
 using VectorEditorProject.Forms;
 
 namespace VectorEditorProject.Core
@@ -182,13 +182,13 @@ namespace VectorEditorProject.Core
                 var copy = figureFactory.CopyFigure(figure);
                 copy.guid = Guid.NewGuid();
 
-                var leftTopPoint = FigureEditor.LeftTopPointF(copy);
-                var rightBottomPoint = FigureEditor.RightBottomPointF(copy);
+                var leftTopPoint = copy.PointsSettings.LeftTopPointF();
+                var rightBottomPoint = copy.PointsSettings.RightBottomPointF();
                 var rectangle = new RectangleF(0, 0,
                     rightBottomPoint.X - leftTopPoint.X,
                     rightBottomPoint.Y - leftTopPoint.Y);
 
-                FigureEditor.EditFiguresSize(copy, rectangle);
+                copy.PointsSettings.EditFiguresSize(rectangle);
 
                 copiedClipboard.Add(copy);
             }
@@ -366,7 +366,7 @@ namespace VectorEditorProject.Core
         /// Получить тип фигуры
         /// </summary>
         /// <returns>Тип фигуры</returns>
-        public Figures.Utility.Figures GetActiveFigureType()
+        public string GetActiveFigureType()
         {
             return _toolsControl.GetActiveFigureType();
         }

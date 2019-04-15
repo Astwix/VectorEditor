@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using VectorEditorProject.Core;
-using VectorEditorProject.Core.Figures.Utility;
+using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.States;
 
 namespace VectorEditorProject.Forms
@@ -20,12 +21,12 @@ namespace VectorEditorProject.Forms
         /// <summary>
         /// Тип активной фигуры
         /// </summary>
-        private Figures _activeFigureType;
+        private string _activeFigureType;
 
         /// <summary>
         /// Привязка кнопка -> фигура
         /// </summary>
-        private readonly Dictionary<Button, Figures> _figures;
+        private readonly Dictionary<Button, string> _figures;
 
         /// <summary>
         /// Конструктор Control'а инструментов
@@ -33,16 +34,22 @@ namespace VectorEditorProject.Forms
         public ToolsControl()
         {
             InitializeComponent();
-
-            _figures = new Dictionary<Button, Figures>
+            int startVerticalpos = 10;
+            FigureFactory figureFactory = new FigureFactory();
+            foreach (var loadedFigure in figureFactory.GetLoadedFigures())
             {
-                {LineButton, Figures.Line},
-                {PolylineButton, Figures.PolyLine},
-                {CircleButton, Figures.Circle},
-                {EllipseButton, Figures.Ellipse},
-                {PolygonButton, Figures.Polygon}
-            };
+                Button figureButton = new Button {Text = loadedFigure};
+                figureButton.Click += new EventHandler(FigureButtonOnClick);
+                figureButton.Location = new Point(10, startVerticalpos);
+                FiguresPanel.Controls.Add(figureButton);
+                startVerticalpos += figureButton.Height + 10;
+            }
+        }
 
+        private void FigureButtonOnClick(object sender, EventArgs e)
+        {
+            _activeFigureType = ((Button) sender).Text;
+            EditContext.SetActiveState(States.AddFigureState);
         }
 
         /// <summary>
@@ -71,7 +78,7 @@ namespace VectorEditorProject.Forms
         /// Получить тип активной фигуры
         /// </summary>
         /// <returns></returns>
-        public Figures GetActiveFigureType()
+        public string GetActiveFigureType()
         {
             return _activeFigureType;
         }

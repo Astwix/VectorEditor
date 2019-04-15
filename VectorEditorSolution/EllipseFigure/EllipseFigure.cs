@@ -1,22 +1,31 @@
 ﻿using System;
-using VectorEditorProject.Core.Figures.Utility;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SDK;
 
-namespace VectorEditorProject.Core.Figures
+namespace EllipseFigure
 {
     /// <summary>
     /// Эллипс
     /// </summary>
     [Serializable]
-    public class Ellipse : FilledFigureBase
+    public class EllipseFigure : FilledFigureBase
     {
         /// <summary>
         /// Конструктор "Эллипс"
         /// </summary>
-        public Ellipse()
+        public EllipseFigure()
         {
             _lineSettings = new LineSettings();
             _pointsSettings = new PointsSettings(2);
             _fillSettings = new FillSettings();
+        }
+
+        public override string GetFigureName()
+        {
+            return "Ellipse";
         }
     }
 }

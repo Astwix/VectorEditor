@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using VectorEditorProject.Core.Figures.Utility;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SDK;
 
-namespace VectorEditorProject.Core.Figures
+namespace CircleFigure
 {
     /// <summary>
     /// Круг
     /// </summary>
     [Serializable]
-    class Circle : FilledFigureBase
+    public class CircleFigure : FilledFigureBase
     {
         /// <summary>
         /// Конструктор "Круг"
         /// </summary>
-        public Circle()
+        public CircleFigure()
         {
             _lineSettings = new LineSettings();
             _pointsSettings = new PointsSettings(2);
@@ -31,9 +35,9 @@ namespace VectorEditorProject.Core.Figures
                 new Rectangle();
             }
 
-            Point leftTopPoint = Point.Round(FigureEditor.LeftTopPointF(this));
+            Point leftTopPoint = Point.Round(_pointsSettings.LeftTopPointF());
             Point rightBottomPoint =
-                Point.Round(FigureEditor.RightBottomPointF(this));
+                Point.Round(_pointsSettings.RightBottomPointF());
 
             int deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
             int deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
@@ -41,6 +45,11 @@ namespace VectorEditorProject.Core.Figures
 
             return new Rectangle(leftTopPoint.X, leftTopPoint.Y,
                 distance, distance);
+        }
+
+        public override string GetFigureName()
+        {
+            return "Circle";
         }
     }
 }

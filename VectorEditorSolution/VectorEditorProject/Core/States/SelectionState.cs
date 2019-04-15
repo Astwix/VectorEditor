@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
+using SDK;
 using VectorEditorProject.Core.Figures;
-using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.States
 {
@@ -143,7 +143,7 @@ namespace VectorEditorProject.Core.States
                 // по фигурам
                 foreach (var figure in figures)
                 {
-                    float distance = FigureEditor.DistanceBetweenPoints(
+                    float distance = PointsSettings.DistanceBetweenPoints(
                         figure.PointsSettings.GetPoints()[0],
                         new PointF(x, y));
 
@@ -151,7 +151,7 @@ namespace VectorEditorProject.Core.States
                     foreach (var point in figure.PointsSettings.GetPoints())
                     {
                         distance = Math.Min(distance,
-                            FigureEditor.DistanceBetweenPoints(point,
+                            PointsSettings.DistanceBetweenPoints(point,
                                 new PointF(x, y)));
                     }
 
@@ -178,8 +178,7 @@ namespace VectorEditorProject.Core.States
 
             foreach (var figure in _controlUnit.GetDocument().GetFigures())
             {
-                if (FigureEditor.IsFigureInRectangle(figure,
-                    _selectionRectangle))
+                if (figure.PointsSettings.IsFigureInRectangle(_selectionRectangle))
                 {
                     selectedFigures.Add(figure);
                 }

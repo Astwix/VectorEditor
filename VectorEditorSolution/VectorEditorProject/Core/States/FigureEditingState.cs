@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
+using SDK;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.Figures;
-using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.States
 {
@@ -131,10 +131,17 @@ namespace VectorEditorProject.Core.States
             var selectedFigures = _editContext.GetSelectedFigures();
             if (selectedFigures.Count > 0)
             {
+                List<PointF> figuresPoints = new List<PointF>();
+
+                foreach (var selectedFigure in selectedFigures)
+                {
+                    figuresPoints.AddRange(selectedFigure.PointsSettings.GetPoints());
+                }
+
                 // инициализация маркеров
-                _leftTopMarker = FigureEditor.LeftTopPointF(selectedFigures);
+                _leftTopMarker = PointsSettings.LeftTopPointF(figuresPoints);
                 _rightBottomMarker =
-                    FigureEditor.RightBottomPointF(selectedFigures);
+                    PointsSettings.RightBottomPointF(figuresPoints);
 
                 // инициализация прямоугольника выделения
                 _selectionRectangle = selectedFigures[0]
@@ -252,10 +259,38 @@ namespace VectorEditorProject.Core.States
         /// </summary>
         private void EditFigure()
         {
-            FigureEditor.EditFiguresSize(_editContext.GetSelectedFigures(),
-                new RectangleF(_leftTopMarker.X, _leftTopMarker.Y,
-                    _rightBottomMarker.X - _leftTopMarker.X,
-                    _rightBottomMarker.Y - _leftTopMarker.Y));
+            RectangleF newSize = new RectangleF(
+                _leftTopMarker.X, _leftTopMarker.Y,
+                _rightBottomMarker.X - _leftTopMarker.X,
+                _rightBottomMarker.Y - _leftTopMarker.Y);
+
+            List<PointF> figuresPoints = new List<PointF>();
+            foreach (var selectedFigure in _editContext.GetSelectedFigures())
+            {
+                figuresPoints.AddRange(selectedFigure.PointsSettings.GetPoints());
+            }
+
+            var leftTopPoint = PointsSettings.LeftTopPointF(figuresPoints);
+            var rightBottomPoint = PointsSettings.RightBottomPointF(figuresPoints);
+            var rectWidth = rightBottomPoint.X - leftTopPoint.X;
+            var rectHeight = rightBottomPoint.Y - leftTopPoint.Y;
+
+            foreach (var selectedFigure in _editContext.GetSelectedFigures())
+            {
+                var points = selectedFigure.PointsSettings.GetPoints().ToArray();
+                for (int i = 0; i < points.Length; i++)
+                {
+                    PointF newPoint = new PointF();
+                    newPoint.X = newSize.X + newSize.Width *
+                                 ((points[i].X - leftTopPoint.X) /
+                                  rectWidth);
+                    newPoint.Y = newSize.Y + newSize.Height *
+                                 ((points[i].Y - leftTopPoint.Y) /
+                                  rectHeight);
+
+                    selectedFigure.PointsSettings.ReplacePoint(i, newPoint);
+                }
+            }
 
             var selectedFigures = _editContext.GetSelectedFigures();
             _selectionRectangle = selectedFigures[0].GetBorderRectangle();
@@ -366,9 +401,17 @@ namespace VectorEditorProject.Core.States
                 {
                     figures[0].PointsSettings.ReplacePoint(_activePoint,
                             new PointF(e.X, e.Y));
-                    _leftTopMarker = FigureEditor.LeftTopPointF(figures);
+
+                    List<PointF> figuresPoints = new List<PointF>();
+                    foreach (var figure in figures)
+                    {
+                        figuresPoints.AddRange(figure.PointsSettings.GetPoints());
+                    }
+
+                    _leftTopMarker = PointsSettings.LeftTopPointF(figuresPoints);
                     _rightBottomMarker =
-                        FigureEditor.RightBottomPointF(figures);
+                        PointsSettings.RightBottomPointF(figuresPoints);
+
                     EditFigure();
                     _controlUnit.UpdateCanvas();
                     return;

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using VectorEditorProject.Core.Figures.Utility;
+using SDK;
 
 namespace VectorEditorProject.Forms
 {

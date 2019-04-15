@@ -28,37 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LineButton = new System.Windows.Forms.Button();
-            this.PolylineButton = new System.Windows.Forms.Button();
             this.SelectionButton = new System.Windows.Forms.Button();
-            this.CircleButton = new System.Windows.Forms.Button();
-            this.PolygonButton = new System.Windows.Forms.Button();
-            this.EllipseButton = new System.Windows.Forms.Button();
+            this.FiguresGroupBox = new System.Windows.Forms.GroupBox();
+            this.FiguresPanel = new System.Windows.Forms.Panel();
+            this.FiguresGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // LineButton
-            // 
-            this.LineButton.Location = new System.Drawing.Point(3, 3);
-            this.LineButton.Name = "LineButton";
-            this.LineButton.Size = new System.Drawing.Size(110, 25);
-            this.LineButton.TabIndex = 8;
-            this.LineButton.Text = "Линия";
-            this.LineButton.UseVisualStyleBackColor = true;
-            this.LineButton.Click += new System.EventHandler(this.CreateFigure);
-            // 
-            // PolylineButton
-            // 
-            this.PolylineButton.Location = new System.Drawing.Point(3, 34);
-            this.PolylineButton.Name = "PolylineButton";
-            this.PolylineButton.Size = new System.Drawing.Size(110, 25);
-            this.PolylineButton.TabIndex = 9;
-            this.PolylineButton.Text = "Полилиния";
-            this.PolylineButton.UseVisualStyleBackColor = true;
-            this.PolylineButton.Click += new System.EventHandler(this.CreateFigure);
             // 
             // SelectionButton
             // 
-            this.SelectionButton.Location = new System.Drawing.Point(127, 65);
+            this.SelectionButton.Location = new System.Drawing.Point(3, 3);
             this.SelectionButton.Name = "SelectionButton";
             this.SelectionButton.Size = new System.Drawing.Size(110, 25);
             this.SelectionButton.TabIndex = 13;
@@ -66,59 +44,41 @@
             this.SelectionButton.UseVisualStyleBackColor = true;
             this.SelectionButton.Click += new System.EventHandler(this.selectionButton_Click);
             // 
-            // CircleButton
+            // FiguresGroupBox
             // 
-            this.CircleButton.Location = new System.Drawing.Point(127, 3);
-            this.CircleButton.Name = "CircleButton";
-            this.CircleButton.Size = new System.Drawing.Size(110, 25);
-            this.CircleButton.TabIndex = 10;
-            this.CircleButton.Text = "Круг";
-            this.CircleButton.UseVisualStyleBackColor = true;
-            this.CircleButton.Click += new System.EventHandler(this.CreateFigure);
+            this.FiguresGroupBox.Controls.Add(this.FiguresPanel);
+            this.FiguresGroupBox.Location = new System.Drawing.Point(3, 34);
+            this.FiguresGroupBox.Name = "FiguresGroupBox";
+            this.FiguresGroupBox.Size = new System.Drawing.Size(234, 199);
+            this.FiguresGroupBox.TabIndex = 14;
+            this.FiguresGroupBox.TabStop = false;
+            this.FiguresGroupBox.Text = "Список фигур";
             // 
-            // PolygonButton
+            // FiguresPanel
             // 
-            this.PolygonButton.Location = new System.Drawing.Point(3, 65);
-            this.PolygonButton.Name = "PolygonButton";
-            this.PolygonButton.Size = new System.Drawing.Size(110, 25);
-            this.PolygonButton.TabIndex = 12;
-            this.PolygonButton.Text = "Полигон";
-            this.PolygonButton.UseVisualStyleBackColor = true;
-            this.PolygonButton.Click += new System.EventHandler(this.CreateFigure);
-            // 
-            // EllipseButton
-            // 
-            this.EllipseButton.Location = new System.Drawing.Point(127, 34);
-            this.EllipseButton.Name = "EllipseButton";
-            this.EllipseButton.Size = new System.Drawing.Size(110, 25);
-            this.EllipseButton.TabIndex = 11;
-            this.EllipseButton.Text = "Эллипс";
-            this.EllipseButton.UseVisualStyleBackColor = true;
-            this.EllipseButton.Click += new System.EventHandler(this.CreateFigure);
+            this.FiguresPanel.AutoScroll = true;
+            this.FiguresPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FiguresPanel.Location = new System.Drawing.Point(3, 18);
+            this.FiguresPanel.Name = "FiguresPanel";
+            this.FiguresPanel.Size = new System.Drawing.Size(228, 178);
+            this.FiguresPanel.TabIndex = 0;
             // 
             // ToolsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.LineButton);
-            this.Controls.Add(this.PolylineButton);
+            this.Controls.Add(this.FiguresGroupBox);
             this.Controls.Add(this.SelectionButton);
-            this.Controls.Add(this.CircleButton);
-            this.Controls.Add(this.PolygonButton);
-            this.Controls.Add(this.EllipseButton);
             this.Name = "ToolsControl";
-            this.Size = new System.Drawing.Size(240, 100);
+            this.Size = new System.Drawing.Size(240, 236);
+            this.FiguresGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button LineButton;
-        private System.Windows.Forms.Button PolylineButton;
         private System.Windows.Forms.Button SelectionButton;
-        private System.Windows.Forms.Button CircleButton;
-        private System.Windows.Forms.Button PolygonButton;
-        private System.Windows.Forms.Button EllipseButton;
+        private System.Windows.Forms.GroupBox FiguresGroupBox;
+        private System.Windows.Forms.Panel FiguresPanel;
     }
 }

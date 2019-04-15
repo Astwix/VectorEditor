@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
+using SDK;
 using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using SDK;
 using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Drawing
@@ -13,20 +14,20 @@ namespace VectorEditorProject.Core.Drawing
         /// <summary>
         /// Словарь тип фигуры -> конкретное рисование
         /// </summary>
-        private readonly Dictionary<Type, DrawerBase> _typeToDrawerBaseMap = null;
+        private readonly Dictionary<string, DrawerBase> _typeToDrawerBaseMap = null;
 
         /// <summary>
         /// Конструктор фабрики фигур
         /// </summary>
         public DrawerFactory()
         {
-            _typeToDrawerBaseMap = new Dictionary<Type, DrawerBase>
+            _typeToDrawerBaseMap = new Dictionary<string, DrawerBase>
             {
-                {typeof(Line), new LineDrawer()},
-                {typeof(PolyLine), new PolyLineDrawer()},
-                {typeof(Polygon), new PolygonDrawer()},
-                {typeof(Circle), new CircleDrawer()},
-                {typeof(Ellipse), new EllipseDrawer()}
+                {"Line", new LineDrawer()},
+                {"PolyLine", new PolyLineDrawer()},
+                {"Polygon", new PolygonDrawer()},
+                {"Circle", new CircleDrawer()},
+                {"Ellipse", new EllipseDrawer()}
             };
 
         }
@@ -38,7 +39,7 @@ namespace VectorEditorProject.Core.Drawing
         /// <param name="graphics">Графика</param>
         public void DrawFigure(FigureBase baseFigure, Graphics graphics)
         {
-            _typeToDrawerBaseMap[baseFigure.GetType()].DrawFigure(baseFigure,
+            _typeToDrawerBaseMap[baseFigure.GetFigureName()].DrawFigure(baseFigure,
                     graphics);
         }
 
@@ -49,7 +50,7 @@ namespace VectorEditorProject.Core.Drawing
         /// <param name="graphics">Графика</param>
         public void DrawBorder(FigureBase baseFigure, Graphics graphics)
         {
-            _typeToDrawerBaseMap[baseFigure.GetType()].DrawBorder(baseFigure,
+            _typeToDrawerBaseMap[baseFigure.GetFigureName()].DrawBorder(baseFigure,
                     graphics);
         }
 

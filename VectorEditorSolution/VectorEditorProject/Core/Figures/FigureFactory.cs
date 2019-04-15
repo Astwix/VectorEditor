@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using SDK;
 
 namespace VectorEditorProject.Core.Figures
 {
@@ -9,63 +14,42 @@ namespace VectorEditorProject.Core.Figures
     public class FigureFactory
     {
         /// <summary>
-        /// Создание фигуры
+        /// Словарь ссылок на фигуры
         /// </summary>
-        /// <param name="figureType">Тип фигуры из перечисления</param>
-        /// <returns>Новый объект фигуры как базовый тип (Base)</returns>
-        public FigureBase CreateFigure(Utility.Figures figureType)
+        private Dictionary<string, Type> _figuresTypes = new Dictionary<string, Type>();
+
+        /// <summary>
+        /// Конструктор фабрики фигур
+        /// </summary>
+        public FigureFactory()
         {
-            switch (figureType)
+            DirectoryInfo figuresDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+            FileInfo[] figuresDLLs = figuresDirectory.GetFiles("*Figure.dll");
+            foreach (var figureDLL in figuresDLLs)
             {
-                case Utility.Figures.Line:
-                    return new Line();
-                    break;
-
-                case Utility.Figures.PolyLine:
-                    return new PolyLine();
-                    break;
-
-                case Utility.Figures.Polygon:
-                    return new Polygon();
-                    break;
-
-                case Utility.Figures.Circle:
-                    return new Circle();
-                    break;
-
-                case Utility.Figures.Ellipse:
-                    return new Ellipse();
-                    break;
-
-                default:
-                    return null;
+                var assembly = Assembly.LoadFrom(figureDLL.FullName);
+                foreach (var assemblyDefinedType in assembly.DefinedTypes)
+                {
+                    if (assemblyDefinedType.Name.Contains("Figure"))
+                    {
+                        int cutAfter = figureDLL.Name.IndexOf("Figure.dll",
+                            StringComparison.Ordinal);
+                        _figuresTypes.Add(figureDLL.Name.Substring(0, cutAfter), 
+                            assemblyDefinedType.AsType());
+                    }
+                }
             }
         }
 
         /// <summary>
-        /// Создание фигуры (с заливкой)
+        /// Создание фигуры
         /// </summary>
-        /// <param name="figureType">Тип фигуры из перечисления</param>
-        /// <returns>Возвращает новый объект фигуры как базовый тип (FilledBase)</returns>
-        public FilledFigureBase CreateFilledFigure(Utility.Figures figureType)
+        /// <param name="figureType">Тип фигуры</param>
+        /// <returns></returns>
+        public FigureBase CreateFigure(string figureType)
         {
-            switch (figureType)
-            {
-                case Utility.Figures.Polygon:
-                    return new Polygon();
-                    break;
-
-                case Utility.Figures.Circle:
-                    return new Circle();
-                    break;
-
-                case Utility.Figures.Ellipse:
-                    return new Ellipse();
-                    break;
-
-                default:
-                    return null;
-            }
+            return (FigureBase) Activator.CreateInstance(
+                _figuresTypes[figureType]);
         }
 
         /// <summary>
@@ -77,6 +61,7 @@ namespace VectorEditorProject.Core.Figures
         {
             var copy = (FigureBase) Activator.CreateInstance(figure.GetType());
             copy.guid = figure.guid;
+            copy.PointsSettings.Clear();
             foreach (var point in figure.PointsSettings.GetPoints())
             {
                 copy.PointsSettings.AddPoint(new PointF(point.X, point.Y));
@@ -92,6 +77,15 @@ namespace VectorEditorProject.Core.Figures
             }
 
             return copy;
+        }
+
+        /// <summary>
+        /// Получить список загруженных фигур
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetLoadedFigures()
+        {
+            return _figuresTypes.Keys.ToList();
         }
     }
 }

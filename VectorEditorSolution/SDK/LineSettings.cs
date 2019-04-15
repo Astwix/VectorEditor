@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace VectorEditorProject.Core.Figures.Utility
+namespace SDK
 {
     /// <summary>
     /// Настройки линии
@@ -60,9 +64,18 @@ namespace VectorEditorProject.Core.Figures.Utility
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Color.GetHashCode() + 
-                   Width.GetHashCode() + 
+            return Color.GetHashCode() +
+                   Width.GetHashCode() +
                    Style.GetHashCode();
+        }
+
+        /// <summary>
+        /// Для красоты в PropertyGrid
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

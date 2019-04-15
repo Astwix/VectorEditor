@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using SDK;
 using VectorEditorProject.Core.Figures;
-using VectorEditorProject.Core.Figures.Utility;
 
 namespace VectorEditorProject.Core.Drawing
 {
@@ -27,8 +27,8 @@ namespace VectorEditorProject.Core.Drawing
                     return;
                 }
 
-                var leftTopPoint = FigureEditor.LeftTopPointF(figure);
-                var rightBottomPoint = FigureEditor.RightBottomPointF(figure);
+                var leftTopPoint = figure.PointsSettings.LeftTopPointF();
+                var rightBottomPoint = figure.PointsSettings.RightBottomPointF();
 
                 float deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
                 float deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);

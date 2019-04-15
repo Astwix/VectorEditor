@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircleDrawer.cs" />
     <Compile Include="CircleFigure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using SDK;
 using VectorEditorProject.Core.Figures;
 
@@ -14,22 +16,30 @@ namespace VectorEditorProject.Core.Drawing
         /// <summary>
         /// Словарь тип фигуры -> конкретное рисование
         /// </summary>
-        private readonly Dictionary<string, DrawerBase> _typeToDrawerBaseMap = null;
+        private readonly Dictionary<string, DrawerBase> _typeToDrawerBaseMap 
+            = new Dictionary<string, DrawerBase>();
 
         /// <summary>
         /// Конструктор фабрики фигур
         /// </summary>
         public DrawerFactory()
         {
-            _typeToDrawerBaseMap = new Dictionary<string, DrawerBase>
+            DirectoryInfo drawersDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+            FileInfo[] drawersDLLs = drawersDirectory.GetFiles("*Figure.dll");
+            foreach (var drawerDLL in drawersDLLs)
             {
-                {"Line", new LineDrawer()},
-                {"PolyLine", new PolyLineDrawer()},
-                {"Polygon", new PolygonDrawer()},
-                {"Circle", new CircleDrawer()},
-                {"Ellipse", new EllipseDrawer()}
-            };
-
+                var assembly = Assembly.LoadFrom(drawerDLL.FullName);
+                foreach (var assemblyDefinedType in assembly.DefinedTypes)
+                {
+                    if (assemblyDefinedType.Name.Contains("Drawer"))
+                    {
+                        int cutAfter = drawerDLL.Name.IndexOf("Figure.dll",
+                            StringComparison.Ordinal);
+                        _typeToDrawerBaseMap.Add(drawerDLL.Name.Substring(0, cutAfter), 
+                            (DrawerBase)Activator.CreateInstance(assemblyDefinedType.AsType()));
+                    }
+                }
+            }
         }
 
         /// <summary>

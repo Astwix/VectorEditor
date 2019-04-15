@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using SDK;
-using VectorEditorProject.Core.Figures;
 
-namespace VectorEditorProject.Core.Drawing
+namespace CircleFigure
 {
     /// <summary>
-    /// Рисование эллипса
+    /// Рисование круга
     /// </summary>
-    public class EllipseDrawer : DrawerBase
+    public class CircleDrawer : DrawerBase
     {
         /// <summary>
-        /// Рисование фигуры - эллипс
+        /// Рисование фигуры - круг
         /// </summary>
-        /// <param name="figure">Объект, который рисуем (эллипс)</param>
-        /// <param name="graphics">Объект graphics, на котором рисуем</param>
+        /// <param name="figure">Фигура, которую рисуем (круг)</param>
+        /// <param name="graphics">Объект graphics,
+        /// на котором рисуем</param>
         public override void DrawFigure(FigureBase figure, Graphics graphics)
         {
             if (figure.PointsSettings.GetPoints().Count == 2)
@@ -31,18 +35,19 @@ namespace VectorEditorProject.Core.Drawing
 
                 float deltaX = Math.Abs(leftTopPoint.X - rightBottomPoint.X);
                 float deltaY = Math.Abs(leftTopPoint.Y - rightBottomPoint.Y);
+                float distance = Math.Max(deltaX, deltaY);
 
                 Brush brush =
                     new SolidBrush(filledBaseFigure.FillSettings.Color);
                 graphics.FillEllipse(brush, leftTopPoint.X, leftTopPoint.Y,
-                    deltaX, deltaY);
+                    distance, distance);
 
                 Pen pen = new Pen(filledBaseFigure.LineSettings.Color,
                     filledBaseFigure.LineSettings.Width);
                 pen.DashStyle = filledBaseFigure.LineSettings.Style;
 
                 graphics.DrawEllipse(pen, leftTopPoint.X, leftTopPoint.Y,
-                    deltaX, deltaY);
+                    distance, distance);
 
                 brush.Dispose();
                 pen.Dispose();

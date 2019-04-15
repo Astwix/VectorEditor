@@ -62,13 +62,7 @@
     <Compile Include="Core\States\StateBase.cs" />
     <Compile Include="Core\States\FigureEditingState.cs" />
     <Compile Include="Core\States\SelectionState.cs" />
-    <Compile Include="Core\Drawing\DrawerBase.cs" />
-    <Compile Include="Core\Drawing\CircleDrawer.cs" />
     <Compile Include="Core\Drawing\DrawerFactory.cs" />
-    <Compile Include="Core\Drawing\EllipseDrawer.cs" />
-    <Compile Include="Core\Drawing\LineDrawer.cs" />
-    <Compile Include="Core\Drawing\PolygonDrawer.cs" />
-    <Compile Include="Core\Drawing\PolyLineDrawer.cs" />
     <Compile Include="Core\Figures\FigureFactory.cs" />
     <Compile Include="Core\States\StatesEnum.cs" />
     <Compile Include="Forms\DocumentForm.cs">

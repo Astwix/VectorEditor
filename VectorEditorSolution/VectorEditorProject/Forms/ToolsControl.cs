@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using SDK;
 using VectorEditorProject.Core;
-using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Core.States;
 
 namespace VectorEditorProject.Forms

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using SDK;
-using VectorEditorProject.Core.Figures;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace VectorEditorProject.Core.Drawing
+namespace SDK
 {
     /// <summary>
     /// Фабрика рисования
@@ -16,7 +17,7 @@ namespace VectorEditorProject.Core.Drawing
         /// <summary>
         /// Словарь тип фигуры -> конкретное рисование
         /// </summary>
-        private readonly Dictionary<string, DrawerBase> _typeToDrawerBaseMap 
+        private readonly Dictionary<string, DrawerBase> _typeToDrawerBaseMap
             = new Dictionary<string, DrawerBase>();
 
         /// <summary>
@@ -25,17 +26,16 @@ namespace VectorEditorProject.Core.Drawing
         public DrawerFactory()
         {
             DirectoryInfo drawersDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-            FileInfo[] drawersDLLs = drawersDirectory.GetFiles("*Figure.dll");
+            FileInfo[] drawersDLLs = drawersDirectory.GetFiles("*.dll");
             foreach (var drawerDLL in drawersDLLs)
             {
                 var assembly = Assembly.LoadFrom(drawerDLL.FullName);
                 foreach (var assemblyDefinedType in assembly.DefinedTypes)
                 {
-                    if (assemblyDefinedType.Name.Contains("Drawer"))
+                    if (assemblyDefinedType.IsSubclassOf(typeof(DrawerBase))
+                        && !assemblyDefinedType.IsAbstract)
                     {
-                        int cutAfter = drawerDLL.Name.IndexOf("Figure.dll",
-                            StringComparison.Ordinal);
-                        _typeToDrawerBaseMap.Add(drawerDLL.Name.Substring(0, cutAfter), 
+                        _typeToDrawerBaseMap.Add(assembly.GetName().Name,
                             (DrawerBase)Activator.CreateInstance(assemblyDefinedType.AsType()));
                     }
                 }
@@ -49,8 +49,8 @@ namespace VectorEditorProject.Core.Drawing
         /// <param name="graphics">Графика</param>
         public void DrawFigure(FigureBase baseFigure, Graphics graphics)
         {
-            _typeToDrawerBaseMap[baseFigure.GetFigureName()].DrawFigure(baseFigure,
-                    graphics);
+            _typeToDrawerBaseMap[baseFigure.GetType().Assembly.GetName().Name]
+                .DrawFigure(baseFigure, graphics);
         }
 
         /// <summary>
@@ -67,14 +67,16 @@ namespace VectorEditorProject.Core.Drawing
         /// <summary>
         /// Рисование холста
         /// </summary>
-        /// <param name="document">Документ</param>
+        /// <param name="documentSize">Размер документа</param>
         /// <param name="graphics">Графика</param>
-        public void DrawCanvas(Document document, Graphics graphics)
+        /// <param name="documentColor">Цвет документа</param>
+        public void DrawCanvas(Color documentColor, Size documentSize, 
+            Graphics graphics)
         {
-            Brush brush = new SolidBrush(document.Color);
+            Brush brush = new SolidBrush(documentColor);
 
             graphics.FillRectangle(brush,
-                new RectangleF(new PointF(0, 0), document.Size));
+                new RectangleF(new PointF(0, 0), documentSize));
 
             brush.Dispose();
         }

@@ -9,15 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK", "SDK\SDK.csproj", "{4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Figures", "Figures", "{DB91632E-AFA7-4EF3-9B8E-9A95EF03D05B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineFigure", "LineFigure\LineFigure.csproj", "{B9CB792B-A98F-49A2-90B3-BE8D7C94AFE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Line", "LineFigure\Line.csproj", "{B9CB792B-A98F-49A2-90B3-BE8D7C94AFE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyLineFigure", "PolyLineFigure\PolyLineFigure.csproj", "{3D32F4E5-53C1-4505-BA62-D436D9680D7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyLine", "PolyLineFigure\PolyLine.csproj", "{3D32F4E5-53C1-4505-BA62-D436D9680D7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolygonFigure", "PolygonFigure\PolygonFigure.csproj", "{772456D7-9995-46B0-9543-B07694C9DC7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polygon", "PolygonFigure\Polygon.csproj", "{772456D7-9995-46B0-9543-B07694C9DC7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EllipseFigure", "EllipseFigure\EllipseFigure.csproj", "{A4DF0022-22F8-403B-B1E5-5DBC17BD8540}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ellipse", "EllipseFigure\Ellipse.csproj", "{A4DF0022-22F8-403B-B1E5-5DBC17BD8540}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleFigure", "CircleFigure\CircleFigure.csproj", "{9326B3C3-AF96-4F13-B4AF-8FEDF920CFE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circle", "CircleFigure\Circle.csproj", "{9326B3C3-AF96-4F13-B4AF-8FEDF920CFE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

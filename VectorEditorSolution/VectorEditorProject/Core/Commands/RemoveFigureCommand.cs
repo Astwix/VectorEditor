@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using SDK;
-using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {

@@ -62,8 +62,6 @@
     <Compile Include="Core\States\StateBase.cs" />
     <Compile Include="Core\States\FigureEditingState.cs" />
     <Compile Include="Core\States\SelectionState.cs" />
-    <Compile Include="Core\Drawing\DrawerFactory.cs" />
-    <Compile Include="Core\Figures\FigureFactory.cs" />
     <Compile Include="Core\States\StatesEnum.cs" />
     <Compile Include="Forms\DocumentForm.cs">
       <SubType>Form</SubType>
@@ -126,33 +124,31 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CircleFigure\CircleFigure.csproj">
+    <ProjectReference Include="..\CircleFigure\Circle.csproj">
       <Project>{9326b3c3-af96-4f13-b4af-8fedf920cfe4}</Project>
-      <Name>CircleFigure</Name>
+      <Name>Circle</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EllipseFigure\EllipseFigure.csproj">
+    <ProjectReference Include="..\EllipseFigure\Ellipse.csproj">
       <Project>{a4df0022-22f8-403b-b1e5-5dbc17bd8540}</Project>
-      <Name>EllipseFigure</Name>
+      <Name>Ellipse</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LineFigure\LineFigure.csproj">
+    <ProjectReference Include="..\LineFigure\Line.csproj">
       <Project>{b9cb792b-a98f-49a2-90b3-be8d7c94afe9}</Project>
-      <Name>LineFigure</Name>
+      <Name>Line</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PolygonFigure\PolygonFigure.csproj">
+    <ProjectReference Include="..\PolygonFigure\Polygon.csproj">
       <Project>{772456d7-9995-46b0-9543-b07694c9dc7b}</Project>
-      <Name>PolygonFigure</Name>
+      <Name>Polygon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PolyLineFigure\PolyLineFigure.csproj">
+    <ProjectReference Include="..\PolyLineFigure\PolyLine.csproj">
       <Project>{3d32f4e5-53c1-4505-ba62-d436d9680d7c}</Project>
-      <Name>PolyLineFigure</Name>
+      <Name>PolyLine</Name>
     </ProjectReference>
     <ProjectReference Include="..\SDK\SDK.csproj">
       <Project>{4bae6634-e69e-49d8-afed-d9e05abf72fc}</Project>
       <Name>SDK</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Figures\Utility\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

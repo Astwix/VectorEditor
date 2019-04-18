@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using SDK;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Core.Drawing;
 
 namespace VectorEditorProject.Core.States
 {

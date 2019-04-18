@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B9CB792B-A98F-49A2-90B3-BE8D7C94AFE9}</ProjectGuid>
+    <ProjectGuid>{A4DF0022-22F8-403B-B1E5-5DBC17BD8540}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LineFigure</RootNamespace>
-    <AssemblyName>LineFigure</AssemblyName>
+    <RootNamespace>Ellipse</RootNamespace>
+    <AssemblyName>Ellipse</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LineDrawer.cs" />
-    <Compile Include="LineFigure.cs" />
+    <Compile Include="EllipseDrawer.cs" />
+    <Compile Include="EllipseFigure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows.Forms;
 using SDK;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.States
 {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using SDK;
-using VectorEditorProject.Core.Figures;
 
 namespace VectorEditorProject.Core.Commands
 {

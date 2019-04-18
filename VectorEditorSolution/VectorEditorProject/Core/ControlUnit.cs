@@ -7,7 +7,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using SDK;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Core.Figures;
 using VectorEditorProject.Forms;
 
 namespace VectorEditorProject.Core

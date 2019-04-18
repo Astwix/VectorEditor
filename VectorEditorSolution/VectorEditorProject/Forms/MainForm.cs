@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using SDK;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Core.Drawing;
 using VectorEditorProject.Core.States;
 
 namespace VectorEditorProject.Forms
@@ -74,7 +74,8 @@ namespace VectorEditorProject.Forms
         /// <param name="e"></param>
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
-            _drawerFactory.DrawCanvas(_controlUnit.GetDocument(), e.Graphics);
+            _drawerFactory.DrawCanvas(_controlUnit.GetDocument().Color,
+                _controlUnit.GetDocument().Size, e.Graphics);
 
             foreach (var figure in _controlUnit.GetDocument().GetFigures())
             {

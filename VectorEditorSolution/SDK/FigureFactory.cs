@@ -4,9 +4,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using SDK;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace VectorEditorProject.Core.Figures
+namespace SDK
 {
     /// <summary>
     /// Фабрика фигур
@@ -23,18 +24,18 @@ namespace VectorEditorProject.Core.Figures
         /// </summary>
         public FigureFactory()
         {
-            DirectoryInfo figuresDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-            FileInfo[] figuresDLLs = figuresDirectory.GetFiles("*Figure.dll");
+            DirectoryInfo figuresDirectory
+                = new DirectoryInfo(Directory.GetCurrentDirectory());
+            FileInfo[] figuresDLLs = figuresDirectory.GetFiles("*.dll");
             foreach (var figureDLL in figuresDLLs)
             {
                 var assembly = Assembly.LoadFrom(figureDLL.FullName);
                 foreach (var assemblyDefinedType in assembly.DefinedTypes)
                 {
-                    if (assemblyDefinedType.Name.Contains("Figure"))
+                    if (assemblyDefinedType.IsSubclassOf(typeof(FigureBase))
+                        && !assemblyDefinedType.IsAbstract)
                     {
-                        int cutAfter = figureDLL.Name.IndexOf("Figure.dll",
-                            StringComparison.Ordinal);
-                        _figuresTypes.Add(figureDLL.Name.Substring(0, cutAfter), 
+                        _figuresTypes.Add(assembly.GetName().Name,
                             assemblyDefinedType.AsType());
                     }
                 }
@@ -48,7 +49,7 @@ namespace VectorEditorProject.Core.Figures
         /// <returns></returns>
         public FigureBase CreateFigure(string figureType)
         {
-            return (FigureBase) Activator.CreateInstance(
+            return (FigureBase)Activator.CreateInstance(
                 _figuresTypes[figureType]);
         }
 
@@ -59,7 +60,7 @@ namespace VectorEditorProject.Core.Figures
         /// <returns>Копия фигуры</returns>
         public FigureBase CopyFigure(FigureBase figure)
         {
-            var copy = (FigureBase) Activator.CreateInstance(figure.GetType());
+            var copy = (FigureBase)Activator.CreateInstance(figure.GetType());
             copy.guid = figure.guid;
             copy.PointsSettings.Clear();
             foreach (var point in figure.PointsSettings.GetPoints())

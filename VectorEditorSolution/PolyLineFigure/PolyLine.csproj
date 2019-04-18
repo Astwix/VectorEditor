@@ -7,8 +7,8 @@
     <ProjectGuid>{3D32F4E5-53C1-4505-BA62-D436D9680D7C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PolyLineFigure</RootNamespace>
-    <AssemblyName>PolyLineFigure</AssemblyName>
+    <RootNamespace>PolyLine</RootNamespace>
+    <AssemblyName>PolyLine</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

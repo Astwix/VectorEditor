@@ -37,7 +37,6 @@ namespace VectorEditorProject.Core.Commands
         {
             ControlUnit = controlUnit;
 
-            var figureFactory = new FigureFactory();
             foreach (var figure in newValues)
             {
                 var original = ControlUnit.GetDocument()
@@ -57,7 +56,6 @@ namespace VectorEditorProject.Core.Commands
         {
             ControlUnit = controlUnit;
 
-            var figureFactory = new FigureFactory();
             var original = ControlUnit.GetDocument().GetFigure(newValues.guid);
             _oldValues.Add(original.CopyFigure());
             _newValues.Add(newValues.CopyFigure());

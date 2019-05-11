@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using SDK;
+using StructureMap;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.States;
 
@@ -35,10 +36,21 @@ namespace VectorEditorProject.Forms
         {
             InitializeComponent();
             int startVerticalpos = 10;
-            FigureFactory figureFactory = new FigureFactory();
-            foreach (var loadedFigure in figureFactory.GetLoadedFigures())
+            
+            var container = new Container(config =>
             {
-                Button figureButton = new Button {Text = loadedFigure};
+                config.Scan(scanner =>
+                {
+                    scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
+                    scanner.AddAllTypesOf<FigureBase>().
+                        NameBy(type => type.Assembly.GetName().Name);
+                });
+            });
+
+            foreach (var loadedFigure in container.GetAllInstances<FigureBase>())
+            {
+                Button figureButton 
+                    = new Button {Text = loadedFigure.GetType().Assembly.GetName().Name};
                 figureButton.Click += new EventHandler(FigureButtonOnClick);
                 figureButton.Location = new Point(10, startVerticalpos);
                 FiguresPanel.Controls.Add(figureButton);

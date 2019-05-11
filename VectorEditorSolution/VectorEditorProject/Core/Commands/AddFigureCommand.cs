@@ -53,7 +53,6 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            FigureFactory figureFactory = new FigureFactory();
             foreach (var figure in _figures)
             {
                 ControlUnit.GetDocument()

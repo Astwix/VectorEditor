@@ -156,7 +156,6 @@ namespace VectorEditorProject.Core
         public void Copy()
         {
             _clipboard.Clear();
-            var figureFactory = new FigureFactory();
             foreach (var selectedFigure in EditContext.GetSelectedFigures())
             {
                 _clipboard.Add(selectedFigure.CopyFigure());
@@ -173,7 +172,6 @@ namespace VectorEditorProject.Core
                 return;
             }
 
-            var figureFactory = new FigureFactory();
             var copiedClipboard = new List<FigureBase>();
 
             foreach (var figure in _clipboard)

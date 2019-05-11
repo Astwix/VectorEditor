@@ -6,8 +6,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using SDK;
+using StructureMap;
 
-namespace SDK
+namespace VectorEditorProject.Core
 {
     /// <summary>
     /// Фабрика рисования
@@ -25,20 +27,19 @@ namespace SDK
         /// </summary>
         public DrawerFactory()
         {
-            DirectoryInfo drawersDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-            FileInfo[] drawersDLLs = drawersDirectory.GetFiles("*.dll");
-            foreach (var drawerDLL in drawersDLLs)
+            var container = new Container(config =>
             {
-                var assembly = Assembly.LoadFrom(drawerDLL.FullName);
-                foreach (var assemblyDefinedType in assembly.DefinedTypes)
+                config.Scan(scanner =>
                 {
-                    if (assemblyDefinedType.IsSubclassOf(typeof(DrawerBase))
-                        && !assemblyDefinedType.IsAbstract)
-                    {
-                        _typeToDrawerBaseMap.Add(assembly.GetName().Name,
-                            (DrawerBase)Activator.CreateInstance(assemblyDefinedType.AsType()));
-                    }
-                }
+                    scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
+                    scanner.AddAllTypesOf<DrawerBase>().
+                        NameBy(type => type.Assembly.GetName().Name);
+                });
+            });
+
+            foreach (var drawer in container.GetAllInstances<DrawerBase>())
+            {
+                _typeToDrawerBaseMap.Add(drawer.GetType().Assembly.GetName().Name, drawer);
             }
         }
 
@@ -60,8 +61,8 @@ namespace SDK
         /// <param name="graphics">Графика</param>
         public void DrawBorder(FigureBase baseFigure, Graphics graphics)
         {
-            _typeToDrawerBaseMap[baseFigure.GetFigureName()].DrawBorder(baseFigure,
-                    graphics);
+            _typeToDrawerBaseMap[baseFigure.GetType().Assembly.GetName().Name].
+                DrawBorder(baseFigure, graphics);
         }
 
         /// <summary>
@@ -70,7 +71,7 @@ namespace SDK
         /// <param name="documentSize">Размер документа</param>
         /// <param name="graphics">Графика</param>
         /// <param name="documentColor">Цвет документа</param>
-        public void DrawCanvas(Color documentColor, Size documentSize, 
+        public void DrawCanvas(Color documentColor, Size documentSize,
             Graphics graphics)
         {
             Brush brush = new SolidBrush(documentColor);

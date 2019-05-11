@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using SDK;
+using StructureMap;
 using VectorEditorProject.Core.Commands;
 
 namespace VectorEditorProject.Core.States
@@ -39,9 +40,24 @@ namespace VectorEditorProject.Core.States
         /// <param name="e"></param>
         public override void MouseDown(object sender, MouseEventArgs e)
         {
-            FigureFactory figureFactory = new FigureFactory();
+            //FigureFactory figureFactory = new FigureFactory();
+            //FigureBase figure =
+            //    figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
+
+            var container = new Container(config =>
+            {
+                config.Scan(scanner =>
+                {
+                    scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
+                    scanner.AddAllTypesOf<FigureBase>().
+                        NameBy(type => type.Assembly.GetName().Name);
+                });
+            });
+
             FigureBase figure =
-                figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
+                container.GetInstance<FigureBase>(_controlUnit
+                    .GetActiveFigureType());
+
             if (figure is FilledFigureBase filledFigure)
             {
                 filledFigure.FillSettings =

@@ -42,8 +42,8 @@ namespace VectorEditorProject.Core.Commands
             {
                 var original = ControlUnit.GetDocument()
                     .GetFigure(figure.guid);
-                _oldValues.Add(figureFactory.CopyFigure(original));
-                _newValues.Add(figureFactory.CopyFigure(figure));
+                _oldValues.Add(original.CopyFigure());
+                _newValues.Add(figure.CopyFigure());
             }
         }
 
@@ -59,8 +59,8 @@ namespace VectorEditorProject.Core.Commands
 
             var figureFactory = new FigureFactory();
             var original = ControlUnit.GetDocument().GetFigure(newValues.guid);
-            _oldValues.Add(figureFactory.CopyFigure(original));
-            _newValues.Add(figureFactory.CopyFigure(newValues));
+            _oldValues.Add(original.CopyFigure());
+            _newValues.Add(newValues.CopyFigure());
         }
 
         /// <summary>

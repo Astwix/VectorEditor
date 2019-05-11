@@ -57,7 +57,7 @@ namespace VectorEditorProject.Core.Commands
             foreach (var figure in _figures)
             {
                 ControlUnit.GetDocument()
-                    .AddFigure(figureFactory.CopyFigure(figure));
+                    .AddFigure(figure.CopyFigure());
             }
         }
 

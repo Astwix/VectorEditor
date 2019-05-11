@@ -315,7 +315,7 @@ namespace VectorEditorProject.Core.States
             _backUp.Clear();
             foreach (var selectedFigure in _editContext.GetSelectedFigures())
             {
-                _backUp.Add(new FigureFactory().CopyFigure(selectedFigure));
+                _backUp.Add(selectedFigure.CopyFigure());
             }
 
             // выбор редактируемой точки (точек > 2)
@@ -492,7 +492,7 @@ namespace VectorEditorProject.Core.States
             List<FigureBase> newValues = new List<FigureBase>();
             foreach (var selectedFigure in _editContext.GetSelectedFigures())
             {
-                newValues.Add(new FigureFactory().CopyFigure(selectedFigure));
+                newValues.Add(selectedFigure.CopyFigure());
             }
 
             // т.к. пользователь меняет реальные фигуры, делаем откат

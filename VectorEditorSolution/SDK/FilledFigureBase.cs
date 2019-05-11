@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,23 @@ namespace SDK
             return _lineSettings.GetHashCode() +
                    _pointsSettings.GetHashCode() +
                    _fillSettings.GetHashCode();
+        }
+
+        /// <summary>
+        /// Копирование фигуры
+        /// </summary>
+        /// <param name="figure">Фигура</param>
+        /// <returns>Копия фигуры</returns>
+        public override FigureBase CopyFigure()
+        {
+            var copy = base.CopyFigure();
+            if (this is FilledFigureBase filledFigure 
+                && copy is FilledFigureBase filledCopy)
+            {
+                filledCopy.FillSettings.Color = filledFigure.FillSettings.Color;
+            }
+
+            return copy;
         }
     }
 }

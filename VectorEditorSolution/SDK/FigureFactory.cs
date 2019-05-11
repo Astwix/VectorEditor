@@ -54,33 +54,6 @@ namespace SDK
         }
 
         /// <summary>
-        /// Копирование фигуры
-        /// </summary>
-        /// <param name="figure">Фигура</param>
-        /// <returns>Копия фигуры</returns>
-        public FigureBase CopyFigure(FigureBase figure)
-        {
-            var copy = (FigureBase)Activator.CreateInstance(figure.GetType());
-            copy.guid = figure.guid;
-            copy.PointsSettings.Clear();
-            foreach (var point in figure.PointsSettings.GetPoints())
-            {
-                copy.PointsSettings.AddPoint(new PointF(point.X, point.Y));
-            }
-
-            copy.LineSettings.Color = figure.LineSettings.Color;
-            copy.LineSettings.Style = figure.LineSettings.Style;
-            copy.LineSettings.Width = figure.LineSettings.Width;
-
-            if (figure is FilledFigureBase filledFigure && copy is FilledFigureBase filledCopy)
-            {
-                filledCopy.FillSettings.Color = filledFigure.FillSettings.Color;
-            }
-
-            return copy;
-        }
-
-        /// <summary>
         /// Получить список загруженных фигур
         /// </summary>
         /// <returns></returns>

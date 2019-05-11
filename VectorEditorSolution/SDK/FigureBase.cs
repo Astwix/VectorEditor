@@ -78,5 +78,27 @@ namespace SDK
         /// </summary>
         /// <returns></returns>
         public abstract string GetFigureName();
+
+        /// <summary>
+        /// Копирование фигуры
+        /// </summary>
+        /// <param name="figure">Фигура</param>
+        /// <returns>Копия фигуры</returns>
+        public virtual FigureBase CopyFigure()
+        {
+            var copy = (FigureBase)Activator.CreateInstance(GetType());
+            copy.guid = guid;
+            copy.PointsSettings.Clear();
+            foreach (var point in PointsSettings.GetPoints())
+            {
+                copy.PointsSettings.AddPoint(new PointF(point.X, point.Y));
+            }
+
+            copy.LineSettings.Color = LineSettings.Color;
+            copy.LineSettings.Style = LineSettings.Style;
+            copy.LineSettings.Width = LineSettings.Width;
+
+            return copy;
+        }
     }
 }

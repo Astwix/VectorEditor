@@ -159,7 +159,7 @@ namespace VectorEditorProject.Core
             var figureFactory = new FigureFactory();
             foreach (var selectedFigure in EditContext.GetSelectedFigures())
             {
-                _clipboard.Add(figureFactory.CopyFigure(selectedFigure));
+                _clipboard.Add(selectedFigure.CopyFigure());
             }
         }
 
@@ -178,7 +178,7 @@ namespace VectorEditorProject.Core
 
             foreach (var figure in _clipboard)
             {
-                var copy = figureFactory.CopyFigure(figure);
+                var copy = figure.CopyFigure();
                 copy.guid = Guid.NewGuid();
 
                 var leftTopPoint = copy.PointsSettings.LeftTopPointF();
@@ -380,9 +380,7 @@ namespace VectorEditorProject.Core
         {
             if ((FigureBase) _propertyGrid.SelectedObject != null)
             {
-                _propertyBackUp =
-                    new FigureFactory().CopyFigure(
-                        (FigureBase) _propertyGrid.SelectedObject);
+                _propertyBackUp = ((FigureBase) _propertyGrid.SelectedObject).CopyFigure();
             }
         }
 
@@ -408,7 +406,7 @@ namespace VectorEditorProject.Core
                 return;
             }
 
-            var newValues = new FigureFactory().CopyFigure(newValue);
+            var newValues = newValue.CopyFigure();
 
             selectedFigure.LineSettings.Color =
                 _propertyBackUp.LineSettings.Color;

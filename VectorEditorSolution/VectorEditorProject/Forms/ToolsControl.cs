@@ -37,17 +37,8 @@ namespace VectorEditorProject.Forms
             InitializeComponent();
             int startVerticalpos = 10;
             
-            var container = new Container(config =>
-            {
-                config.Scan(scanner =>
-                {
-                    scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
-                    scanner.AddAllTypesOf<FigureBase>().
-                        NameBy(type => type.Assembly.GetName().Name);
-                });
-            });
-
-            foreach (var loadedFigure in container.GetAllInstances<FigureBase>())
+            foreach (var loadedFigure in DI.getInstance().Container
+                .GetAllInstances<FigureBase>())
             {
                 Button figureButton 
                     = new Button {Text = loadedFigure.GetType().Assembly.GetName().Name};

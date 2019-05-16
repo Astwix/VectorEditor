@@ -58,6 +58,7 @@
     <Compile Include="Core\Commands\FiguresChangingCommand.cs" />
     <Compile Include="Core\Commands\RemoveFigureCommand.cs" />
     <Compile Include="Core\ControlUnit.cs" />
+    <Compile Include="Core\DI.cs" />
     <Compile Include="Core\Document.cs" />
     <Compile Include="Core\DrawerFactory.cs" />
     <Compile Include="Core\EditContext.cs" />

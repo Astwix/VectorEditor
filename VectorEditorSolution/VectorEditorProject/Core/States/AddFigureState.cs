@@ -44,18 +44,8 @@ namespace VectorEditorProject.Core.States
             //FigureBase figure =
             //    figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
 
-            var container = new Container(config =>
-            {
-                config.Scan(scanner =>
-                {
-                    scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
-                    scanner.AddAllTypesOf<FigureBase>().
-                        NameBy(type => type.Assembly.GetName().Name);
-                });
-            });
-
-            FigureBase figure =
-                container.GetInstance<FigureBase>(_controlUnit
+            FigureBase figure = DI.getInstance().Container
+                .GetInstance<FigureBase>(_controlUnit
                     .GetActiveFigureType());
 
             if (figure is FilledFigureBase filledFigure)

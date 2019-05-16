@@ -27,17 +27,7 @@ namespace VectorEditorProject.Core
         /// </summary>
         public DrawerFactory()
         {
-            var container = new Container(config =>
-            {
-                config.Scan(scanner =>
-                {
-                    scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
-                    scanner.AddAllTypesOf<DrawerBase>().
-                        NameBy(type => type.Assembly.GetName().Name);
-                });
-            });
-
-            foreach (var drawer in container.GetAllInstances<DrawerBase>())
+            foreach (var drawer in DI.getInstance().Container.GetAllInstances<DrawerBase>())
             {
                 _typeToDrawerBaseMap.Add(drawer.GetType().Assembly.GetName().Name, drawer);
             }

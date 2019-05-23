@@ -11,7 +11,7 @@ namespace VectorEditorProject.Core
     /// <summary>
     /// Синглтон, содежащий DI контейнер
     /// </summary>
-    class DI
+    public class DI
     {
         /// <summary>
         /// Instance синглтона

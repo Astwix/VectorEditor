@@ -28,7 +28,7 @@ namespace VectorEditorProject.Forms
         /// Конструктор для изменения существующего документа
         /// </summary>
         /// <param name="document">Документ</param>
-        public DocumentForm(Document document)
+        public DocumentForm(IDocument document)
         {
             InitializeComponent();
 

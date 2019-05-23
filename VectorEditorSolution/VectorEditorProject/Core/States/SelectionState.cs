@@ -21,7 +21,7 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Control Unit
         /// </summary>
-        private readonly ControlUnit _controlUnit;
+        private readonly IControlUnit _controlUnit;
 
         /// <summary>
         /// Нажата ли клавиша мыши
@@ -48,7 +48,7 @@ namespace VectorEditorProject.Core.States
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="editContext">EditContext</param>
-        public SelectionState(ControlUnit controlUnit, EditContext editContext)
+        public SelectionState(IControlUnit controlUnit, EditContext editContext)
         {
             _controlUnit = controlUnit;
             _editContext = editContext;

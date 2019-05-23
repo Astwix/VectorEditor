@@ -8,7 +8,7 @@ namespace VectorEditorProject.Core
     /// <summary>
     /// Документ
     /// </summary>
-    public class Document
+    public class Document : IDocument
     {
         /// <summary>
         /// Имя

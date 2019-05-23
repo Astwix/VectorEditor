@@ -14,7 +14,7 @@ namespace VectorEditorProject.Core.Commands
         /// Control Unit
         /// </summary>
         [field: NonSerialized]
-        public ControlUnit ControlUnit { get; set; }
+        public IControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Список фигур, доступный только для чтения
@@ -26,7 +26,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlControlUnit">Control ControlUnit</param>
         /// <param name="figure">Фигура</param>
-        public AddFigureCommand(ControlUnit controlControlUnit, 
+        public AddFigureCommand(IControlUnit controlControlUnit, 
             FigureBase figure)
         {
             ControlUnit = controlControlUnit;
@@ -41,7 +41,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlControlUnit">Control ControlUnit</param>
         /// <param name="figures">Фигуры</param>
-        public AddFigureCommand(ControlUnit controlControlUnit,
+        public AddFigureCommand(IControlUnit controlControlUnit,
             IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlControlUnit;

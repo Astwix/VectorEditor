@@ -14,7 +14,7 @@ namespace VectorEditorProject.Core
     /// <summary>
     /// Control Unit
     /// </summary>
-    public class ControlUnit
+    public class ControlUnit : IControlUnit
     {
         /// <summary>
         /// Список команд
@@ -328,7 +328,7 @@ namespace VectorEditorProject.Core
         /// Получить документ
         /// </summary>
         /// <returns>Текущий документ</returns>
-        public Document GetDocument()
+        public IDocument GetDocument()
         {
             return _currentDocument;
         }

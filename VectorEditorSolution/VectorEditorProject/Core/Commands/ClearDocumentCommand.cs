@@ -14,7 +14,7 @@ namespace VectorEditorProject.Core.Commands
         /// Control Unit
         /// </summary>
         [field: NonSerialized]
-        public ControlUnit ControlUnit { get; set; }
+        public IControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Список резервных фигур
@@ -25,7 +25,7 @@ namespace VectorEditorProject.Core.Commands
         /// Констуктор команды очистки документа
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
-        public ClearDocumentCommand(ControlUnit controlUnit)
+        public ClearDocumentCommand(IControlUnit controlUnit)
         {
             ControlUnit = controlUnit;
             foreach (var figure in controlUnit.GetDocument().GetFigures())

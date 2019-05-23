@@ -15,28 +15,28 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Control Unit
         /// </summary>
-        private readonly ControlUnit _controlUnit;
+        protected readonly IControlUnit _controlUnit;
 
         /// <summary>
         /// Активное состояние
         /// </summary>
-        private StateBase _activeState;
+        protected StateBase _activeState;
 
         /// <summary>
         /// Guid активной фигуры
         /// </summary>
-        private Guid _activeFigureGuid = Guid.Empty;
+        protected Guid _activeFigureGuid = Guid.Empty;
 
         /// <summary>
         /// Список выделенных фигур
         /// </summary>
-        private readonly List<Guid> _selectedFigures = new List<Guid>();
+        protected readonly List<Guid> _selectedFigures = new List<Guid>();
 
         /// <summary>
         /// Конструктор Edit Context
         /// </summary>
         /// <param name="controlUnit"></param>
-        public EditContext(ControlUnit controlUnit)
+        public EditContext(IControlUnit controlUnit)
         {
             _controlUnit = controlUnit;
 
@@ -149,6 +149,18 @@ namespace VectorEditorProject.Core
         public FigureBase GetActiveFigure()
         {
             return _controlUnit.GetDocument().GetFigure(_activeFigureGuid);
+        }
+
+        /// <summary> 
+        /// Установить выделенную фигуру 
+        /// </summary> 
+        /// <param name="figure">Фигура</param> 
+        public void SetSelectedFigures(
+            Guid figure)
+        {
+            _selectedFigures.Clear();
+            _selectedFigures.Add(figure);
+            _controlUnit.UpdatePropertyGrid();
         }
 
         /// <summary>

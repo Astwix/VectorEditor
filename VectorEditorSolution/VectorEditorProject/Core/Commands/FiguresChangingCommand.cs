@@ -15,7 +15,7 @@ namespace VectorEditorProject.Core.Commands
         /// Control Unit
         /// </summary>
         [field: NonSerialized]
-        public ControlUnit ControlUnit { get; set; }
+        public IControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Старые значения
@@ -32,7 +32,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="newValues">Новые значения</param>
-        public FiguresChangingCommand(ControlUnit controlUnit,
+        public FiguresChangingCommand(IControlUnit controlUnit,
             List<FigureBase> newValues)
         {
             ControlUnit = controlUnit;
@@ -51,7 +51,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="newValues">Новые значения</param>
-        public FiguresChangingCommand(ControlUnit controlUnit,
+        public FiguresChangingCommand(IControlUnit controlUnit,
             FigureBase newValues)
         {
             ControlUnit = controlUnit;

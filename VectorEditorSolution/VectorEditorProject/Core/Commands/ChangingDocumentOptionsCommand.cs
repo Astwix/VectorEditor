@@ -13,7 +13,7 @@ namespace VectorEditorProject.Core.Commands
         /// Control Unit
         /// </summary>
         [field: NonSerialized]
-        public ControlUnit ControlUnit { get; set; }
+        public IControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Новый размер канвы
@@ -50,7 +50,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control ControlUnit</param>
         /// <param name="newOptions">Новые параметры</param>
-        public ChangingDocumentOptionsCommand(ControlUnit controlUnit,
+        public ChangingDocumentOptionsCommand(IControlUnit controlUnit,
             Document newOptions)
         {
             ControlUnit = controlUnit;

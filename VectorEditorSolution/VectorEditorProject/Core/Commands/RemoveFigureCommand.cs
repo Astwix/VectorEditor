@@ -14,7 +14,7 @@ namespace VectorEditorProject.Core.Commands
         /// Control Unit
         /// </summary>
         [field: NonSerialized]
-        public ControlUnit ControlUnit { get; set; }
+        public IControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Список фигур (доступный только для чтения)
@@ -26,7 +26,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="figure">Фигура</param>
-        public RemoveFigureCommand(ControlUnit controlUnit, FigureBase figure)
+        public RemoveFigureCommand(IControlUnit controlUnit, FigureBase figure)
         {
             ControlUnit = controlUnit;
             _figures = new List<FigureBase>()
@@ -40,7 +40,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="figures">Фигуры</param>
-        public RemoveFigureCommand(ControlUnit controlUnit,
+        public RemoveFigureCommand(IControlUnit controlUnit,
             IReadOnlyList<FigureBase> figures)
         {
             ControlUnit = controlUnit;

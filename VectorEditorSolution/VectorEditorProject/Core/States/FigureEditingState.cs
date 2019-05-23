@@ -21,7 +21,7 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Control Unit
         /// </summary>
-        private readonly ControlUnit _controlUnit;
+        private readonly IControlUnit _controlUnit;
 
         /// <summary>
         /// Левый верхний маркер
@@ -114,7 +114,7 @@ namespace VectorEditorProject.Core.States
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="editContext">Edit Context</param>
-        public FigureEditingState(ControlUnit controlUnit, 
+        public FigureEditingState(IControlUnit controlUnit, 
             EditContext editContext)
         {
             _editContext = editContext;

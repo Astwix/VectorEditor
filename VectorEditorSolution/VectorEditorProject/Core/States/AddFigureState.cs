@@ -20,14 +20,14 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Control Unit
         /// </summary>
-        private readonly ControlUnit _controlUnit;
+        private readonly IControlUnit _controlUnit;
 
         /// <summary>
         /// Конструктор состояния добавления фигуры
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="editContext">Edit Context</param>
-        public AddFigureState(ControlUnit controlUnit, EditContext editContext)
+        public AddFigureState(IControlUnit controlUnit, EditContext editContext)
         {
             _controlUnit = controlUnit;
             _editContext = editContext;

@@ -24,7 +24,7 @@ namespace VectorEditorProject.Core.Commands
         /// Control Unit
         /// </summary>
         [field: NonSerialized]
-        public ControlUnit ControlUnit { get; set; }
+        public IControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Команда добавления точки
@@ -33,7 +33,7 @@ namespace VectorEditorProject.Core.Commands
         /// <param name="point">Точка</param>
         /// <param name="controlUnit">controlUnit</param>
         public AddPointCommand(FigureBase figure, PointF point,
-            ControlUnit controlUnit)
+            IControlUnit controlUnit)
         {
             _guid = figure.guid;
             _point = point;

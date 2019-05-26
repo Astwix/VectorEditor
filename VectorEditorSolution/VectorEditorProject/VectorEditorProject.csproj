@@ -64,6 +64,7 @@
     <Compile Include="Core\EditContext.cs" />
     <Compile Include="Core\IControlUnit.cs" />
     <Compile Include="Core\IDocument.cs" />
+    <Compile Include="Core\IEditContext.cs" />
     <Compile Include="Core\States\AddFigureState.cs" />
     <Compile Include="Core\States\AddPointState.cs" />
     <Compile Include="Core\States\StateBase.cs" />

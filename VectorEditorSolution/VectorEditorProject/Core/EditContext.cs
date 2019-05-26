@@ -10,7 +10,7 @@ namespace VectorEditorProject.Core
     /// <summary>
     /// Edit Context
     /// </summary>
-    public class EditContext
+    public class EditContext : IEditContext
     {
         /// <summary>
         /// Control Unit

@@ -19,7 +19,7 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Список резервных фигур
         /// </summary>
-        private readonly List<FigureBase> _backUpFigures = new List<FigureBase>();
+        protected readonly List<FigureBase> _backUpFigures = new List<FigureBase>();
 
         /// <summary>
         /// Констуктор команды очистки документа

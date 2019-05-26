@@ -114,9 +114,12 @@ namespace VectorEditorTest
             Assert.IsNull(editContext.GetActiveFigure());
         }
 
-        private static Array AllStates = Enum.GetValues(typeof(States));
+        private static Array AllStates()
+        {
+            return Enum.GetValues(typeof(States));
+        }
         [Test,
-         TestCaseSource("AllStates"),
+         TestCaseSource(nameof(AllStates)),
          TestCase(null)]
         public void SetActiveStateTest(States s)
         {

@@ -13,12 +13,12 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// GUID фигуры
         /// </summary>
-        private readonly Guid _guid = Guid.Empty;
+        protected readonly Guid _guid = Guid.Empty;
 
         /// <summary>
         /// Точка
         /// </summary>
-        private readonly PointF _point;
+        protected readonly PointF _point;
 
         /// <summary>
         /// Control Unit

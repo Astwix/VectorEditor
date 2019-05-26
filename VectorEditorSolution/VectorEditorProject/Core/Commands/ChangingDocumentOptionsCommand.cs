@@ -18,32 +18,32 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Новый размер канвы
         /// </summary>
-        private readonly Size _newSize;
+        protected readonly Size _newSize;
 
         /// <summary>
         /// Резервный размер канвы
         /// </summary>
-        private readonly Size _backUpSize;
+        protected readonly Size _backUpSize;
 
         /// <summary>
         /// Новый цвет
         /// </summary>
-        private readonly Color _newColor;
+        protected readonly Color _newColor;
 
         /// <summary>
         /// Резервный цвет
         /// </summary>
-        private readonly Color _backUpColor;
+        protected readonly Color _backUpColor;
 
         /// <summary>
         /// Новое название
         /// </summary>
-        private readonly String _newName;
+        protected readonly String _newName;
 
         /// <summary>
         /// Резервное название
         /// </summary>
-        private readonly String _backUpName;
+        protected readonly String _backUpName;
 
         /// <summary>
         /// Изменение свойств документа

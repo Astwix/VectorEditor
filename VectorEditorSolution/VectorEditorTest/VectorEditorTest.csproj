@@ -60,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -68,13 +69,34 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddFigureCommandTest.cs" />
+    <Compile Include="AddPointCommandTest.cs" />
+    <Compile Include="AddPointStateTest.cs" />
+    <Compile Include="ChangingDocumentOptionsCommandTest.cs" />
+    <Compile Include="ClearDocumentCommandTest.cs" />
+    <Compile Include="CommandFactoryTest.cs" />
+    <Compile Include="ControlUnitTest.cs" />
     <Compile Include="DocumentTest.cs" />
     <Compile Include="DrawerFactoryTest.cs" />
     <Compile Include="EditContextTest.cs" />
+    <Compile Include="FiguresChangingCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoveFigureCommandTest.cs" />
+    <Compile Include="Stubs\AddFigureCommandStub.cs" />
+    <Compile Include="Stubs\AddPointCommandStub.cs" />
+    <Compile Include="Stubs\AddPointStateStub.cs" />
+    <Compile Include="Stubs\ChangingDocumentOptionsCommandStub.cs" />
+    <Compile Include="Stubs\ClearDocumentCommandStub.cs" />
+    <Compile Include="Stubs\ControlUnitStub.cs" />
     <Compile Include="Stubs\EditContextStub.cs" />
+    <Compile Include="Stubs\FiguresChangingCommandStub.cs" />
+    <Compile Include="Stubs\PropertyGridStub.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stubs\RemoveFigureCommandStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -83,6 +105,22 @@
     <ProjectReference Include="..\CircleFigure\Circle.csproj">
       <Project>{9326B3C3-AF96-4F13-B4AF-8FEDF920CFE4}</Project>
       <Name>Circle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EllipseFigure\Ellipse.csproj">
+      <Project>{a4df0022-22f8-403b-b1e5-5dbc17bd8540}</Project>
+      <Name>Ellipse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LineFigure\Line.csproj">
+      <Project>{b9cb792b-a98f-49a2-90b3-be8d7c94afe9}</Project>
+      <Name>Line</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PolygonFigure\Polygon.csproj">
+      <Project>{772456d7-9995-46b0-9543-b07694c9dc7b}</Project>
+      <Name>Polygon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PolyLineFigure\PolyLine.csproj">
+      <Project>{3d32f4e5-53c1-4505-ba62-d436d9680d7c}</Project>
+      <Name>PolyLine</Name>
     </ProjectReference>
     <ProjectReference Include="..\SDK\SDK.csproj">
       <Project>{4BAE6634-E69E-49D8-AFED-D9E05ABF72FC}</Project>

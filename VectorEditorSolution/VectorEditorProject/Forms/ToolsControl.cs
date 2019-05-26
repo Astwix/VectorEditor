@@ -40,12 +40,14 @@ namespace VectorEditorProject.Forms
             foreach (var loadedFigure in DI.getInstance().Container
                 .GetAllInstances<FigureBase>())
             {
-                Button figureButton 
-                    = new Button {Text = loadedFigure.GetType().Assembly.GetName().Name};
+                Button figureButton
+                    = new Button
+                        {Text = loadedFigure.GetType().Assembly.GetName().Name};
                 figureButton.Click += new EventHandler(FigureButtonOnClick);
                 figureButton.Location = new Point(10, startVerticalpos);
                 FiguresPanel.Controls.Add(figureButton);
                 startVerticalpos += figureButton.Height + 10;
+                _activeFigureType = figureButton.Text;
             }
         }
 

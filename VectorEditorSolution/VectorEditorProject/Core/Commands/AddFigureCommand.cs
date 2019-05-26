@@ -19,7 +19,7 @@ namespace VectorEditorProject.Core.Commands
         /// <summary>
         /// Список фигур, доступный только для чтения
         /// </summary>
-        private readonly IReadOnlyList<FigureBase> _figures;
+        protected readonly IReadOnlyList<FigureBase> _figures;
 
         /// <summary>
         /// Конструктор создания команды

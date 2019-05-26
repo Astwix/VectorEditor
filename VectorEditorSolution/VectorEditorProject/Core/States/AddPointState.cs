@@ -14,22 +14,22 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Фабрика рисования
         /// </summary>
-        private readonly DrawerFactory _drawerFactory = new DrawerFactory();
+        protected readonly DrawerFactory _drawerFactory = new DrawerFactory();
 
         /// <summary>
         /// Edit Context
         /// </summary>
-        private readonly EditContext _editContext;
+        protected readonly EditContext _editContext;
 
         /// <summary>
         /// Control Unit
         /// </summary>
-        private readonly IControlUnit _controlUnit;
+        protected readonly IControlUnit _controlUnit;
 
         /// <summary>
         /// Нажата ли кнопка мыши
         /// </summary>
-        private bool _isMousePressed = true;
+        protected bool _isMousePressed = true;
 
         /// <summary>
         /// Состояние добавления точек
@@ -125,6 +125,7 @@ namespace VectorEditorProject.Core.States
             if (activeFigure == null)
             {
                 _editContext.SetActiveState(States.SelectionState);
+                return;
             }
 
             activeFigure.PointsSettings.RemoveLast();

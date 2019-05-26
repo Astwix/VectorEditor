@@ -19,17 +19,17 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Список команд
         /// </summary>
-        private List<CommandBase> _commands;
+        protected List<CommandBase> _commands;
 
         /// <summary>
         /// Текущая команда
         /// </summary>
-        private int _currentCommand;
+        protected int _currentCommand;
 
         /// <summary>
         /// Edit Context
         /// </summary>
-        public EditContext EditContext
+        public IEditContext EditContext
         {
             get;
             set;
@@ -38,48 +38,48 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Последний сохраненный хэш
         /// </summary>
-        private int _lastSavedHash = -1;
+        protected int _lastSavedHash = 0;
 
         /// <summary>
         /// Канва
         /// </summary>
-        private readonly PictureBox _canvas;
+        protected readonly PictureBox _canvas;
 
         /// <summary>
         /// Control настроек фигуры
         /// </summary>
-        private readonly FigureSettingsControl _figureSettingsControl;
+        protected readonly FigureSettingsControl _figureSettingsControl;
 
         /// <summary>
         /// Control инструментов
         /// </summary>
-        private readonly ToolsControl _toolsControl;
+        protected readonly ToolsControl _toolsControl;
 
         /// <summary>
         /// Редактор свойств
         /// </summary>
-        private readonly PropertyGrid _propertyGrid;
+        protected readonly PropertyGrid _propertyGrid;
 
         /// <summary>
         /// Резервные свойства
         /// </summary>
-        private FigureBase _propertyBackUp;
+        protected FigureBase _propertyBackUp;
 
         /// <summary>
         /// Буфер обмена
         /// </summary>
-        private readonly List<FigureBase> _clipboard = new List<FigureBase>();
+        protected readonly List<FigureBase> _clipboard = new List<FigureBase>();
 
         /// <summary>
         /// Текущий документ
         /// </summary>
-        private readonly Document _currentDocument = new Document("Untitled",
+        protected readonly Document _currentDocument = new Document("Untitled",
             Color.White, new Size(400, 400));
 
         /// <summary>
         /// Словарь для обновления view по действию
         /// </summary>
-        private readonly Dictionary<Type, List<Action>> _viewUpdateDictionary;
+        protected readonly Dictionary<Type, List<Action>> _viewUpdateDictionary;
 
         /// <summary>
         /// Конструктор класса Control Unit
@@ -205,7 +205,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Обновить состояние
         /// </summary>
-        private void UpdateState()
+        public void UpdateState()
         {
             EditContext.UpdateState();
         }
@@ -378,7 +378,8 @@ namespace VectorEditorProject.Core
         {
             if ((FigureBase) _propertyGrid.SelectedObject != null)
             {
-                _propertyBackUp = ((FigureBase) _propertyGrid.SelectedObject).CopyFigure();
+                _propertyBackUp = ((FigureBase) _propertyGrid.SelectedObject)
+                    .CopyFigure();
             }
         }
 
@@ -473,9 +474,9 @@ namespace VectorEditorProject.Core
         /// Расчет текущего хэша
         /// </summary>
         /// <returns>Хэш</returns>
-        private int CalcCurrentHash()
+        protected int CalcCurrentHash()
         {
-            int hash = -1;
+            int hash = 0;
             foreach (var command in _commands)
             {
                 hash = hash + command.GetHashCode();
@@ -490,13 +491,7 @@ namespace VectorEditorProject.Core
         /// <returns></returns>
         public bool IsFileHaveUnsavedChanges()
         {
-            bool isIt = false;
-            if (_lastSavedHash != CalcCurrentHash())
-            {
-                isIt = true;
-            }
-
-            return isIt;
+            return _lastSavedHash != CalcCurrentHash();
         }
 
         /// <summary>

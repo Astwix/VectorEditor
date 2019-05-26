@@ -6,7 +6,7 @@ namespace VectorEditorProject.Core
 {
     public interface IControlUnit
     {
-        EditContext EditContext { get; set; }
+        IEditContext EditContext { get; set; }
 
         void Copy();
         void Delete();

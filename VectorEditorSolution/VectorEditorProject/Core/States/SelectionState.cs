@@ -16,39 +16,39 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Edit Context
         /// </summary>
-        private readonly EditContext _editContext;
+        protected readonly IEditContext _editContext;
 
         /// <summary>
         /// Control Unit
         /// </summary>
-        private readonly IControlUnit _controlUnit;
+        protected readonly IControlUnit _controlUnit;
 
         /// <summary>
         /// Нажата ли клавиша мыши
         /// </summary>
-        private bool _isMousePressed;
+        protected bool _isMousePressed;
 
         /// <summary>
         /// Начальный Х
         /// </summary>
-        private int _beginX;
+        protected int _beginX;
 
         /// <summary>
         /// Начальный У
         /// </summary>
-        private int _beginY;
+        protected int _beginY;
 
         /// <summary>
         /// Прямоугольник выделения
         /// </summary>
-        private Rectangle _selectionRectangle;
+        protected Rectangle _selectionRectangle;
 
         /// <summary>
         /// Конструктор состояния выделения
         /// </summary>
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="editContext">EditContext</param>
-        public SelectionState(IControlUnit controlUnit, EditContext editContext)
+        public SelectionState(IControlUnit controlUnit, IEditContext editContext)
         {
             _controlUnit = controlUnit;
             _editContext = editContext;
@@ -159,7 +159,7 @@ namespace VectorEditorProject.Core.States
 
                 // ближайшая (к клику пользователя) фигура из словаря
                 var nearFigure = distanceToFigures.Aggregate(
-                        (l, r) => l.Value < r.Value ? l : r).Key;
+                    (l, r) => l.Value < r.Value ? l : r).Key;
                 _editContext.SetSelectedFigures(new List<FigureBase>()
                 {
                     nearFigure

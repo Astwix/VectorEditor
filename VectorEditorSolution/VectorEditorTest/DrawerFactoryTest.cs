@@ -20,8 +20,10 @@ namespace VectorEditorTest
         [Test]
         public void ConstructorTest()
         {
+            // Arrange
             var df = new DrawerFactory();
 
+            // Act 
             int containerParsedCount = DI.getInstance().Container
                 .GetAllInstances<DrawerBase>()
                 .Count();
@@ -30,20 +32,24 @@ namespace VectorEditorTest
                 (new PrivateObject(df).GetField("_typeToDrawerBaseMap"));
             int drawerFacadeCreatedCount = _typeToDrawerBaseMap.Count;
 
+            // Assert
             Assert.AreEqual(containerParsedCount, drawerFacadeCreatedCount);
         }
 
         [Test]
         public void DrawCanvasTest()
         {
+            // Arrange 
             var df = new DrawerFactory();
             var bitmap = new Bitmap(10, 10);
 
+            // Act 
             var bitmapBeforeDraw = (Bitmap)bitmap.Clone();
             df.DrawCanvas(Color.AliceBlue, new Size(10, 10),
                 Graphics.FromImage(bitmap));
             var bitmapAfterDraw = (Bitmap)bitmap.Clone();
 
+            // Assert
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -62,16 +68,19 @@ namespace VectorEditorTest
         [Test]
         public void DrawFigureWithRealFigureTest()
         {
+            // Arrange 
             var df = new DrawerFactory();
             FigureBase figure = new CircleFigure();
             figure.PointsSettings.AddPoint(new PointF(0, 0));
             figure.PointsSettings.AddPoint(new PointF(10, 10));
             var bitmap = new Bitmap(10, 10);
 
+            // Act 
             var bitmapBeforeDraw = (Bitmap)bitmap.Clone();
             df.DrawFigure(figure, Graphics.FromImage(bitmap));
             var bitmapAfterDraw = (Bitmap)bitmap.Clone();
 
+            // Assert
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -90,6 +99,7 @@ namespace VectorEditorTest
         [Test]
         public void DrawFigureWithMockTest()
         {
+            // Arrange 
             var df = new DrawerFactory();
             Mock<FigureBase> figureMock = new Mock<FigureBase>();
             Mock<DrawerBase> figureDrawerMock = new Mock<DrawerBase>();
@@ -100,9 +110,11 @@ namespace VectorEditorTest
                 figureDrawerMock.Object.GetType().Assembly.GetName().Name,
                 figureDrawerMock.Object);
 
+            // Act 
             df.DrawFigure(figureMock.Object,
                 Graphics.FromImage(new Bitmap(10, 10)));
 
+            // Assert
             figureDrawerMock.Verify(
                 x => x.DrawFigure(It.IsAny<FigureBase>(), It.IsAny<Graphics>()),
                 Times.Once);
@@ -111,9 +123,12 @@ namespace VectorEditorTest
         [Test]
         public void DrawFigureUnknownDrawerTest()
         {
+            // Arrange 
             var df = new DrawerFactory();
             Mock<FigureBase> figureMock = new Mock<FigureBase>();
 
+            // Act 
+            // Assert
             Assert.Throws<KeyNotFoundException>(() =>
             {
                 df.DrawFigure(figureMock.Object,
@@ -124,16 +139,19 @@ namespace VectorEditorTest
         [Test]
         public void DrawBorderWithRealFigureTest()
         {
+            // Arrange 
             var df = new DrawerFactory();
             FigureBase figure = new CircleFigure();
             figure.PointsSettings.AddPoint(new PointF(0, 0));
             figure.PointsSettings.AddPoint(new PointF(10, 10));
             var bitmap = new Bitmap(10, 10);
 
+            // Act 
             var bitmapBeforeDraw = (Bitmap)bitmap.Clone();
             df.DrawBorder(figure, Graphics.FromImage(bitmap));
             var bitmapAfterDraw = (Bitmap)bitmap.Clone();
 
+            // Assert
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -152,6 +170,7 @@ namespace VectorEditorTest
         [Test]
         public void DrawBorderWithMockTest()
         {
+            // Arrange 
             var df = new DrawerFactory();
             Mock<FigureBase> figureMock = new Mock<FigureBase>();
             Mock<DrawerBase> figureDrawerMock = new Mock<DrawerBase>();
@@ -162,9 +181,11 @@ namespace VectorEditorTest
                 figureDrawerMock.Object.GetType().Assembly.GetName().Name,
                 figureDrawerMock.Object);
 
+            // Act 
             df.DrawBorder(figureMock.Object,
                 Graphics.FromImage(new Bitmap(10, 10)));
 
+            // Assert
             figureDrawerMock.Verify(
                 x => x.DrawBorder(It.IsAny<FigureBase>(), It.IsAny<Graphics>()),
                 Times.Once);
@@ -173,9 +194,12 @@ namespace VectorEditorTest
         [Test]
         public void DrawBorderUnknownDrawerTest()
         {
+            // Arrange 
             var df = new DrawerFactory();
             Mock<FigureBase> figureMock = new Mock<FigureBase>();
 
+            // Act 
+            // Assert
             Assert.Throws<KeyNotFoundException>(() =>
             {
                 df.DrawBorder(figureMock.Object,

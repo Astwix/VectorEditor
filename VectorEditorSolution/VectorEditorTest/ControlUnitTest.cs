@@ -31,6 +31,7 @@ namespace VectorEditorTest
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
+
             // Assert
             // Controls
             Assert.IsNotNull(controlUnit.Canvas);
@@ -50,8 +51,10 @@ namespace VectorEditorTest
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
             var editContext = new Mock<IEditContext>();
+
             // Act
             controlUnit.EditContext = editContext.Object;
+            
             // Assert
             Assert.IsNotNull(controlUnit.EditContext);
             Assert.AreEqual(editContext.Object, controlUnit.EditContext);
@@ -64,8 +67,10 @@ namespace VectorEditorTest
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
+
             // Act
             var someFillSettings = controlUnit.GetActiveFillSettings();
+
             // Assert
             Assert.IsNotNull(someFillSettings);
         }
@@ -77,8 +82,10 @@ namespace VectorEditorTest
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
+
             // Act
             var someLineSettings = controlUnit.GetActiveLineSettings();
+
             // Assert
             Assert.IsNotNull(someLineSettings);
         }
@@ -90,8 +97,10 @@ namespace VectorEditorTest
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
+
             // Act
             var someFigureType = controlUnit.GetActiveFigureType();
+
             // Assert
             Assert.IsTrue(someFigureType.Length > 0);
         }
@@ -115,12 +124,14 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             var shouldBeZero = controlUnit.Clipboard.Count;
             controlUnit.GetDocument().AddFigure(circle);
             editContext.SetSelectedFigures(circle.guid);
             controlUnit.Copy();
             var shouldBeOne = controlUnit.Clipboard.Count;
+
             // Assert
             Assert.AreEqual(shouldBeZero, 0);
             Assert.AreEqual(shouldBeOne, 1);
@@ -137,6 +148,7 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             var shouldBeZero = controlUnit.GetDocument().GetFigures().Count;
             controlUnit.GetDocument().AddFigure(circle);
@@ -144,6 +156,7 @@ namespace VectorEditorTest
             editContext.SetSelectedFigures(circle.guid);
             controlUnit.Delete();
             var shouldBeZero2 = controlUnit.GetDocument().GetFigures().Count;
+
             // Assert
             Assert.AreEqual(shouldBeZero, 0);
             Assert.AreEqual(shouldBeOne, 1);
@@ -162,7 +175,7 @@ namespace VectorEditorTest
                 File.Delete(path);
             }
 
-            // -----SERIALIZE TEST----- //
+            // SERIALIZE TEST //
             using (var stream = File.Create(path))
             {
                 var ellipse = new EllipseFigure();
@@ -183,7 +196,7 @@ namespace VectorEditorTest
 
             int shouldBeOne = 0;
 
-            // -----DESERIALIZE TEST----- //
+            // DESERIALIZE TEST //
             using (var stream = File.Open(path, FileMode.Open))
             {
                 var controlUnit = new ControlUnitStub(new PictureBox(),
@@ -199,6 +212,7 @@ namespace VectorEditorTest
             {
                 File.Delete(path);
             }
+
             // Assert
             Assert.AreEqual(1, shouldBeOne);
         }
@@ -213,6 +227,7 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             // Assert
             Assert.DoesNotThrow(() => controlUnit.Do());
@@ -227,6 +242,7 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             // Assert
             Assert.IsNotNull(controlUnit.GetDocument());
@@ -245,12 +261,14 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             var shouldBeFalse = controlUnit.IsFileHaveUnsavedChanges();
             var shouldBeZero = controlUnit.LastSavedHash;
             controlUnit.StoreCommand(
                 CommandFactory.CreateAddFigureCommand(controlUnit, figure));
             var shouldBeTrue = controlUnit.IsFileHaveUnsavedChanges();
+
             // Assert
             Assert.AreEqual(false, shouldBeFalse);
             Assert.AreEqual(true, shouldBeTrue);
@@ -260,15 +278,16 @@ namespace VectorEditorTest
         [Test]
         public void PasteTest()
         {
+            // Arrange
             var figure = new LineFigure();
             figure.PointsSettings.AddPoint(new PointF(10, 10));
             figure.PointsSettings.AddPoint(new PointF(12, 33));
-            // Arrange
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             Assert.DoesNotThrow(() => controlUnit.Paste());
             controlUnit.Clipboard.Add(figure);
@@ -277,6 +296,7 @@ namespace VectorEditorTest
             var shouldBeOne = controlUnit.GetDocument().GetFigures().Count;
             controlUnit.Paste();
             var shouldBeTwo = controlUnit.GetDocument().GetFigures().Count;
+
             // Assert
             Assert.AreEqual(0, shouldBeZero);
             Assert.AreEqual(1, shouldBeOne);
@@ -286,16 +306,17 @@ namespace VectorEditorTest
         [Test]
         public void PropertyGridPropertyValueChangedTest()
         {
+            // Arrange
             var figure = new CircleFigure();
             figure.PointsSettings.AddPoint(new PointF(10, 10));
             figure.PointsSettings.AddPoint(new PointF(12, 33));
-            // Arrange
             var propertyGridStub = new PropertyGridStub();
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 propertyGridStub);
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             controlUnit.PropertyGrid.SelectedObject = figure;
             propertyGridStub.FakePropertyChange();
@@ -304,6 +325,7 @@ namespace VectorEditorTest
             controlUnit.GetDocument().AddFigure(figure);
             controlUnit.PropertyGrid.SelectedObject = figure;
             propertyGridStub.FakePropertyChange();
+
             // Assert
             Assert.Pass();
         }
@@ -311,10 +333,10 @@ namespace VectorEditorTest
         [Test]
         public void PropertyGridSelectedObjectsChangedTest()
         {
+            // Arrange 
             var figure = new LineFigure();
             figure.PointsSettings.AddPoint(new PointF(10, 10));
             figure.PointsSettings.AddPoint(new PointF(12, 33));
-            // Arrange
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
@@ -343,11 +365,13 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             controlUnit.PropertyGrid.SelectedObject = null;
             controlUnit.UpdatePropertyGrid();
             controlUnit.PropertyGrid.SelectedObject = figure;
             controlUnit.UpdatePropertyGrid();
+
             // Assert
             Assert.Pass();
         }
@@ -364,6 +388,7 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             var shouldBeZero = controlUnit.Commands.Count;
             var shouldBeZero2 = controlUnit.CurrentCommand;
@@ -373,6 +398,7 @@ namespace VectorEditorTest
             controlUnit.Do();
             var shouldBeOne2 = controlUnit.CurrentCommand;
             controlUnit.Reset();
+
             // Assert
             Assert.AreEqual(0, shouldBeZero);
             Assert.AreEqual(0, shouldBeZero2);
@@ -394,6 +420,7 @@ namespace VectorEditorTest
 
             // Act
             controlUnit.UpdateState();
+
             // Assert
             editContextMock.Verify(x => x.UpdateState(), Times.Once);
         }
@@ -405,6 +432,7 @@ namespace VectorEditorTest
             var controlUnit = new ControlUnitStub(new PictureBox(),
                 new FigureSettingsControl(), new ToolsControl(),
                 new PropertyGrid());
+
             // Act
             controlUnit.StoreCommand(
                 CommandFactory.CreateClearDocumentCommand(controlUnit));
@@ -412,6 +440,7 @@ namespace VectorEditorTest
                 CommandFactory.CreateClearDocumentCommand(controlUnit));
             controlUnit.StoreCommand(
                 CommandFactory.CreateClearDocumentCommand(controlUnit));
+
             // Assert
             Assert.AreEqual(1, controlUnit.Commands.Count);
             Assert.AreEqual(0, controlUnit.CurrentCommand);
@@ -426,6 +455,7 @@ namespace VectorEditorTest
                 new PropertyGrid());
             var editContext = new EditContext(controlUnit);
             controlUnit.EditContext = editContext;
+
             // Act
             controlUnit.StoreCommand(
                 CommandFactory.CreateClearDocumentCommand(controlUnit));

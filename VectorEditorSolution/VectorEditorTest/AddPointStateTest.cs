@@ -108,6 +108,7 @@ namespace VectorEditorTest
 
             state.MouseDown(this,
                 new MouseEventArgs(MouseButtons.Left, 1, 2, 3, 4));
+
             // Assert
             Assert.IsTrue(state.IsMousePressed);
             Assert.IsTrue(figure.PointsSettings.GetPoints().Count > 2);
@@ -138,6 +139,7 @@ namespace VectorEditorTest
 
             state.MouseUp(this,
                 new MouseEventArgs(MouseButtons.Left, 1, 2, 3, 4));
+            
             // Assert
             Assert.IsFalse(state.IsMousePressed);
             Assert.IsTrue(figure.PointsSettings.GetPoints().Count > 1);
@@ -168,6 +170,7 @@ namespace VectorEditorTest
 
             state.MouseMove(this,
                 new MouseEventArgs(MouseButtons.Left, 1, 2, 3, 4));
+            
             // Assert
             Assert.IsTrue(state.IsMousePressed);
             Assert.IsTrue(figure.PointsSettings.GetPoints().Count > 1);

@@ -87,5 +87,14 @@ namespace VectorEditorProject.Forms
         {
             return _activeFigureType;
         }
+
+        /// <summary>
+        /// Установить тип активной фигуры
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetActiveFigureType(string value)
+        {
+            _activeFigureType = value;
+        }
     }
 }

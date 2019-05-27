@@ -75,7 +75,7 @@ namespace SDK
         /// <returns></returns>
         public override string ToString()
         {
-            return base.ToString();
+            return "";
         }
     }
 }

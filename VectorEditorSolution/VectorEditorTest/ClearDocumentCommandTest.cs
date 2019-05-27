@@ -51,6 +51,7 @@ namespace VectorEditorTest
             // Act
             var command = new ClearDocumentCommandStub(controlUnit);
             command.Do();
+
             // Assert
             Assert.IsEmpty(controlUnit.GetDocument().GetFigures());
         }
@@ -71,6 +72,7 @@ namespace VectorEditorTest
             var command = new ClearDocumentCommandStub(controlUnit);
             command.Do();
             command.Undo();
+
             // Assert
             Assert.IsNotEmpty(controlUnit.GetDocument().GetFigures());
         }

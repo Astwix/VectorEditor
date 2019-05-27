@@ -18,12 +18,12 @@ namespace SDK
         /// <summary>
         /// Лимит точек
         /// </summary>
-        private readonly int _limitPoint = 0;
+        protected readonly int _limitPoint = 0;
 
         /// <summary>
         /// Список точек
         /// </summary>
-        private readonly List<PointF> _points = new List<PointF>();
+        protected readonly List<PointF> _points = new List<PointF>();
 
         /// <summary>
         /// Конструктор для безлимитных фигур

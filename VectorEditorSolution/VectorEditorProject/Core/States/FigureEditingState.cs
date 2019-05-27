@@ -16,98 +16,98 @@ namespace VectorEditorProject.Core.States
         /// <summary>
         /// Edit Context
         /// </summary>
-        private readonly EditContext _editContext;
+        protected readonly IEditContext _editContext;
 
         /// <summary>
         /// Control Unit
         /// </summary>
-        private readonly IControlUnit _controlUnit;
+        protected readonly IControlUnit _controlUnit;
 
         /// <summary>
         /// Левый верхний маркер
         /// </summary>
-        private PointF _leftTopMarker;
+        protected PointF _leftTopMarker;
 
         /// <summary>
         /// Правый нижний маркер
         /// </summary>
-        private PointF _rightBottomMarker;
+        protected PointF _rightBottomMarker;
 
         /// <summary>
         /// Прямоугольник выделения
         /// </summary>
-        private Rectangle _selectionRectangle;
+        protected Rectangle _selectionRectangle;
 
         /// <summary>
         /// Нажата ли кнопка мыши
         /// </summary>
-        private bool _isMousePressed;
+        protected bool _isMousePressed;
 
         /// <summary>
         /// Подсвечен ли левый верхний маркер
         /// </summary>
-        private bool _isLeftTopMarkerHovered;
+        protected bool _isLeftTopMarkerHovered;
 
         /// <summary>
         /// Подсвечен ли правый нижний маркер
         /// </summary>
-        private bool _isRightBottomMarkerHovered;
+        protected bool _isRightBottomMarkerHovered;
 
         /// <summary>
         /// Ширина фигуры
         /// </summary>
-        private float _fixedWidth;
+        protected float _fixedWidth;
 
         /// <summary>
         /// Высота фигуры
         /// </summary>
-        private float _fixedHeight;
+        protected float _fixedHeight;
 
         /// <summary>
         /// Расстояние по X до курсора
         /// </summary>
-        private float _deltaXtoCursor;
+        protected float _deltaXtoCursor;
 
         /// <summary>
         /// Расстояние по Y до курсора
         /// </summary>
-        private float _deltaYtoCursor;
+        protected float _deltaYtoCursor;
 
         /// <summary>
         /// Перемещается ли фигура
         /// </summary>
-        private bool _isFigureMoving;
+        protected bool _isFigureMoving;
 
         /// <summary>
         /// Список опорных точек
         /// </summary>
-        private readonly Dictionary<int, bool> _pointsHovered =
+        protected readonly Dictionary<int, bool> _pointsHovered =
             new Dictionary<int, bool>();
 
         /// <summary>
         /// Число активных точек
         /// </summary>
-        private int _activePoint = -1;
+        protected int _activePoint = -1;
 
         /// <summary>
         /// Размер маркера
         /// </summary>
-        private const float _markerSize = 10;
+        protected const float _markerSize = 10;
 
         /// <summary>
         /// Цвет маркера при наведении (выделение)
         /// </summary>
-        private readonly Color _markerHoverColor = Color.DeepPink;
+        protected readonly Color _markerHoverColor = Color.DeepPink;
 
         /// <summary>
         /// Цвет маркера при наведении (опорная точка)
         /// </summary>
-        private readonly Color _markerRefPointHoverColor = Color.Aquamarine;
+        protected readonly Color _markerRefPointHoverColor = Color.Aquamarine;
 
         /// <summary>
         /// Резервный список фигур
         /// </summary>
-        private readonly List<FigureBase> _backUp = new List<FigureBase>();
+        protected readonly List<FigureBase> _backUp = new List<FigureBase>();
 
         /// <summary>
         /// Конструктор состояния редактирования фигуры
@@ -115,7 +115,7 @@ namespace VectorEditorProject.Core.States
         /// <param name="controlUnit">Control Unit</param>
         /// <param name="editContext">Edit Context</param>
         public FigureEditingState(IControlUnit controlUnit, 
-            EditContext editContext)
+            IEditContext editContext)
         {
             _editContext = editContext;
             _controlUnit = controlUnit;

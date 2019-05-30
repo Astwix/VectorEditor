@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using Circle;
 using Moq;
@@ -18,7 +13,8 @@ namespace VectorEditorTest
     [TestFixture]
     class ChangingDocumentOptionsCommandTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды изменения " +
+                             "параметров документа через конструктор")]
         public void Constructor1Test()
         {
             // Arrange
@@ -42,7 +38,8 @@ namespace VectorEditorTest
             controlUnitMock.Verify(x => x.GetDocument(), Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное применение команды изменения " +
+                             "параметров документа")]
         public void DoTest()
         {
             // Arrange
@@ -65,7 +62,8 @@ namespace VectorEditorTest
             Assert.AreEqual(new Size(22, 33), docAfterAct.Size);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное отменение команды изменения" +
+                             "параметров документа")]
         public void UndoTest()
         {
             // Arrange
@@ -89,7 +87,7 @@ namespace VectorEditorTest
             Assert.AreNotEqual(new Size(22, 33), docAfterAct.Size);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange
@@ -105,7 +103,8 @@ namespace VectorEditorTest
             Assert.IsTrue(command.ToString().Length > 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
         public void GetHashTest()
         {
             // Arrange

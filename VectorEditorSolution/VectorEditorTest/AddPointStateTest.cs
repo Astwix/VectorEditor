@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using Circle;
 using NUnit.Framework;
@@ -17,7 +12,8 @@ namespace VectorEditorTest
     [TestFixture]
     class AddPointStateTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание состояния добавления точки " +
+                             "через конструктор")]
         public void ConstructorTest()
         {
             // Arrange
@@ -42,7 +38,7 @@ namespace VectorEditorTest
             Assert.IsNotNull(state.ControlUnit);
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка на отрисовку холста")]
         public void DrawTest()
         {
             // Arrange
@@ -82,7 +78,7 @@ namespace VectorEditorTest
             Assert.Fail();
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка нажатия кнопки мыши")]
         public void MouseDownTest()
         {
             // Arrange
@@ -114,7 +110,7 @@ namespace VectorEditorTest
             Assert.IsTrue(figure.PointsSettings.GetPoints().Count > 2);
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка на отжатие кнопки мыши")]
         public void MouseUpTest()
         {
             // Arrange
@@ -145,7 +141,7 @@ namespace VectorEditorTest
             Assert.IsTrue(figure.PointsSettings.GetPoints().Count > 1);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка перемещения мыши")]
         public void MouseMoveTest()
         {
             // Arrange

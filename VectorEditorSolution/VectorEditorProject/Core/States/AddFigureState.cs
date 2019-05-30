@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Forms;
 using SDK;
-using StructureMap;
 using VectorEditorProject.Core.Commands;
 
 namespace VectorEditorProject.Core.States
@@ -44,7 +43,7 @@ namespace VectorEditorProject.Core.States
             //FigureBase figure =
             //    figureFactory.CreateFigure(_controlUnit.GetActiveFigureType());
 
-            FigureBase figure = DI.getInstance().Container
+            FigureBase figure = DI.GetInstance().Container
                 .GetInstance<FigureBase>(_controlUnit
                     .GetActiveFigureType());
 

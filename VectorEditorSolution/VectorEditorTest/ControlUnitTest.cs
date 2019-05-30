@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Circle;
 using Ellipse;
@@ -13,7 +9,6 @@ using Moq;
 using NUnit.Framework;
 using Polygon;
 using PolyLine;
-using StructureMap.Diagnostics.TreeView;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Forms;
@@ -24,7 +19,8 @@ namespace VectorEditorTest
     [TestFixture]
     class ControlUnitTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание экземпляра " +
+                             "класса Control Unit")]
         public void ConstructorTest()
         {
             // Arrange
@@ -43,7 +39,7 @@ namespace VectorEditorTest
             Assert.IsTrue(controlUnit.ViewUpdateDictionary.Count > 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка свойства Edit Context")]
         public void EditContextPropertyTest()
         {
             // Arrange
@@ -60,7 +56,7 @@ namespace VectorEditorTest
             Assert.AreEqual(editContext.Object, controlUnit.EditContext);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное получение настроек заливки")]
         public void GetActiveFillSettingsTest()
         {
             // Arrange
@@ -75,7 +71,7 @@ namespace VectorEditorTest
             Assert.IsNotNull(someFillSettings);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное получение настроек линии")]
         public void GetActiveLineSettingsTest()
         {
             // Arrange
@@ -90,7 +86,7 @@ namespace VectorEditorTest
             Assert.IsNotNull(someLineSettings);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное получение типа фигуры")]
         public void GetActiveFigureTypeTest()
         {
             // Arrange
@@ -105,7 +101,7 @@ namespace VectorEditorTest
             Assert.IsTrue(someFigureType.Length > 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное обновление холста")]
         public void CanvasUpdateTest()
         {
             // Arrange
@@ -114,7 +110,8 @@ namespace VectorEditorTest
             // Проблема с проверкой вызова invalidate у контрола
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение числа фигур " +
+                             "в буфере обмена до их копирования и после")]
         public void CopyTest()
         {
             // Arrange
@@ -138,7 +135,8 @@ namespace VectorEditorTest
             Assert.AreEqual(circle.guid, controlUnit.Clipboard[0].guid);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение числа фигур " +
+                             "после их удаления")]
         public void DeleteTest()
         {
             // Arrange
@@ -163,11 +161,11 @@ namespace VectorEditorTest
             Assert.AreEqual(shouldBeZero2, 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный тест (де)сериализации файла")]
         public void SerializeDeserializeTest()
         {
             // Arrange
-            string path = @"D:\TestVector.pika";
+            string path = AppDomain.CurrentDomain.BaseDirectory + "/TestVector.pika";
 
             // Delete the file if it exists.
             if (File.Exists(path))
@@ -218,7 +216,8 @@ namespace VectorEditorTest
         }
 
 
-        [Test]
+        [TestCase(TestName = "Позитивное применение " +
+                             "несуществующей команды в стеке")]
         public void DoTest()
         {
             // Arrange
@@ -233,7 +232,7 @@ namespace VectorEditorTest
             Assert.DoesNotThrow(() => controlUnit.Do());
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное получение документа")]
         public void GetDocumentTest()
         {
             // Arrange
@@ -248,7 +247,8 @@ namespace VectorEditorTest
             Assert.IsNotNull(controlUnit.GetDocument());
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка на " +
+                             "определение несохраненных изменений")]
         public void IsFileHaveUnsavedChangesTest()
         {
             // Arrange
@@ -275,7 +275,8 @@ namespace VectorEditorTest
             Assert.AreEqual(0, shouldBeZero);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный тест сравнения числа фигур " +
+                             "после вставки фигур(ы)")]
         public void PasteTest()
         {
             // Arrange
@@ -303,7 +304,8 @@ namespace VectorEditorTest
             Assert.AreEqual(2, shouldBeTwo);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный отклик редактора свойств " +
+                             "на изменение выделенной фигуры")]
         public void PropertyGridPropertyValueChangedTest()
         {
             // Arrange
@@ -330,7 +332,8 @@ namespace VectorEditorTest
             Assert.Pass();
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный отклик редактора свойств " +
+                             "при создании новой фигуры")]
         public void PropertyGridSelectedObjectsChangedTest()
         {
             // Arrange 
@@ -353,7 +356,8 @@ namespace VectorEditorTest
             Assert.Pass();
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный отклик редактора свойств " +
+                             "на выделение фигуры")]
         public void UpdatePropertyGridTest()
         {
             // Arrange
@@ -376,7 +380,8 @@ namespace VectorEditorTest
             Assert.Pass();
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение значений " +
+                             "в стеке команд при его сбросе")]
         public void ResetTest()
         {
             // Arrange
@@ -408,7 +413,7 @@ namespace VectorEditorTest
             Assert.AreEqual(0, controlUnit.CurrentCommand);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение обновления состояния")]
         public void UpdateStateTest()
         {
             // Arrange
@@ -425,7 +430,8 @@ namespace VectorEditorTest
             editContextMock.Verify(x => x.UpdateState(), Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение числа команд " +
+                             "при их добавлении")]
         public void StoreCommandTest()
         {
             // Arrange
@@ -446,7 +452,8 @@ namespace VectorEditorTest
             Assert.AreEqual(0, controlUnit.CurrentCommand);
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанное применение и " +
+                             "отмена команд в стеке")]
         public void UndoTest()
         {
             // Arrange

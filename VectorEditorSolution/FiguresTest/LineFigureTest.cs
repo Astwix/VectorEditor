@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Line;
 using NUnit.Framework;
 
@@ -11,30 +7,29 @@ namespace FiguresTest
     [TestFixture()]
     class LineFigureTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание фигуры " +
+                             "Линия через конструктор")]
         public void ConstructorTest()
         {
             // Arrange
             var figure = new LineFigure();
 
             // Act
-            
             // Assert
             Assert.NotNull(figure.PointsSettings);
             Assert.NotNull(figure.LineSettings);
             Assert.AreNotEqual(Guid.Empty, figure.guid);
         }
 
-        [Test]
-        public void GetFigureNameTest()
+        [TestCase(TestName = "Позитивная проверка значения свойства Имя фигуры")]
+        public void FigureNameTest()
         {
             // Arrange
             var figure = new LineFigure();
 
             // Act
-            
             // Assert
-            Assert.AreEqual("Line", figure.GetFigureName());
+            Assert.AreEqual("Line", figure.FigureName);
         }
     }
 

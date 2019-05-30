@@ -18,9 +18,13 @@ namespace PolyLine
             _pointsSettings = new PointsSettings();
         }
 
-        public override string GetFigureName()
+        /// <summary>
+        /// Имя фигуры
+        /// </summary>
+        /// <returns></returns>
+        public override string FigureName
         {
-            return "PolyLine";
+            get { return "PolyLine"; }
         }
     }
 }

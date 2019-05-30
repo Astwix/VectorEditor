@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Line;
+﻿using Line;
 using SDK;
 
 namespace FiguresTest.Stubs
 {
+    /// <summary>
+    /// Стаб класса LineFigure
+    /// </summary>
     class LineFigureStub : LineFigure
     {
+        /// <summary>
+        /// Настройки линии
+        /// </summary>
         public LineSettings LineSettings
         {
             get => _lineSettings;
             set => _lineSettings = value;
         }
 
+        /// <summary>
+        /// Настройки точек
+        /// </summary>
         public PointsSettings PointsSettings
         {
             get => _pointsSettings;

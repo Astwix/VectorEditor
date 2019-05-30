@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ellipse;
 using NUnit.Framework;
 
@@ -11,14 +7,14 @@ namespace FiguresTest
     [TestFixture]
     class EllipseFigureTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание фигуры " +
+                             "Эллипс через конструктор")]
         public void ConstructorTest()
         {
             // Arrange
             var figure = new EllipseFigure();
 
             // Act
-
             // Assert
             Assert.NotNull(figure.PointsSettings);
             Assert.NotNull(figure.LineSettings);
@@ -26,16 +22,15 @@ namespace FiguresTest
             Assert.AreNotEqual(Guid.Empty, figure.guid);
         }
 
-        [Test]
-        public void GetFigureNameTest()
+        [TestCase(TestName = "Позитивная проверка значения свойства Имя фигуры")]
+        public void FigureNameTest()
         {
             // Arrange
             var figure = new EllipseFigure();
 
             // Act
-            
             // Assert
-            Assert.AreEqual("Ellipse", figure.GetFigureName());
+            Assert.AreEqual("Ellipse", figure.FigureName);
         }
     }
 

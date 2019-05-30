@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using SDK;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.Commands;
 using VectorEditorProject.Core.States;

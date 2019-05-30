@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using Moq;
 using NUnit.Framework;
 using SDK;
@@ -14,8 +9,10 @@ namespace VectorEditorTest
     class DocumentTest
     {
         [Test]
-        [TestCase(5, 5)]
-        [TestCase(int.MaxValue, int.MaxValue)]
+        [TestCase(5, 5, 
+            TestName = "Конструктор с граничными 5, 5 параметрами")]
+        [TestCase(int.MaxValue, int.MaxValue, 
+            TestName = "Конструктор с максимальными параметрами")]
         public void ConstructorTest1(int a, int b)
         {
             // Arrange
@@ -30,8 +27,10 @@ namespace VectorEditorTest
         }
 
         [Test]
-        [TestCase(4, 4)]
-        [TestCase(int.MinValue, int.MinValue)]
+        [TestCase(4, 4,
+            TestName = "Негативный конструктор с граничными 4, 4 параметрами")]
+        [TestCase(int.MinValue, int.MinValue,
+            TestName = "Негативный конструктор с минимальными параметрами")]
         public void ConstructorTest2(int a, int b)
         {
             // Arrange 
@@ -46,8 +45,10 @@ namespace VectorEditorTest
         }
 
         [Test]
-        [TestCase(5, 5)]
-        [TestCase(int.MaxValue, int.MaxValue)]
+        [TestCase(5, 5, 
+            TestName = "Свойство Размер холста с граничными 5, 5 параметрами")]
+        [TestCase(int.MaxValue, int.MaxValue,
+            TestName = "Свойство Размер холста с максимальными параметрами")]
         public void SizeTest1(int a, int b)
         {
             // Arrange 
@@ -62,8 +63,12 @@ namespace VectorEditorTest
         }
 
         [Test]
-        [TestCase(4, 4)]
-        [TestCase(int.MinValue, int.MinValue)]
+        [TestCase(4, 4,
+            TestName = "Негативный тест свойство Размер холста " +
+                       "с граничными 4, 4 параметрами")]
+        [TestCase(int.MinValue, int.MinValue,
+            TestName = "Негативный тест свойство Размер холста " +
+                       "с минимальными параметрами")]
         public void SizeTest2(int a, int b)
         {
             // Arrange 
@@ -78,8 +83,8 @@ namespace VectorEditorTest
         }
 
         [Test]
-        [TestCase("Test")]
-        [TestCase(" ")]
+        [TestCase("Test", TestName = "Проверка с типовым значением для имени")]
+        [TestCase(" ", TestName = "Проверка одного пробела в имени документа")]
         public void NameTest(string a)
         {
             // Arrange 
@@ -92,7 +97,7 @@ namespace VectorEditorTest
             Assert.AreEqual(a, doc.Name);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный тест очистки холста")]
         public void ClearCanvasTest()
         {
             // Arrange 
@@ -111,7 +116,7 @@ namespace VectorEditorTest
             Assert.AreEqual(0, doc.GetFigures().Count);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное получение фигуры по guid")]
         public void GetFigureTest()
         {
             // Arrange 
@@ -130,7 +135,7 @@ namespace VectorEditorTest
             Assert.AreEqual(figureMock.Object, shouldBeFigureMock);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное получение фигуры через список")]
         public void GetFiguresTest()
         {
             // Arrange 
@@ -151,7 +156,7 @@ namespace VectorEditorTest
         }
 
 
-        [Test]
+        [TestCase(TestName = "Позитивный тест на добавление фигур")]
         public void AddFigureTest()
         {
             // Arrange 
@@ -171,7 +176,7 @@ namespace VectorEditorTest
             Assert.AreSame(figureMock.Object, shouldBeFigureMock);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный тест на удаление фигур")]
         public void DeleteFigureTest()
         {
             // Arrange 

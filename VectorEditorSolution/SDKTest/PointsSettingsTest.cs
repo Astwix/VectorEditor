@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using SDK;
 using SDKTest.Stubs;
@@ -13,7 +9,8 @@ namespace SDKTest
     [TestFixture]
     class PointsSettingsTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание через конструктор " +
+                             "настроек точек без параметров")]
         public void ConstructorTest()
         {
             // Arrange
@@ -25,7 +22,8 @@ namespace SDKTest
             Assert.IsEmpty(settings.Points);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание через конструктор " +
+                             "настроек точек с параметрами")]
         public void ConstructorTest2()
         {
             // Arrange
@@ -37,7 +35,8 @@ namespace SDKTest
             Assert.IsEmpty(settings.Points);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное определение координат левой " +
+                             "верхней точки приведенного прямоугольника")]
         public void TopLeftPointTest()
         {
             // Arrange
@@ -53,7 +52,8 @@ namespace SDKTest
             Assert.AreEqual(10, settings.LeftTopPointF().Y);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное определение координат правой " +
+                             "нижней точки приведенного прямоугольника")]
         public void RightDownPointTest()
         {
             // Arrange
@@ -69,7 +69,7 @@ namespace SDKTest
             Assert.AreEqual(60, settings.RightBottomPointF().Y);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное замещение точки по индексу")]
         public void ReplacePointTest()
         {
             // Arrange
@@ -86,8 +86,8 @@ namespace SDKTest
             Assert.AreEqual(200, settings.Points[1].Y);
         }
 
-        [Test]
-        public void RemovePointTest()
+        [TestCase(TestName = "Позитивное удаление точки по самой точке")]
+        public void DeletePointTest()
         {
             // Arrange
             var settings = new PointsSettingsStub();
@@ -104,8 +104,8 @@ namespace SDKTest
             Assert.IsTrue(settings.Points.Contains(new PointF(20, 60)));
         }
 
-        [Test]
-        public void RemoveLastTest()
+        [TestCase(TestName = "Позитивное удаление последней точки")]
+        public void DeleteLastTest()
         {
             // Arrange
             var settings = new PointsSettingsStub();
@@ -122,7 +122,8 @@ namespace SDKTest
             Assert.IsTrue(settings.Points.Contains(new PointF(10, 20)));
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка попадания фигуры " +
+                             "в прямоугольник выделения")]
         public void IsFigureInRectangleTest()
         {
             // Arrange
@@ -143,8 +144,9 @@ namespace SDKTest
 
         }
 
-        [Test]
-        public void GetHashCodeTest()
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
+        public void GetHashTest()
         {
             // Arrange
             var settings = new PointsSettingsStub();
@@ -161,7 +163,8 @@ namespace SDKTest
             Assert.AreNotEqual(code1, code2);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное пропорциональное изменение " +
+                             "размера фигур")]
         public void EditFiguresSizeTest()
         {
             // Arrange
@@ -178,7 +181,7 @@ namespace SDKTest
             Assert.AreEqual(new PointF(10, 10), settings.RightBottomPointF());
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный расчет расстояния между двумя точками")]
         public void DistanceBetweenPointsTest()
         {
             // Arrange
@@ -190,7 +193,7 @@ namespace SDKTest
                 PointsSettings.DistanceBetweenPoints(point1, point2), 0.1);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная очистка списка точек")]
         public void ClearTest()
         {
             // Arrange
@@ -206,7 +209,8 @@ namespace SDKTest
             Assert.IsEmpty(settings.Points);
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка на корректное добавление " +
+                             "точки, если лимит не превышен")]
         public void CanAddPointsTest()
         {
             // Arrange
@@ -224,7 +228,7 @@ namespace SDKTest
             Assert.IsTrue(settings.Points.Count == 1);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное добавление точки")]
         public void AddPointsTest()
         {
             // Arrange

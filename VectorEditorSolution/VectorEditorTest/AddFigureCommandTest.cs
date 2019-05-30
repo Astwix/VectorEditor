@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using Circle;
 using Moq;
@@ -18,7 +14,8 @@ namespace VectorEditorTest
     [TestFixture]
     class AddFigureCommandTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды добавления фигуры " +
+                             "через конструктор с одной фигурой")]
         public void Constructor1Test()
         {
             // Arrange
@@ -34,7 +31,8 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(command.Figures);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды добавления фигуры " +
+                             "через конструктор со списком фигур")]
         public void Constructor2Test()
         {
             // Arrange
@@ -50,7 +48,7 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(command.Figures);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное применение команды добавления фигуры")]
         public void DoTest()
         {
             // Arrange
@@ -70,7 +68,7 @@ namespace VectorEditorTest
             Assert.IsNotNull(figureAfterAct);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное отменение команды добавления фигуры")]
         public void UndoTest()
         {
             // Arrange
@@ -91,7 +89,7 @@ namespace VectorEditorTest
             Assert.IsNotNull(figureAfterAct);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange
@@ -106,8 +104,9 @@ namespace VectorEditorTest
             Assert.IsTrue(command.ToString().Length > 0);
         }
 
-        [Test]
-        public void GetHashCodeTest()
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
+        public void GetHashTest()
         {
             // Arrange
             var controlUnitMock = new Mock<IControlUnit>();

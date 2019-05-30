@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace VectorEditorTest.Stubs
 {
+    /// <summary>
+    /// Стаб PropertyGrid
+    /// </summary>
     class PropertyGridStub : PropertyGrid
     {
+        /// <summary>
+        /// Фейковый вызов события "Изменение свойства"
+        /// </summary>
         public void FakePropertyChange()
         {
             OnPropertyValueChanged(new PropertyValueChangedEventArgs

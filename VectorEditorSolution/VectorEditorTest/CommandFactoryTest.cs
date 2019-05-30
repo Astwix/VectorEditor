@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Circle;
 using NUnit.Framework;
@@ -17,7 +13,8 @@ namespace VectorEditorTest
     [TestFixture]
     class CommandFactoryTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды " +
+                             "'Добавление фигуры'")]
         public void CreateAddFigureCommandTest()
         {
             // Arrange
@@ -43,7 +40,8 @@ namespace VectorEditorTest
             Assert.IsInstanceOf<AddFigureCommand>(command2);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды " +
+                             "'Добавление точки'")]
         public void CreateAddPointCommandTest()
         {
             // Arrange
@@ -63,7 +61,8 @@ namespace VectorEditorTest
             Assert.IsInstanceOf<AddPointCommand>(command1);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды " +
+                             "'Изменение параметров документа'")]
         public void CreateChangingDocumentOptionsCommandTest()
         {
             // Arrange
@@ -83,7 +82,8 @@ namespace VectorEditorTest
             Assert.IsInstanceOf<ChangingDocumentOptionsCommand>(command1);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды " +
+                             "'Изменение параметров фигуры'")]
         public void CreateFiguresChangingCommandTest()
         {
             // Arrange
@@ -111,7 +111,8 @@ namespace VectorEditorTest
             Assert.IsInstanceOf<FiguresChangingCommand>(command2);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды " +
+                             "'Очистки документа'")]
         public void CreateClearDocumentCommandTest()
         {
             // Arrange
@@ -128,7 +129,8 @@ namespace VectorEditorTest
             Assert.IsInstanceOf<ClearDocumentCommand>(command1);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды " +
+                             "'Удаление фигуры'")]
         public void CreateRemoveFigureCommandTest()
         {
             // Arrange
@@ -154,7 +156,9 @@ namespace VectorEditorTest
             Assert.IsInstanceOf<RemoveFigureCommand>(command2);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная починка фигур: " +
+                             "восстановление ссылок после " +
+                             "сериализации")]
         public void MakeCommandOKAgainTest()
         {
             // Arrange

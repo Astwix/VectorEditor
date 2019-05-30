@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using SDK;
-using StructureMap;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.States;
 
@@ -37,7 +36,7 @@ namespace VectorEditorProject.Forms
             InitializeComponent();
             int startVerticalpos = 10;
             
-            foreach (var loadedFigure in DI.getInstance().Container
+            foreach (var loadedFigure in DI.GetInstance().Container
                 .GetAllInstances<FigureBase>())
             {
                 Button figureButton

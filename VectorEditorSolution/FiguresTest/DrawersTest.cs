@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Circle;
 using Ellipse;
 using Line;
@@ -17,11 +13,21 @@ namespace FiguresTest
     [TestFixture()]
     class DrawersTest
     {
-        [TestCase(typeof(LineFigure), typeof(LineDrawer))]
-        [TestCase(typeof(PolyLineFigure), typeof(PolyLineDrawer))]
-        [TestCase(typeof(CircleFigure), typeof(CircleDrawer))]
-        [TestCase(typeof(EllipseFigure), typeof(EllipseDrawer))]
-        [TestCase(typeof(PolygonFigure), typeof(PolygonDrawer))]
+        [TestCase(typeof(LineFigure), typeof(LineDrawer), 
+            TestName = "Позитивный результат отрисовки " +
+                       "Линии LineDrawer'ом")]
+        [TestCase(typeof(PolyLineFigure), typeof(PolyLineDrawer),
+            TestName = "Позитивный результат отрисовки " +
+                       "Полилинии PolyLineDrawer'ом")]
+        [TestCase(typeof(CircleFigure), typeof(CircleDrawer),
+            TestName = "Позитивный результат отрисовки " +
+                       "Круга CircleDrawer'ом")]
+        [TestCase(typeof(EllipseFigure), typeof(EllipseDrawer),
+            TestName = "Позитивный результат отрисовки " +
+                       "Эллипса EllipseDrawer'ом")]
+        [TestCase(typeof(PolygonFigure), typeof(PolygonDrawer),
+            TestName = "Позитивный результат отрисовки " +
+                       "Многоугольника PolygonDrawer'ом")]
         public void AllDrawersTest(Type figureType, Type drawerType)
         {
             var figure = (FigureBase)Activator.CreateInstance(figureType);

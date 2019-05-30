@@ -43,9 +43,13 @@ namespace Circle
                 distance, distance);
         }
 
-        public override string GetFigureName()
+        /// <summary>
+        /// Имя фигуры
+        /// </summary>
+        /// <returns></returns>
+        public override string FigureName
         {
-            return "Circle";
+            get { return "Circle"; }
         }
     }
 }

@@ -18,9 +18,13 @@ namespace Line
             _pointsSettings = new PointsSettings(2);
         }
 
-        public override string GetFigureName()
+        /// <summary>
+        /// Имя фигуры
+        /// </summary>
+        /// <returns></returns>
+        public override string FigureName
         {
-            return "Line";
+            get { return "Line"; }
         }
     }
 }

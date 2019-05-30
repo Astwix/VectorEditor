@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using Circle;
 using NUnit.Framework;
@@ -16,7 +11,8 @@ namespace VectorEditorTest
     [TestFixture()]
     class ClearDocumentCommandTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды очистки " +
+                             "документа через конструктор")]
         public void ConstructorTest()
         {
             // Arrange
@@ -36,7 +32,7 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(command.BackUpFigures);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное применение команды очистки документа")]
         public void DoTest()
         {
             // Arrange
@@ -56,7 +52,7 @@ namespace VectorEditorTest
             Assert.IsEmpty(controlUnit.GetDocument().GetFigures());
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное отменение команды очистки документа")]
         public void UndoTest()
         {
             // Arrange
@@ -77,7 +73,7 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(controlUnit.GetDocument().GetFigures());
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange
@@ -92,7 +88,8 @@ namespace VectorEditorTest
             Assert.IsTrue(command.ToString().Length > 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
         public void GetHashTest()
         {
             // Arrange

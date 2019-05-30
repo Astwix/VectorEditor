@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Moq;
 using NUnit.Framework;
 using VectorEditorProject.Core;
@@ -15,7 +10,8 @@ namespace VectorEditorTest
     [TestFixture]
     class AddFigureStateTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание состояния добавления фигуры " +
+                             "через конструктор")]
         public void ConstructorTest()
         {
             // Arragne
@@ -31,7 +27,7 @@ namespace VectorEditorTest
             Assert.IsNotNull(state.EditContext);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка вызова нажатия кнопки мыши")]
         public void MouseDownTest()
         {
             // Arragne

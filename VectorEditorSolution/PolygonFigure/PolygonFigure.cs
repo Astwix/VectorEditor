@@ -19,9 +19,13 @@ namespace Polygon
             _fillSettings = new FillSettings();
         }
 
-        public override string GetFigureName()
+        /// <summary>
+        /// Имя фигуры
+        /// </summary>
+        /// <returns></returns>
+        public override string FigureName
         {
-            return "Polygon";
+            get { return "Polygon"; }
         }
     }
 }

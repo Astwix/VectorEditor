@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using Circle;
 using Moq;
@@ -19,7 +14,8 @@ namespace VectorEditorTest
     [TestFixture]
     class AddPointCommandTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание через конструктор " +
+                             "команды добавления точки")]
         public void ConstructorTest()
         {
             // Arrange
@@ -36,7 +32,7 @@ namespace VectorEditorTest
             Assert.AreEqual(figureMock.Object.guid, command.FigureGuid);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное применение команды добавления точки")]
         public void DoTest()
         {
             // Arrange
@@ -57,7 +53,7 @@ namespace VectorEditorTest
             Assert.AreEqual(1, figureAfterAct.PointsSettings.GetPoints().Count);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное отменение команды добавления точки")]
         public void UndoTest()
         {
             // Arrange
@@ -79,7 +75,7 @@ namespace VectorEditorTest
             Assert.AreEqual(0, figureAfterAct.PointsSettings.GetPoints().Count);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange
@@ -94,7 +90,8 @@ namespace VectorEditorTest
             Assert.IsTrue(command.ToString().Length > 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
         public void GetHashTest()
         {
             // Arrange

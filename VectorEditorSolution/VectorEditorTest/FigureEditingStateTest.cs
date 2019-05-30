@@ -14,7 +14,9 @@ namespace VectorEditorTest
     [TestFixture]
     class FigureEditingStateTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание состояния " +
+                             "редактирования фигуры " +
+                             "через конструктор")]
         public void ConstructorTest()
         {
             // Arrange
@@ -37,7 +39,8 @@ namespace VectorEditorTest
             Assert.IsNotNull(state);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка отрисовки " +
+                             "подсветки на опорных и угловых точках")]
         public void DrawTest()
         {
             // Arragne
@@ -82,7 +85,7 @@ namespace VectorEditorTest
             Assert.Fail();
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка нажатия кнопки мыши")]
         public void MouseDownTest()
         {
             // Arrange
@@ -108,7 +111,7 @@ namespace VectorEditorTest
             Assert.Pass();
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка перемещения мыши")]
         public void MouseMoveTest()
         {
             // Arrange
@@ -147,7 +150,7 @@ namespace VectorEditorTest
             Assert.Pass();
         }
 
-        [Test]
+        [TestCase(TestName = "Положительная проверка на отжатие кнопки мыши")]
         public void MouseUpTest()
         {
             // Arrange

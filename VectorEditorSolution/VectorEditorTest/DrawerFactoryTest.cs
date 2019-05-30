@@ -14,7 +14,8 @@ namespace VectorEditorTest
     [TestFixture()]
     class DrawerFactoryTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание фабрики Drawer'ов " +
+                             "через контейнер")]
         public void ConstructorTest()
         {
             // Arrange
@@ -27,13 +28,13 @@ namespace VectorEditorTest
             var _typeToDrawerBaseMap =
                 (Dictionary<string, DrawerBase>)
                 (new PrivateObject(df).GetField("_typeToDrawerBaseMap"));
-            int drawerFacadeCreatedCount = _typeToDrawerBaseMap.Count;
+            int drawerFactoryCreatedCount = _typeToDrawerBaseMap.Count;
 
             // Assert
-            Assert.AreEqual(containerParsedCount, drawerFacadeCreatedCount);
+            Assert.AreEqual(containerParsedCount, drawerFactoryCreatedCount);
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка отрисовки холста")]
         public void DrawCanvasTest()
         {
             // Arrange 
@@ -62,7 +63,7 @@ namespace VectorEditorTest
             Assert.Fail();
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка отрисовки по реальной фигуре")]
         public void DrawFigureWithRealFigureTest()
         {
             // Arrange 
@@ -93,7 +94,7 @@ namespace VectorEditorTest
             Assert.Fail();
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка отрисовки по мок фигуре")]
         public void DrawFigureWithMockTest()
         {
             // Arrange 
@@ -117,7 +118,8 @@ namespace VectorEditorTest
                 Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка отрисовки " +
+                             "фигуры по неизвестному Drawer'у")]
         public void DrawFigureUnknownDrawerTest()
         {
             // Arrange 
@@ -133,7 +135,8 @@ namespace VectorEditorTest
             });
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка отрисовки " +
+                             "выделения по реальной фигуре")]
         public void DrawBorderWithRealFigureTest()
         {
             // Arrange 
@@ -164,7 +167,8 @@ namespace VectorEditorTest
             Assert.Fail();
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка отрисовки " +
+                             "выделения по мок фигуре")]
         public void DrawBorderWithMockTest()
         {
             // Arrange 
@@ -188,7 +192,8 @@ namespace VectorEditorTest
                 Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка отрисовки " +
+                             "выделения по неизвестному Drawer'у")]
         public void DrawBorderUnknownDrawerTest()
         {
             // Arrange 

@@ -9,14 +9,14 @@ namespace FiguresTest
     [TestFixture]
     public class CircleFigureTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание фигуры " +
+                             "Круг через конструктор")]
         public void ConstructorTest()
         {
             // Arrange
             var figure = new CircleFigure();
 
             // Act
-            
             // Assert
             Assert.NotNull(figure.PointsSettings);
             Assert.NotNull(figure.LineSettings);
@@ -24,19 +24,19 @@ namespace FiguresTest
             Assert.AreNotEqual(Guid.Empty, figure.guid);
         }
 
-        [Test]
-        public void GetFigureNameTest()
+        [TestCase(TestName = "Позитивная проверка значения свойства Имя фигуры")]
+        public void FigureNameTest()
         {
             // Arrange
             var figure = new CircleFigure();
 
             // Act
-
             // Assert
             Assert.AreEqual("Circle", figure.FigureName);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение получаемых " +
+                             "границ фигур")]
         public void GetBorderRectangleTest()
         {
             // Arrange

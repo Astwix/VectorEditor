@@ -12,7 +12,9 @@ namespace VectorEditorTest
     [TestFixture]
     class FiguresChangingCommandTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды изменения " +
+                             "параметров фигуры через конструктор " +
+                             "с параметрами одной фигурой")]
         public void Constructor1Test()
         {
             // Arrange
@@ -33,7 +35,9 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(command.OldValues);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды изменения " +
+                             "параметров фигуры через конструктор " +
+                             "с параметрами списка фигур")]
         public void Constructor2Test()
         {
             // Arrange
@@ -55,7 +59,8 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(command.OldValues);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное применение команды " +
+                             "изменения свойств фигур")]
         public void DoTest()
         {
             // Arrange
@@ -82,7 +87,8 @@ namespace VectorEditorTest
             Assert.AreEqual(Color.BlueViolet, actualColor);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное отменение команды " +
+                             "изменения свойств фигур")]
         public void UndoTest()
         {
             // Arrange
@@ -111,7 +117,7 @@ namespace VectorEditorTest
             Assert.AreNotEqual(Color.Firebrick, actualColor);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange
@@ -131,7 +137,8 @@ namespace VectorEditorTest
             Assert.IsTrue(command.ToString().Length > 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
         public void GetHashTest()
         {
             // Arrange

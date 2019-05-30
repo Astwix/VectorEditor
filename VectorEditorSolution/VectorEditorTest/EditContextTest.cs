@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Moq;
+using NUnit.Framework;
+using SDK;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Moq;
-using NUnit.Framework;
-using SDK;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.States;
 using VectorEditorProject.Forms;
@@ -15,7 +15,8 @@ namespace VectorEditorTest
     [TestFixture]
     public class EditContextTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивная проверка числа вызовов " +
+                             "на действия с мышью")]
         public void MouseCallsTest()
         {
             // Arrange 
@@ -24,7 +25,8 @@ namespace VectorEditorTest
                 new ControlUnit(new PictureBox(), new FigureSettingsControl(),
                     new ToolsControl(), new PropertyGrid()));
             ec.ActiveState = state.Object;
-            MouseEventArgs testArgs = new MouseEventArgs(MouseButtons.Left, 1, 2, 3, 4);
+            MouseEventArgs testArgs =
+                new MouseEventArgs(MouseButtons.Left, 1, 2, 3, 4);
 
             // Act 
             ec.MouseDown(this, testArgs);
@@ -32,12 +34,15 @@ namespace VectorEditorTest
             ec.MouseMove(this, testArgs);
 
             // Assert
-            state.Verify(stateBase => stateBase.MouseDown(this, testArgs), Times.Once);
-            state.Verify(stateBase => stateBase.MouseUp(this, testArgs), Times.Once);
-            state.Verify(stateBase => stateBase.MouseMove(this, testArgs), Times.Once);
+            state.Verify(stateBase => stateBase.MouseDown(this, testArgs),
+                Times.Once);
+            state.Verify(stateBase => stateBase.MouseUp(this, testArgs),
+                Times.Once);
+            state.Verify(stateBase => stateBase.MouseMove(this, testArgs),
+                Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное обновление состояния")]
         public void UpdateStateTest()
         {
             // Arrange 
@@ -54,7 +59,7 @@ namespace VectorEditorTest
             state.Verify(stateBase => stateBase.Update(), Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка рисования")]
         public void DrawTest()
         {
             // Arrange 
@@ -68,10 +73,12 @@ namespace VectorEditorTest
             ec.Draw(new Control().CreateGraphics());
 
             // Assert
-            state.Verify(stateBase => stateBase.Draw(It.IsAny<Graphics>()), Times.Once);
+            state.Verify(stateBase => stateBase.Draw(It.IsAny<Graphics>()),
+                Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание стаба Edit Context" +
+                             "через конструктор")]
         public void ConstructorTest()
         {
             // Arrange 
@@ -85,7 +92,8 @@ namespace VectorEditorTest
             Assert.IsNotNull(ec.ActiveState);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение guid созданной реальной " +
+                             "фигуры и установленной ее активной")]
         public void SetActiveFigureTest()
         {
             // Arrange 
@@ -102,7 +110,8 @@ namespace VectorEditorTest
             Assert.AreEqual(editContext.ActiveFigureGuid, mock.Object.guid);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение созданной мок " +
+                             "фигуры и установленной ее активной")]
         public void GetActiveFigureTest1()
         {
             // Arrange 
@@ -120,7 +129,7 @@ namespace VectorEditorTest
             Assert.AreEqual(mock.Object, editContext.GetActiveFigure());
         }
 
-        [Test]
+        [TestCase(TestName = "Null проверка на активную фигуру")]
         public void GetActiveFigureTest2()
         {
             // Arrange 
@@ -138,9 +147,7 @@ namespace VectorEditorTest
         {
             return Enum.GetValues(typeof(States));
         }
-        [Test,
-         TestCaseSource(nameof(AllStates)),
-         TestCase(null)]
+        [TestCaseSource(nameof(AllStates))]
         public void SetActiveStateTest(States s)
         {
             // Arrange 
@@ -157,7 +164,8 @@ namespace VectorEditorTest
             Assert.IsNotNull(editContext.ActiveState);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение числа фигур до их создания " +
+                             "и после создания фигуры по guid")]
         public void SetSelectedFigures1()
         {
             // Arrange 
@@ -175,7 +183,8 @@ namespace VectorEditorTest
             controlUnitMock.Verify(unit => unit.UpdatePropertyGrid(), Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение числа фигур до их создания " +
+                             "и после создания фигуры по guid через список")]
         public void SetSelectedFigures2()
         {
             // Arrange 
@@ -194,7 +203,8 @@ namespace VectorEditorTest
             controlUnitMock.Verify(unit => unit.UpdatePropertyGrid(), Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение числа фигур до их создания " +
+                             "и после создания фигуры по базовому типу через список")]
         public void SetSelectedFigures3()
         {
             // Arrange 
@@ -213,7 +223,8 @@ namespace VectorEditorTest
             controlUnitMock.Verify(unit => unit.UpdatePropertyGrid(), Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное сравнение числа фигур до " +
+                             "и после их создания")]
         public void GetSelectedFigures()
         {
             // Arrange 

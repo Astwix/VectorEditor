@@ -8,7 +8,8 @@ namespace SDKTest
     [TestFixture]
     public class LineSettingsTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание через конструктор " +
+                             "настроек линии без параметров")]
         public void ConstructorTest()
         {
             // Arrange
@@ -21,7 +22,8 @@ namespace SDKTest
             Assert.AreEqual(1, settings.Width);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание через конструктор " +
+                             "настроек заливки с параметрами")]
         public void ConstructorTest2()
         {
             // Arrange
@@ -35,7 +37,7 @@ namespace SDKTest
             Assert.AreEqual(19, settings.Width);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное присваивание свойства Цвет линии")]
         public void ColorPropertyTest()
         {
             // Arrange
@@ -48,7 +50,7 @@ namespace SDKTest
             Assert.AreEqual(Color.Red, settings.Color);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное присваивание свойства Стиль линии")]
         public void StylePropertyTest()
         {
             // Arrange
@@ -61,7 +63,7 @@ namespace SDKTest
             Assert.AreEqual(DashStyle.Dash, settings.Style);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное присваивание свойства Ширина линии")]
         public void WidthPropertyTest()
         {
             // Arrange
@@ -74,8 +76,9 @@ namespace SDKTest
             Assert.AreEqual(26, settings.Width);
         }
 
-        [Test]
-        public void GetHashCodeTest()
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
+        public void GetHashTest()
         {
             // Arrange
             var settings = new LineSettings();
@@ -89,7 +92,7 @@ namespace SDKTest
             Assert.AreNotEqual(code1, code2);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange

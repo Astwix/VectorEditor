@@ -14,7 +14,9 @@ namespace VectorEditorTest
     [TestFixture]
     class RemoveFigureCommandTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание команды удаления " +
+                             "фигуры через конструктор " +
+                             "со списком фигур, с одной фигурой")]
         public void ConstructorTest()
         {
             // Arrange
@@ -34,7 +36,8 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(command2.Figures);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное применение команды " +
+                             "удаления фигуры")]
         public void DoTest()
         {
             // Arrange
@@ -55,7 +58,8 @@ namespace VectorEditorTest
             Assert.IsEmpty(figureAfterAct);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное отменение команды " +
+                             "удаления фигуры")]
         public void UndoTest()
         {
             // Arrange
@@ -77,7 +81,7 @@ namespace VectorEditorTest
             Assert.IsNotEmpty(figureAfterAct);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange
@@ -95,7 +99,8 @@ namespace VectorEditorTest
             Assert.IsTrue(command.ToString().Length > 0);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
         public void GetHashTest()
         {
             // Arrange

@@ -10,7 +10,8 @@ namespace VectorEditorTest
     [TestFixture]
     class AddFigureStateTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание состояния добавления фигуры " +
+                             "через конструктор")]
         public void ConstructorTest()
         {
             // Arragne
@@ -26,7 +27,7 @@ namespace VectorEditorTest
             Assert.IsNotNull(state.EditContext);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка вызова нажатия кнопки мыши")]
         public void MouseDownTest()
         {
             // Arragne

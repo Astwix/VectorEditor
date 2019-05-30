@@ -12,7 +12,8 @@ namespace VectorEditorTest
     [TestFixture]
     class SelectionStateTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание состояния " +
+                             "'Выделение фигуры'")]
         public void ConstructorTest()
         {
             // Arragne
@@ -28,7 +29,8 @@ namespace VectorEditorTest
             Assert.IsNotNull(state.EditContext);
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка на отрисовку " +
+                             "прямоугольника выделения")]
         public void DrawTest()
         {
             // Arragne
@@ -61,7 +63,7 @@ namespace VectorEditorTest
             Assert.Fail();
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка нажатия кнопки мыши")]
         public void MouseDownTest()
         {
             // Arragne
@@ -81,7 +83,7 @@ namespace VectorEditorTest
             Assert.AreEqual(3, state.SelectionRectangle.Y);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивная проверка перемещения мыши")]
         public void MouseMoveTest()
         {
             // Arragne
@@ -105,7 +107,7 @@ namespace VectorEditorTest
             controlUnit.Verify(x => x.UpdateCanvas(), Times.Once);
         }
 
-        [Test]
+        [TestCase(TestName = "Смешанная проверка на отжатие кнопки мыши")]
         public void MouseUpTest()
         {
             // Arragne

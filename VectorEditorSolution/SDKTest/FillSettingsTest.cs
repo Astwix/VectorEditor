@@ -7,7 +7,8 @@ namespace SDKTest
     [TestFixture]
     public class FillSettingsTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание через конструктор " +
+                             "настроек заливки без параметров")]
         public void ConstructorTest()
         {
             // Arrange
@@ -18,7 +19,8 @@ namespace SDKTest
             Assert.AreEqual(Color.Transparent, settings.Color);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное создание через конструктор " +
+                             "настроек заливки с параметром")]
         public void ConstructorTest2()
         {
             // Arrange
@@ -30,7 +32,7 @@ namespace SDKTest
             Assert.AreEqual(Color.Azure, settings.Color);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное присваивание свойства Цвет")]
         public void ColorPropertyTest()
         {
             // Arrange
@@ -43,8 +45,9 @@ namespace SDKTest
             Assert.AreEqual(Color.Red, settings.Color);
         }
 
-        [Test]
-        public void GetHashCodeTest()
+        [TestCase(TestName = "Позитивный расчет и зависимость " +
+                             "хэш-кода от свойств объекта")]
+        public void GetHashTest()
         {
             // Arrange
             var settings = new FillSettings();
@@ -58,7 +61,7 @@ namespace SDKTest
             Assert.AreNotEqual(code1, code2);
         }
 
-        [Test]
+        [TestCase(TestName = "Позитивное переопределение ToString")]
         public void ToStringTest()
         {
             // Arrange

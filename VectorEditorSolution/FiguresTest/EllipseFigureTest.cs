@@ -7,14 +7,14 @@ namespace FiguresTest
     [TestFixture]
     class EllipseFigureTest
     {
-        [Test]
+        [TestCase(TestName = "Позитивное создание фигуры " +
+                             "Эллипс через конструктор")]
         public void ConstructorTest()
         {
             // Arrange
             var figure = new EllipseFigure();
 
             // Act
-
             // Assert
             Assert.NotNull(figure.PointsSettings);
             Assert.NotNull(figure.LineSettings);
@@ -22,14 +22,13 @@ namespace FiguresTest
             Assert.AreNotEqual(Guid.Empty, figure.guid);
         }
 
-        [Test]
-        public void GetFigureNameTest()
+        [TestCase(TestName = "Позитивная проверка значения свойства Имя фигуры")]
+        public void FigureNameTest()
         {
             // Arrange
             var figure = new EllipseFigure();
 
             // Act
-            
             // Assert
             Assert.AreEqual("Ellipse", figure.FigureName);
         }

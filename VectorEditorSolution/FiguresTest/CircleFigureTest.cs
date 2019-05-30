@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Circle;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Assert = NUnit.Framework.Assert;
 
 namespace FiguresTest
@@ -35,7 +33,7 @@ namespace FiguresTest
             // Act
 
             // Assert
-            Assert.AreEqual("Circle", figure.GetFigureName());
+            Assert.AreEqual("Circle", figure.FigureName);
         }
 
         [Test]

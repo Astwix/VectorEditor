@@ -90,7 +90,8 @@ namespace VectorEditorProject.Forms
 
             _lastValidLineType = LineTypeComboBox.SelectedIndex;
 
-            return new LineSettings(lineColorDialog.Color, width, (DashStyle)LineTypeComboBox.SelectedItem);
+            return new LineSettings(lineColorDialog.Color, width,
+                (DashStyle) LineTypeComboBox.SelectedItem);
         }
 
         /// <summary>

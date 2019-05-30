@@ -6,6 +6,9 @@ using SDK;
 
 namespace VectorEditorProject.Core
 {
+    /// <summary>
+    /// Интерфейс класса EditContext
+    /// </summary>
     public interface IEditContext
     {
         /// <summary>

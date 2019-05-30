@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SDK;
+﻿using SDK;
 using StructureMap;
 
 namespace VectorEditorProject.Core
@@ -16,7 +11,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Instance синглтона
         /// </summary>
-        private static DI instance;
+        private static DI _instance;
 
         /// <summary>
         /// Приватный контруктор
@@ -38,7 +33,6 @@ namespace VectorEditorProject.Core
                         => type.Assembly.GetName().Name);
 
                     //Магия разрешения зависимостей на примере
-
                 });
             });
         }
@@ -47,11 +41,11 @@ namespace VectorEditorProject.Core
         /// Получить Instance синглтона
         /// </summary>
         /// <returns></returns>
-        public static DI getInstance()
+        public static DI GetInstance()
         {
-            if (instance == null)
-                instance = new DI();
-            return instance;
+            if (_instance == null)
+                _instance = new DI();
+            return _instance;
         }
 
         /// <summary>

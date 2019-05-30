@@ -19,9 +19,13 @@ namespace Ellipse
             _fillSettings = new FillSettings();
         }
 
-        public override string GetFigureName()
+        /// <summary>
+        /// Имя фигуры
+        /// </summary>
+        /// <returns></returns>
+        public override string FigureName
         {
-            return "Ellipse";
+            get { return "Ellipse"; }
         }
     }
 }

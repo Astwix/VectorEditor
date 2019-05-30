@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ellipse;
 using NUnit.Framework;
 
@@ -35,7 +31,7 @@ namespace FiguresTest
             // Act
             
             // Assert
-            Assert.AreEqual("Ellipse", figure.GetFigureName());
+            Assert.AreEqual("Ellipse", figure.FigureName);
         }
     }
 

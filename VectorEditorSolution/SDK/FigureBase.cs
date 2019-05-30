@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SDK
 {
@@ -74,10 +70,10 @@ namespace SDK
         }
 
         /// <summary>
-        /// Получить название фигуры
+        /// Название фигуры
         /// </summary>
         /// <returns></returns>
-        public abstract string GetFigureName();
+        public abstract string FigureName { get; }
 
         /// <summary>
         /// Копирование фигуры

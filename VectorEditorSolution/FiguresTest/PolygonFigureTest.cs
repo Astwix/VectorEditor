@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Polygon;
 
@@ -35,7 +31,7 @@ namespace FiguresTest
             // Act
             
             // Assert
-            Assert.AreEqual("Polygon", figure.GetFigureName());
+            Assert.AreEqual("Polygon", figure.FigureName);
         }
     }
 

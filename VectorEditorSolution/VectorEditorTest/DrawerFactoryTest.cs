@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Circle;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -24,7 +21,7 @@ namespace VectorEditorTest
             var df = new DrawerFactory();
 
             // Act 
-            int containerParsedCount = DI.getInstance().Container
+            int containerParsedCount = DI.GetInstance().Container
                 .GetAllInstances<DrawerBase>()
                 .Count();
             var _typeToDrawerBaseMap =

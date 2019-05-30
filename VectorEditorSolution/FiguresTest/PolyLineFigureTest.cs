@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using PolyLine;
 
@@ -34,7 +30,7 @@ namespace FiguresTest
             // Act
 
             // Assert
-            Assert.AreEqual("PolyLine", figure.GetFigureName());
+            Assert.AreEqual("PolyLine", figure.FigureName);
         }
     }
 

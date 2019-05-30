@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using SDK;
-using StructureMap;
 
 namespace VectorEditorProject.Core
 {
@@ -27,9 +20,11 @@ namespace VectorEditorProject.Core
         /// </summary>
         public DrawerFactory()
         {
-            foreach (var drawer in DI.getInstance().Container.GetAllInstances<DrawerBase>())
+            foreach (var drawer in 
+                DI.GetInstance().Container.GetAllInstances<DrawerBase>())
             {
-                _typeToDrawerBaseMap.Add(drawer.GetType().Assembly.GetName().Name, drawer);
+                _typeToDrawerBaseMap.Add(
+                    drawer.GetType().Assembly.GetName().Name, drawer);
             }
         }
 

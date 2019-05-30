@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using SDK;
 using VectorEditorProject.Core;
 using VectorEditorProject.Core.States;

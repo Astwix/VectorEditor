@@ -1,17 +1,34 @@
-﻿using System.Collections.Generic;
-using VectorEditorProject.Figures;
+﻿using System;
+using System.Collections.Generic;
+using SDK;
 
 namespace VectorEditorProject.Core.Commands
 {
-    public class ClearDocumentCommand : BaseCommand
+    /// <summary>
+    /// Команда очистки документа
+    /// </summary>
+    [Serializable]
+    public class ClearDocumentCommand : CommandBase
     {
-        private Document _document;
-        private List<BaseFigure> _backUpFigures = new List<BaseFigure>();
+        /// <summary>
+        /// Control Unit
+        /// </summary>
+        [field: NonSerialized]
+        public IControlUnit ControlUnit { get; set; }
 
-        public ClearDocumentCommand(Document document)
+        /// <summary>
+        /// Список резервных фигур
+        /// </summary>
+        protected readonly List<FigureBase> _backUpFigures = new List<FigureBase>();
+
+        /// <summary>
+        /// Констуктор команды очистки документа
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        public ClearDocumentCommand(IControlUnit controlUnit)
         {
-            _document = document;
-            foreach (var figure in document.GetFigures())
+            ControlUnit = controlUnit;
+            foreach (var figure in controlUnit.GetDocument().GetFigures())
             {
                 _backUpFigures.Add(figure);
             }
@@ -22,7 +39,7 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            _document.ClearCanvas();
+            ControlUnit.GetDocument().ClearCanvas();
         }
 
         /// <summary>
@@ -32,8 +49,23 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _backUpFigures)
             {
-                _document.AddFigure(figure);
+                ControlUnit.GetDocument().AddFigure(figure);
             }
+        }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var backUpFigure in _backUpFigures)
+            {
+                hash = hash + backUpFigure.GetHashCode();
+            }
+
+            return hash;
         }
     }
 }

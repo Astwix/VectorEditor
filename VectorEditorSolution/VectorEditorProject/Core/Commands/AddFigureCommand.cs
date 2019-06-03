@@ -1,38 +1,62 @@
-﻿using System.Collections.Generic;
-using VectorEditorProject.Figures;
+﻿using System;
+using System.Collections.Generic;
+using SDK;
 
 namespace VectorEditorProject.Core.Commands
 {
-    public class AddFigureCommand : BaseCommand
+    /// <summary>
+    /// Команда добавления фигуры
+    /// </summary>
+    [Serializable]
+    public class AddFigureCommand : CommandBase
     {
-        private ControlUnit _controlUnit;
-        private IReadOnlyList<BaseFigure> _figures;
+        /// <summary>
+        /// Control Unit
+        /// </summary>
+        [field: NonSerialized]
+        public IControlUnit ControlUnit { get; set; }
+
+        /// <summary>
+        /// Список фигур, доступный только для чтения
+        /// </summary>
+        protected readonly IReadOnlyList<FigureBase> _figures;
 
         /// <summary>
         /// Конструктор создания команды
         /// </summary>
-        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="controlControlUnit">Control ControlUnit</param>
         /// <param name="figure">Фигура</param>
-        public AddFigureCommand(ControlUnit controlUnit, BaseFigure figure)
+        public AddFigureCommand(IControlUnit controlControlUnit, 
+            FigureBase figure)
         {
-            _controlUnit = controlUnit;
-            _figures = new List<BaseFigure>() {figure};
+            ControlUnit = controlControlUnit;
+            _figures = new List<FigureBase>()
+            {
+                figure
+            };
         }
 
-        public AddFigureCommand(ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
+        /// <summary>
+        /// Конструктор создания команды
+        /// </summary>
+        /// <param name="controlControlUnit">Control ControlUnit</param>
+        /// <param name="figures">Фигуры</param>
+        public AddFigureCommand(IControlUnit controlControlUnit,
+            IReadOnlyList<FigureBase> figures)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlControlUnit;
             _figures = figures;
         }
 
         /// <summary>
-        /// Делай
+        /// Действие
         /// </summary>
         public override void Do()
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().AddFigure(figure);
+                ControlUnit.GetDocument()
+                    .AddFigure(figure.CopyFigure());
             }
         }
 
@@ -43,8 +67,23 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().DeleteFigure(figure);
+                ControlUnit.GetDocument().DeleteFigure(figure);
             }
+        }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var figure in _figures)
+            {
+                hash = hash + figure.GetHashCode();
+            }
+
+            return hash;
         }
     }
 }

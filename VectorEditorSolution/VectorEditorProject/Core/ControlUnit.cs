@@ -1,42 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using SDK;
 using VectorEditorProject.Core.Commands;
-using VectorEditorProject.Core.Figures.Utility;
-using VectorEditorProject.Figures;
-using VectorEditorProject.Figures.Utility;
 using VectorEditorProject.Forms;
 
 namespace VectorEditorProject.Core
 {
-    public class ControlUnit
+    /// <summary>
+    /// Control Unit
+    /// </summary>
+    public class ControlUnit : IControlUnit
     {
-        private List<BaseCommand> _commands;
-        private int _currentCommand;
-        public EditContext EditContext { get; set; }
-
-        private readonly PictureBox _canvas;
-        private FigureSettingsControl _figureSettingsControl;
-        private ToolsControl _toolsControl;
-        private PropertyGrid _propertyGrid;
-
-        private BaseFigure _propertyBackUp;
-
-        private List<BaseFigure> _clipboard = new List<BaseFigure>();
-
-        private Document _currentDocument = new Document("Untitled", Color.White, new Size(400, 400));
-
-        private Dictionary<Type, List<Action>> _viewUpdateDictionary = new Dictionary<Type, List<Action>>();
+        /// <summary>
+        /// Список команд
+        /// </summary>
+        protected List<CommandBase> _commands;
 
         /// <summary>
-        /// Конструктор класса управляющего control
+        /// Текущая команда
         /// </summary>
-        public ControlUnit(PictureBox canvas, FigureSettingsControl figureSettingsControl, 
+        protected int _currentCommand;
+
+        /// <summary>
+        /// Edit Context
+        /// </summary>
+        public IEditContext EditContext
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Последний сохраненный хэш
+        /// </summary>
+        protected int _lastSavedHash = 0;
+
+        /// <summary>
+        /// Канва
+        /// </summary>
+        protected readonly PictureBox _canvas;
+
+        /// <summary>
+        /// Control настроек фигуры
+        /// </summary>
+        protected readonly FigureSettingsControl _figureSettingsControl;
+
+        /// <summary>
+        /// Control инструментов
+        /// </summary>
+        protected readonly ToolsControl _toolsControl;
+
+        /// <summary>
+        /// Редактор свойств
+        /// </summary>
+        protected readonly PropertyGrid _propertyGrid;
+
+        /// <summary>
+        /// Резервные свойства
+        /// </summary>
+        protected FigureBase _propertyBackUp;
+
+        /// <summary>
+        /// Буфер обмена
+        /// </summary>
+        protected readonly List<FigureBase> _clipboard = new List<FigureBase>();
+
+        /// <summary>
+        /// Текущий документ
+        /// </summary>
+        protected readonly Document _currentDocument = new Document("Untitled",
+            Color.White, new Size(400, 400));
+
+        /// <summary>
+        /// Словарь для обновления view по действию
+        /// </summary>
+        protected readonly Dictionary<Type, List<Action>> _viewUpdateDictionary;
+
+        /// <summary>
+        /// Конструктор класса Control Unit
+        /// </summary>
+        public ControlUnit(PictureBox canvas,
+            FigureSettingsControl figureSettingsControl,
             ToolsControl toolsControl, PropertyGrid propertyGrid)
         {
-            _commands = new List<BaseCommand>();
+            _commands = new List<CommandBase>();
             _currentCommand = 0;
 
             _canvas = canvas;
@@ -44,23 +96,43 @@ namespace VectorEditorProject.Core
             _toolsControl = toolsControl;
             _propertyGrid = propertyGrid;
 
-            _propertyGrid.PropertyValueChanged += 
-                new PropertyValueChangedEventHandler(this.PropertyGrid_PropertyValueChanged);
-            _propertyGrid.SelectedObjectsChanged += 
+            _propertyGrid.PropertyValueChanged +=
+                new PropertyValueChangedEventHandler(this
+                    .PropertyGrid_PropertyValueChanged);
+            _propertyGrid.SelectedObjectsChanged +=
                 new EventHandler(this.PropertyGrid_SelectedObjectsChanged);
 
-            _viewUpdateDictionary.Add(typeof(AddFigureCommand), new List<Action>()
-                { UpdateCanvas});
-            _viewUpdateDictionary.Add(typeof(AddPointCommand), new List<Action>()
-                { UpdateCanvas });
-            _viewUpdateDictionary.Add(typeof(ClearDocumentCommand), new List<Action>()
-                { UpdateCanvas });
-            _viewUpdateDictionary.Add(typeof(SelectFiguresCommand), new List<Action>()
-                { UpdateCanvas, UpdatePropertyGrid });
-            _viewUpdateDictionary.Add(typeof(FiguresChangingCommand), new List<Action>()
-                { UpdateCanvas, UpdateState, UpdatePropertyGrid });
-            _viewUpdateDictionary.Add(typeof(RemoveFigureCommand), new List<Action>()
-                { UpdateCanvas, UpdatePropertyGrid});
+            _viewUpdateDictionary = new Dictionary<Type, List<Action>>
+            {
+                {
+                    typeof(AddFigureCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(AddPointCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(ClearDocumentCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(FiguresChangingCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                },
+                {
+                    typeof(RemoveFigureCommand),
+                    new List<Action>()
+                    {
+                        UpdateState, UpdateCanvas, UpdatePropertyGrid
+                    }
+                },
+                {
+                    typeof(ChangingDocumentOptionsCommand),
+                    new List<Action>() {UpdateState, UpdateCanvas}
+                }
+            };
+
         }
 
         /// <summary>
@@ -71,7 +143,8 @@ namespace VectorEditorProject.Core
             var figures = EditContext.GetSelectedFigures();
             if (figures.Count > 0)
             {
-                var command = new RemoveFigureCommand(this, figures);
+                var command = CommandFactory.CreateRemoveFigureCommand(
+                    this, figures);
                 StoreCommand(command);
                 Do();
             }
@@ -83,10 +156,9 @@ namespace VectorEditorProject.Core
         public void Copy()
         {
             _clipboard.Clear();
-            var figureFactory = new FigureFactory();
             foreach (var selectedFigure in EditContext.GetSelectedFigures())
             {
-                _clipboard.Add(figureFactory.CopyFigure(selectedFigure));
+                _clipboard.Add(selectedFigure.CopyFigure());
             }
         }
 
@@ -95,44 +167,45 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Paste()
         {
-            var figureFactory = new FigureFactory();
-            var copiedClipboard = new List<BaseFigure>();
+            if (_clipboard.Count == 0)
+            {
+                return;
+            }
+
+            var copiedClipboard = new List<FigureBase>();
 
             foreach (var figure in _clipboard)
             {
-                var copy = figureFactory.CopyFigure(figure);
+                var copy = figure.CopyFigure();
                 copy.guid = Guid.NewGuid();
 
-                var leftTopPoint = FigureEditor.LeftTopPointF(copy);
-                var rightBottomPoint = FigureEditor.RightBottomPointF(copy);
-                var rectangle = new RectangleF(0,0, 
+                var leftTopPoint = copy.PointsSettings.LeftTopPointF();
+                var rightBottomPoint = copy.PointsSettings.RightBottomPointF();
+                var rectangle = new RectangleF(0, 0,
                     rightBottomPoint.X - leftTopPoint.X,
                     rightBottomPoint.Y - leftTopPoint.Y);
 
-                FigureEditor.EditFiguresSize(copy, rectangle);
+                copy.PointsSettings.EditFiguresSize(rectangle);
 
                 copiedClipboard.Add(copy);
             }
 
-            var selectCommand1 = new SelectFiguresCommand(EditContext, new List<BaseFigure>());
-            StoreCommand(selectCommand1);
-            Do();
+            EditContext.SetSelectedFigures(new List<FigureBase>());
 
-            var command = new AddFigureCommand(this, copiedClipboard);
+            var command = CommandFactory.CreateAddFigureCommand(this,
+                copiedClipboard);
             StoreCommand(command);
             Do();
 
-            var selectCommand2 = new SelectFiguresCommand(EditContext, copiedClipboard);
-            StoreCommand(selectCommand2);
-            Do();
+            EditContext.SetSelectedFigures(copiedClipboard);
 
-            EditContext.SetActiveState(EditContext.States.FigureEditingState);
+            EditContext.SetActiveState(States.States.FigureEditingState);
         }
 
         /// <summary>
         /// Обновить состояние
         /// </summary>
-        private void UpdateState()
+        public void UpdateState()
         {
             EditContext.UpdateState();
         }
@@ -141,7 +214,7 @@ namespace VectorEditorProject.Core
         /// Обновление view по соответствующей команде
         /// </summary>
         /// <param name="command">Команда</param>
-        private void UpdateView(BaseCommand command)
+        private void UpdateView(CommandBase command)
         {
             var actionList = _viewUpdateDictionary[command.GetType()];
             foreach (var action in actionList)
@@ -153,13 +226,13 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Обновление Property Grid
         /// </summary>
-        private void UpdatePropertyGrid()
+        public void UpdatePropertyGrid()
         {
             if (EditContext.GetSelectedFigures().Count == 1)
             {
                 var figure = EditContext.GetSelectedFigures()[0];
 
-                if (figure is FilledBaseFigure filledFigure)
+                if (figure is FilledFigureBase filledFigure)
                 {
                     _propertyGrid.SelectedObject = filledFigure;
                 }
@@ -180,9 +253,10 @@ namespace VectorEditorProject.Core
         /// Добавление команд
         /// </summary>
         /// <param name="command">Команда</param>
-        public void StoreCommand(BaseCommand command)
+        public void StoreCommand(CommandBase command)
         {
-            _commands = _commands.GetRange(0, _currentCommand); // обрезание списка
+            // обрезание списка
+            _commands = _commands.GetRange(0, _currentCommand); 
 
             _commands.Add(command);
         }
@@ -192,25 +266,26 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Do()
         {
-            BaseCommand cmd = null;
+            CommandBase command = null;
             try
             {
-                cmd = _commands[_currentCommand];
+                command = _commands[_currentCommand];
             }
-            catch (Exception e)
+            catch (ArgumentOutOfRangeException e)
             {
-                
+                // В массиве нет больше команд, которые можно применить
+                System.Media.SystemSounds.Beep.Play();
             }
 
-            if (cmd == null)
+            if (command == null)
             {
                 return;
             }
 
-            cmd.Do();
+            command.Do();
             _currentCommand = _currentCommand + 1;
 
-            UpdateView(cmd);
+            UpdateView(command);
         }
 
         /// <summary>
@@ -218,25 +293,26 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Undo()
         {
-            BaseCommand cmd = null;
+            CommandBase command = null;
             try
             {
-                cmd = _commands[_currentCommand - 1];
+                command = _commands[_currentCommand - 1];
             }
-            catch (Exception e)
+            catch (ArgumentOutOfRangeException e)
             {
-
+                // В массиве нет больше команд, которые можно отменить
+                System.Media.SystemSounds.Beep.Play();
             }
 
-            if (cmd == null)
+            if (command == null)
             {
                 return;
             }
 
-            cmd.Undo();
+            command.Undo();
             _currentCommand = _currentCommand - 1;
 
-            UpdateView(cmd);
+            UpdateView(command);
         }
 
         /// <summary>
@@ -244,15 +320,15 @@ namespace VectorEditorProject.Core
         /// </summary>
         public void Reset()
         {
-            _commands = new List<BaseCommand>();
+            _commands = new List<CommandBase>();
             _currentCommand = 0;
         }
 
         /// <summary>
         /// Получить документ
         /// </summary>
-        /// <returns></returns>
-        public Document GetDocument()
+        /// <returns>Текущий документ</returns>
+        public IDocument GetDocument()
         {
             return _currentDocument;
         }
@@ -268,7 +344,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить настройки линии
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Настройки линии</returns>
         public LineSettings GetActiveLineSettings()
         {
             return _figureSettingsControl.GetLineSettings();
@@ -277,7 +353,7 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить настройки заливки
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Настройки заливки</returns>
         public FillSettings GetActiveFillSettings()
         {
             return _figureSettingsControl.GetFillSettings();
@@ -286,34 +362,57 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить тип фигуры
         /// </summary>
-        /// <returns></returns>
-        public FigureFactory.Figures GetActiveFigureType()
+        /// <returns>Тип фигуры</returns>
+        public string GetActiveFigureType()
         {
             return _toolsControl.GetActiveFigureType();
         }
 
-        private void PropertyGrid_SelectedObjectsChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Изменение выделенного объекта
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PropertyGrid_SelectedObjectsChanged(object sender,
+            EventArgs e)
         {
-            if ((BaseFigure)_propertyGrid.SelectedObject != null)
+            if ((FigureBase) _propertyGrid.SelectedObject != null)
             {
-                _propertyBackUp = new FigureFactory().CopyFigure((BaseFigure)_propertyGrid.SelectedObject);
+                _propertyBackUp = ((FigureBase) _propertyGrid.SelectedObject)
+                    .CopyFigure();
             }
         }
 
-        private void PropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        /// <summary>
+        /// Изменение свойств
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        private void PropertyGrid_PropertyValueChanged(
+            object s, PropertyValueChangedEventArgs e)
         {
-            var selectedFigure = (BaseFigure) _propertyGrid.SelectedObject;
+            var selectedFigure = (FigureBase) _propertyGrid.SelectedObject;
 
             if (selectedFigure == null)
             {
                 return;
             }
 
-            var newValues = new FigureFactory().CopyFigure(GetDocument().GetFigure(selectedFigure.guid));
+            var newValue = GetDocument().GetFigure(selectedFigure.guid);
+            if (newValue == null)
+            {
+                UpdatePropertyGrid();
+                return;
+            }
 
-            selectedFigure.LineSettings.Color = _propertyBackUp.LineSettings.Color;
-            selectedFigure.LineSettings.Style = _propertyBackUp.LineSettings.Style;
-            selectedFigure.LineSettings.Width = _propertyBackUp.LineSettings.Width;
+            var newValues = newValue.CopyFigure();
+
+            selectedFigure.LineSettings.Color =
+                _propertyBackUp.LineSettings.Color;
+            selectedFigure.LineSettings.Style =
+                _propertyBackUp.LineSettings.Style;
+            selectedFigure.LineSettings.Width =
+                _propertyBackUp.LineSettings.Width;
 
             var points = _propertyBackUp.PointsSettings.GetPoints().ToArray();
 
@@ -322,17 +421,88 @@ namespace VectorEditorProject.Core
                 selectedFigure.PointsSettings.ReplacePoint(i, points[i]);
             }
 
-            if (selectedFigure is FilledBaseFigure selectedFilledFigure &&
-                _propertyBackUp is FilledBaseFigure backUpFilledValues)
+            if (selectedFigure is FilledFigureBase selectedFilledFigure &&
+                _propertyBackUp is FilledFigureBase backUpFilledValues)
             {
-                selectedFilledFigure.FillSettings.Color = backUpFilledValues.FillSettings.Color;
+                selectedFilledFigure.FillSettings.Color =
+                    backUpFilledValues.FillSettings.Color;
             }
 
-            var command = new FiguresChangingCommand(this, newValues);
+            var command = CommandFactory.CreateFiguresChangingCommand(this,
+                newValues);
             StoreCommand(command);
             Do();
 
             _propertyBackUp = newValues;
+        }
+
+        /// <summary>
+        /// Десериализация
+        /// </summary>
+        /// <param name="stream">Поток</param>
+        public void Deserialize(Stream stream)
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            _currentDocument.ClearCanvas();
+            _commands.Clear();
+            _currentCommand = 0;
+
+            // восстановление
+            _commands = (List<CommandBase>)binaryFormatter.Deserialize(stream);
+            MakeCommandsOKAgain();
+            foreach (var command in _commands)
+            {
+                Do();
+            }
+
+            _lastSavedHash = CalcCurrentHash();
+        }
+
+        /// <summary>
+        /// Сериализация
+        /// </summary>
+        /// <param name="stream">Поток</param>
+        public void Serialize(Stream stream)
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            binaryFormatter.Serialize(stream, _commands);
+
+            _lastSavedHash = CalcCurrentHash();
+        }
+
+        /// <summary>
+        /// Расчет текущего хэша
+        /// </summary>
+        /// <returns>Хэш</returns>
+        protected int CalcCurrentHash()
+        {
+            int hash = 0;
+            foreach (var command in _commands)
+            {
+                hash = hash + command.GetHashCode();
+            }
+
+            return hash;
+        }
+
+        /// <summary>
+        /// Есть ли несохраненные изменения
+        /// </summary>
+        /// <returns></returns>
+        public bool IsFileHaveUnsavedChanges()
+        {
+            return _lastSavedHash != CalcCurrentHash();
+        }
+
+        /// <summary>
+        /// Починить команды при восстановлении файла
+        /// </summary>
+        private void MakeCommandsOKAgain()
+        {
+            foreach (var command in _commands)
+            {
+                CommandFactory.MakeCommandOKAgain(command, this);
+            }
         }
     }
 }

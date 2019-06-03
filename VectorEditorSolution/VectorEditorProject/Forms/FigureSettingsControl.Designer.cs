@@ -47,7 +47,7 @@
             this.LineColorButton.Size = new System.Drawing.Size(88, 23);
             this.LineColorButton.TabIndex = 0;
             this.LineColorButton.UseVisualStyleBackColor = true;
-            this.LineColorButton.Click += new System.EventHandler(this.lineColorButton_Click);
+            this.LineColorButton.Click += new System.EventHandler(this.LineColorButton_Click);
             // 
             // FillColorButton
             // 
@@ -56,7 +56,7 @@
             this.FillColorButton.Size = new System.Drawing.Size(88, 23);
             this.FillColorButton.TabIndex = 1;
             this.FillColorButton.UseVisualStyleBackColor = true;
-            this.FillColorButton.Click += new System.EventHandler(this.fillColorButton_Click);
+            this.FillColorButton.Click += new System.EventHandler(this.FillColorButton_Click);
             // 
             // LineColorLabel
             // 

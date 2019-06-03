@@ -2,14 +2,28 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using VectorEditorProject.Figures.Utility;
+using SDK;
 
 namespace VectorEditorProject.Forms
 {
+    /// <summary>
+    /// Пользовательский control с настройками фигуры
+    /// </summary>
     public partial class FigureSettingsControl : UserControl
     {
+        /// <summary>
+        /// Толщина линии
+        /// </summary>
         private int _lastValidLineWidth = 1;
 
+        /// <summary>
+        /// Тип линии
+        /// </summary>
+        private int _lastValidLineType;
+
+        /// <summary>
+        /// Конструктор control'а с настройками фигуры
+        /// </summary>
         public FigureSettingsControl()
         {
             InitializeComponent();
@@ -25,9 +39,16 @@ namespace VectorEditorProject.Forms
             LineTypeComboBox.Items.Add(DashStyle.DashDotDot);
             LineTypeComboBox.Items.Add(DashStyle.Dot);
             LineTypeComboBox.SelectedIndex = 0;
+
+            _lastValidLineType = LineTypeComboBox.SelectedIndex;
         }
 
-        private void lineColorButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Клик по кнопке "цвет линии"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LineColorButton_Click(object sender, EventArgs e)
         {
             if (lineColorDialog.ShowDialog() != DialogResult.Cancel)
             {
@@ -35,7 +56,12 @@ namespace VectorEditorProject.Forms
             }
         }
 
-        private void fillColorButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Клик по кнопке "цвет заливки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FillColorButton_Click(object sender, EventArgs e)
         {
             if (fillColorDialog.ShowDialog() != DialogResult.Cancel)
             {
@@ -43,21 +69,35 @@ namespace VectorEditorProject.Forms
             }
         }
 
+        /// <summary>
+        /// Получить настройки линии
+        /// </summary>
+        /// <returns></returns>
         public LineSettings GetLineSettings()
         {
-            int width = 1;
-            if (int.TryParse(LineWidthTextBox.Text, out width))
-            {
-                _lastValidLineWidth = width;
-            }
-            else
+            if (!int.TryParse(LineWidthTextBox.Text, out var width) || (width < 1))
             {
                 width = _lastValidLineWidth;
                 LineWidthTextBox.Text = _lastValidLineWidth.ToString();
             }
-            return new LineSettings(lineColorDialog.Color, width, (DashStyle)LineTypeComboBox.SelectedItem);
+
+            _lastValidLineWidth = width;
+
+            if (LineTypeComboBox.SelectedItem == null)
+            {
+                LineTypeComboBox.SelectedIndex = _lastValidLineType;
+            }
+
+            _lastValidLineType = LineTypeComboBox.SelectedIndex;
+
+            return new LineSettings(lineColorDialog.Color, width,
+                (DashStyle) LineTypeComboBox.SelectedItem);
         }
 
+        /// <summary>
+        /// Получить настройки заливки
+        /// </summary>
+        /// <returns></returns>
         public FillSettings GetFillSettings()
         {
             return new FillSettings(fillColorDialog.Color);

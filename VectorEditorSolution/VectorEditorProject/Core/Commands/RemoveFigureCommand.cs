@@ -1,22 +1,49 @@
-﻿using System.Collections.Generic;
-using VectorEditorProject.Figures;
+﻿using System;
+using System.Collections.Generic;
+using SDK;
 
 namespace VectorEditorProject.Core.Commands
 {
-    public class RemoveFigureCommand : BaseCommand
+    /// <summary>
+    /// Команда удаления фигур
+    /// </summary>
+    [Serializable]
+    public class RemoveFigureCommand : CommandBase
     {
-        private ControlUnit _controlUnit;
-        private IReadOnlyList<BaseFigure> _figures;
+        /// <summary>
+        /// Control Unit
+        /// </summary>
+        [field: NonSerialized]
+        public IControlUnit ControlUnit { get; set; }
 
-        public RemoveFigureCommand(ControlUnit controlUnit, BaseFigure figure)
+        /// <summary>
+        /// Список фигур (доступный только для чтения)
+        /// </summary>
+        protected readonly IReadOnlyList<FigureBase> _figures;
+
+        /// <summary>
+        /// Конструктор команды удаления фигуры
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="figure">Фигура</param>
+        public RemoveFigureCommand(IControlUnit controlUnit, FigureBase figure)
         {
-            _controlUnit = controlUnit;
-            _figures = new List<BaseFigure>() { figure };
+            ControlUnit = controlUnit;
+            _figures = new List<FigureBase>()
+            {
+                figure
+            };
         }
 
-        public RemoveFigureCommand(ControlUnit controlUnit, IReadOnlyList<BaseFigure> figures)
+        /// <summary>
+        /// Конструктор команды удаления фигур
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="figures">Фигуры</param>
+        public RemoveFigureCommand(IControlUnit controlUnit,
+            IReadOnlyList<FigureBase> figures)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
             _figures = figures;
         }
 
@@ -27,7 +54,7 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().AddFigure(figure);
+                ControlUnit.GetDocument().AddFigure(figure);
             }
         }
 
@@ -38,8 +65,23 @@ namespace VectorEditorProject.Core.Commands
         {
             foreach (var figure in _figures)
             {
-                _controlUnit.GetDocument().DeleteFigure(figure);
+                ControlUnit.GetDocument().DeleteFigure(figure.guid);
             }
+        }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var figure in _figures)
+            {
+                hash = hash + figure.GetHashCode();
+            }
+
+            return hash;
         }
     }
 }

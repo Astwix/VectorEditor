@@ -1,44 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VectorEditorProject.Figures;
+using SDK;
 
 namespace VectorEditorProject.Core.Commands
 {
-    public class FiguresChangingCommand : BaseCommand
+    /// <summary>
+    /// Команда изменения фигур
+    /// </summary>
+    [Serializable]
+    public class FiguresChangingCommand : CommandBase
     {
-        private ControlUnit _controlUnit;
-        private List<BaseFigure> _oldValues = new List<BaseFigure>();
-        private List<BaseFigure> _newValues = new List<BaseFigure>();
+        /// <summary>
+        /// Control Unit
+        /// </summary>
+        [field: NonSerialized]
+        public IControlUnit ControlUnit { get; set; }
 
-        public FiguresChangingCommand(ControlUnit controlUnit, List<BaseFigure> newValues)
+        /// <summary>
+        /// Старые значения
+        /// </summary>
+        protected readonly List<FigureBase> _oldValues = new List<FigureBase>();
+
+        /// <summary>
+        /// Новые значения
+        /// </summary>
+        protected readonly List<FigureBase> _newValues = new List<FigureBase>();
+
+        /// <summary>
+        /// Конструктор команды изменения фигур
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="newValues">Новые значения</param>
+        public FiguresChangingCommand(IControlUnit controlUnit,
+            List<FigureBase> newValues)
         {
-            _controlUnit = controlUnit;
-            
-            var figureFactory = new FigureFactory();
+            ControlUnit = controlUnit;
+
             foreach (var figure in newValues)
             {
-                var original = _controlUnit.GetDocument().GetFigure(figure.guid);
-                _oldValues.Add(figureFactory.CopyFigure(original));
-                _newValues.Add(figureFactory.CopyFigure(figure));
+                var original = ControlUnit.GetDocument()
+                    .GetFigure(figure.guid);
+                _oldValues.Add(original.CopyFigure());
+                _newValues.Add(figure.CopyFigure());
             }
         }
 
-        public FiguresChangingCommand(ControlUnit controlUnit, BaseFigure newValues)
+        /// <summary>
+        /// Конструктор команды изменения фигуры
+        /// </summary>
+        /// <param name="controlUnit">Control Unit</param>
+        /// <param name="newValues">Новые значения</param>
+        public FiguresChangingCommand(IControlUnit controlUnit,
+            FigureBase newValues)
         {
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
 
-            var figureFactory = new FigureFactory();
-            var original = _controlUnit.GetDocument().GetFigure(newValues.guid);
-            _oldValues.Add(figureFactory.CopyFigure(original));
-            _newValues.Add(figureFactory.CopyFigure(newValues));
+            var original = ControlUnit.GetDocument().GetFigure(newValues.guid);
+            _oldValues.Add(original.CopyFigure());
+            _newValues.Add(newValues.CopyFigure());
         }
 
+        /// <summary>
+        /// Действие
+        /// </summary>
         public override void Do()
         {
             AcceptValues(_newValues);
         }
 
+        /// <summary>
+        /// Отмена
+        /// </summary>
         public override void Undo()
         {
             AcceptValues(_oldValues);
@@ -48,30 +81,56 @@ namespace VectorEditorProject.Core.Commands
         /// Применить изменения к параметрам фигур
         /// </summary>
         /// <param name="values">Изменения</param>
-        private void AcceptValues(List<BaseFigure> values)
+        private void AcceptValues(List<FigureBase> values)
         {
             foreach (var figure in values)
             {
                 // применение параметров линии
-                var original = _controlUnit.GetDocument().GetFigure(figure.guid);
+                var original = ControlUnit.GetDocument()
+                    .GetFigure(figure.guid);
                 original.LineSettings.Color = figure.LineSettings.Color;
                 original.LineSettings.Style = figure.LineSettings.Style;
                 original.LineSettings.Width = figure.LineSettings.Width;
 
                 // применение заливки
-                if (original is FilledBaseFigure originalFilled && 
-                    figure is FilledBaseFigure filledFigure)
+                if (original is FilledFigureBase originalFilled &&
+                    figure is FilledFigureBase filledFigure)
                 {
-                    originalFilled.FillSettings.Color = filledFigure.FillSettings.Color;
+                    originalFilled.FillSettings.Color =
+                        filledFigure.FillSettings.Color;
                 }
 
                 // применение изменений точек
-                var points = figure.PointsSettings.GetPoints().ToArray();
-                for (var i = 0; i < points.Length; i++)
+                var points = figure.PointsSettings.GetPoints()
+                    .ToArray();
+                for (var i = 0;
+                    i < points.Length;
+                    i++)
                 {
-                    original.PointsSettings.ReplacePoint(i, points[i]);
+                    original.PointsSettings.ReplacePoint(i,
+                        points[i]);
                 }
             }
+        }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            int hash = -1;
+            foreach (var newValue in _newValues)
+            {
+                hash = hash + newValue.GetHashCode();
+            }
+
+            foreach (var oldValue in _oldValues)
+            {
+                hash = hash + oldValue.GetHashCode();
+            }
+
+            return hash;
         }
     }
 }

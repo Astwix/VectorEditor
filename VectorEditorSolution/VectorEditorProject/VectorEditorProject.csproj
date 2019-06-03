@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.7.1\lib\net45\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,38 +51,26 @@
   <ItemGroup>
     <Compile Include="Core\Commands\AddFigureCommand.cs" />
     <Compile Include="Core\Commands\AddPointCommand.cs" />
-    <Compile Include="Core\Commands\BaseCommand.cs" />
+    <Compile Include="Core\Commands\CommandBase.cs" />
+    <Compile Include="Core\Commands\ChangingDocumentOptionsCommand.cs" />
     <Compile Include="Core\Commands\ClearDocumentCommand.cs" />
+    <Compile Include="Core\Commands\CommandFactory.cs" />
     <Compile Include="Core\Commands\FiguresChangingCommand.cs" />
     <Compile Include="Core\Commands\RemoveFigureCommand.cs" />
-    <Compile Include="Core\Commands\SelectFiguresCommand.cs" />
     <Compile Include="Core\ControlUnit.cs" />
+    <Compile Include="Core\DI.cs" />
     <Compile Include="Core\Document.cs" />
+    <Compile Include="Core\DrawerFactory.cs" />
     <Compile Include="Core\EditContext.cs" />
-    <Compile Include="Core\Figures\Utility\FigureEditor.cs" />
+    <Compile Include="Core\IControlUnit.cs" />
+    <Compile Include="Core\IDocument.cs" />
+    <Compile Include="Core\IEditContext.cs" />
     <Compile Include="Core\States\AddFigureState.cs" />
     <Compile Include="Core\States\AddPointState.cs" />
-    <Compile Include="Core\States\BaseState.cs" />
+    <Compile Include="Core\States\StateBase.cs" />
     <Compile Include="Core\States\FigureEditingState.cs" />
     <Compile Include="Core\States\SelectionState.cs" />
-    <Compile Include="Core\Drawing\BaseDrawer.cs" />
-    <Compile Include="Core\Drawing\CircleDrawer.cs" />
-    <Compile Include="Core\Drawing\DrawerFactory.cs" />
-    <Compile Include="Core\Drawing\EllipseDrawer.cs" />
-    <Compile Include="Core\Drawing\LineDrawer.cs" />
-    <Compile Include="Core\Drawing\PolygonDrawer.cs" />
-    <Compile Include="Core\Drawing\PolyLineDrawer.cs" />
-    <Compile Include="Core\Figures\BaseFigure.cs" />
-    <Compile Include="Core\Figures\Circle.cs" />
-    <Compile Include="Core\Figures\Ellipse.cs" />
-    <Compile Include="Core\Figures\FigureFactory.cs" />
-    <Compile Include="Core\Figures\FilledBaseFigure.cs" />
-    <Compile Include="Core\Figures\Line.cs" />
-    <Compile Include="Core\Figures\Polygon.cs" />
-    <Compile Include="Core\Figures\PolyLine.cs" />
-    <Compile Include="Core\Figures\Utility\FillSettings.cs" />
-    <Compile Include="Core\Figures\Utility\LineSettings.cs" />
-    <Compile Include="Core\Figures\Utility\PointsSettings.cs" />
+    <Compile Include="Core\States\StatesEnum.cs" />
     <Compile Include="Forms\DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +118,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,5 +132,32 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CircleFigure\Circle.csproj">
+      <Project>{9326b3c3-af96-4f13-b4af-8fedf920cfe4}</Project>
+      <Name>Circle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EllipseFigure\Ellipse.csproj">
+      <Project>{a4df0022-22f8-403b-b1e5-5dbc17bd8540}</Project>
+      <Name>Ellipse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LineFigure\Line.csproj">
+      <Project>{b9cb792b-a98f-49a2-90b3-be8d7c94afe9}</Project>
+      <Name>Line</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PolygonFigure\Polygon.csproj">
+      <Project>{772456d7-9995-46b0-9543-b07694c9dc7b}</Project>
+      <Name>Polygon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PolyLineFigure\PolyLine.csproj">
+      <Project>{3d32f4e5-53c1-4505-ba62-d436d9680d7c}</Project>
+      <Name>PolyLine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SDK\SDK.csproj">
+      <Project>{4bae6634-e69e-49d8-afed-d9e05abf72fc}</Project>
+      <Name>SDK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

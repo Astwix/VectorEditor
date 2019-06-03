@@ -1,26 +1,43 @@
 ﻿using System;
 using System.Drawing;
-using VectorEditorProject.Figures;
+using SDK;
 
 namespace VectorEditorProject.Core.Commands
 {
-    class AddPointCommand : BaseCommand
+    /// <summary>
+    /// Команда добавления точки
+    /// </summary>
+    [Serializable]
+    public class AddPointCommand : CommandBase
     {
-        private Guid _guid = Guid.Empty;
-        private PointF _point;
-        private ControlUnit _controlUnit;
+        /// <summary>
+        /// GUID фигуры
+        /// </summary>
+        protected readonly Guid _guid = Guid.Empty;
+
+        /// <summary>
+        /// Точка
+        /// </summary>
+        protected readonly PointF _point;
+
+        /// <summary>
+        /// Control Unit
+        /// </summary>
+        [field: NonSerialized]
+        public IControlUnit ControlUnit { get; set; }
 
         /// <summary>
         /// Команда добавления точки
         /// </summary>
-        /// <param name="fugure">Фигура</param>
+        /// <param name="figure">Фигура</param>
         /// <param name="point">Точка</param>
         /// <param name="controlUnit">controlUnit</param>
-        public AddPointCommand(BaseFigure fugure, PointF point, ControlUnit controlUnit)
+        public AddPointCommand(FigureBase figure, PointF point,
+            IControlUnit controlUnit)
         {
-            _guid = fugure.guid;
+            _guid = figure.guid;
             _point = point;
-            _controlUnit = controlUnit;
+            ControlUnit = controlUnit;
         }
 
         /// <summary>
@@ -28,7 +45,9 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Do()
         {
-            _controlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.AddPoint(_point);
+            ControlUnit.GetDocument()
+                .GetFigure(_guid)
+                ?.PointsSettings.AddPoint(_point);
         }
 
         /// <summary>
@@ -36,7 +55,18 @@ namespace VectorEditorProject.Core.Commands
         /// </summary>
         public override void Undo()
         {
-            _controlUnit.GetDocument().GetFigure(_guid)?.PointsSettings.DeletePoint(_point);
+            ControlUnit.GetDocument()
+                .GetFigure(_guid)
+                ?.PointsSettings.DeletePoint(_point);
+        }
+
+        /// <summary>
+        /// Получить хэш-код
+        /// </summary>
+        /// <returns>Хэш</returns>
+        public override int GetHashCode()
+        {
+            return _guid.GetHashCode() + _point.GetHashCode();
         }
     }
 }

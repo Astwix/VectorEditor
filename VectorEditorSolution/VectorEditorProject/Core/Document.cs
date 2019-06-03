@@ -1,16 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using VectorEditorProject.Figures;
+using SDK;
 
 namespace VectorEditorProject.Core
 {
-    public class Document
+    /// <summary>
+    /// Документ
+    /// </summary>
+    public class Document : IDocument
     {
-        public string Name { get; set; }
-        public Color Color { get; set; }
-        public Size Size { get; set; }
-        private List<BaseFigure> Figures { get; set; }
+        /// <summary>
+        /// Имя
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        /// Размер
+        /// </summary>
+        private Size _size;
+
+        /// <summary>
+        /// Имя
+        /// </summary>
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (value.Length > 0 && value.Length < 50)
+                {
+                    _name = value;
+                }
+            } 
+        }
+
+        /// <summary>
+        /// Цвет
+        /// </summary>
+        public Color Color
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Размер
+        /// </summary>
+        public Size Size
+        {
+            get => _size;
+            set
+            {
+                if (value.Width >= 5 && value.Height >= 5)
+                {
+                    _size = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Фигуры
+        /// </summary>
+        private List<FigureBase> Figures
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Конструктор документа
@@ -23,14 +79,14 @@ namespace VectorEditorProject.Core
             Name = name;
             Color = color;
             Size = size;
-            Figures = new List<BaseFigure>();
+            Figures = new List<FigureBase>();
         }
 
         /// <summary>
         /// Добавление фигуры
         /// </summary>
         /// <param name="figure">Фигура</param>
-        public void AddFigure(BaseFigure figure)
+        public void AddFigure(FigureBase figure)
         {
             Figures.Add(figure);
         }
@@ -39,9 +95,9 @@ namespace VectorEditorProject.Core
         /// Удаление фигуры
         /// </summary>
         /// <param name="figure">Фигура</param>
-        public void DeleteFigure(BaseFigure figure)
+        public void DeleteFigure(FigureBase figure)
         {
-            Figures.Remove(figure);
+            DeleteFigure(figure.guid);
         }
 
         /// <summary>
@@ -50,7 +106,7 @@ namespace VectorEditorProject.Core
         /// <param name="guid">guid фигуры</param>
         public void DeleteFigure(Guid guid)
         {
-            foreach (BaseFigure figure in Figures)
+            foreach (FigureBase figure in Figures)
             {
                 if (figure.guid == guid)
                 {
@@ -72,7 +128,7 @@ namespace VectorEditorProject.Core
         /// Возвращает список фигур, доступный только для чтения
         /// </summary>
         /// <returns>Список фигур</returns>
-        public IReadOnlyList<BaseFigure> GetFigures()
+        public IReadOnlyList<FigureBase> GetFigures()
         {
             return Figures;
         }
@@ -82,7 +138,7 @@ namespace VectorEditorProject.Core
         /// </summary>
         /// <param name="guid">GUID фигуры</param>
         /// <returns>Фигура</returns>
-        public BaseFigure GetFigure(Guid guid)
+        public FigureBase GetFigure(Guid guid)
         {
             foreach (var figure in Figures)
             {

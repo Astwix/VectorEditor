@@ -5,24 +5,32 @@ using VectorEditorProject.Core;
 
 namespace VectorEditorProject.Forms
 {
+    /// <summary>
+    /// Форма настроек документа
+    /// </summary>
     public partial class DocumentForm : Form
     {
-        public Document document;
-
+        /// <summary>
+        /// Конструктор формы настроек документа
+        /// </summary>
         public DocumentForm()
         {
             InitializeComponent();
+
+            documentNameTextBox.Text = "Untitled";
+            widthTextBox.Text = "400";
+            heightTextBox.Text = "400";
+            colorDialog.Color = Color.White;
+            colorButton.BackColor = colorDialog.Color;
         }
 
         /// <summary>
         /// Конструктор для изменения существующего документа
         /// </summary>
-        /// <param name="document"></param>
-        public DocumentForm(Document document)
+        /// <param name="document">Документ</param>
+        public DocumentForm(IDocument document)
         {
-            this.document = document;
             InitializeComponent();
-            this.Text = "Параметры <" + document.Name + ">";
 
             documentNameTextBox.Text = document.Name;
             widthTextBox.Text = document.Size.Width.ToString();
@@ -31,30 +39,46 @@ namespace VectorEditorProject.Forms
             colorButton.BackColor = colorDialog.Color;
         }
 
+        /// <summary>
+        /// Клик по кнопке "ОК"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OKButton_Click(object sender, EventArgs e)
         {
-            try
+            if (int.TryParse(widthTextBox.Text, out var width) &&
+                int.TryParse(heightTextBox.Text, out var height) &&
+                width > 1 && 
+                height > 1)
             {
-                int width = int.Parse(widthTextBox.Text);
-                int height = int.Parse(heightTextBox.Text);
-
-                Size docSize = new Size(width, height);
-                document = new Document(documentNameTextBox.Text, colorDialog.Color, docSize);
-
                 DialogResult = DialogResult.OK;
                 Close();
             }
-            catch (Exception exception)
-            {
-            }
         }
 
-        private void colorButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Клик по кнопке "Смена цвета"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColorButton_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() != DialogResult.Cancel)
             {
                 colorButton.BackColor = colorDialog.Color;
             }
+        }
+
+        /// <summary>
+        /// Создание документа
+        /// </summary>
+        /// <returns>Параметры документа</returns>
+        public Document CreateDocument()
+        {
+            int.TryParse(widthTextBox.Text, out var width);
+            int.TryParse(heightTextBox.Text, out var height);
+
+            return new Document(documentNameTextBox.Text, colorDialog.Color, new Size(width, height));
         }
     }
 }

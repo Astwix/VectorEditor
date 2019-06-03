@@ -2,65 +2,79 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using VectorEditorProject.Core.Commands;
+using SDK;
 using VectorEditorProject.Core.States;
-using VectorEditorProject.Figures;
 
 namespace VectorEditorProject.Core
 {
-    public class EditContext
+    /// <summary>
+    /// Edit Context
+    /// </summary>
+    public class EditContext : IEditContext
     {
-        private ControlUnit _controlUnit;
-        private BaseState _activeState;
-        private Guid _activeFigureGuid = Guid.Empty;
-        private List<Guid> _selectedFigures = new List<Guid>();
+        /// <summary>
+        /// Control Unit
+        /// </summary>
+        protected readonly IControlUnit _controlUnit;
 
-        public EditContext(ControlUnit controlUnit)
+        /// <summary>
+        /// Активное состояние
+        /// </summary>
+        protected StateBase _activeState;
+
+        /// <summary>
+        /// Guid активной фигуры
+        /// </summary>
+        protected Guid _activeFigureGuid = Guid.Empty;
+
+        /// <summary>
+        /// Список выделенных фигур
+        /// </summary>
+        protected readonly List<Guid> _selectedFigures = new List<Guid>();
+
+        /// <summary>
+        /// Конструктор Edit Context
+        /// </summary>
+        /// <param name="controlUnit"></param>
+        public EditContext(IControlUnit controlUnit)
         {
             _controlUnit = controlUnit;
 
-            SetActiveState(States.SelectionState);
-        }
-
-        /// <summary>
-        /// Перечисление состояний
-        /// </summary>
-        public enum States
-        {
-            AddFigureState,
-            SelectionState,
-            AddPointState,
-            FigureEditingState
+            SetActiveState(States.States.SelectionState);
         }
 
         /// <summary>
         /// Установить активное состояние
         /// </summary>
         /// <param name="state">Состояние</param>
-        public void SetActiveState(States state)
+        public void SetActiveState(States.States state)
         {
             switch (state)
             {
-                case States.AddFigureState:
-                    if (GetSelectedFigures().Count > 0) // если есть выделение - сбросить
+                case States.States.AddFigureState:
+                    // если есть выделение - сбросить
+                    if (GetSelectedFigures().Count > 0)
                     {
-                        var command = new SelectFiguresCommand(this, new List<BaseFigure>());
-                        _controlUnit.StoreCommand(command);
-                        _controlUnit.Do();
+                        SetSelectedFigures(new List<FigureBase>());
                     }
-                    _activeState = new AddFigureState(_controlUnit, this);
+
+                    _activeState = new AddFigureState(_controlUnit,
+                        this);
                     break;
 
-                case States.AddPointState:
-                    _activeState = new AddPointState(_controlUnit, this);
+                case States.States.AddPointState:
+                    _activeState = new AddPointState(_controlUnit,
+                        this);
                     break;
 
-                case States.SelectionState:
-                    _activeState = new SelectionState(_controlUnit, this);
+                case States.States.SelectionState:
+                    _activeState = new SelectionState(_controlUnit,
+                        this);
                     break;
-                    
-                case States.FigureEditingState:
-                    _activeState = new FigureEditingState(_controlUnit, this);
+
+                case States.States.FigureEditingState:
+                    _activeState = new FigureEditingState(_controlUnit,
+                        this);
                     break;
 
                 default:
@@ -71,26 +85,49 @@ namespace VectorEditorProject.Core
             _controlUnit.UpdateCanvas();
         }
 
+        /// <summary>
+        /// Рисование
+        /// </summary>
+        /// <param name="graphics"></param>
         public void Draw(Graphics graphics)
         {
-            _activeState?.Draw(graphics); // суперсахар с "?": создается, только если объект существует
+            // суперсахар с "?": создается, только если объект существует
+            _activeState?.Draw(graphics); 
         }
 
+        /// <summary>
+        /// Нажатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void MouseDown(object sender, MouseEventArgs e)
         {
             _activeState?.MouseDown(sender, e);
         }
 
+        /// <summary>
+        /// Перемещение мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void MouseMove(object sender, MouseEventArgs e)
         {
             _activeState?.MouseMove(sender, e);
         }
 
+        /// <summary>
+        /// Отжатие кнопки мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void MouseUp(object sender, MouseEventArgs e)
         {
             _activeState?.MouseUp(sender, e);
         }
 
+        /// <summary>
+        /// Обновление состояния
+        /// </summary>
         public void UpdateState()
         {
             _activeState?.Update();
@@ -100,7 +137,7 @@ namespace VectorEditorProject.Core
         /// Установить активную фигуру
         /// </summary>
         /// <param name="figure">Фигура</param>
-        public void SetActiveFigure(BaseFigure figure)
+        public void SetActiveFigure(FigureBase figure)
         {
             _activeFigureGuid = figure.guid;
         }
@@ -108,17 +145,29 @@ namespace VectorEditorProject.Core
         /// <summary>
         /// Получить активную фигуру
         /// </summary>
-        /// <returns></returns>
-        public BaseFigure GetActiveFigure()
+        /// <returns>guid фигуры</returns>
+        public FigureBase GetActiveFigure()
         {
             return _controlUnit.GetDocument().GetFigure(_activeFigureGuid);
+        }
+
+        /// <summary> 
+        /// Установить выделенную фигуру 
+        /// </summary> 
+        /// <param name="figure">Фигура</param> 
+        public void SetSelectedFigures(
+            Guid figure)
+        {
+            _selectedFigures.Clear();
+            _selectedFigures.Add(figure);
+            _controlUnit.UpdatePropertyGrid();
         }
 
         /// <summary>
         /// Выделение фигур (с перебором по фигурам)
         /// </summary>
         /// <param name="figuresList">Список фигур</param>
-        public void SetSelectedFigures(List<BaseFigure> figuresList)
+        public void SetSelectedFigures(List<FigureBase> figuresList)
         {
             _selectedFigures.Clear();
 
@@ -126,6 +175,8 @@ namespace VectorEditorProject.Core
             {
                 _selectedFigures.Add(baseFigure.guid);
             }
+
+            _controlUnit.UpdatePropertyGrid();
         }
 
         /// <summary>
@@ -140,15 +191,17 @@ namespace VectorEditorProject.Core
             {
                 _selectedFigures.Add(guid);
             }
+
+            _controlUnit.UpdatePropertyGrid();
         }
 
         /// <summary>
-        /// Список выделенных фигур, доступный только для чтения
+        /// Получить выделенные фигуры
         /// </summary>
-        /// <returns></returns>
-        public IReadOnlyList<BaseFigure> GetSelectedFigures()
+        /// <returns>Список выделенных фигур (только для чтения)</returns>
+        public IReadOnlyList<FigureBase> GetSelectedFigures()
         {
-            List<BaseFigure> selectedFigures = new List<BaseFigure>();
+            List<FigureBase> selectedFigures = new List<FigureBase>();
 
             foreach (var guid in _selectedFigures)
             {
